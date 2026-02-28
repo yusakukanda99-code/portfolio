@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YUSAKU KANDA – Design Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #888;
+      --nav-h: 52px;
+      --nav-gap: 24px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── Ink Reveal Canvas (背景) ── */
+    #ink-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      display: block;
+    }
+
+    /* スクロールで白くなるオーバーレイ */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ─── ページ構造 ─── */
+    .page-wrap {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .col-left { width: 50%; }
+    .spacer-top    { height: calc(100vh - var(--nav-h) - var(--nav-gap) * 2); }
+    .spacer-bottom { height: 0; }
+
+    /* ─── Nav ─── */
+    #main-nav {
+      position: fixed;
+      left: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      height: var(--nav-h);
+      padding: 0 24px 0 32px;
+      width: fit-content;
+      background: rgba(250, 250, 252, 0.25);
+      backdrop-filter: blur(22px) saturate(1.5) brightness(1.05);
+      -webkit-backdrop-filter: blur(22px) saturate(1.5) brightness(1.05);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.015);
+      transition: top 0.2s ease;
+    }
+
+    #main-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: #222;
+      text-decoration: none;
+      padding: 8px 20px;
+      position: relative;
+      transition: color 0.25s;
+      white-space: nowrap;
+    }
+
+    #main-nav a:last-child { padding-right: 2px; }
+
+    #main-nav a:hover {
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(80,80,110,0.8), 0 0 24px rgba(100,100,140,0.6), 0 0 48px rgba(120,120,160,0.3);
+    }
+
+    #main-nav a:hover::before {
+      content: '';
+      position: absolute;
+      inset: -2px -8px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse 85% 75% at 50% 50%,
+        rgba(215, 215, 228, 0.95) 0%,
+        rgba(222, 222, 236, 0.50) 52%,
+        transparent 75%
+      );
+      filter: blur(7px);
+      z-index: -1;
+    }
+
+    /* ─── 右パネル（fixed） ─── */
+    .col-right {
+      position: fixed;
+      top: 0; right: 0;
+      width: 50%;
+      height: 100vh;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 10% 80px 20%;
+      transition: opacity 0.3s linear;
+    }
+
+    .col-right-bg {
+      position: absolute;
+      inset: 0 10% 0 20%;
+      background: rgba(250, 250, 252, 0.25);
+      backdrop-filter: blur(22px) saturate(1.5) brightness(1.05);
+      -webkit-backdrop-filter: blur(22px) saturate(1.5) brightness(1.05);
+      z-index: 0;
+      transition: opacity 0.3s linear;
+    }
+
+    .col-right .hero-text {
+      position: relative;
+      z-index: 1;
+      max-width: 360px;
+    }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.4em;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(42px, 5vw, 64px);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 36px;
+      color: var(--text);
+    }
+
+    .divider {
+      width: 40px; height: 1px;
+      background: rgba(0,0,0,0.2);
+      margin-bottom: 28px;
+    }
+
+    .description {
+      font-size: 13px;
+      line-height: 2;
+      color: #555;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── アニメーション ── */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes charFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* 1文字ずつのspan */
+    .char {
+      display: inline;
+      opacity: 0;
+      animation: charFade 2.0s ease forwards;
+    }
+
+    /* ink完了前: nav・テキストのみ非表示 */
+    #main-nav, #col-right-bg,
+    .subtitle, .name, .divider, .description {
+      opacity: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 10;
+      background: #fff;
+      padding: 60px 40px 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-family: 'Cormorant Garamond', 'Noto Sans JP', serif;
+    }
+
+    .footer-home {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: #1a1a1a;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1a1a1a;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    .footer-home .arrow {
+      font-style: normal;
+      display: inline-block;
+      font-size: 16px;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-home:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+    }
+
+    .footer-nav-col {
+      flex: 1;
+    }
+
+    .footer-nav-col a {
+      display: block;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-nav-col > a {
+      margin-bottom: 12px;
+    }
+
+    .footer-nav-col > a .arrow {
+      font-style: normal;
+      display: inline-block;
+      margin-right: 4px;
+      font-size: 16px;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-nav-col > a:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .footer-submenu {
+      padding-left: 0;
+      margin-top: 4px;
+    }
+
+    .footer-submenu-indent {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .footer-submenu-bracket {
+      color: #1a1a1a;
+      font-size: 13px;
+      line-height: 1.6;
+      flex-shrink: 0;
+    }
+
+    .footer-submenu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-submenu-list li a {
+      font-size: 13px;
+      color: #1a1a1a;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-submenu-list li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #1a1a1a;
+      transition: width 0.3s ease;
+    }
+
+    .footer-submenu-list li a:hover::after {
+      width: 100%;
+    }
+
+    .footer-copyright {
+      margin-top: 60px;
+      text-align: right;
+      font-size: 9px;
+      color: #b0b0b0;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ページ全体レイアウト: page-wrap + footer を縦に並べる */
+    .site-wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ink完了後 .reveal 付与でアニメーション開始 */
+    #main-nav.reveal      { animation: fadeUp  .6s ease forwards 0.2s; }
+    #col-right-bg.reveal  { animation: fadeIn  .6s ease forwards 0.2s; }
+    /* subtitle / name / description の文字はJSで1文字ずつ制御 */
+    .divider.reveal       { animation: fadeIn  .5s ease forwards 0.4s; }
+
+    /* ═══════════════════════════════
+       STRONG SECTION (strong.html統合)
+    ═══════════════════════════════ */
+    .strong-section {
+      position: relative;
+      z-index: 2;
+      background: transparent; /* 遷移中はbg-overlayの白で覆われる */
+    }
+    /* 遷移完了後に白背景を付与 */
+    .strong-section.s-bg-ready {
+      background: #ffffff;
+    }
+
+    /* テキスト要素の初期状態（JS発火まで非表示） */
+    .strong-section .s-eyebrow,
+    .strong-section .s-main-title,
+    .strong-section .s-rule,
+    .strong-section .s-intro,
+    .strong-section .s-sep,
+    .strong-section .s-sk {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    /* .s-char は TOPと同じ charFade アニメーションを使用 */
+    .s-char {
+      display: inline;
+      opacity: 0;
+      animation: charFade 2.0s ease forwards;
+    }
+
+    @keyframes s-appear {
+      from { opacity: 0; transform: scale(0.975); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes s-fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .strong-section {
+      --s-ink: #1c1c1c;
+      --s-mid: #5a5a5a;
+      --s-light: #9a9a9a;
+      --s-faint: #c8c8c8;
+      --s-bg: #ffffff;
+      --s-line: rgba(28,28,28,0.12);
+      --s-line-strong: rgba(28,28,28,0.25);
+      --s-accent: #8b7355;
+      --s-accent-light: rgba(139,115,85,0.15);
+    }
+
+    .strong-section .s-frame {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ── 左カラム ── */
+    .strong-section .s-col-left {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: transparent;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+    }
+    .strong-section.s-bg-ready .s-col-left,
+    .strong-section.s-bg-ready .s-col-right {
+      background: #ffffff;
+    }
+
+    .strong-section .s-left-inner {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      z-index: 2;
+      overflow: visible;
+    }
+
+    .strong-section .s-diagram-wrap {
+      width: 100%;
+      max-width: 300px;
+      position: absolute;
+      top: calc(var(--nav-gap) + var(--nav-h) + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #s-diagram-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0;
+      mix-blend-mode: lighten;
+      transition: opacity 1.2s ease;
+    }
+    #s-diagram-img.s-img-visible {
+      opacity: 1;
+    }
+    #s-img-canvas {
+      display: none;
+    }
+
+    .strong-section .s-left-caption {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .strong-section .s-left-caption::before,
+    .strong-section .s-left-caption::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--s-faint);
+    }
+    .strong-section .s-left-caption span {
+      font-family: 'EB Garamond', serif;
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      color: var(--s-light);
+      text-transform: uppercase;
+    }
+
+    .strong-section .s-left-side-text {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      font-family: 'EB Garamond', serif;
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      color: var(--s-faint);
+      white-space: nowrap;
+      z-index: 2;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* ── 右カラム ── */
+    .strong-section .s-col-right {
+      background: transparent;
+      overflow-y: visible;
+    }
+
+    .strong-section .s-right-inner {
+      padding: 120px 40px 88px 40px;
+    }
+
+    /* eyebrow */
+    .strong-section .s-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .strong-section .s-eyebrow-line {
+      width: 20px;
+      height: 1px;
+      background: var(--s-accent);
+    }
+    .strong-section .s-eyebrow span {
+      font-family: 'EB Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      color: var(--s-accent);
+      text-transform: uppercase;
+    }
+
+    /* main title */
+    .strong-section .s-main-title {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 400;
+      font-size: clamp(17px, 1.8vw, 22px);
+      line-height: 1.9;
+      color: var(--s-ink);
+      margin-bottom: 36px;
+    }
+    .strong-section .s-main-title u {
+      text-decoration: none;
+      border-bottom: 1px solid rgba(28,28,28,0.3);
+      padding-bottom: 1px;
+    }
+
+    /* rule */
+    .strong-section .s-rule {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 0 0 32px;
+    }
+    .strong-section .s-rule-seg-long { flex: 1; height: 1px; background: var(--s-line); }
+    .strong-section .s-rule-seg-accent { width: 40px; height: 1px; background: var(--s-accent); opacity: 0.5; }
+
+    /* intro paragraphs */
+    .strong-section .s-intro {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12.5px;
+      line-height: 2.15;
+      color: var(--s-mid);
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+    .strong-section .s-intro:last-of-type { margin-bottom: 0; }
+
+    /* section separator */
+    .strong-section .s-sep {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      margin: 72px 0 60px;
+    }
+    .strong-section .s-sep-line { height: 1px; background: var(--s-line); }
+    .strong-section .s-sep-center {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .strong-section .s-sep span {
+      font-family: 'EB Garamond', serif;
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      color: var(--s-light);
+      text-transform: uppercase;
+    }
+
+    /* skill cards */
+    .strong-section .s-skills { display: flex; flex-direction: column; gap: 48px; padding-top: 24px; }
+
+    .strong-section .s-sk {
+      background: transparent;
+      position: relative;
+    }
+    .strong-section.s-bg-ready .s-sk {
+      background: #fff;
+    }
+
+    .strong-section .s-sk-head {
+      padding: 13px 22px;
+      border-top: 1px solid var(--s-line);
+      border-bottom: 1px solid var(--s-line);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .strong-section .s-sk-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      color: var(--s-accent);
+      letter-spacing: 0.15em;
+      opacity: 0.75;
+      flex-shrink: 0;
+    }
+    .strong-section .s-sk-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--s-ink);
+      letter-spacing: 0.06em;
+    }
+    .strong-section .s-sk-en {
+      margin-left: auto;
+      font-family: 'EB Garamond', serif;
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      color: var(--s-light);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .strong-section .s-sk-body {
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+    }
+
+    .strong-section .s-sk-item-name {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--s-ink);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .strong-section .s-sk-item-name::before {
+      content: '';
+      width: 12px;
+      height: 1px;
+      background: var(--s-accent);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .strong-section .s-sk-item-desc {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10.5px;
+      color: var(--s-light);
+      line-height: 1.65;
+      padding-left: 20px;
+    }
+
+    /* セクション境界 */
+    .strong-section-header {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .strong-section .s-frame { grid-template-columns: 1fr; }
+      .strong-section .s-col-left { position: relative; height: auto; min-height: 55vw; border-right: none; border-bottom: 1px solid var(--s-line-strong); }
+      .strong-section .s-right-inner { padding: 44px 28px 64px; }
+      .strong-section .s-sk-body { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════
+       TAG FILTER WORKS SECTION
+    ═══════════════════════════════ */
+    .pf-outer { position: relative; z-index: 5; }
+    .pf-sticky {
+      position: sticky; top: 0; height: 100vh;
+      display: flex; flex-direction: column;
+      overflow: hidden; background: #fff;
+    }
+
+    /* ── section header ── */
+    .pf-section-head {
+      flex: 0 0 auto;
+      padding: 16px max(calc((100vw - 1000px)/2), 40px) 0;
+      display: flex; align-items: baseline; gap: 20px;
+    }
+    .pf-section-eyebrow { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; font-weight: 300; color: #999; letter-spacing: 0.18em; }
+    .pf-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6.5vw, 80px); font-weight: 300; letter-spacing: 0.01em; line-height: 0.9; color: #1a1a1a; }
+
+    /* ── filter strip ── */
+    .pf-filter {
+      flex: 0 0 auto;
+      display: flex; align-items: center;
+      padding: 0 max(calc((100vw - 1000px)/2), 40px);
+      height: 52px; gap: 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .pf-filter-meta { flex: 0 0 110px; display: flex; flex-direction: column; gap: 3px; }
+    .pf-count { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+    .pf-count strong { color: #1a1a1a; font-weight: 400; }
+    .pf-clear { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #aaa; background: none; border: none; cursor: pointer; padding: 0; opacity: 0; pointer-events: none; transition: opacity 0.2s, color 0.2s; text-align: left; }
+    .pf-clear:hover { color: #1a1a1a; }
+    .pf-clear.pf-visible { opacity: 1; pointer-events: all; }
+    .pf-filter-divider { flex: 0 0 1px; height: 28px; background: rgba(0,0,0,0.08); margin: 0 18px; }
+    .pf-tags { flex: 1; display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .pf-tags::-webkit-scrollbar { display: none; }
+    .pf-tag { flex: 0 0 auto; font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.04em; padding: 0.24rem 0.72rem; border: 1px solid rgba(0,0,0,0.1); background: transparent; color: #888; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: all 0.16s; }
+    .pf-tag:hover { border-color: rgba(0,0,0,0.3); color: #1a1a1a; }
+    .pf-tag.pf-active { border-color: #1a1a1a; color: #1a1a1a; background: rgba(0,0,0,0.04); }
+    .pf-sort-hint { flex: 0 0 auto; margin-left: 14px; font-family: 'EB Garamond', serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #ccc; white-space: nowrap; }
+
+    /* ── card area ── */
+    .pf-card-area { flex: 1; overflow: hidden; display: flex; align-items: flex-end; position: relative; padding-bottom: 52px; }
+    .pf-track { display: flex; gap: 80px; height: 88%; align-items: flex-end; padding-left: max(calc((100vw - 1000px)/2), 40px); will-change: transform; }
+
+    /* ── cards ── */
+    .pf-card { flex-shrink: 0; width: 260px; height: 100%; display: flex; flex-direction: column; cursor: pointer; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .pf-card.pf-card-in { opacity: 1; transform: translateY(0); }
+    .pf-card-img-wrap { flex: 1; overflow: hidden; background: #2a2a2a; position: relative; }
+    .pf-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%); position: absolute; inset: 0; transform: scale(1); transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s; }
+    .pf-card:hover .pf-card-img-wrap img { transform: scale(1.06); filter: grayscale(0); }
+
+    .pf-card-tab { position: absolute; top: 0; left: -14px; z-index: 3; max-width: 88%; padding: 0.55rem 1.3rem 0.55rem 1rem; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 300; color: #1a1a1a; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgba(248,248,250,0.68); backdrop-filter: blur(20px) saturate(1.6) brightness(1.08); -webkit-backdrop-filter: blur(20px) saturate(1.6) brightness(1.08); border-right: 1px solid rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 2px 2px 18px rgba(0,0,0,0.07); border-radius: 3px 0 5px 0; transition: background 0.3s; }
+    .pf-card:hover .pf-card-tab { background: rgba(255,255,255,0.9); }
+    .pf-match-badge { display: inline-block; margin-left: 0.5rem; font-size: 10px; color: #aaa; }
+    .pf-match-badge.pf-hl { color: #1a1a1a; }
+    .pf-tag-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem 0.75rem; display: flex; flex-wrap: wrap; gap: 4px; background: linear-gradient(to top, rgba(255,255,255,0.65) 0%, transparent 100%); }
+    .pf-ctag { font-size: 10px; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; letter-spacing: 0.03em; padding: 0.12rem 0.44rem; border: 1px solid rgba(0,0,0,0.1); color: rgba(0,0,0,0.38); background: rgba(255,255,255,0.55); backdrop-filter: blur(6px); border-radius: 2px; }
+    .pf-ctag.pf-matched { border-color: rgba(0,0,0,0.42); color: #1a1a1a; background: rgba(255,255,255,0.85); }
+    .pf-card-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.5vw, 48px); font-weight: 400; color: #fff; position: absolute; bottom: -10px; left: 12px; line-height: 1; letter-spacing: 0.03em; z-index: 2; }
+    .pf-card-footer { padding: 20px 0 0; flex-shrink: 0; }
+    .pf-card-dash { width: 18px; height: 1px; background: #1a1a1a; margin-bottom: 10px; }
+    .pf-card-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: #1a1a1a; letter-spacing: 0.04em; }
+    .pf-progress { position: absolute; bottom: 0; right: 40px; display: flex; align-items: center; gap: 14px; }
+    .pf-progress-text { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #aaa; text-transform: uppercase; }
+    .pf-progress-bar { width: 80px; height: 1px; background: #e0e0e0; position: relative; overflow: hidden; }
+    .pf-progress-fill { position: absolute; top: 0; left: 0; height: 100%; background: #1a1a1a; width: 0%; transition: width 0.08s linear; }
+    .pf-empty { flex-shrink: 0; width: min(420px, 80vw); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+    .pf-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: #ccc; }
+    .pf-empty-sub { font-size: 10px; letter-spacing: 0.15em; color: #ccc; text-transform: uppercase; }
+
+    /* ═══════════════════════════════
+       WORK DETAIL MODAL
+    ═══════════════════════════════ */
+
+    /* ink transition canvas — fixed overlay used for open/close animation */
+    .wd-modal {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .wd-modal.wd-open { pointer-events: all; opacity: 1; }
+    .wd-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(240,242,248,0.55);
+      backdrop-filter: blur(18px) saturate(1.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .wd-modal.wd-open .wd-backdrop { opacity: 1; }
+    .wd-panel {
+      position: relative; z-index: 1;
+      width: calc(100% - 80px); max-width: 1200px;
+      height: 100vh;
+      background: #fff;
+      overflow-y: scroll; overscroll-behavior: contain;
+      scrollbar-width: none;
+      border-radius: 0;
+      box-shadow: 0 0 80px rgba(0,0,0,0.14), 0 0 0 1px rgba(255,255,255,0.3);
+    }
+    .wd-panel::-webkit-scrollbar { display: none; }
+
+
+    .wd-topbar, .wd-detail-wrap, .wd-end-hint { position: relative; z-index: 1; }
+
+    /* bottom fade gradient — fixed overlay aligned to panel */
+    .wd-fade-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 80px);
+      max-width: 1200px;
+      height: 220px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0)   0%,
+        rgba(255,255,255,0.7) 50%,
+        rgba(255,255,255,1)   100%
+      );
+      pointer-events: none;
+      z-index: 45;
+      display: none;
+    }
+    .wd-modal.wd-open + .wd-scrollbar + .wd-fade-bottom,
+    .wd-fade-bottom.wd-fade-show { display: block; }
+
+    .wd-topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; background: rgba(255,255,255,0.82); backdrop-filter: blur(20px) saturate(1.5); -webkit-backdrop-filter: blur(20px) saturate(1.5); border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .wd-topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; letter-spacing: 0.08em; color: #888; }
+    .wd-close-btn { display: flex; align-items: center; gap: 7px; font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #999; background: none; border: none; cursor: pointer; transition: color 0.2s; }
+    .wd-close-btn:hover { color: #1a1a1a; }
+    .wd-close-icon { width: 18px; height: 18px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .wd-close-icon::before, .wd-close-icon::after { content: ''; position: absolute; width: 12px; height: 1px; background: currentColor; }
+    .wd-close-icon::before { transform: rotate(45deg); }
+    .wd-close-icon::after  { transform: rotate(-45deg); }
+
+    /* ── custom scrollbar ── */
+    /* ── scroll-to-close progress bar (right edge of panel) ── */
+    .wd-scrollbar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 44px;
+      height: 100vh;
+      z-index: 600;
+      display: none;
+    }
+    /* thin track line on far right */
+    .wd-scrollbar-track {
+      position: absolute;
+      top: 0; bottom: 0; right: 0;
+      width: 2px;
+      background: rgba(0,0,0,0.08);
+    }
+    /* growing fill */
+    .wd-scrollbar-thumb {
+      position: absolute;
+      top: 0; right: 0;
+      width: 2px;
+      height: 0%;
+      background: #1a1a1a;
+    }
+    .wd-scrollbar-thumb.wd-sb-closing { background: #999; }
+    /* pct badge — pill that follows thumb bottom */
+    .wd-sb-pct {
+      position: absolute;
+      right: 8px;
+      bottom: calc(100% - var(--sb-pos, 0px) - 2px);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: #1a1a1a;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 20px;
+      padding: 3px 7px;
+      pointer-events: none;
+      white-space: nowrap;
+      line-height: 1.2;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      transform: translateY(50%);
+    }
+    .wd-end-hint { display: none; }
+
+    /* detail content */
+    .wd-detail-wrap {
+      --text: #1a1a1a; --text-mid: #555; --text-light: #888;
+      --accent: #C0C9DB; --accent-rgb: 192, 201, 219; --max-w: 1000px;
+      font-family: 'Noto Sans JP', sans-serif; font-weight: 300; line-height: 1.8; color: #1a1a1a;
+    }
+    .wd-detail-wrap .content-wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+    .wd-detail-wrap .content-bottom-spacer { height: 55vh; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
+    .wd-detail-wrap .breadcrumb { padding: 20px 0 10px; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; }
+    .wd-detail-wrap .breadcrumb a { color: #888; text-decoration: none; }
+    .wd-detail-wrap .page-title { font-family: 'Noto Sans JP', sans-serif; font-size: clamp(1.1rem, 2.2vw, 1.55rem); font-weight: 500; letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 36px; }
+    .wd-detail-wrap .hero-block { position: relative; max-width: calc(1000px + (100vw - 1000px)/2 - 32px); margin-bottom: 64px; }
+    .wd-detail-wrap .hero-image-wrap { width: 100%; height: min(42vh, 420px); background: #e9ecf1; overflow: hidden; }
+    .wd-detail-wrap .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .wd-detail-wrap .img-ph { background: #eceef2; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .wd-detail-wrap .img-ph img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 1; }
+    .wd-detail-wrap .video-section { margin-bottom: 60px; }
+    .wd-detail-wrap .video-wrapper { width: 100%; aspect-ratio: 16/9; background: #111; overflow: hidden; }
+    .wd-detail-wrap .video-wrapper iframe, .wd-detail-wrap .video-wrapper video { width: 100%; height: 100%; display: block; border: none; }
+    .wd-detail-wrap .video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #1a1a1a; }
+    .wd-detail-wrap .video-play-icon { width: 56px; height: 56px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .wd-detail-wrap .video-play-icon::after { content: ''; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid rgba(255,255,255,0.5); margin-left: 3px; }
+    .wd-detail-wrap .video-label { font-family: 'EB Garamond', serif; font-size: 0.75rem; letter-spacing: 0.18em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
+    .wd-detail-wrap .video-caption { margin-top: 12px; font-size: 0.78rem; color: #888; letter-spacing: 0.06em; }
+    .wd-detail-wrap .overview { margin-bottom: 60px; padding: 22px 28px; background: rgba(192,201,219,0.08); border-left: 2px solid rgba(192,201,219,0.55); }
+    .wd-detail-wrap .overview p { font-size: 0.875rem; line-height: 2; color: #555; }
+    .wd-detail-wrap .section { margin-bottom: 60px; }
+    .wd-detail-wrap .section-label { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(192,201,219,0.9); filter: brightness(0.65) saturate(1.4); margin-bottom: 8px; }
+    .wd-detail-wrap .section-title { font-size: clamp(1rem, 1.7vw, 1.28rem); font-weight: 500; letter-spacing: 0.04em; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(192,201,219,0.35); display: flex; align-items: baseline; gap: 12px; }
+    .wd-detail-wrap .section-title .num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: #7a8ba8; line-height: 1; }
+    .wd-detail-wrap .section-body { font-size: 0.875rem; line-height: 2; color: #555; }
+    .wd-detail-wrap .section-body p + p { margin-top: 1.3em; }
+    .wd-detail-wrap .split-layout { display: grid; grid-template-columns: 1fr 220px; gap: 36px; align-items: start; }
+    .wd-detail-wrap .split-single { width: 100%; aspect-ratio: 3/4; background: #eceef2; }
+    .wd-detail-wrap .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 40px 0 56px; }
+    .wd-detail-wrap .pager-prev, .wd-detail-wrap .pager-next { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #1a1a1a; transition: opacity 0.25s; cursor: pointer; background: none; border: none; }
+    .wd-detail-wrap .pager-prev { justify-content: flex-start; }
+    .wd-detail-wrap .pager-next { justify-content: flex-end; }
+    .wd-detail-wrap .pager-prev:hover, .wd-detail-wrap .pager-next:hover { opacity: 0.4; }
+    .wd-detail-wrap .pager-arrow-line { display: flex; align-items: center; flex-shrink: 0; }
+    .wd-detail-wrap .arrow-line { width: 32px; height: 1px; background: #1a1a1a; transition: width 0.3s; }
+    .wd-detail-wrap .pager-prev:hover .arrow-line, .wd-detail-wrap .pager-next:hover .arrow-line { width: 50px; }
+    .wd-detail-wrap .arrow-tip-left { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-right: 6px solid #1a1a1a; }
+    .wd-detail-wrap .arrow-tip-right { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid #1a1a1a; }
+    .wd-detail-wrap .pager-texts { display: flex; flex-direction: column; }
+    .wd-detail-wrap .pager-prev .pager-texts { align-items: flex-start; }
+    .wd-detail-wrap .pager-next .pager-texts { align-items: flex-end; }
+    .wd-detail-wrap .pager-dir { font-family: 'EB Garamond', serif; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: #888; line-height: 1; margin-bottom: 4px; }
+    .wd-detail-wrap .pager-work-title { font-family: 'Noto Sans JP', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.03em; color: #1a1a1a; line-height: 1.5; max-width: 180px; }
+    .wd-detail-wrap .pager-next .pager-work-title { text-align: right; }
+    .wd-detail-wrap .pager-center { padding: 0 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: none; border: none; }
+    .wd-detail-wrap .pager-seemore-svg { width: 80px; height: 80px; display: block; animation: wd-spin 20s linear infinite; }
+    @keyframes wd-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .wd-detail-wrap .seemore-dot { fill: #7a8ba8; stroke: #7a8ba8; stroke-width: 0; transform-box: fill-box; transform-origin: center; transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), fill 0.4s, stroke-width 0.4s; }
+    .wd-detail-wrap .pager-center:hover .seemore-dot { transform: scale(8); fill: transparent; stroke-width: 0.125; }
+
+    @media (max-width: 768px) {
+      .pf-outer { height: auto !important; }
+      .pf-sticky { position: relative; height: auto; }
+      .pf-filter, .pf-section-head { padding-left: 20px; padding-right: 20px; }
+      .pf-card-area { overflow-x: auto; -webkit-overflow-scrolling: touch; height: 55vw; min-height: 260px; }
+      .pf-track { transform: none !important; padding-left: 20px; }
+      .pf-card { width: 220px; }
+      .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════
+       CUSTOM CURSOR
+    ══════════════════════════════════ */
+    *, *::before, *::after { cursor: none !important; }
+
+    /* ── frosted-glass cursor ── */
+    #cursor-wrap {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      will-change: left, top;
+      width: 0; height: 0;   /* shrink to 0 so it doesn't affect layout */
+    }
+    #cursor-ring {
+      position: absolute;
+      width: 36px; height: 36px;
+      top: -18px; left: -18px;  /* center on origin */
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(10px) saturate(1.5) brightness(1.1);
+      -webkit-backdrop-filter: blur(10px) saturate(1.5) brightness(1.1);
+      border: 0.5px solid rgba(255,255,255,0.6);
+      box-shadow: 0 2px 14px rgba(0,0,0,0.1), inset 0 0 8px rgba(255,255,255,0.2);
+      z-index: 1;   /* below SVG */
+    }
+    #cursor-svg {
+      position: absolute;
+      top: -24px; left: -24px;
+      overflow: visible;
+      z-index: 2;   /* above ring so arc+crosshair visible */
+    }
+    #cursor-dot { display: none; }
+  </style>
+</head>
+<body>
+  <div id="cursor-wrap">
+    <div id="cursor-ring"></div><!-- z-index:1 (behind SVG) -->
+    <svg id="cursor-svg" width="48" height="48" viewBox="-24 -24 48 48">
+      <line x1="-6" y1="0" x2="6" y2="0" stroke="rgba(0,0,0,0.4)" stroke-width="0.8"/>
+      <line x1="0" y1="-6" x2="0" y2="6" stroke="rgba(0,0,0,0.4)" stroke-width="0.8"/>
+      <circle id="cursor-arc" cx="0" cy="0" r="18"
+        fill="none"
+        stroke="rgba(20,20,20,0.7)"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-dasharray="113.1"
+        stroke-dashoffset="113.1"
+        transform="rotate(-90)"/>
+    </svg>
+  </div>
+  <div id="cursor-dot" style="display:none"></div>
+
+
+  <canvas id="ink-canvas"></canvas>
+  <div class="bg-overlay" id="bg-overlay"></div>
+
+  <div class="site-wrap">
+  <div class="page-wrap">
+
+    <div class="col-left">
+      <div class="spacer-top"></div>
+      <nav id="main-nav">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Work</a>
+        <a href="#">Career</a>
+      </nav>
+      <div class="spacer-bottom"></div>
+    </div>
+
+    <div class="col-right">
+      <div class="col-right-bg" id="col-right-bg"></div>
+      <div class="hero-text" id="hero-text">
+        <p class="subtitle">Design Portfolio Site</p>
+        <h1 class="name">YUSAKU<br>KANDA</h1>
+        <div class="divider"></div>
+        <p class="description">かんだ ゆうさくのデザインを掲載しております<br>方針・コンセプトがはいります。ここに文章がはいります。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════
+       STRONG SECTION（強み）
+  ══════════════════════════════════ -->
+  <div class="strong-section-header" id="strong-header">
+    <span class="strong-section-header-label">Strengths</span>
+  </div>
+
+  <section class="strong-section" id="strong-section">
+    <div class="s-frame">
+
+      <!-- 左カラム -->
+      <aside class="s-col-left">
+        <div class="s-left-inner">
+          <div class="s-diagram-wrap" id="s-diagram-wrap">
+            <img src="強み.png" alt="ブランドフレームワーク図" id="s-diagram-img">
+          </div>
+        </div>
+      </aside>
+
+      <!-- 右カラム -->
+      <main class="s-col-right">
+        <div class="s-right-inner">
+
+          <div class="s-eyebrow">
+            <div class="s-eyebrow-line"></div>
+            <span>Integrated Strength</span>
+          </div>
+
+          <h2 class="s-main-title">
+            私の最大の強みは、企画から実行、<br>
+            視覚化までを一気通貫で担当できる<br>
+            <u>統合的な推進力</u>です。
+          </h2>
+
+          <div class="s-rule">
+            <div class="s-rule-seg-accent"></div>
+            <div class="s-rule-seg-long"></div>
+          </div>
+
+          <p class="s-intro">主軸とするデザインスキルに加え、マーケティングや企画立案の経験を有しているため、企画段階から最終的なアウトプットを想定し、効果的な戦略を立てることができます。</p>
+          <p class="s-intro">複雑な情報を分かりやすく伝える視覚資料の作成を得意としており、単なるデザインに留まらず、ビジネスゴール達成のために最も理解しやすいロジックとデザインを融合させ、アウトプットの質とスピードを両立させてきました。</p>
+          <p class="s-intro">また、社内セミナー運営においては、会場手配、ケータリング調整、他部署との密な連携を通じ、イベント全体を円滑に進行するなど、多岐にわたる調整力と実行力を発揮し、事業の多角的な側面に貢献してまいりました。</p>
+
+          <div class="s-sep">
+            <div class="s-sep-line"></div>
+            <div class="s-sep-center">
+              <span>Skills</span>
+            </div>
+            <div class="s-sep-line"></div>
+          </div>
+
+          <div class="s-skills">
+
+            <div class="s-sk">
+              <div class="s-sk-head">
+                <span class="s-sk-num">01</span>
+                <span class="s-sk-title">企画（設計）</span>
+                <span class="s-sk-en">Planning</span>
+              </div>
+              <div class="s-sk-body">
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">ストーリーテリング</div>
+                  <div class="s-sk-item-desc">複雑な条件も論理を情動へ結び付ける</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">コンセプト設計</div>
+                  <div class="s-sk-item-desc">制約・KPIから方向性を定める</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">データドリブン</div>
+                  <div class="s-sk-item-desc">SNS・Salesforceで関係性を保つ</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">コンテンツ化</div>
+                  <div class="s-sk-item-desc">仕事を言葉・知恵へ落とし込む</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="s-sk">
+              <div class="s-sk-head">
+                <span class="s-sk-num">02</span>
+                <span class="s-sk-title">品質の維持（運営 / オペレーション）</span>
+                <span class="s-sk-en">Operation</span>
+              </div>
+              <div class="s-sk-body">
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">ゼロからの構築</div>
+                  <div class="s-sk-item-desc">企画・制作を一人で担う</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">施行・段取り管理</div>
+                  <div class="s-sk-item-desc">当日までの遅延を阻止する</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">現場発の提案力</div>
+                  <div class="s-sk-item-desc">真摯に現場を拾って落とし込む</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">関係者調整</div>
+                  <div class="s-sk-item-desc">参与者間の整理を実施する</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="s-sk">
+              <div class="s-sk-head">
+                <span class="s-sk-num">03</span>
+                <span class="s-sk-title">制作（ブランドを体現）</span>
+                <span class="s-sk-en">Creative</span>
+              </div>
+              <div class="s-sk-body">
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">ブランド品質管理</div>
+                  <div class="s-sk-item-desc">0.1mm単位まで調整し仕上げる</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">クリエイティブDX</div>
+                  <div class="s-sk-item-desc">デジタルマテリアルを統合する</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">データドリブン活用</div>
+                  <div class="s-sk-item-desc">数字で高さと合意を形成する</div>
+                </div>
+                <div class="s-sk-item">
+                  <div class="s-sk-item-name">インナー施策</div>
+                  <div class="s-sk-item-desc">内部から外へ変えるアプローチ</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       TAG FILTER WORKS SECTION
+  ══════════════════════════════════ -->
+  <div class="pf-outer" id="pf-outer">
+    <div class="pf-sticky">
+
+      <!-- section header -->
+      <div class="pf-section-head">
+        <p class="pf-section-eyebrow">今までのデザインや実績をご紹介</p>
+        <h2 class="pf-section-title">WORK</h2>
+      </div>
+
+      <!-- filter strip -->
+      <div class="pf-filter">
+        <div class="pf-filter-meta">
+          <p class="pf-count" id="pf-count"><strong>0</strong> works</p>
+          <button class="pf-clear" id="pf-clear">Clear all ×</button>
+        </div>
+        <div class="pf-filter-divider"></div>
+        <div class="pf-tags" id="pf-tags"></div>
+        <span class="pf-sort-hint" id="pf-sort-hint"></span>
+      </div>
+
+      <!-- cards -->
+      <div class="pf-card-area">
+        <div class="pf-track" id="pf-track"></div>
+        <div class="pf-progress">
+          <span class="pf-progress-text">Scroll</span>
+          <div class="pf-progress-bar"><div class="pf-progress-fill" id="pf-fill"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Work Detail Modal -->
+  <div class="wd-modal" id="wd-modal" role="dialog" aria-modal="true">
+    <div class="wd-backdrop" id="wd-backdrop"></div>
+    <div class="wd-panel" id="wd-panel">
+      <div class="wd-topbar">
+        <span class="wd-topbar-title" id="wd-topbar-title"></span>
+        <button class="wd-close-btn" id="wd-close-btn">
+          <span class="wd-close-icon"></span>Close
+        </button>
+      </div>
+      <div class="wd-detail-wrap" id="wd-detail-wrap"></div>
+      <div class="wd-end-hint" id="wd-end-hint"></div>
+    </div>
+  </div>
+  <!-- scroll-to-close progress bar -->
+  <div class="wd-scrollbar" id="wd-scrollbar" style="display:none">
+    <div class="wd-scrollbar-track"></div>
+    <div class="wd-scrollbar-thumb" id="wd-sb-thumb"></div>
+    <span class="wd-sb-pct" id="wd-sb-pct">0%</span>
+  </div>
+  <!-- bottom fade gradient -->
+  <div class="wd-fade-bottom" id="wd-fade-bottom"></div>
+
+
+
+
+  <footer>
+    <a href="#" class="footer-home"><span class="arrow">›</span> Home</a>
+    <nav class="footer-nav">
+      <div class="footer-nav-col">
+        <a href="#"><span class="arrow">›</span> About</a>
+      </div>
+      <div class="footer-nav-col">
+        <a href="#"><span class="arrow">›</span> Work</a>
+        <div class="footer-submenu">
+          <div class="footer-submenu-indent">
+            <span class="footer-submenu-bracket">└</span>
+            <ul class="footer-submenu-list">
+              <li><a href="#">Digital</a></li>
+              <li><a href="#">Event</a></li>
+              <li><a href="#">Sales Support</a></li>
+              <li><a href="#">Public Relations</a></li>
+              <li><a href="#">Private</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <a href="#"><span class="arrow">›</span> Career</a>
+      </div>
+    </nav>
+    <p class="footer-copyright">神田 有作のデザインのポートフォリオとなり、無断転載等の一切を禁止しております</p>
+  </footer>
+
+  </div>
+
+  <!-- ══════════════════════════════════
+       Ink Reveal Animation
+  ══════════════════════════════════ -->
+  <script>
+    // ── 画像リスト（仮画像 / 本番は実ファイルパスに差し替え） ──
+    const IMAGE_SRCS = [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1400&q=80",
+      "https://images.unsplash.com/photo-1511497584788-876760111969?w=1400&q=80",
+    ];
+    const CYCLE_INTERVAL = 4000; // 4秒
+
+    const cv  = document.getElementById('ink-canvas');
+    const ctx = cv.getContext('2d');
+
+    let W = 0, H = 0;
+    let imgDrawX = 0, imgDrawY = 0, imgDrawW = 0, imgDrawH = 0;
+    let animId = null;
+    let finished = false;
+
+    // 現在表示中の画像インデックス
+    let currentIdx = 0;
+
+    // 直前の完成フレームを保持するオフスクリーンキャンバス
+    let prevCanvas = null;
+
+    const BLUR_STEPS = [20, 14, 9, 5, 2, 0];
+    let blurLevels = [];
+
+    // 画像オブジェクトのキャッシュ
+    const imgCache = {};
+    function loadImg(src) {
+      return new Promise(resolve => {
+        if (imgCache[src] && imgCache[src].complete) return resolve(imgCache[src]);
+        const i = new Image();
+        i.onload = () => { imgCache[src] = i; resolve(i); };
+        i.onerror = () => resolve(null);
+        i.src = src;
+        imgCache[src] = i;
+      });
+    }
+
+    function getCoverParams(img) {
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+      const scale = Math.max(W / iw, H / ih);
+      const dw = iw * scale, dh = ih * scale;
+      return { dx: (W - dw) / 2, dy: (H - dh) / 2, dw, dh };
+    }
+
+    function drawFull(img) {
+      const { dx, dy, dw, dh } = getCoverParams(img);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+      ctx.drawImage(img, dx, dy, dw, dh);
+    }
+
+    function buildBlurLevels(img) {
+      const { dx, dy, dw, dh } = getCoverParams(img);
+      imgDrawX = dx; imgDrawY = dy; imgDrawW = dw; imgDrawH = dh;
+      blurLevels = BLUR_STEPS.map(blur => {
+        const off = document.createElement('canvas');
+        off.width = W; off.height = H;
+        const oc = off.getContext('2d');
+        // 先に黒で塗りつぶし、ブラーエッジの透明抜けを防ぐ
+        oc.fillStyle = '#000';
+        oc.fillRect(0, 0, W, H);
+        if (blur > 0) {
+          const blurOff = document.createElement('canvas');
+          blurOff.width = W; blurOff.height = H;
+          const bc = blurOff.getContext('2d');
+          // ブラーのエッジ滲み対策: 拡大して描いてからブラー適用
+          bc.fillStyle = '#000';
+          bc.fillRect(0, 0, W, H);
+          bc.filter = `blur(${blur}px)`;
+          bc.drawImage(img, dx, dy, dw, dh);
+          bc.filter = 'none';
+          oc.drawImage(blurOff, 0, 0);
+        } else {
+          oc.drawImage(img, dx, dy, dw, dh);
+        }
+        return off;
+      });
+    }
+
+    function getBlurred(progress) {
+      const steps = BLUR_STEPS.length - 1;
+      const idx = progress * steps;
+      const lo  = Math.floor(idx);
+      const hi  = Math.min(lo + 1, steps);
+      const t   = idx - lo;
+      if (t === 0 || lo === hi) return blurLevels[lo];
+      const mix = document.createElement('canvas');
+      mix.width = W; mix.height = H;
+      const mc = mix.getContext('2d');
+      mc.drawImage(blurLevels[lo], 0, 0);
+      mc.globalAlpha = t;
+      mc.drawImage(blurLevels[hi], 0, 0);
+      return mix;
+    }
+
+    class InkDrop {
+      constructor(x, y, delay) {
+        this.x = x; this.y = y; this.r = 0;
+        this.maxR  = Math.sqrt(W * W + H * H) * (0.28 + Math.random() * 0.4);
+        this.speed = 14 + Math.random() * 12;
+        this.delay = delay; this.age = 0;
+        this.wb  = Math.random() * Math.PI * 2;
+        this.wbS = 0.018 + Math.random() * 0.032;
+        this.sx  = 0.76 + Math.random() * 0.48;
+        this.sy  = 0.76 + Math.random() * 0.48;
+        this.ang = Math.random() * Math.PI * 2;
+        this.done = false;
+        this.sats = Array.from({ length: 4 + Math.floor(Math.random() * 5) }, () => ({
+          a: Math.random() * Math.PI * 2,
+          d: 0.48 + Math.random() * 0.5,
+          r: 0.18 + Math.random() * 0.36,
+        }));
+      }
+      update() {
+        this.age++;
+        if (this.age < this.delay) return;
+        this.wb += this.wbS;
+        if (this.r < this.maxR) {
+          this.r += this.speed * (1 - this.r / this.maxR * 0.62);
+        } else { this.done = true; }
+      }
+      get progress() {
+        if (this.age < this.delay) return 0;
+        return Math.min(1, this.r / this.maxR);
+      }
+      drawMask(c) {
+        if (this.age < this.delay || this.r <= 0) return;
+        const p = this.progress;
+        c.save();
+        c.translate(this.x, this.y);
+        c.rotate(this.ang + Math.sin(this.wb) * 0.04);
+        c.scale(this.sx, this.sy);
+        c.globalAlpha = Math.min(1, p * 5);
+        c.beginPath();
+        for (let i = 0; i <= 20; i++) {
+          const a = (i / 20) * Math.PI * 2;
+          const n = 1
+            + Math.sin(a * 3  + this.wb) * 0.09
+            + Math.sin(a * 7  + 1.2)     * 0.055
+            + Math.sin(a * 13)            * 0.028;
+          c.lineTo(Math.cos(a) * this.r * n, Math.sin(a) * this.r * n);
+        }
+        c.closePath();
+        const g = c.createRadialGradient(0, 0, this.r * 0.2, 0, 0, this.r * 1.08);
+        g.addColorStop(0,    'rgba(255,255,255,1)');
+        g.addColorStop(0.65, 'rgba(255,255,255,1)');
+        g.addColorStop(0.9,  'rgba(255,255,255,0.5)');
+        g.addColorStop(1,    'rgba(255,255,255,0)');
+        c.fillStyle = g; c.fill();
+        this.sats.forEach(s => {
+          const sr = this.r * s.d;
+          const sx = Math.cos(s.a) * sr, sy = Math.sin(s.a) * sr;
+          const sR = this.r * s.r * p;
+          if (sR < 1) return;
+          const sg = c.createRadialGradient(sx, sy, 0, sx, sy, sR);
+          sg.addColorStop(0, 'rgba(255,255,255,0.85)');
+          sg.addColorStop(1, 'rgba(255,255,255,0)');
+          c.fillStyle = sg;
+          c.beginPath(); c.arc(sx, sy, sR, 0, Math.PI * 2); c.fill();
+        });
+        c.restore();
+      }
+    }
+
+    let drops = [], inkOff, iCtx;
+
+    function makeDrops() {
+      drops = [];
+      const O = [
+        { x: W * .5,  y: H * .5,  d: 0  },
+        { x: W * .22, y: H * .28, d: 3  },
+        { x: W * .78, y: H * .68, d: 5  },
+        { x: W * .1,  y: H * .78, d: 7  },
+        { x: W * .9,  y: H * .18, d: 6  },
+        { x: W * .5,  y: H * .08, d: 9  },
+        { x: W * .5,  y: H * .92, d: 10 },
+        { x: W * .04, y: H * .04, d: 11 },
+        { x: W * .96, y: H * .96, d: 12 },
+        { x: W * .28, y: H * .96, d: 13 },
+        { x: W * .74, y: H * .04, d: 14 },
+        { x: W * .96, y: H * .04, d: 15 },
+        { x: W * .04, y: H * .96, d: 16 },
+      ];
+      drops = O.map(o => new InkDrop(o.x, o.y, o.d));
+      for (let i = 0; i < 22; i++)
+        drops.push(new InkDrop(Math.random() * W, Math.random() * H, 2 + Math.random() * 25));
+    }
+
+    // 現在の canvas 状態を prevCanvas に保存（drawFull後に呼ぶこと）
+    function savePrevCanvas() {
+      if (!prevCanvas) prevCanvas = document.createElement('canvas');
+      prevCanvas.width  = W;
+      prevCanvas.height = H;
+      const pc = prevCanvas.getContext('2d');
+      pc.fillStyle = '#000';
+      pc.fillRect(0, 0, W, H);
+      pc.drawImage(cv, 0, 0);
+    }
+
+    function startAnim(img, onDone) {
+      if (animId) cancelAnimationFrame(animId);
+      finished = false;
+
+      buildBlurLevels(img);
+
+      inkOff = document.createElement('canvas');
+      inkOff.width = W; inkOff.height = H;
+      iCtx = inkOff.getContext('2d');
+
+      makeDrops();
+
+      const { dx, dy, dw, dh } = getCoverParams(img);
+
+      function frame() {
+        iCtx.clearRect(0, 0, W, H);
+        drops.forEach(d => { d.update(); d.drawMask(iCtx); });
+
+        const spread     = drops.reduce((s, d) => s + d.progress, 0) / drops.length;
+        const fadeAlpha  = Math.min(1, spread * 1.6);
+        const blurProg   = Math.min(1, spread * 1.2);
+        const blurredImg = getBlurred(blurProg);
+
+        const masked = document.createElement('canvas');
+        masked.width = W; masked.height = H;
+        const mc = masked.getContext('2d');
+        mc.drawImage(blurredImg, 0, 0);
+        mc.globalCompositeOperation = 'destination-in';
+        mc.drawImage(inkOff, 0, 0);
+
+        ctx.clearRect(0, 0, W, H);
+        // 背景: 前の画像、なければ黒で全面塗りつぶし
+        if (prevCanvas) {
+          ctx.drawImage(prevCanvas, 0, 0);
+        } else {
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(0, 0, W, H);
+        }
+        ctx.globalAlpha = fadeAlpha;
+        ctx.drawImage(masked, 0, 0);
+        ctx.globalAlpha = 1;
+
+        if (drops.every(d => d.done)) {
+          drawFull(img);
+          finished = true;
+          if (onDone) onDone();
+          return;
+        }
+        animId = requestAnimationFrame(frame);
+      }
+      animId = requestAnimationFrame(frame);
+    }
+
+    // テキストを1文字ずつspanに分割してアニメーション
+    function splitAndAnimate(el, startDelay, duration) {
+      const nodes = Array.from(el.childNodes);
+      el.innerHTML = '';
+      el.style.opacity = '1';
+
+      const spans = [];
+      nodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          [...node.textContent].forEach(ch => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.textContent = ch === ' ' ? '\u00A0' : ch;
+            el.appendChild(span);
+            spans.push(span);
+          });
+        } else if (node.nodeName === 'BR') {
+          el.appendChild(document.createElement('br'));
+        } else {
+          el.appendChild(node);
+        }
+      });
+
+      const count = spans.length;
+      const delays = spans.map((_, i) => startDelay + (i / count) * duration);
+      for (let i = delays.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [delays[i], delays[j]] = [delays[j], delays[i]];
+      }
+      spans.forEach((span, i) => {
+        span.style.animationDelay = delays[i].toFixed(3) + 's';
+      });
+
+      return startDelay + duration;
+    }
+
+    function revealContent() {
+      const elNav     = document.getElementById('main-nav');
+      const elBg      = document.getElementById('col-right-bg');
+      const subtitle  = document.querySelector('.subtitle');
+      const name      = document.querySelector('.name');
+      const divider   = document.querySelector('.divider');
+      const desc      = document.querySelector('.description');
+
+      [elNav, elBg].forEach(el => {
+        el.classList.add('reveal');
+        el.addEventListener('animationend', () => {
+          el.style.animation = 'none';
+          el.style.opacity   = '1';
+          el.style.transform = 'none';
+        }, { once: true });
+      });
+
+      const DURATION = 0.5;
+      let t = 0.3;
+
+      splitAndAnimate(subtitle, t, DURATION);
+      t += 0.3;
+
+      splitAndAnimate(name, t, DURATION);
+      t += 0.3;
+
+      divider.classList.add('reveal');
+      divider.style.animationDelay = t + 's';
+      divider.addEventListener('animationend', () => {
+        divider.style.animation = 'none';
+        divider.style.opacity = '1';
+      }, { once: true });
+      t += 0.2;
+
+      splitAndAnimate(desc, t, DURATION);
+    }
+
+    function setSize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      cv.width  = W;
+      cv.height = H;
+    }
+
+    let contentRevealed = false;
+
+    // 次の画像へサイクル
+    function scheduleNextCycle() {
+      if (IMAGE_SRCS.length < 2) return;
+      setTimeout(async () => {
+        currentIdx = (currentIdx + 1) % IMAGE_SRCS.length;
+        const nextImg = await loadImg(IMAGE_SRCS[currentIdx]);
+        if (!nextImg) { scheduleNextCycle(); return; }
+        savePrevCanvas();
+        startAnim(nextImg, scheduleNextCycle);
+      }, CYCLE_INTERVAL);
+    }
+
+    // 全画像をプリロード
+    async function init() {
+      setSize();
+      // 画像ロード有無にかかわらず必ずrevealする保険タイマー
+      setTimeout(() => {
+        if (!contentRevealed) { contentRevealed = true; revealContent(); }
+      }, 900);
+      const firstImg = await loadImg(IMAGE_SRCS[0]);
+      if (!firstImg) {
+        if (!contentRevealed) { contentRevealed = true; revealContent(); }
+        return;
+      }
+      buildBlurLevels(firstImg);
+      startAnim(firstImg, scheduleNextCycle);
+      setTimeout(() => {
+        if (!contentRevealed) { contentRevealed = true; revealContent(); }
+      }, 700);
+      IMAGE_SRCS.slice(1).forEach(src => loadImg(src));
+    }
+
+    init();
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(async () => {
+        setSize();
+        const img = await loadImg(IMAGE_SRCS[currentIdx]);
+        if (img) buildBlurLevels(img);
+        if (finished && img) drawFull(img);
+      }, 100);
+    });
+  </script>
+
+  <!-- ══════════════════════════════════
+       Scroll Crossfade + Strong Section Animation
+  ══════════════════════════════════ -->
+  <script>
+    const overlay      = document.getElementById('bg-overlay');
+    const colRightBg   = document.getElementById('col-right-bg');
+    const heroText     = document.getElementById('hero-text');
+    const sSectionEl   = document.getElementById('strong-section');
+    const mainNav      = document.getElementById('main-nav');
+    const NAV_GAP      = 24;
+    const NAV_H        = 52;
+    const SCROLL_END   = window.innerHeight * 0.6;
+
+    // ファーストビュー: nav を画面下部に初期配置
+    const navBottomTop = window.innerHeight - NAV_H - NAV_GAP;
+    mainNav.style.top  = navBottomTop + 'px';
+
+    // 初期状態
+    sSectionEl.style.opacity = '0';
+
+    let sContentRevealed = false;
+    let bgReadyDone      = false;
+    let navReachedTop    = false; // nav が上端に到達したら固定
+
+    window.addEventListener('scroll', () => {
+      const progress = Math.min(1, Math.max(0, window.scrollY / SCROLL_END));
+
+      // Nav: 下→上（一度上端に達したら固定したまま戻さない）
+      if (!navReachedTop) {
+        const navTop = navBottomTop + (NAV_GAP - navBottomTop) * progress;
+        mainNav.style.top = navTop + 'px';
+        if (progress >= 1) {
+          navReachedTop = true;
+          mainNav.style.top = NAV_GAP + 'px';
+        }
+      }
+
+      // TOP フェードアウト (bg-overlay が白くなってキャンバスを覆い隠す)
+      overlay.style.opacity    = progress;
+      colRightBg.style.opacity = 1 - progress;
+      heroText.style.opacity   = 1 - progress;
+      document.querySelector('.col-right').style.pointerEvents = progress > 0.9 ? 'none' : '';
+
+      // Strong section: bg-overlayが白くなった後半でフェードイン
+      const strongP = Math.min(1, Math.max(0, (progress - 0.6) / 0.4));
+      sSectionEl.style.opacity = strongP;
+
+      // 遷移完了後に白背景を付与
+      if (progress >= 1 && !bgReadyDone) {
+        bgReadyDone = true;
+        sSectionEl.classList.add('s-bg-ready');
+      } else if (progress < 1 && bgReadyDone) {
+        bgReadyDone = false;
+        sSectionEl.classList.remove('s-bg-ready');
+      }
+
+      // コンテンツアニメーション発火（一度だけ）
+      if (progress > 0.75 && !sContentRevealed) {
+        sContentRevealed = true;
+        revealStrongContent();
+      }
+    }, { passive: true });
+
+    // ── Strong Section コンテンツアニメーション ──
+
+    // TOPと同じ文字ランダムフェード
+    function splitAndAnimateStrong(el, startDelay, duration) {
+      // u タグ等を保持しつつ文字分割
+      function processNode(node, spans, container) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          [...node.textContent].forEach(ch => {
+            const span = document.createElement('span');
+            span.className = 's-char';
+            span.textContent = ch === ' ' ? '\u00A0' : ch;
+            container.appendChild(span);
+            spans.push(span);
+          });
+        } else if (node.nodeName === 'BR') {
+          container.appendChild(document.createElement('br'));
+        } else {
+          // u タグなどはラッパーごと保持
+          const wrapper = node.cloneNode(false);
+          container.appendChild(wrapper);
+          node.childNodes.forEach(child => processNode(child, spans, wrapper));
+        }
+      }
+
+      const nodes = Array.from(el.childNodes);
+      el.innerHTML = '';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+
+      const spans = [];
+      nodes.forEach(n => processNode(n, spans, el));
+
+      const count = spans.length;
+      const delays = spans.map((_, i) => startDelay + (i / count) * duration);
+      for (let i = delays.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [delays[i], delays[j]] = [delays[j], delays[i]];
+      }
+      spans.forEach((span, i) => {
+        span.style.animationDelay = delays[i].toFixed(3) + 's';
+      });
+    }
+
+    function revealStrongContent() {
+      const section = document.getElementById('strong-section');
+
+      // 画像: Ink reveal アニメーション
+      startStrongImgAnim();
+
+      // テキスト要素アニメーション
+      const eyebrow = section.querySelector('.s-eyebrow');
+      const title   = section.querySelector('.s-main-title');
+      const rule    = section.querySelector('.s-rule');
+      const intros  = section.querySelectorAll('.s-intro');
+      const sep     = section.querySelector('.s-sep');
+      const skills  = section.querySelectorAll('.s-sk');
+
+      // eyebrow
+      eyebrow.style.animation      = 's-fadeUp 0.6s ease both';
+      eyebrow.style.animationDelay = '0.1s';
+
+      // title: 1文字ずつランダムフェード
+      splitAndAnimateStrong(title, 0.18, 0.5);
+
+      // rule
+      rule.style.animation      = 's-fadeUp 0.6s ease both';
+      rule.style.animationDelay = '0.26s';
+
+      // intros
+      let t = 0.32;
+      intros.forEach(intro => {
+        intro.style.animation      = 's-fadeUp 0.6s ease both';
+        intro.style.animationDelay = t + 's';
+        t += 0.1;
+      });
+
+      // sep
+      sep.style.animation      = 's-fadeUp 0.6s ease both';
+      sep.style.animationDelay = '0.6s';
+
+      // skill cards
+      skills.forEach((sk, i) => {
+        sk.style.animation      = 's-fadeUp 0.6s ease both';
+        sk.style.animationDelay = (0.66 + i * 0.07) + 's';
+      });
+    }
+
+    // ── Strong セクション画像 Ink Reveal ──
+    function startStrongImgAnim() {
+      const img = document.getElementById('s-diagram-img');
+      // 少し遅延を置いてからフェードイン
+      setTimeout(() => {
+        img.classList.add('s-img-visible');
+      }, 150);
+    }
+  </script>
+
+
+
+    <!-- ══════════════════════════════════
+       Tag Filter Works – JS
+  ══════════════════════════════════ -->
+  <script>
+  (function () {
+
+    /* ════════  DATA – 21 works  ════════ */
+    const PF_WORKS = [
+      { id:1,  title:'ミカタグループ 企業動画',        category:'Digital',          tags:['動画制作','企業PR','演出'],                    img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=70' },
+      { id:2,  title:'採用サイト リニューアル',        category:'Digital',          tags:['ウェブデザイン','UI/UX','採用'],                img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=70' },
+      { id:3,  title:'SNS運用 キャンペーン',           category:'Digital',          tags:['SNS','グラフィック','コピーライティング'],        img:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=70' },
+      { id:4,  title:'メールマガジン デザイン',        category:'Digital',          tags:['メールマガジン','ライティング','情報設計'],        img:'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&q=70' },
+      { id:5,  title:'LP制作 / 転換率改善',           category:'Digital',          tags:['LP','ウェブデザイン','UI/UX'],                  img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70' },
+      { id:6,  title:'社内表彰式 演出設計',            category:'Event',            tags:['イベント','空間演出','映像制作'],                img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=70' },
+      { id:7,  title:'展示会ブース デザイン',          category:'Event',            tags:['展示会','空間デザイン','グラフィック'],          img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=70' },
+      { id:8,  title:'オープニング 映像制作',          category:'Event',            tags:['映像制作','動画制作','イベント'],                img:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=70' },
+      { id:9,  title:'セミナー 進行・資料制作',        category:'Event',            tags:['イベント','資料制作','プレゼン'],                img:'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=70' },
+      { id:10, title:'営業提案書 テンプレート',        category:'Sales Support',    tags:['資料制作','ブランディング','テンプレート'],        img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=70' },
+      { id:11, title:'製品カタログ デザイン',          category:'Sales Support',    tags:['印刷物','グラフィック','情報設計'],              img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70' },
+      { id:12, title:'商談資料 リビルド',              category:'Sales Support',    tags:['資料制作','コンサルティング','UI/UX'],            img:'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=70' },
+      { id:13, title:'トークスクリプト 体系化',        category:'Sales Support',    tags:['ライティング','情報設計','コンサルティング'],      img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=70' },
+      { id:14, title:'ブランドブック 制作',            category:'Public Relations', tags:['ブランディング','印刷物','コピーライティング'],    img:'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=600&q=70' },
+      { id:15, title:'プレスリリース デザイン',        category:'Public Relations', tags:['グラフィック','ライティング','情報設計'],          img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70' },
+      { id:16, title:'社内報 リニューアル',            category:'Public Relations', tags:['印刷物','グラフィック','ライティング'],            img:'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=600&q=70' },
+      { id:17, title:'採用広報 ビジュアル',            category:'Public Relations', tags:['採用','グラフィック','ブランディング'],            img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70' },
+      { id:18, title:'写真集 レイアウト',              category:'Private',          tags:['印刷物','写真','タイポグラフィ'],                img:'https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=600&q=70' },
+      { id:19, title:'ロゴ・VI デザイン',              category:'Private',          tags:['ロゴ','ブランディング','タイポグラフィ'],          img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70' },
+      { id:20, title:'イラスト シリーズ',              category:'Private',          tags:['イラスト','デジタルアート','キャラクター'],        img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70' },
+      { id:21, title:'モーション グラフィックス',      category:'Private',          tags:['モーション','動画制作','アニメーション'],          img:'https://images.unsplash.com/photo-1551503766-ac63dfa6401c?w=600&q=70' },
+    ];
+
+    const ALL_PF_TAGS = [...new Set(PF_WORKS.flatMap(w => w.tags))].sort((a,b) => a.localeCompare(b,'ja'));
+    let pfSelected = new Set();
+    let currentWorks = [...PF_WORKS];
+
+    /* ════════  TAGS  ════════ */
+    function pfRenderTags() {
+      const c = document.getElementById('pf-tags');
+      c.innerHTML = '';
+      ALL_PF_TAGS.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'pf-tag' + (pfSelected.has(tag) ? ' pf-active' : '');
+        btn.textContent = tag;
+        btn.addEventListener('click', () => pfToggle(tag));
+        c.appendChild(btn);
+      });
+    }
+
+    /* ════════  WORKS  ════════ */
+    function pfMatch(w) { return pfSelected.size ? w.tags.filter(t => pfSelected.has(t)).length : 0; }
+
+    function pfRenderWorks() {
+      const track = document.getElementById('pf-track');
+      track.innerHTML = '';
+      currentWorks = [...PF_WORKS]
+        .map(w => ({ ...w, mc: pfMatch(w) }))
+        .filter(w => !pfSelected.size || w.mc > 0)
+        .sort((a,b) => b.mc - a.mc);
+
+      document.getElementById('pf-count').innerHTML = `<strong>${currentWorks.length}</strong> works`;
+      document.getElementById('pf-sort-hint').textContent = pfSelected.size ? 'sorted by match' : '';
+
+      if (!currentWorks.length) {
+        const el = document.createElement('div');
+        el.className = 'pf-empty';
+        el.innerHTML = '<p class="pf-empty-title">No works found.</p><p class="pf-empty-sub">Try another tag</p>';
+        track.appendChild(el); pfRefresh(); return;
+      }
+
+      currentWorks.forEach((work, i) => {
+        const mHtml = pfSelected.size ? `<span class="pf-match-badge ${work.mc>0?'pf-hl':''}">${work.mc}/${work.tags.length}</span>` : '';
+        const tHtml = work.tags.map(t => `<span class="pf-ctag ${pfSelected.has(t)?'pf-matched':''}">${t}</span>`).join('');
+        const card = document.createElement('div');
+        card.className = 'pf-card';
+        card.innerHTML = `
+          <div class="pf-card-img-wrap">
+            <div class="pf-card-tab">${work.category}${mHtml}</div>
+            <img src="${work.img}" alt="${work.title}" loading="lazy"
+              onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(160deg,#1a1a1a 0%,#3a3a3a 100%)'">
+            <div class="pf-tag-overlay">${tHtml}</div>
+            <span class="pf-card-num">${String(i+1).padStart(2,'0')}</span>
+          </div>
+          <div class="pf-card-footer">
+            <div class="pf-card-dash"></div>
+            <p class="pf-card-label">${work.title}</p>
+          </div>`;
+        const ci = i;
+        card.addEventListener('click', () => openModal(ci));
+        track.appendChild(card);
+      });
+      pfRefresh();
+      requestAnimationFrame(() => {
+        track.querySelectorAll('.pf-card').forEach(c => {
+          if (c.getBoundingClientRect().left < window.innerWidth * 0.98) c.classList.add('pf-card-in');
+        });
+      });
+    }
+
+    /* ════════  SCROLL  ════════ */
+    let pfCfg = { scrollDist: 0 };
+
+    function pfRefresh() {
+      const outer = document.getElementById('pf-outer');
+      const track = document.getElementById('pf-track');
+      const leftPad = Math.max(40, (window.innerWidth - 1000) / 2);
+      const num = track.querySelectorAll('.pf-card').length;
+      const trackW = num * 260 + Math.max(0, num - 1) * 80;
+      // 最後のカード中心 = viewport中心 まで届くよう計算
+      const newDist = Math.max(0, leftPad + trackW - 130 - window.innerWidth / 2);
+
+      // Preserve visual position: keep the same horizontal-scroll progress ratio
+      const oldDist = pfCfg.scrollDist || 0;
+      const scrolledIn = Math.max(0, -outer.getBoundingClientRect().top);
+      const progress = oldDist > 0 ? Math.min(1, scrolledIn / oldDist) : 0;
+
+      outer.style.height = (window.innerHeight + newDist) + 'px';
+      pfCfg = { scrollDist: newDist };
+
+      // Re-anchor scroll so the sticky panel doesn't jump
+      if (scrolledIn > 0) {
+        const outerAbsTop = outer.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: outerAbsTop + progress * newDist, behavior: 'instant' });
+      }
+
+      pfTick();
+    }
+
+    function pfTick() {
+      const outer = document.getElementById('pf-outer');
+      const track = document.getElementById('pf-track');
+      const fill  = document.getElementById('pf-fill');
+      const scrolled = -outer.getBoundingClientRect().top;
+      if (scrolled <= 0) { track.style.transform = 'translateX(0)'; if (fill) fill.style.width = '0%'; return; }
+      const dist = pfCfg.scrollDist || 1;
+      if (scrolled >= dist) {
+        track.style.transform = `translateX(-${dist}px)`; if (fill) fill.style.width = '100%';
+        track.querySelectorAll('.pf-card').forEach(c => c.classList.add('pf-card-in')); return;
+      }
+      track.style.transform = `translateX(-${scrolled}px)`;
+      if (fill) fill.style.width = ((scrolled/dist)*100).toFixed(1) + '%';
+      track.querySelectorAll('.pf-card').forEach(c => {
+        if (c.getBoundingClientRect().left < window.innerWidth * 0.98) c.classList.add('pf-card-in');
+      });
+    }
+
+        /* ════════  MODAL  ════════ */
+    const modal    = document.getElementById('wd-modal');
+    const panel    = document.getElementById('wd-panel');
+    const content  = document.getElementById('wd-detail-wrap');
+    const closeBtn = document.getElementById('wd-close-btn');
+    const backdrop = document.getElementById('wd-backdrop');
+    const topTitle = document.getElementById('wd-topbar-title');
+    const sbWrap   = document.getElementById('wd-scrollbar');
+    const sbThumb  = document.getElementById('wd-sb-thumb');
+    const sbPct    = document.getElementById('wd-sb-pct');
+    let openIdx = 0, hintShown = false, closeTimer = null;
+
+    // Align bar to right edge of the panel
+    function sbAlign() {
+      const r = panel.getBoundingClientRect();
+      sbWrap.style.right = (window.innerWidth - r.right) + 'px';
+    }
+    window.addEventListener('resize', () => { if (sbWrap.style.display !== 'none') sbAlign(); });
+
+    function openModal(idx) {
+      openIdx = idx;
+      const work = currentWorks[idx];
+      topTitle.textContent = work.category;
+      content.innerHTML = buildDetailHTML(work);
+      panel.scrollTop = 0;
+      hintShown = false;
+      clearTimeout(closeTimer);
+      // Reset and show bar
+      if (sbThumb) { sbThumb.style.height = '0%'; sbThumb.classList.remove('wd-sb-closing'); }
+      if (sbPct) sbPct.textContent = '0%';
+      modal.style.visibility = '';
+      modal.classList.add('wd-open');
+      document.getElementById('wd-fade-bottom').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      // Position and show bar after layout
+      requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; });
+    }
+
+    function closeModal() {
+      hintShown = false;
+      clearTimeout(closeTimer);
+      // バーとグラデーションは即座に非表示
+      sbWrap.style.display = 'none';
+      document.getElementById('wd-fade-bottom').style.display = 'none';
+      // モーダルはフェードアウト
+      modal.classList.remove('wd-open');
+      // フェード完了後に完全非表示
+      setTimeout(() => {
+        modal.style.visibility = 'hidden';
+        document.body.style.overflow = '';
+      }, 420);
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Scroll → grow bar height 0%→100%, auto-close at bottom
+    panel.addEventListener('scroll', () => {
+      const max = panel.scrollHeight - panel.clientHeight;
+      const pct = max > 0 ? panel.scrollTop / max : 0;
+      const pctVal = Math.round(pct * 100);
+      if (sbThumb) sbThumb.style.height = pctVal + '%';
+      if (sbPct) {
+        sbPct.textContent = pctVal + '%';
+        // Position badge at the bottom of the thumb
+        const trackH = sbWrap.offsetHeight;
+        const pos = trackH * pct;
+        sbPct.style.bottom = (trackH - pos) + 'px';
+        sbPct.style.transform = 'translateY(50%)';
+      }
+
+      const atBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 4;
+      if (atBottom && !hintShown) {
+        hintShown = true;
+        if (sbThumb) sbThumb.classList.add('wd-sb-closing');
+        closeTimer = setTimeout(closeModal, 300);
+      }
+      if (!atBottom && hintShown) {
+        hintShown = false;
+        clearTimeout(closeTimer);
+        if (sbThumb) sbThumb.classList.remove('wd-sb-closing');
+      }
+    }, { passive: true });
+
+
+
+    /* ════════  DETAIL HTML  ════════ */
+    function buildDetailHTML(work) {
+      const heroSrc = work.img.replace('w=600', 'w=1400');
+      return `
+        <div class="content-wrap">
+          <p class="breadcrumb"><a href="#">Work</a> / ${work.category} / ${work.title}</p>
+          <h1 class="page-title">${work.title}</h1>
+        </div>
+        <div class="hero-block">
+          <div class="hero-image-wrap">
+            <img src="${heroSrc}" alt="${work.title}"
+              onerror="this.style.display='none';this.parentNode.style.background='#1a1a1a'">
+          </div>
+        </div>
+        <div class="content-wrap">
+          <section class="video-section">
+            <div class="video-wrapper"><div class="video-placeholder"><div class="video-play-icon"></div><p class="video-label">Video — Insert iframe or video tag here</p></div></div>
+            <p class="video-caption">${work.title}</p>
+          </section>
+          <div class="overview"><p>ここに概要テキストを入力してください。プロジェクトの概要、クライアント情報、制作背景などを記載します。</p></div>
+          <section class="section">
+            <p class="section-label">Context</p>
+            <h2 class="section-title"><span class="num">1</span>課題と背景</h2>
+            <div class="section-body"><p>ここに課題と背景のテキストを入力してください。クライアントが抱えていた課題、プロジェクト開始の背景などを記述します。</p><p>具体的なエピソードや数値データを活用することを推奨します。</p></div>
+          </section>
+          <section class="section">
+            <p class="section-label">Strategy</p>
+            <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
+            <div class="split-layout">
+              <div class="section-body"><p>ここに戦略的アプローチのテキストを入力してください。</p><p>具体的な施策内容と、その施策を選択した理由について記述します。</p></div>
+              <div class="img-ph split-single"></div>
+            </div>
+          </section>
+          <section class="section">
+            <p class="section-label">Creative</p>
+            <h2 class="section-title"><span class="num">3</span>こだわり</h2>
+            <div class="section-body"><p>ここにクリエイティブのこだわりについてのテキストを入力してください。独自のアプローチや技術的な挑戦について記述します。</p></div>
+          </section>
+          <section class="section">
+            <p class="section-label">Results &amp; Transferability</p>
+            <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
+            <div class="section-body"><p>ここに成果と貢献についてのテキストを入力してください。KPI達成状況などを具体的に記述します。</p></div>
+          </section>
+          <section class="section" style="margin-bottom:48px;">
+            <p class="section-label">Role</p>
+            <h2 class="section-title"><span class="num">5</span>役割</h2>
+            <div class="section-body"><p>ここに役割についてのテキストを入力してください。担当範囲と自身が果たした役割について記述します。</p></div>
+          </section>
+          <div class="content-bottom-spacer"></div>
+        </div>`;
+    }
+
+    /* ════════  STATE  ════════ */
+    function pfToggle(tag) { pfSelected.has(tag) ? pfSelected.delete(tag) : pfSelected.add(tag); pfUpdate(); }
+    function pfUpdate() {
+      pfRenderTags(); pfRenderWorks();
+      document.getElementById('pf-clear').classList.toggle('pf-visible', pfSelected.size > 0);
+    }
+    document.getElementById('pf-clear').addEventListener('click', () => { pfSelected.clear(); pfUpdate(); });
+    window.addEventListener('scroll', pfTick, { passive: true });
+    window.addEventListener('resize', pfRefresh);
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', pfUpdate); }
+    else { pfUpdate(); }
+
+  })();
+  </script>
+  <script>
+  /* ══  Custom Cursor — frosted glass + meter  ══ */
+  (function () {
+    const wrap = document.getElementById('cursor-wrap');
+    const arc  = document.getElementById('cursor-arc');
+    const CIRC = 113.1;   // 2π × 18
+    const DURATION = 3000; // ms to 100%
+
+    let mx=0, my=0, cx=0, cy=0;
+    const LAG = 0.18;
+    const lerp = (a,b,t) => a+(b-a)*t;
+
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+
+    (function tick() {
+      cx = lerp(cx, mx, LAG);
+      cy = lerp(cy, my, LAG);
+      wrap.style.left = cx + 'px';
+      wrap.style.top  = cy + 'px';
+      requestAnimationFrame(tick);
+    })();
+
+    // Meter state
+    let hoverTarget  = null;
+    let startTime    = null;
+    let meterRafId   = null;
+
+    function startMeter(target) {
+      hoverTarget = target;
+      startTime   = performance.now();
+
+      function step(now) {
+        const pct = Math.min(1, (now - startTime) / DURATION);
+        arc.setAttribute('stroke-dashoffset', CIRC * (1 - pct));
+        if (pct < 1) {
+          meterRafId = requestAnimationFrame(step);
+        } else {
+          const fired = hoverTarget;
+          resetMeter();
+          if (fired) {
+            // Try native click first, then dispatchEvent as fallback
+            try { fired.click(); } catch(e) {}
+            fired.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+          }
+        }
+      }
+      meterRafId = requestAnimationFrame(step);
+    }
+
+    function resetMeter() {
+      cancelAnimationFrame(meterRafId);
+      startTime   = null;
+      hoverTarget = null;
+      arc.setAttribute('stroke-dashoffset', CIRC);
+    }
+
+    // Hover selector — static + delegation
+    const SELECTOR = 'a, button, .pf-card, .pf-tag, [data-hover]';
+
+    function onEnter(target) {
+      // Always reset before starting — prevents stale meter firing on wrong target
+      resetMeter();
+      startMeter(target);
+    }
+    function onLeave() { resetMeter(); }
+
+    // Static elements
+    document.querySelectorAll(SELECTOR).forEach(el => {
+      el.addEventListener('mouseenter', () => onEnter(el));
+      el.addEventListener('mouseleave', onLeave);
+    });
+
+    // Dynamic elements: event delegation for pf-card / pf-tag
+    document.addEventListener('mouseover', e => {
+      const t = e.target.closest('.pf-card, .pf-tag');
+      if (!t) return;
+      // Only start if entering a different target
+      if (t !== hoverTarget) onEnter(t);
+    });
+    document.addEventListener('mouseout', e => {
+      const t = e.target.closest('.pf-card, .pf-tag');
+      if (!t) return;
+      const rel = e.relatedTarget;
+      if (!rel || !rel.closest('.pf-card, .pf-tag')) onLeave();
+    });
+
+    // Hide when leaving window
+    document.addEventListener('mouseleave', () => { wrap.style.opacity='0'; resetMeter(); });
+    document.addEventListener('mouseenter', () => { wrap.style.opacity=''; });
+  })();
+  </script>
+
+</body>
+</html>
