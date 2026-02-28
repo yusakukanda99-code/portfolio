@@ -917,16 +917,39 @@
       .pf-outer { height: auto !important; }
       .pf-sticky { position: relative; height: auto; }
       .pf-filter, .pf-section-head { padding-left: 20px; padding-right: 20px; }
-      .pf-card-area { overflow-x: auto; -webkit-overflow-scrolling: touch; height: 55vw; min-height: 260px; }
-      .pf-track { transform: none !important; padding-left: 20px; }
-      .pf-card { width: 220px; }
+      .pf-card-area {
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+        height: auto; min-height: 280px;
+        padding-bottom: 24px;
+      }
+      .pf-track {
+        transform: none !important;
+        padding-left: 20px;
+        padding-right: 20px;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        height: auto;
+      }
+      .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; }
+      .pf-card-img-wrap { flex: 1; min-height: 0; }
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
+      /* modal */
+      .wd-panel { width: 100% !important; }
+      .wd-fade-bottom { width: 100% !important; }
     }
 
     /* ══════════════════════════════════
        CUSTOM CURSOR
     ══════════════════════════════════ */
-    *, *::before, *::after { cursor: none !important; }
+    @media (pointer: fine) {
+      /* only hide cursor on devices with a precise pointer (mouse) */
+      *, *::before, *::after { cursor: none !important; }
+    }
+    @media (pointer: coarse), (max-width: 1024px) {
+      /* tablet/touch: restore native cursor, hide custom */
+      *, *::before, *::after { cursor: auto !important; }
+      #cursor-wrap, #cursor-dot { display: none !important; }
+    }
 
     /* ── frosted-glass cursor ── */
     #cursor-wrap {
@@ -2092,6 +2115,10 @@
     let mx=0, my=0, cx=0, cy=0;
     const LAG = 0.18;
     const lerp = (a,b,t) => a+(b-a)*t;
+
+    // Disable on touch/tablet devices
+    const isTouchDevice = () => window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
+    if (isTouchDevice()) return;
 
     document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
 
