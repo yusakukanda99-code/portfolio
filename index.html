@@ -59,7 +59,7 @@
     #main-nav {
       position: fixed;
       left: 0;
-      z-index: 20;
+      z-index: 15;
       display: flex;
       align-items: center;
       height: var(--nav-h);
@@ -201,7 +201,7 @@
     .prof-section {
       background: #fff;
       position: relative;
-      z-index: 10;
+      z-index: 20;
       margin-top: 140px;
     }
 
@@ -213,33 +213,6 @@
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
-    }
-
-    .prof-section-head {
-      padding: 80px max(calc((100vw - 1000px)/2), 40px) 0;
-      display: flex;
-      align-items: baseline;
-      gap: 20px;
-      justify-content: space-between;
-    }
-
-    .prof-section-eyebrow {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 10px;
-      font-weight: 300;
-      color: #999;
-      letter-spacing: 0.18em;
-      order: 2;
-    }
-
-    .prof-section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(52px, 6.5vw, 80px);
-      font-weight: 300;
-      letter-spacing: 0.01em;
-      line-height: 0.9;
-      color: #1a1a1a;
-      order: 1;
     }
 
     .prof-hero {
@@ -965,14 +938,108 @@
       display: none;
     }
 
+    /* ── Strengths section head ── */
+    .strengths-section-head {
+      padding: 80px max(calc((100vw - 1000px)/2), 40px) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      background: transparent;
+      position: relative;
+      z-index: 10;
+    }
+
+    .strengths-section-eyebrow {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.18em;
+    }
+
+    .strengths-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6.5vw, 80px);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 0.9;
+      color: #1a1a1a;
+    }
+
+    /* ── Center all section heads ── */
+    .pf-section-head {
+      flex: 0 0 auto;
+      padding: 16px max(calc((100vw - 1000px)/2), 40px) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .pf-section-eyebrow { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; font-weight: 300; color: #999; letter-spacing: 0.18em; order: unset; }
+    .pf-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6.5vw, 80px); font-weight: 300; letter-spacing: 0.01em; line-height: 0.9; color: #1a1a1a; order: unset; }
+
+    .prof-section-head {
+      padding: 80px max(calc((100vw - 1000px)/2), 40px) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .prof-section-eyebrow {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.18em;
+      order: unset;
+    }
+
+    .prof-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6.5vw, 80px);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 0.9;
+      color: #1a1a1a;
+      order: unset;
+    }
+
     @media (max-width: 860px) {
       .strong-section .s-frame { grid-template-columns: 1fr; }
-      .strong-section .s-col-left { position: relative; height: auto; min-height: 55vw; border-right: none; border-bottom: 1px solid var(--s-line-strong); }
+      .strong-section .s-col-left { position: relative; height: auto; min-height: auto; border-right: none; border-bottom: 1px solid var(--s-line-strong); padding-bottom: 32px; }
+      .strong-section .s-diagram-wrap {
+        position: relative;
+        top: auto; bottom: auto; left: auto;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 24px 0 0;
+        height: auto;
+        padding: 0 24px;
+        box-sizing: border-box;
+      }
+      #s-diagram-img {
+        max-height: none;
+        width: 100%;
+        height: auto;
+      }
       .strong-section .s-right-inner { padding: 44px 28px 48px; }
       .strong-section .s-sk-body { grid-template-columns: 1fr; }
       .strong-section .s-frame { padding-bottom: 40px; }
-      .pf-outer { padding-top: 80px; }
+      .pf-outer { padding-top: 40px; }
       .prof-section { margin-top: 60px; }
+      /* background-attachment: fixed は mobile で scroll に変更 */
+      .prof-fullimg {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center center;
+        height: 50vw;
+      }
     }
 
     /* ═══════════════════════════════
@@ -983,17 +1050,8 @@
       position: sticky; top: 0; height: 100vh;
       display: flex; flex-direction: column;
       overflow: hidden; background: #fff;
+      z-index: 20;
     }
-
-    /* ── section header ── */
-    .pf-section-head {
-      flex: 0 0 auto;
-      padding: 16px max(calc((100vw - 1000px)/2), 40px) 0;
-      display: flex; align-items: baseline; gap: 20px;
-      justify-content: space-between;
-    }
-    .pf-section-eyebrow { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; font-weight: 300; color: #999; letter-spacing: 0.18em; order: 2; }
-    .pf-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6.5vw, 80px); font-weight: 300; letter-spacing: 0.01em; line-height: 0.9; color: #1a1a1a; order: 1; }
 
     /* ── filter strip ── */
     .pf-filter {
@@ -1012,9 +1070,9 @@
     .pf-filter-divider { flex: 0 0 1px; height: 28px; background: rgba(0,0,0,0.08); margin: 0 18px; }
     .pf-tags { flex: 1; display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .pf-tags::-webkit-scrollbar { display: none; }
-    .pf-tag { flex: 0 0 auto; font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.04em; padding: 0.24rem 0.72rem; border: 1px solid rgba(0,0,0,0.1); background: transparent; color: #888; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: all 0.16s; }
-    .pf-tag:hover { border-color: rgba(0,0,0,0.3); color: #1a1a1a; }
-    .pf-tag.pf-active { border-color: #1a1a1a; color: #1a1a1a; background: rgba(0,0,0,0.04); }
+    .pf-tag { flex: 0 0 auto; font-family: 'Noto Sans JP', sans-serif; font-size: 11.5px; font-weight: 400; letter-spacing: 0.06em; padding: 0.35rem 0.9rem; border: 1px solid rgba(0,0,0,0.22); background: rgba(0,0,0,0.03); color: #555; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: all 0.16s; }
+    .pf-tag:hover { border-color: rgba(0,0,0,0.5); color: #1a1a1a; background: rgba(0,0,0,0.06); }
+    .pf-tag.pf-active { border-color: #1a1a1a; color: #fff; background: #1a1a1a; }
     .pf-sort-hint { flex: 0 0 auto; margin-left: 14px; font-family: 'EB Garamond', serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #ccc; white-space: nowrap; }
 
     /* ── card area ── */
@@ -1221,13 +1279,30 @@
     .wd-detail-wrap .pager-center:hover .seemore-dot { transform: scale(8); fill: transparent; stroke-width: 0.125; }
 
     @media (max-width: 768px) {
-      .pf-outer { height: auto !important; }
+      .pf-outer { height: auto !important; padding-top: 0 !important; padding-bottom: 100px; }
       .pf-sticky { position: relative; height: auto; }
       .pf-filter, .pf-section-head { padding-left: 20px; padding-right: 20px; }
+      .pf-filter {
+        flex-wrap: wrap;
+        height: auto;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        gap: 10px;
+      }
+      .pf-filter-meta { flex: 0 0 auto; }
+      .pf-filter-divider { display: none; }
+      .pf-tags {
+        flex: 0 0 100%;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        gap: 8px;
+      }
+      .pf-tag { flex: 1 1 auto; text-align: center; }
+      .pf-sort-hint { display: none; }
       .pf-card-area {
         overflow-x: auto; -webkit-overflow-scrolling: touch;
         height: auto; min-height: 280px;
-        padding-bottom: 24px;
+        padding-bottom: 48px;
       }
       .pf-track {
         transform: none !important;
@@ -1237,7 +1312,8 @@
         align-items: flex-start;
         height: auto;
       }
-      .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; }
+      /* モバイルではスクロール連動アニメーションが動かないため即時表示 */
+      .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; opacity: 1 !important; transform: none !important; }
       .pf-card-img-wrap { flex: 1; min-height: 0; }
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
       /* modal */
@@ -1340,11 +1416,13 @@
   <!-- ══════════════════════════════════
        STRONG SECTION（強み）
   ══════════════════════════════════ -->
-  <div class="strong-section-header" id="strong-header">
-    <span class="strong-section-header-label">Strengths</span>
-  </div>
-
   <section class="strong-section" id="strong-section">
+
+    <div class="strengths-section-head" id="strong-header">
+      <p class="strengths-section-eyebrow">私の強み</p>
+      <h2 class="strengths-section-title">STRENGTHS</h2>
+    </div>
+
     <div class="s-frame">
 
       <!-- 左カラム -->
@@ -1562,18 +1640,6 @@
       </div>
       <div class="footer-nav-col">
         <a href="#"><span class="arrow">›</span> Work</a>
-        <div class="footer-submenu">
-          <div class="footer-submenu-indent">
-            <span class="footer-submenu-bracket">└</span>
-            <ul class="footer-submenu-list">
-              <li><a href="#">Digital</a></li>
-              <li><a href="#">Event</a></li>
-              <li><a href="#">Sales Support</a></li>
-              <li><a href="#">Public Relations</a></li>
-              <li><a href="#">Private</a></li>
-            </ul>
-          </div>
-        </div>
       </div>
       <div class="footer-nav-col">
         <a href="#"><span class="arrow">›</span> Career</a>
@@ -2012,7 +2078,7 @@
       heroText.style.opacity   = 1 - progress;
       document.querySelector('.col-right').style.pointerEvents = progress > 0.9 ? 'none' : '';
 
-      // Strong section: bg-overlayが白くなった後半でフェードイン
+      // Strong section + 見出し: bg-overlayが白くなった後半でフェードイン
       const strongP = Math.min(1, Math.max(0, (progress - 0.6) / 0.4));
       sSectionEl.style.opacity = strongP;
 
