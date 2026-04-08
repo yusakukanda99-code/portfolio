@@ -1188,16 +1188,16 @@
       // 未指定はすべて false（プレースホルダーなし）
       const imgs = work.imgs || {};
       // 単枚スロット
-      const slotA  = imgs.a  ? `<div class="img-ph split-single"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
-      const slotA2 = imgs.a2 ? `<div class="img-ph split-single"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
-      const slotB  = imgs.b  ? `<div class="img-ph split-single"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
-      const slotB2 = imgs.b2 ? `<div class="img-ph split-single"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
-      const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotA  = imgs.a  ? `<div class="img-ph split-single"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotA2 = imgs.a2 ? `<div class="img-ph split-single"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotB  = imgs.b  ? `<div class="img-ph split-single"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotB2 = imgs.b2 ? `<div class="img-ph split-single"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
       // 右カラムに2枚縦並びにする場合のラッパー
       const colA = (slotA || slotA2) ? `<div class="img-col-stack">${slotA}${slotA2}</div>` : '';
       const colB = (slotB || slotB2) ? `<div class="img-col-stack">${slotB}${slotB2}</div>` : '';
       // ヒーロー下のサブ横長画像
-      const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
 
       return `
         <div class="content-wrap">
