@@ -1334,6 +1334,8 @@
     .wd-detail-wrap .section-body p + p { margin-top: 1.3em; }
     .wd-detail-wrap .split-layout { display: grid; grid-template-columns: 1fr 220px; gap: 36px; align-items: start; }
     .wd-detail-wrap .split-single { width: 100%; background: #eceef2; }
+    .wd-detail-wrap .wide-single { width: 100%; background: #eceef2; flex: 1; }
+    .wd-detail-wrap .wide-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
     .wd-detail-wrap .result-wide { width: 100%; background: #eceef2; margin-top: 32px; }
     .wd-detail-wrap .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 40px 0 56px; }
     .wd-detail-wrap .pager-prev, .wd-detail-wrap .pager-next { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #1a1a1a; transition: opacity 0.25s; cursor: pointer; background: none; border: none; }

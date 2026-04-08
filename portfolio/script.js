@@ -650,7 +650,7 @@
         }
       },
       {
-        id:5, year:'2025',
+        id:5, year:'2025', layout:'wide',
         title:'社内ポータルサイト 企画案',
         category:'Inner Branding / Web',
         tags:['ウェブデザイン','資料制作'],
@@ -1189,14 +1189,16 @@
       // 未指定はすべて false（プレースホルダーなし）
       const imgs = work.imgs || {};
       // 単枚スロット
-      const slotA  = imgs.a  ? `<div class="img-ph split-single"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotA2 = imgs.a2 ? `<div class="img-ph split-single"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB  = imgs.b  ? `<div class="img-ph split-single"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB2 = imgs.b2 ? `<div class="img-ph split-single"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const isWide = work.layout === 'wide';
+      const imgCls = isWide ? 'wide-single' : 'split-single';
+      const slotA  = imgs.a  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotA2 = imgs.a2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotB  = imgs.b  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const slotB2 = imgs.b2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
       const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
       // 右カラムに2枚縦並びにする場合のラッパー
-      const colA = (slotA || slotA2) ? `<div class="img-col-stack">${slotA}${slotA2}</div>` : '';
-      const colB = (slotB || slotB2) ? `<div class="img-col-stack">${slotB}${slotB2}</div>` : '';
+      const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : `<div class="img-col-stack">${slotA}${slotA2}</div>`) : '';
+      const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : `<div class="img-col-stack">${slotB}${slotB2}</div>`) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
 
@@ -1232,12 +1234,12 @@
           <section class="section">
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
-            ${colA ? `<div class="split-layout"><div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}</div>` : `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>`}
+            ${colA ? (isWide ? `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}</div>`) : `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colB ? `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>` : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
