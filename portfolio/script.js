@@ -605,8 +605,8 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
-        imgs:{ hero2:true, a:true, a2:true, b:true, b2:true, c:false },
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
           challenge:'専門家が持つ知識の発信がこれまで受け身になりがちで、自ら情報を探している見込み客との接点が限られていました。税務・会計という難解なテーマを誰もが理解できる言葉と映像に置き換え、会社自ら積極的に情報を届ける仕組みの構築が求められました。',
@@ -622,6 +622,7 @@
         category:'Web / Print',
         tags:['広報','ウェブデザイン','印刷物','ディレクション'],
         img:'img/works/work_03/work_03.webp',
+        imgs: { a:true },
         client:'ミカタグループ・大日本印刷株式会社・クラウドサーカス株式会社',
         d:{
           overview:'相続という複雑なテーマに不安を抱えるご家族へ「安心できる」「何をすればいいかわかる」と感じてもらえるウェブサイト＆パンフレットを制作。外部制作会社と連携しながら、ブランドとしての統一感を保つプロジェクト。',
@@ -672,6 +673,7 @@
         category:'Event / Community Art',
         tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
         img:'img/works/work_06/work_06.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
           overview:'地域活性化とアーティスト支援を目的に、大学・自治体・イベント事務局など多様な関係者を巻き込みながら公共の場に賑わいを生み出したプロジェクト。目標を上回る動員を達成し、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。',
@@ -688,6 +690,7 @@
         category:'Event Management',
         tags:['イベント','資料制作','ディレクション','動画制作'],
         img:'img/works/work_07/work_07.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'全国に分散する従業員・家族約700名が参加した創業30周年式典を、ゼロから企画・設計・運営。分単位の進行設計、投影資料・映像・BGM制作、会場との調整全般を担当し、無事完遂したプロジェクト。',
@@ -704,6 +707,7 @@
         category:'Print / Branding',
         tags:['資料制作','写真','印刷物','ディレクション','ブランディング'],
         img:'img/works/work_08/work_08.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'株式会社輪奏',
         d:{
           overview:'訪問看護という馴染みの薄い仕組みへの不安を解消し、「ひのてり」の強みを地域に伝えるパンフレットを制作。自ら現場に足を運んで撮影を行い、温かみのある実際の現場の表情を誌面に盛り込んだプロジェクト。',
@@ -720,6 +724,7 @@
         category:'Publishing / PR',
         tags:['広報','ディレクション','印刷物','ブランディング'],
         img:'img/works/work_09/work_09.webp',
+        imgs: { a:true },
         client:'ミカタ税理士法人・株式会社学研ホールディングス',
         d:{
           overview:'相続というテーマを「7日間の講義形式の漫画本」に落とし込み、学研より全国出版・販売を実現。複雑な専門知識を親しみやすい形で届け、ミカタグループのブランド信頼性向上に大きく貢献したプロジェクト。',
@@ -736,6 +741,7 @@
         category:'Recruiting / PR',
         tags:['採用','資料制作','写真','広報','ディレクション'],
         img:'img/works/work_10/work_10.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務会計・経営コンサルティング領域における採用競争に勝つため、「ミカタで働くとはどういうことか」を求職者に具体的・魅力的に伝える採用ブランディングをゼロから構築。写真撮影・バナー制作・資料作成まで一貫して担当したプロジェクト。',
@@ -752,6 +758,7 @@
         category:'Web Design / EC',
         tags:['ウェブデザイン'],
         img:'img/works/work_11/work_11.webp',
+        imgs: { a:true },
         client:'株式会社アロマクリエイト',
         d:{
           overview:'コロナ禍によりマスク着用が日常化する中、「マスクに吹きかけるアロマスプレー」という新しい生活習慣を提案する商品のLP制作。「これが自分の生活に必要だ」と感じさせる世界観を視覚で設計しました。',
@@ -768,6 +775,7 @@
         category:'Digital Advertising',
         tags:['ディスプレイ広告','デジタル運用'],
         img:'img/works/work_12/work_12.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'ターゲットごとの異なるニーズに対し、最適な訴求とデザインを使い分け、問い合わせ獲得効率（成約率）を最大化。AI生成画像の活用と日々のABテストによりデザインを継続改善し続けたデジタル広告運用プロジェクト。',
@@ -784,6 +792,7 @@
         category:'Digital / Content',
         tags:['デジタル運用','ウェブデザイン','広報','メールマガジン'],
         img:'img/works/work_13/work_13.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税理士法人の専門知識をオウンドメディアとメールマガジンで継続発信し、検索流入の増加と既存顧客との関係強化を実現。代表コラムの整理・掲載も担当し、会社の対外的な信頼向上に貢献したプロジェクト。',
@@ -800,6 +809,7 @@
         category:'Web / UX',
         tags:['デジタル運用','ディスプレイ広告','ディレクション','ウェブデザイン'],
         img:'img/works/work_14/work_14.webp',
+        imgs: { a:true, a2:true },
         client:'ミカタグループ・クラウドサーカス株式会社',
         d:{
           overview:'IT関連事業で会社設立を考えている方向けのLP制作。バナーからサイト流入、面談日程調整までをGoogle Workspaceと連携させた自動化フローで設計し、申し込みから面談日程までのリードタイムを大幅に短縮したプロジェクト。',
@@ -816,6 +826,7 @@
         category:'Digital / PR',
         tags:['広報','デジタル運用','メールマガジン','ウェブデザイン'],
         img:'img/works/work_15/work_15.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'コーポレートサイトの継続運用とSalesforce Pardotを活用したメルマガ配信を統合。「実益型」と「情緒型」の2種類のメルマガを設計し、HTMLコーディングから配信設計まで一貫して担当。属人的だった情報発信を仕組み化したプロジェクト。',
@@ -832,6 +843,7 @@
         category:'Inner Branding / Print',
         tags:['印刷物','ディレクション','ブランディング','広報'],
         img:'img/works/work_16/work_16.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&Aによる拠点拡大が続く中、全国各地に分散した従業員の帰属意識・一体感を醸成するため、社内報「お元氣様です」（年3回）の定期発行とノベルティ制作を推進。ゼロからインナーブランディングの仕組みを構築したプロジェクト。',
@@ -848,6 +860,7 @@
         category:'Design Competition',
         tags:['プライベート','ブランディング'],
         img:'img/works/work_17/work_17.webp',
+        imgs: { a:true },
         client:'Sony Fashion Entertainments（個人応募）',
         d:{
           overview:'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに個人応募。全国から集まった応募作品の中から32組の公認クリエイターに選出され、採用デザインはソニー公式サイト・専用アプリ・全国の百貨店での展示販売に展開されました。',
@@ -880,6 +893,7 @@
         category:'Web / Branding',
         tags:['ウェブデザイン','デジタル運用','ブランディング'],
         img:'img/works/work_19/work_19.webp',
+        imgs: { a:true, a2:true },
         client:'ARアドバンストテクノロジ',
         d:{
           overview:'ファイル管理システム「ZIDOMA data」を「誰でも使える、頼れるパートナー」として再定義するリブランディング提案を策定。自らオリジナルイラストを制作し、取材・撮影で初の顧客事例をゼロから獲得したプロジェクト。',
@@ -896,6 +910,7 @@
         category:'Branding / Print',
         tags:['印刷物','ブランディング','ディレクション','写真'],
         img:'img/works/work_20/work_20.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'創業30周年を迎えるミカタグループに向けて、会社案内（全16ページ）・営業チラシ・各種資材をトータルで統一制作。戦略立案からフォトディレクション・作図・ライティング・デザインまでを社内で一貫して完結させた大型プロジェクト。',
@@ -912,6 +927,7 @@
         category:'Video / Branding',
         tags:['動画制作','写真','ブランディング','ディレクション'],
         img:'img/works/work_21/work_21.webp',
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&A商談時に売主様・従業員様へ「どんな会社に入るのか」を伝えるための会社案内動画を約3週間・単独で制作。撮影から編集・納品まで全工程を一人で完遂し、グループインへの不安解消と承継プロセスの円滑化に貢献したプロジェクト。',
