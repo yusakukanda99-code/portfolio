@@ -3,11 +3,11 @@
 ══════════════════════════════════ */
     // ── 画像リスト（仮画像 / 本番は実ファイルパスに差し替え） ──
     const IMAGE_SRCS = [
-      "top_01.jpg",
-      "top_02.jpg",
-      "top_03.jpg",
-      "top_04.jpg",
-      "top_05.jpg",
+      "img/top/top_01.webp",
+      "img/top/top_02.webp",
+      "img/top/top_03.webp",
+      "img/top/top_04.webp",
+      "img/top/top_05.webp",
     ];
     const CYCLE_INTERVAL = 4000; // 4秒
 
@@ -583,18 +583,19 @@
     /* ════════  DATA – 21 works  ════════ */
     const PF_WORKS = [
       {
-        id:1, year:'2026',
+        id:1, year:'2025',
         title:'企業動画 ー オーナーの一生に伴走する',
         category:'Branding / Video',
         tags:['ブランディング','動画制作','メールマガジン','ディレクション'],
-        img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=70',
+        img:'img/works/work_01/work_01.webp',
         client:'ミカタグループ・株式会社グラッドキューブ',
+        imgs:{ a:false, b:false, c:false },
         d:{
-          overview:'「税理士＝事務的な仕事」という固定イメージを払拭し、経営者の人生に深く寄り添うミカタグループの姿勢を映像で伝えるプロジェクト。動画・静止画・印刷物まで世界観を統一し、あらゆる接点でブランドへの信頼感を醸成しました。',
-          challenge:'「税理士＝事務的な仕事、過去の数字を扱う存在」という世間の固定されたイメージを払拭し、ミカタグループの本来の強みである「経営者の人生そのものに深く寄り添う姿勢」を、見た人の心に残る形で伝える必要がありました。機能の説明にとどまらず、感情に訴えかけ「この人たちに任せたい」と思わせる、印象に残る表現が求められました。',
-          approach:'「人生にリタイアは存在しない」という力強い言葉を軸に、経営者の挑戦を「走る」という動作で表現しました。税理士を表舞台の主役としてではなく、「二人三脚で生涯走り続けるパートナー」として描くことで、会社の立ち位置を明確にしました。また「数字は過去を記録するためではなく、未来を描くもの」という言葉を用いて、守りのイメージが強い士業を「未来への挑戦に寄り添う存在」として昇華。見る人が自身の経験と重ねながら共感できるよう、物語を通じた伝え方を大切にしました。',
-          creative:'信頼感と誠実さが自然と伝わるよう、映像全体の雰囲気を重厚にまとめました。あえて「間」を設けることで、見る人が自身の状況を映像の中に投影できる余白を意識しました。映像・静止画・印刷物のすべてにわたって色味と雰囲気を統一し、どの媒体に触れても同じ世界観が伝わるよう細部まで丁寧に調整しました。',
-          result:'動画にとどまらず、静止画・印刷物・ウェブサイトへと世界観を展開。あらゆる接点で一貫した印象を届けることで、ブランドへの信頼感の醸成に貢献しました。',
+          overview:'「経営と、人生の、味方になる。」というビジョンのもと、中小企業オーナーの法人・個人資産を一体でサポートするミカタ税理士法人にて認知向上を目的とした動画の作成及び配信に携わりました。2026年1月15日（木）より各エリアにてブランディング動画を配信しております。',
+          challenge:'「税理士＝事務的・過去の数字を扱う仕事」という世間の固執したイメージを払拭し、ミカタグループの真の強みである「オーナーの人生（ライフステージ）そのものに深く寄り添う姿勢」を、潜在顧客の記憶に残る形で提示する必要がありました。機能的な説明ではなく、感情に訴えかけ「この人たちをパートナーにしたい」と思わせるブランド認知が求められました。',
+          approach:'広報・マーケティングの視点から、視聴者のインサイトを突き、ブランドへの共感を生むための設計を行いました。\n\nコンセプトの象徴化（コミュニケーションコンセプト）：\n「人生にリタイアは存在しない」という力強いメッセージを掲げ、経営者の挑戦を「走る」という行為で表現。税理士を、表舞台の主役ではなく「二人三脚で生涯並走し続けるパートナー」として描き、ブランドの立ち位置を明確化しました。\n\nターゲットへの心理的アプローチ：\n「数字は過去を記録するためではなく、未来を描くもの」というフレーズを用い、守りのイメージが強い士業を「未来を創る挑戦の側にある存在」へと昇華させました。これは、ゲストの夢を支えるOLCの「ストーリーテリング」の考え方にも通じる、本質的なアプローチです。',
+          creative:'ビジュアルとナレーションのシンクロ：\nモノクロームや光のコントラストを活かしたシネマティックな映像表現（GRAPHIC / STILL）に、重厚感のあるナレーションを融合。視聴者の没入感を高め、ブランドに対する「誠実さ」と「プロフェッショナリズム」を15〜30秒という短時間で直感的に伝えました。\n\nトータルブランディングの展開：\n動画制作にとどまらず、Web・スチール・グラフィックへと世界観を横展開（BRANDING INTEGRATION）。あらゆる接点で一貫したブランド体験（魔法が解けない設計）を提供することを徹底しました。',
+          result:'「経営者としての孤独に寄り添ってくれる」という共感の声を得るとともに、既存の士業の枠を超えたクリエイティブな企業姿勢が、新たな層への認知拡大に大きく寄与しました。',
           role:'制作全体の取りまとめおよび品質確認。'
         }
       },
@@ -603,8 +604,9 @@
         title:'YouTubeチャンネル ミカタチャンネル',
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
-        img:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=70',
+        img:'img/works/work_02/work_02.webp',
         client:'ミカタ税理法人（ミカタグループ）',
+        imgs:{ hero2:true, a:true, a2:true, b:true, b2:true, c:false },
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
           challenge:'専門家が持つ知識の発信がこれまで受け身になりがちで、自ら情報を探している見込み客との接点が限られていました。税務・会計という難解なテーマを誰もが理解できる言葉と映像に置き換え、会社自ら積極的に情報を届ける仕組みの構築が求められました。',
@@ -619,7 +621,7 @@
         title:'ミカタの相続サイト & パンフレット制作',
         category:'Web / Print',
         tags:['広報','ウェブデザイン','印刷物','ディレクション'],
-        img:'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=600&q=70',
+        img:'img/works/work_03/work_03.webp',
         client:'ミカタグループ・大日本印刷株式会社・クラウドサーカス株式会社',
         d:{
           overview:'相続という複雑なテーマに不安を抱えるご家族へ「安心できる」「何をすればいいかわかる」と感じてもらえるウェブサイト＆パンフレットを制作。外部制作会社と連携しながら、ブランドとしての統一感を保つプロジェクト。',
@@ -635,8 +637,9 @@
         title:'ミカタ税理士法人 ビジネスセミナー運営',
         category:'Event Management',
         tags:['セミナー','イベント','ウェブデザイン','メールマガジン','印刷物','資料制作','写真','広報','ディレクション'],
-        img:'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=70',
+        img:'img/works/work_04/work_04.webp',
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
+        imgs:{ hero2:true, a:true, a2:true, b:true, b2:true, c:true },
         d:{
           overview:'全国の経営者を対象としたビジネスセミナーをゼロから設計・運営。東京・大阪・名古屋・鹿児島・沖縄・軽井沢・六本木など年間を通じて全国各地で満員御礼を達成したプロジェクト。',
           challenge:'多忙な経営者に足を運んでいただくには、情報の価値だけでなく「この場に来る意味がある」と感じてもらえる期待感の演出が不可欠でした。対面と配信を同時に行うかたちは社内で前例がなく、進行の仕組みや資料のひな形もゼロから作り上げる必要があり、関係各所との調整を繰り返しながら、再現できる体制へと整えていきました。',
@@ -651,7 +654,7 @@
         title:'社内ポータルサイト 企画案',
         category:'Inner Branding / Web',
         tags:['ウェブデザイン','資料制作'],
-        img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70',
+        img:'img/works/work_05/work_05.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'拠点増加に伴う情報分断・帰属感の希薄化という組織課題を解決するため、社内ポータルサイトの構想を短期・中期・長期の3段階で設計し提案したプロジェクト。',
@@ -667,7 +670,7 @@
         title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
         tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
-        img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=70',
+        img:'img/works/work_06/work_06.webp',
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
           overview:'地域活性化とアーティスト支援を目的に、大学・自治体・イベント事務局など多様な関係者を巻き込みながら公共の場に賑わいを生み出したプロジェクト。目標を上回る動員を達成し、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。',
@@ -683,7 +686,7 @@
         title:'ミカタグループ 創業30周年式典',
         category:'Event Management',
         tags:['イベント','資料制作','ディレクション','動画制作'],
-        img:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=70',
+        img:'img/works/work_07/work_07.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'全国に分散する従業員・家族約700名が参加した創業30周年式典を、ゼロから企画・設計・運営。分単位の進行設計、投影資料・映像・BGM制作、会場との調整全般を担当し、無事完遂したプロジェクト。',
@@ -699,7 +702,7 @@
         title:'ひのてり訪問看護ステーション 会社案内パンフレット',
         category:'Print / Branding',
         tags:['資料制作','写真','印刷物','ディレクション','ブランディング'],
-        img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70',
+        img:'img/works/work_08/work_08.webp',
         client:'株式会社輪奏',
         d:{
           overview:'訪問看護という馴染みの薄い仕組みへの不安を解消し、「ひのてり」の強みを地域に伝えるパンフレットを制作。自ら現場に足を運んで撮影を行い、温かみのある実際の現場の表情を誌面に盛り込んだプロジェクト。',
@@ -715,7 +718,7 @@
         title:'マンガでカンタン！相続は7日間でわかります。',
         category:'Publishing / PR',
         tags:['広報','ディレクション','印刷物','ブランディング'],
-        img:'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=600&q=70',
+        img:'img/works/work_09/work_09.webp',
         client:'ミカタ税理士法人・株式会社学研ホールディングス',
         d:{
           overview:'相続というテーマを「7日間の講義形式の漫画本」に落とし込み、学研より全国出版・販売を実現。複雑な専門知識を親しみやすい形で届け、ミカタグループのブランド信頼性向上に大きく貢献したプロジェクト。',
@@ -731,7 +734,7 @@
         title:'採用ブランディング 基盤構築と撮影',
         category:'Recruiting / PR',
         tags:['採用','資料制作','写真','広報','ディレクション'],
-        img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70',
+        img:'img/works/work_10/work_10.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務会計・経営コンサルティング領域における採用競争に勝つため、「ミカタで働くとはどういうことか」を求職者に具体的・魅力的に伝える採用ブランディングをゼロから構築。写真撮影・バナー制作・資料作成まで一貫して担当したプロジェクト。',
@@ -747,7 +750,7 @@
         title:'抗菌アロマスプレー ランディングページ',
         category:'Web Design / EC',
         tags:['ウェブデザイン'],
-        img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=70',
+        img:'img/works/work_11/work_11.webp',
         client:'株式会社アロマクリエイト',
         d:{
           overview:'コロナ禍によりマスク着用が日常化する中、「マスクに吹きかけるアロマスプレー」という新しい生活習慣を提案する商品のLP制作。「これが自分の生活に必要だ」と感じさせる世界観を視覚で設計しました。',
@@ -763,7 +766,7 @@
         title:'ディスプレイ広告 デジタル広告の制作と改善運用',
         category:'Digital Advertising',
         tags:['ディスプレイ広告','デジタル運用'],
-        img:'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=70',
+        img:'img/works/work_12/work_12.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'ターゲットごとの異なるニーズに対し、最適な訴求とデザインを使い分け、問い合わせ獲得効率（成約率）を最大化。AI生成画像の活用と日々のABテストによりデザインを継続改善し続けたデジタル広告運用プロジェクト。',
@@ -779,7 +782,7 @@
         title:'オウンドメディア 自社運用と情報発信',
         category:'Digital / Content',
         tags:['デジタル運用','ウェブデザイン','広報','メールマガジン'],
-        img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70',
+        img:'img/works/work_13/work_13.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税理士法人の専門知識をオウンドメディアとメールマガジンで継続発信し、検索流入の増加と既存顧客との関係強化を実現。代表コラムの整理・掲載も担当し、会社の対外的な信頼向上に貢献したプロジェクト。',
@@ -795,7 +798,7 @@
         title:'IT関連 会社設立向けランディングページ',
         category:'Web / UX',
         tags:['デジタル運用','ディスプレイ広告','ディレクション','ウェブデザイン'],
-        img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=70',
+        img:'img/works/work_14/work_14.webp',
         client:'ミカタグループ・クラウドサーカス株式会社',
         d:{
           overview:'IT関連事業で会社設立を考えている方向けのLP制作。バナーからサイト流入、面談日程調整までをGoogle Workspaceと連携させた自動化フローで設計し、申し込みから面談日程までのリードタイムを大幅に短縮したプロジェクト。',
@@ -811,7 +814,7 @@
         title:'コーポレートサイト運用 & メルマガ配信',
         category:'Digital / PR',
         tags:['広報','デジタル運用','メールマガジン','ウェブデザイン'],
-        img:'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&q=70',
+        img:'img/works/work_15/work_15.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'コーポレートサイトの継続運用とSalesforce Pardotを活用したメルマガ配信を統合。「実益型」と「情緒型」の2種類のメルマガを設計し、HTMLコーディングから配信設計まで一貫して担当。属人的だった情報発信を仕組み化したプロジェクト。',
@@ -827,7 +830,7 @@
         title:'インナーブランディング 備品・社内報の制作',
         category:'Inner Branding / Print',
         tags:['印刷物','ディレクション','ブランディング','広報'],
-        img:'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=600&q=70',
+        img:'img/works/work_16/work_16.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&Aによる拠点拡大が続く中、全国各地に分散した従業員の帰属意識・一体感を醸成するため、社内報「お元氣様です」（年3回）の定期発行とノベルティ制作を推進。ゼロからインナーブランディングの仕組みを構築したプロジェクト。',
@@ -843,7 +846,7 @@
         title:'Sony FES Watch U デザインコンペ',
         category:'Design Competition',
         tags:['プライベート','ブランディング'],
-        img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70',
+        img:'img/works/work_17/work_17.webp',
         client:'Sony Fashion Entertainments（個人応募）',
         d:{
           overview:'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに個人応募。全国から集まった応募作品の中から32組の公認クリエイターに選出され、採用デザインはソニー公式サイト・専用アプリ・全国の百貨店での展示販売に展開されました。',
@@ -859,7 +862,7 @@
         title:'プレゼンテーション映像 業務支援ツールの企画・予算獲得',
         category:'Motion / Presentation',
         tags:['動画制作','資料制作'],
-        img:'https://images.unsplash.com/photo-1551503766-ac63dfa6401c?w=600&q=70',
+        img:'img/works/work_18/work_18.webp',
         client:'ARアドバンストテクノロジ・株式会社ファーストリテイリング',
         d:{
           overview:'大手ファッション企業（ファーストリテイリング）へのシステム導入継続に向けた経営層向けプレゼン映像を制作。「現状の混乱→集約→将来像」という3段階のストーリー設計と、After Effectsによるアニメーションで経営層の意思決定を動かすことに貢献。半年間のプロジェクト継続承認と予算確保を実現しました。',
@@ -875,7 +878,7 @@
         title:'Zidoma サービスサイト リブランディング',
         category:'Web / Branding',
         tags:['ウェブデザイン','デジタル運用','ブランディング'],
-        img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=70',
+        img:'img/works/work_19/work_19.webp',
         client:'ARアドバンストテクノロジ',
         d:{
           overview:'ファイル管理システム「ZIDOMA data」を「誰でも使える、頼れるパートナー」として再定義するリブランディング提案を策定。自らオリジナルイラストを制作し、取材・撮影で初の顧客事例をゼロから獲得したプロジェクト。',
@@ -891,7 +894,7 @@
         title:'会社案内・営業資材 トータル制作',
         category:'Branding / Print',
         tags:['印刷物','ブランディング','ディレクション','写真'],
-        img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70',
+        img:'img/works/work_20/work_20.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'創業30周年を迎えるミカタグループに向けて、会社案内（全16ページ）・営業チラシ・各種資材をトータルで統一制作。戦略立案からフォトディレクション・作図・ライティング・デザインまでを社内で一貫して完結させた大型プロジェクト。',
@@ -907,7 +910,7 @@
         title:'M&A 会社案内動画',
         category:'Video / Branding',
         tags:['動画制作','写真','ブランディング','ディレクション'],
-        img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=70',
+        img:'img/works/work_21/work_21.webp',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&A商談時に売主様・従業員様へ「どんな会社に入るのか」を伝えるための会社案内動画を約3週間・単独で制作。撮影から編集・納品まで全工程を一人で完遂し、グループインへの不安解消と承継プロセスの円滑化に貢献したプロジェクト。',
@@ -1080,7 +1083,7 @@
           getDetailHTML(w); // HTMLキャッシュ
           // ヒーロー画像もプリフェッチ（モーダルを開いた時に即表示）
           const img = new Image();
-          img.src = w.img.replace('w=600', 'w=900');
+          img.src = w.img;
         }, i * 40));
       }, { timeout: 3000 });
     }
@@ -1174,11 +1177,28 @@
 
     /* ════════  DETAIL HTML  ════════ */
     function buildDetailHTML(work) {
-      // w=900 に縮小（w=1400 は未キャッシュで遅い。900pxで十分な画質）
-      const heroSrc = work.img.replace('w=600', 'w=900');
+      const heroSrc = work.img;
+      const imgBase = work.img.replace(/\.[^.]+$/, '');
       const d = work.d || {};
       const toHTML = s => (s||'').replace(/\\n/g, '<br>');
       const tagsHTML = (work.tags||[]).map(t => `<span class="detail-tag">${t}</span>`).join('');
+
+      // imgs フラグで各スロットの表示を制御
+      // 例: imgs:{ a:true, b:true, c:true }
+      // 未指定はすべて false（プレースホルダーなし）
+      const imgs = work.imgs || {};
+      // 単枚スロット
+      const slotA  = imgs.a  ? `<div class="img-ph split-single"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotA2 = imgs.a2 ? `<div class="img-ph split-single"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotB  = imgs.b  ? `<div class="img-ph split-single"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotB2 = imgs.b2 ? `<div class="img-ph split-single"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      // 右カラムに2枚縦並びにする場合のラッパー
+      const colA = (slotA || slotA2) ? `<div class="img-col-stack">${slotA}${slotA2}</div>` : '';
+      const colB = (slotB || slotB2) ? `<div class="img-col-stack">${slotB}${slotB2}</div>` : '';
+      // ヒーロー下のサブ横長画像
+      const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+
       return `
         <div class="content-wrap">
           <p class="breadcrumb"><a href="#">Work</a> / ${work.title}</p>
@@ -1196,6 +1216,7 @@
               onerror="this.style.display='none';this.parentNode.style.background='#1a1a1a'">
           </div>
         </div>
+        ${slotHero2 ? `<div class="content-wrap">${slotHero2}</div>` : ''}
         <div class="content-wrap">
           <section class="video-section">
             <div class="video-wrapper"><div class="video-placeholder"><div class="video-play-icon"></div><p class="video-label">Video — Insert iframe or video tag here</p></div></div>
@@ -1210,24 +1231,18 @@
           <section class="section">
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
-            <div class="split-layout">
-              <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
-              <div class="img-ph split-single"></div>
-            </div>
+            ${colA ? `<div class="split-layout"><div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}</div>` : `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            <div class="split-layout">
-              <div class="section-body"><p>${toHTML(d.creative||'')}</p></div>
-              <div class="img-ph split-single"></div>
-            </div>
+            ${colB ? `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>` : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
             <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
             <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
-            <div class="img-ph result-wide"></div>
+            ${slotC}
           </section>
           <section class="section" style="margin-bottom:48px;">
             <p class="section-label">Role</p>
