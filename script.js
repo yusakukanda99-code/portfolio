@@ -625,7 +625,8 @@
         category:'Web / Print',
         tags:['広報','ウェブデザイン','印刷物','ディレクション'],
         img:'img/works/work_03/work_03.webp',
-        imgs: { a:true },
+        imgs: { a:true, a2:true, b:true, b2:true },
+        isWide: true,
         client:'ミカタグループ・大日本印刷株式会社・クラウドサーカス株式会社',
         d:{
           overview:'相続という複雑なテーマに不安を抱えるご家族へ「安心できる」「何をすればいいかわかる」と感じてもらえるウェブサイト＆パンフレットを制作。外部制作会社と連携しながら、ブランドとしての統一感を保つプロジェクト。',
