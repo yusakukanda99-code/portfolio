@@ -625,7 +625,7 @@
         category:'Web / Print',
         tags:['広報','ウェブデザイン','印刷物','ディレクション'],
         img:'img/works/work_03/work_03.webp',
-        imgs: { a:true, a2:true, b:true, b2:true },
+        imgs: { a:true, a2:true },
         layout: 'wide',
         captionA2: 'ミカタの相続サービスロゴ<br><a href="https://mikata-souzoku.jp/" target="_blank" rel="noopener">公式サイト：https://mikata-souzoku.jp/</a>',
         client:'ミカタグループ・大日本印刷株式会社・クラウドサーカス株式会社',
