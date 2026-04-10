@@ -1128,7 +1128,7 @@
       // ③ キャッシュ済みならすぐ、なければ次フレームで注入
       if (_detailCache.has(work.id)) {
         content.innerHTML = _detailCache.get(work.id);
-        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; initLightbox(content); });
+        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; initLightbox(content); initWIS(content); });
       } else {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
@@ -1136,6 +1136,7 @@
             sbAlign();
             if (sbWrap) sbWrap.style.display = 'block';
             initLightbox(content);
+            initWIS(content);
           });
         });
       }
@@ -1236,6 +1237,34 @@
       };
     })();
 
+
+    /* ════════  WD INLINE SLIDER (wd-in-slider)  ════════ */
+    window.initWIS = function(root) {
+      root.querySelectorAll('.wd-in-slider').forEach(function(sl) {
+        const slides = Array.from(sl.querySelectorAll('.wis-slide'));
+        const dots   = Array.from(sl.querySelectorAll('.wis-dot'));
+        if (slides.length < 2) return;
+        let cur = 0;
+        function go(n) {
+          slides[cur].classList.remove('wis-active');
+          dots[cur] && dots[cur].classList.remove('wis-dot-on');
+          cur = (n + slides.length) % slides.length;
+          slides[cur].classList.add('wis-active');
+          dots[cur] && dots[cur].classList.add('wis-dot-on');
+        }
+        sl.querySelector('.wis-prev')?.addEventListener('click', function(e) { e.stopPropagation(); go(cur - 1); });
+        sl.querySelector('.wis-next')?.addEventListener('click', function(e) { e.stopPropagation(); go(cur + 1); });
+        dots.forEach(function(d, i) { d.addEventListener('click', function(e) { e.stopPropagation(); go(i); }); });
+        // touch swipe
+        var tx = 0;
+        sl.querySelector('.wis-track')?.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, {passive:true});
+        sl.querySelector('.wis-track')?.addEventListener('touchend', function(e) {
+          var dx = e.changedTouches[0].clientX - tx;
+          if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+        }, {passive:true});
+      });
+    };
+
     /* ════════  DETAIL HTML  ════════ */
     function buildDetailHTML(work) {
       const heroSrc = work.img;
@@ -1257,9 +1286,20 @@
       const slotB  = imgs.b  ? mkSlot(`${imgBase}_b.webp`,  imgCls) : '';
       const slotB2 = imgs.b2 ? mkSlot(`${imgBase}_b2.webp`, imgCls) : '';
       const slotC  = imgs.c  ? mkSlot(`${imgBase}_c.webp`,  'result-wide') : '';
-      // 右カラムに2枚縦並びにする場合のラッパー
-      const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : `<div class="img-col-stack">${slotA}${slotA2}</div>`) : '';
-      const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : `<div class="img-col-stack">${slotB}${slotB2}</div>`) : '';
+      // スライダーラッパーを生成
+      function mkSlider(slides) {
+        if (!slides.length) return '';
+        if (slides.length === 1) return slides[0]; // 1枚だけならそのまま
+        const inner = slides.map((s,i) => `<div class="wis-slide${i===0?' wis-active':''}">${s}</div>`).join('');
+        return `<div class="wd-in-slider" data-wis-total="${slides.length}">
+          <div class="wis-track">${inner}</div>
+          <button class="wis-btn wis-prev" aria-label="前の画像">&#8592;</button>
+          <button class="wis-btn wis-next" aria-label="次の画像">&#8594;</button>
+          <div class="wis-dots">${slides.map((_,i)=>`<span class="wis-dot${i===0?' wis-dot-on':''}"></span>`).join('')}</div>
+        </div>`;
+      }
+      const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '';
+      const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
 

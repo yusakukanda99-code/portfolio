@@ -1405,6 +1405,64 @@
     }
 
 
+    /* ════════  WD INLINE SLIDER  ════════ */
+    .wd-in-slider {
+      position: relative;
+      background: #eceef2;
+      overflow: hidden;
+    }
+    .wis-track { position: relative; }
+    .wis-slide { display: none; }
+    .wis-slide.wis-active { display: block; }
+    .wis-slide .img-ph {
+      /* スライダー内はポインターそのままでlb-triggerのzoom-inを上書き */
+      cursor: default;
+    }
+    /* スライダーの前後ボタン */
+    .wis-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.8);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+      z-index: 3;
+      transition: background 0.2s, opacity 0.2s;
+      opacity: 0;
+    }
+    .wd-in-slider:hover .wis-btn { opacity: 1; }
+    .wis-prev { left: 8px; }
+    .wis-next { right: 8px; }
+    .wis-btn:hover { background: rgba(255,255,255,0.97); }
+    /* ドット */
+    .wis-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+    }
+    .wis-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wis-dot.wis-dot-on { background: #1a1a1a; }
+
+
     /* ════════  LIGHTBOX  ════════ */
     #wd-lb {
       display: none;
