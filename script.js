@@ -1310,7 +1310,7 @@
         </div>`;
       }
       const colA = work.captionA2
-        ? (slotA ? `<div class="wide-single">${slotA}</div>` : '')
+        ? (slotA || '')
         : ((slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '');
       const colA2caption = work.captionA2 ? `<div class="img-caption-only"><p class="img-caption">${work.captionA2}</p></div>` : '';
       const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
