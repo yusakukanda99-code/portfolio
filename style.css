@@ -1702,3 +1702,17 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* ── hero2 YouTube video embed ── */
+.hero2-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  margin-bottom: 24px;
+}
+.hero2-video iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
