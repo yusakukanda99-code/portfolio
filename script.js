@@ -602,6 +602,7 @@
       },
       {
         id:2, year:'2023–2026',
+        youtubeApproach:'nGfB2WvLpgQ',
         title:'YouTubeチャンネル ミカタチャンネル',
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
@@ -1339,7 +1340,8 @@
           <section class="section">
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
-            ${colA ? (isWide ? `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}</div>`) : `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>`}
+            <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
+            ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : (colA || '')}
           </section>
           <section class="section">
             <p class="section-label">Creative</p>

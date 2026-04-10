@@ -1434,6 +1434,12 @@
     }
 
 
+    /* アプローチセクション内の動画 */
+    .wd-approach-video {
+      margin-top: 24px;
+    }
+
+
     /* ════════  WD INLINE SLIDER  ════════ */
     .wd-in-slider {
       position: relative;
