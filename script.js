@@ -607,7 +607,7 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
-        imgs: { a:true, a2:true, b:true, b2:true },
+        imgs: { a:true, a2:true, b:true, b2:true, sliderC:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
@@ -1290,6 +1290,12 @@
       const slotB2 = imgs.b2 ? mkSlot(`${imgBase}_b2.webp`, imgCls) : '';
       const slotC  = imgs.c  ? mkSlot(`${imgBase}_c.webp`,  'result-wide') : '';
       // スライダーラッパーを生成
+
+      // sliderC: こだわりセクション用 s1-s5 スライダー
+      const sliderCSrcs = imgs.sliderC
+        ? ['s1','s2','s3','s4','s5'].map(function(s){ return mkSlot(imgBase+'_'+s+'.webp','slider-item'); })
+        : [];
+      const colSliderC = (imgs.sliderC && sliderCSrcs.length) ? mkSlider(sliderCSrcs) : '';
       function mkSlider(slides) {
         if (!slides.length) return '';
         if (slides.length === 1) return slides[0]; // 1枚だけならそのまま
@@ -1347,7 +1353,7 @@
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
