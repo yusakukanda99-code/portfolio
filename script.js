@@ -632,7 +632,7 @@
         d:{
           overview:'相続という複雑なテーマに不安を抱えるご家族へ「安心できる」「何をすればいいかわかる」と感じてもらえるウェブサイト＆パンフレットを制作。外部制作会社と連携しながら、ブランドとしての統一感を保つプロジェクト。',
           challenge:'大切な方を亡くされた直後のご家族は、深い悲しみの中で複雑な手続きや厳しい期限に追われることになります。既存の資料は文字量が多く、かえって不安をあおる傾向がありました。手に取った瞬間に「安心できる」「何をすればいいかわかる」と感じてもらえる資料が必要でした。',
-          approach:'申告期限など見落としがちな重要な日程をカレンダー形式で見える化し、ご自身で行うべきことと専門家に任せるべきことの区別を明確にしました。パンフレットでは、読みやすさに定評のある書体（UDフォント）を採用し、文字の大きさや行間のバランスを細かく指定することで、高齢の方も含めた幅広い方が読みやすい紙面を追求。ウェブサイトについては外部の制作会社と連携しながら、パンフレットと色使いや雰囲気がずれないよう丁寧に調整し、ブランドとしての統一感を保ちました。<br><br>▼ ミカタの相続サービスロゴ',
+          approach:'申告期限など見落としがちな重要な日程をカレンダー形式で見える化し、ご自身で行うべきことと専門家に任せるべきことの区別を明確にしました。パンフレットでは、読みやすさに定評のある書体（UDフォント）を採用し、文字の大きさや行間のバランスを細かく指定することで、高齢の方も含めた幅広い方が読みやすい紙面を追求。ウェブサイトについては外部の制作会社と連携しながら、パンフレットと色使いや雰囲気がずれないよう丁寧に調整し、ブランドとしての統一感を保ちました。',
           creative:'「相続は難しい」という先入観を取り除くため、全体を緑色を基調とした柔らかい印象でまとめました。内容が複雑になりやすい分、文字の太さに変化をつけることで情報に強弱を生み出し、読み進めやすい誌面を目指しました。サイトとパンフレットが別のサービスに見えないよう、表紙のイメージや全体の雰囲気を揃え、どちらに触れても同じ安心感を届けられるよう細部まで管理しました。',
           result:'窓口での説明にかかる手間を大幅に削減し、相談から成約までの流れをスムーズにしました。また、2026年2月からの広告出稿開始後、現時点で5件のお問い合わせを獲得。外部の制作会社を取りまとめながら、自社ブランドの品質を最高水準で守り抜く力を発揮しました。',
           role:'制作全体の取りまとめ。外部協力会社への指示、品質・進行の管理。'
@@ -1309,10 +1309,10 @@
           <div class="wis-dots">${slides.map((_,i)=>`<span class="wis-dot${i===0?' wis-dot-on':''}"></span>`).join('')}</div>
         </div>`;
       }
-      const colA = d.captionA2
+      const colA = work.captionA2
         ? (slotA ? `<div class="wide-single">${slotA}</div>` : '')
         : ((slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '');
-      const colA2caption = (slotA2 && d.captionA2) ? `<div class="centered-logo-wrap">${slotA2}<p class="img-caption">${d.captionA2}</p></div>` : '';
+      const colA2caption = (slotA2 && work.captionA2) ? `<div class="centered-logo-wrap">${slotA2}<p class="img-caption">${work.captionA2}</p></div>` : '';
       const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
