@@ -1637,6 +1637,7 @@
 }
 
 
+
 /* ── slider item (work_02 creative) ── */
 .slider-item {
   width: 100%;
@@ -1650,6 +1651,23 @@
   max-height: none;
   display: block;
   object-fit: contain;
+}
+/* img-ph（プレースホルダー）のmin-height・背景をslider内では無効化 */
+.slider-item .img-ph {
+  background: transparent !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  position: static !important;
+}
+.slider-item .img-ph img {
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  object-fit: contain !important;
+  inset: auto !important;
 }
 /* 役割セクション下 50vh 余白 */
 .wd-panel .wd-sections > section:last-child {
