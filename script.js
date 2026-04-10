@@ -1290,12 +1290,6 @@
       const slotB2 = imgs.b2 ? mkSlot(`${imgBase}_b2.webp`, imgCls) : '';
       const slotC  = imgs.c  ? mkSlot(`${imgBase}_c.webp`,  'result-wide') : '';
       // スライダーラッパーを生成
-
-      // sliderC: creative section slider
-      const sliderCSrcs = imgs.sliderC
-        ? ['s1','s2','s3','s4','s5'].map(s => mkSlot(imgBase+'_'+s+'.webp','slider-item'))
-        : [];
-      const colSliderC = imgs.sliderC ? mkSlider(sliderCSrcs) : '';
       function mkSlider(slides) {
         if (!slides.length) return '';
         if (slides.length === 1) return slides[0]; // 1枚だけならそのまま
@@ -1353,7 +1347,7 @@
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colSliderC ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
