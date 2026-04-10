@@ -607,7 +607,7 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
-        imgs: { a:true, a2:true, c:true },
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
@@ -1359,7 +1359,7 @@
             <p class="section-label">Results &amp; Transferability</p>
             <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
             <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
-            ${work.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + work.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
+            ${d.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + d.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
             ${slotC}
           </section>
           <section class="section" style="margin-bottom:48px;">
