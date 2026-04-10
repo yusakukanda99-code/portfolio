@@ -1443,8 +1443,9 @@
     /* ââââââââ  WD INLINE SLIDER  ââââââââ */
     .wd-in-slider {
       position: relative;
-      background: #eceef2;
-      overflow: hidden;
+      background: transparent;
+      overflow: visible;
+      height: auto;
     }
     .wis-track { position: relative; }
     .wis-slide { display: none; }
@@ -1617,8 +1618,6 @@
 
 
 /* ── work_02 creative slider ── */
-.slider-item { width: 100%; }
-.slider-item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 
 /* ── YouTube Shorts embed (work_02) ── */
 .yt-shorts-wrap {
@@ -1637,7 +1636,8 @@
   max-width: 100%;
 }
 
-/* ── creative section slider (work_02 s1-s5) ── */
+
+/* ── slider item (work_02 creative) ── */
 .slider-item {
   width: 100%;
   background: transparent;
@@ -1647,42 +1647,11 @@
 .slider-item img {
   width: 100%;
   height: auto;
-  display: block;
-  border-radius: 4px;
-  object-fit: contain;
   max-height: none;
-}
-.wd-in-slider {
-  background: transparent;
-  width: 100%;
-}
-/* 役割セクションの下に50vhの余白 */
-.wd-panel .wd-sections > section:last-child {
-  padding-bottom: 50vh;
-}
-
-/* ── slider fix: full-size transparent (work_02) ── */
-.wd-in-slider {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-  background: transparent !important;
-  width: 100% !important;
-}
-.slider-item {
-  background: transparent !important;
-  padding: 0 !important;
-  width: 100% !important;
-}
-.slider-item img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
   display: block;
   object-fit: contain;
 }
 /* 役割セクション下 50vh 余白 */
 .wd-panel .wd-sections > section:last-child {
-  padding-bottom: 50vh !important;
+  padding-bottom: 50vh;
 }
