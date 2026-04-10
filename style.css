@@ -20,7 +20,7 @@
       overflow-anchor: none;
     }
 
-    /* ── Ink Reveal Canvas (背景) ── */
+    /* ââ Ink Reveal Canvas (èæ¯) ââ */
     #ink-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -32,7 +32,7 @@
       transform: translateZ(0);
     }
 
-    /* スクロールで白くなるオーバーレイ */
+    /* ã¹ã¯ã­ã¼ã«ã§ç½ããªããªã¼ãã¼ã¬ã¤ */
     .bg-overlay {
       position: fixed;
       inset: 0;
@@ -44,7 +44,7 @@
       transform: translateZ(0);
     }
 
-    /* ─── ページ構造 ─── */
+    /* âââ ãã¼ã¸æ§é  âââ */
     .page-wrap {
       position: relative;
       display: flex;
@@ -55,7 +55,7 @@
     .spacer-top    { height: calc(100vh - var(--nav-h) - var(--nav-gap) * 2); }
     .spacer-bottom { height: 0; }
 
-    /* ─── Nav ─── */
+    /* âââ Nav âââ */
     #main-nav {
       position: fixed;
       left: 0;
@@ -106,7 +106,7 @@
       z-index: -1;
     }
 
-    /* ─── 右パネル（fixed） ─── */
+    /* âââ å³ããã«ï¼fixedï¼ âââ */
     .col-right {
       position: fixed;
       top: 0; right: 0;
@@ -170,7 +170,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ── アニメーション ── */
+    /* ââ ã¢ãã¡ã¼ã·ã§ã³ ââ */
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
@@ -184,21 +184,21 @@
       to   { opacity: 1; }
     }
 
-    /* 1文字ずつのspan */
+    /* 1æå­ãã¤ã®span */
     .char {
       display: inline;
       opacity: 0;
       animation: charFade 2.0s ease forwards;
     }
 
-    /* ink完了前: nav・テキストのみ非表示 */
+    /* inkå®äºå: navã»ãã­ã¹ãã®ã¿éè¡¨ç¤º */
     #main-nav, #col-right-bg,
     .subtitle, .name, .divider, .description {
       opacity: 0;
     }
 
     /* ===== FOOTER ===== */
-    /* ── Profile Section ── */
+    /* ââ Profile Section ââ */
     .prof-section {
       background: #fff;
       position: relative;
@@ -408,14 +408,14 @@
       .prof-message { padding: 0 24px 48px; }
       .prof-section-head { padding-top: 48px; }
 
-      /* モバイルでは強みセクションとヘッダーをJS opacity制御から解放して常時表示 */
+      /* ã¢ãã¤ã«ã§ã¯å¼·ã¿ã»ã¯ã·ã§ã³ã¨ãããã¼ãJS opacityå¶å¾¡ããè§£æ¾ãã¦å¸¸æè¡¨ç¤º */
       .strong-section,
       .strengths-section-head { opacity: 1 !important; }
 
-      /* page-wrapに高さを与えて強みセクションがTOPと被らないようにする */
+      /* page-wrapã«é«ããä¸ãã¦å¼·ã¿ã»ã¯ã·ã§ã³ãTOPã¨è¢«ããªãããã«ãã */
       .page-wrap { height: 100vh; min-height: 100vh; }
 
-      /* ── Hero: frosted glass on mobile ── */
+      /* ââ Hero: frosted glass on mobile ââ */
       .col-left { width: 0; overflow: visible; }
       .col-left .spacer-top,
       .col-left .spacer-bottom { display: none; }
@@ -452,7 +452,7 @@
       .description { display: none; }
     }
 
-    /* ── Profile message ── */
+    /* ââ Profile message ââ */
     .prof-message {
       max-width: 1000px;
       margin: 0 auto;
@@ -468,7 +468,7 @@
       margin-top: 36px;
     }
 
-    /* ── End Profile Section ── */
+    /* ââ End Profile Section ââ */
 
     footer {
       position: relative;
@@ -602,32 +602,32 @@
       letter-spacing: 0.05em;
     }
 
-    /* ページ全体レイアウト: page-wrap + footer を縦に並べる */
+    /* ãã¼ã¸å¨ä½ã¬ã¤ã¢ã¦ã: page-wrap + footer ãç¸¦ã«ä¸¦ã¹ã */
     .site-wrap {
       position: relative;
       z-index: 2;
     }
 
-    /* ink完了後 .reveal 付与でアニメーション開始 */
+    /* inkå®äºå¾ .reveal ä»ä¸ã§ã¢ãã¡ã¼ã·ã§ã³éå§ */
     #main-nav.reveal      { animation: fadeUp  .6s ease forwards 0.2s; }
     #col-right-bg.reveal  { animation: fadeIn  .6s ease forwards 0.2s; }
-    /* subtitle / name / description の文字はJSで1文字ずつ制御 */
+    /* subtitle / name / description ã®æå­ã¯JSã§1æå­ãã¤å¶å¾¡ */
     .divider.reveal       { animation: fadeIn  .5s ease forwards 0.4s; }
 
-    /* ═══════════════════════════════
-       STRONG SECTION (strong.html統合)
-    ═══════════════════════════════ */
+    /* âââââââââââââââââââââââââââââââ
+       STRONG SECTION (strong.htmlçµ±å)
+    âââââââââââââââââââââââââââââââ */
     .strong-section {
       position: relative;
       z-index: 2;
-      background: transparent; /* 遷移中はbg-overlayの白で覆われる */
+      background: transparent; /* é·ç§»ä¸­ã¯bg-overlayã®ç½ã§è¦ããã */
     }
-    /* 遷移完了後に白背景を付与 */
+    /* é·ç§»å®äºå¾ã«ç½èæ¯ãä»ä¸ */
     .strong-section.s-bg-ready {
       background: #ffffff;
     }
 
-    /* テキスト要素の初期状態（JS発火まで非表示） */
+    /* ãã­ã¹ãè¦ç´ ã®åæç¶æï¼JSçºç«ã¾ã§éè¡¨ç¤ºï¼ */
     .strong-section .s-eyebrow,
     .strong-section .s-main-title,
     .strong-section .s-rule,
@@ -638,7 +638,7 @@
       transform: translateY(12px);
     }
 
-    /* .s-char は TOPと同じ charFade アニメーションを使用 */
+    /* .s-char ã¯ TOPã¨åã charFade ã¢ãã¡ã¼ã·ã§ã³ãä½¿ç¨ */
     .s-char {
       display: inline;
       opacity: 0;
@@ -675,7 +675,7 @@
       padding-bottom: 140px;
     }
 
-    /* ── 左カラム ── */
+    /* ââ å·¦ã«ã©ã  ââ */
     .strong-section .s-col-left {
       position: sticky;
       top: 0;
@@ -772,7 +772,7 @@
       transform: translateY(-50%) rotate(180deg);
     }
 
-    /* ── 右カラム ── */
+    /* ââ å³ã«ã©ã  ââ */
     .strong-section .s-col-right {
       background: transparent;
       overflow-y: visible;
@@ -977,12 +977,12 @@
       padding-left: 20px;
     }
 
-    /* セクション境界 */
+    /* ã»ã¯ã·ã§ã³å¢ç */
     .strong-section-header {
       display: none;
     }
 
-    /* ── Strengths section head ── */
+    /* ââ Strengths section head ââ */
     .strengths-section-head {
       padding: 80px max(calc((100vw - 1000px)/2), 40px) 0;
       display: flex;
@@ -1012,7 +1012,7 @@
       color: #1a1a1a;
     }
 
-    /* ── Center all section heads ── */
+    /* ââ Center all section heads ââ */
     .pf-section-head {
       flex: 0 0 auto;
       padding: 16px max(calc((100vw - 1000px)/2), 40px) 0;
@@ -1077,7 +1077,7 @@
       .strong-section .s-frame { padding-bottom: 40px; }
       .pf-outer { padding-top: 40px; }
       .prof-section { margin-top: 60px; }
-      /* background-attachment: fixed は mobile で scroll に変更 */
+      /* background-attachment: fixed ã¯ mobile ã§ scroll ã«å¤æ´ */
       .prof-fullimg {
         background-attachment: scroll;
         background-size: cover;
@@ -1086,9 +1086,9 @@
       }
     }
 
-    /* ═══════════════════════════════
+    /* âââââââââââââââââââââââââââââââ
        TAG FILTER WORKS SECTION
-    ═══════════════════════════════ */
+    âââââââââââââââââââââââââââââââ */
     .pf-outer { position: relative; z-index: 5; padding-top: 180px; overflow-anchor: none; }
     .pf-sticky {
       position: sticky; top: 0; height: 100vh;
@@ -1097,7 +1097,7 @@
       z-index: 20;
     }
 
-    /* ── filter strip ── */
+    /* ââ filter strip ââ */
     .pf-filter {
       flex: 0 0 auto;
       display: flex; align-items: center;
@@ -1124,11 +1124,11 @@
     .pf-tag.pf-active { border-color: #1a1a1a; color: #fff; background: #1a1a1a; }
     .pf-sort-hint { display: none; }
 
-    /* ── card area ── */
+    /* ââ card area ââ */
     .pf-card-area { flex: 1; overflow: clip; display: flex; align-items: flex-end; position: relative; padding-bottom: 52px; }
     .pf-track { display: flex; gap: 80px; height: 88%; align-items: flex-end; padding-left: calc(50vw - 130px); padding-right: calc(50vw - 130px); will-change: transform; }
 
-    /* ── cards ── */
+    /* ââ cards ââ */
     .pf-card { flex-shrink: 0; width: 260px; height: 100%; display: flex; flex-direction: column; cursor: pointer; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
     .pf-card.pf-card-in { opacity: 1; transform: translateY(0); }
     .pf-card-img-wrap { flex: 1; overflow: hidden; background: #2a2a2a; position: relative; }
@@ -1154,11 +1154,11 @@
     .pf-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: #ccc; }
     .pf-empty-sub { font-size: 10px; letter-spacing: 0.15em; color: #ccc; text-transform: uppercase; }
 
-    /* ═══════════════════════════════
+    /* âââââââââââââââââââââââââââââââ
        WORK DETAIL MODAL
-    ═══════════════════════════════ */
+    âââââââââââââââââââââââââââââââ */
 
-    /* ink transition canvas — fixed overlay used for open/close animation */
+    /* ink transition canvas â fixed overlay used for open/close animation */
     .wd-modal {
       position: fixed; inset: 0; z-index: 500;
       display: flex; align-items: flex-end;
@@ -1166,14 +1166,14 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.35s ease;
-      /* GPUレイヤーを事前確保 → 初回表示のラグを排除 */
+      /* GPUã¬ã¤ã¤ã¼ãäºåç¢ºä¿ â ååè¡¨ç¤ºã®ã©ã°ãæé¤ */
       will-change: opacity;
       transform: translateZ(0);
     }
     .wd-modal.wd-open { pointer-events: all; opacity: 1; }
     .wd-backdrop {
       position: absolute; inset: 0;
-      /* backdrop-filter は全画面GPU再描画を引き起こすため削除 */
+      /* backdrop-filter ã¯å¨ç»é¢GPUåæç»ãå¼ãèµ·ããããåé¤ */
       background: rgba(220,224,234,0.72);
       opacity: 0;
       transition: opacity 0.35s ease;
@@ -1189,14 +1189,14 @@
       overflow-y: scroll; overscroll-behavior: contain;
       scrollbar-width: none;
       border-radius: 0;
-      /* box-shadow を軽量化 */
+      /* box-shadow ãè»½éå */
       box-shadow: -4px 0 40px rgba(0,0,0,0.10), 4px 0 40px rgba(0,0,0,0.10);
       will-change: transform;
       transform: translateZ(0);
     }
     .wd-panel::-webkit-scrollbar { display: none; }
 
-    /* ── スケルトンローディング ── */
+    /* ââ ã¹ã±ã«ãã³ã­ã¼ãã£ã³ã° ââ */
     @keyframes wd-shimmer {
       0%   { background-position: -600px 0; }
       100% { background-position: 600px 0; }
@@ -1216,7 +1216,7 @@
     .wd-sk-body + .wd-sk-body   { width: 92%; }
     .wd-sk-body-short { width: 60% !important; margin-bottom: 48px; }
 
-    /* bottom fade gradient — fixed overlay aligned to panel */
+    /* bottom fade gradient â fixed overlay aligned to panel */
     .wd-fade-bottom {
       position: fixed;
       bottom: 0;
@@ -1247,8 +1247,8 @@
     .wd-close-icon::before { transform: rotate(45deg); }
     .wd-close-icon::after  { transform: rotate(-45deg); }
 
-    /* ── custom scrollbar ── */
-    /* ── scroll-to-close progress bar (right edge of panel) ── */
+    /* ââ custom scrollbar ââ */
+    /* ââ scroll-to-close progress bar (right edge of panel) ââ */
     .wd-scrollbar {
       position: fixed;
       top: 0; right: 0;
@@ -1273,7 +1273,7 @@
       background: #1a1a1a;
     }
     .wd-scrollbar-thumb.wd-sb-closing { background: #999; }
-    /* pct badge — pill that follows thumb bottom */
+    /* pct badge â pill that follows thumb bottom */
     .wd-sb-pct {
       position: absolute;
       right: 8px;
@@ -1395,7 +1395,7 @@
         align-items: flex-start;
         height: auto;
       }
-      /* モバイルではスクロール連動アニメーションが動かないため即時表示 */
+      /* ã¢ãã¤ã«ã§ã¯ã¹ã¯ã­ã¼ã«é£åã¢ãã¡ã¼ã·ã§ã³ãåããªãããå³æè¡¨ç¤º */
       .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; opacity: 1 !important; transform: none !important; }
       .pf-card-img-wrap { flex: 1; min-height: 0; }
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
@@ -1405,7 +1405,7 @@
     }
 
 
-    /* 配信媒体リスト */
+    /* éä¿¡åªä½ãªã¹ã */
     .d-list {
       list-style: none;
       padding: 0;
@@ -1434,13 +1434,13 @@
     }
 
 
-    /* アプローチセクション内の動画 */
+    /* ã¢ãã­ã¼ãã»ã¯ã·ã§ã³åã®åç» */
     .wd-approach-video {
       margin-top: 24px;
     }
 
 
-    /* ════════  WD INLINE SLIDER  ════════ */
+    /* ââââââââ  WD INLINE SLIDER  ââââââââ */
     .wd-in-slider {
       position: relative;
       background: #eceef2;
@@ -1450,10 +1450,10 @@
     .wis-slide { display: none; }
     .wis-slide.wis-active { display: block; }
     .wis-slide .img-ph {
-      /* スライダー内はポインターそのままでlb-triggerのzoom-inを上書き */
+      /* ã¹ã©ã¤ãã¼åã¯ãã¤ã³ã¿ã¼ãã®ã¾ã¾ã§lb-triggerã®zoom-inãä¸æ¸ã */
       cursor: default;
     }
-    /* スライダーの前後ボタン */
+    /* ã¹ã©ã¤ãã¼ã®åå¾ãã¿ã³ */
     .wis-btn {
       position: absolute;
       top: 50%;
@@ -1477,7 +1477,7 @@
     .wis-prev { left: 8px; }
     .wis-next { right: 8px; }
     .wis-btn:hover { background: rgba(255,255,255,0.97); }
-    /* ドット */
+    /* ããã */
     .wis-dots {
       position: absolute;
       bottom: 8px;
@@ -1498,7 +1498,7 @@
     .wis-dot.wis-dot-on { background: #1a1a1a; }
 
 
-    /* ════════  LIGHTBOX  ════════ */
+    /* ââââââââ  LIGHTBOX  ââââââââ */
     #wd-lb {
       display: none;
       position: fixed;
@@ -1547,7 +1547,7 @@
       box-shadow: 0 8px 48px rgba(0,0,0,0.5);
     }
 
-    /* img-ph: クリック可能なライトボックストリガー */
+    /* img-ph: ã¯ãªãã¯å¯è½ãªã©ã¤ãããã¯ã¹ããªã¬ã¼ */
     .lb-trigger {
       cursor: zoom-in;
       position: relative;
@@ -1572,9 +1572,9 @@
     }
     .lb-trigger:hover .lb-zoom-icon { opacity: 1; }
 
-    /* ══════════════════════════════════
+    /* ââââââââââââââââââââââââââââââââââ
        CUSTOM CURSOR
-    ══════════════════════════════════ */
+    ââââââââââââââââââââââââââââââââââ */
     @media (pointer: fine) {
       /* only hide cursor on devices with a precise pointer (mouse) */
       *, *::before, *::after { cursor: none !important; }
@@ -1585,7 +1585,7 @@
       #cursor-wrap, #cursor-dot { display: none !important; }
     }
 
-    /* ── frosted-glass cursor ── */
+    /* ââ frosted-glass cursor ââ */
     #cursor-wrap {
       position: fixed;
       top: 0; left: 0;
@@ -1615,3 +1615,7 @@
     }
     #cursor-dot { display: none; }
 
+
+/* ── work_02 creative slider ── */
+.slider-item { width: 100%; }
+.slider-item img { width: 100%; height: auto; display: block; border-radius: 4px; }
