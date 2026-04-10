@@ -1128,13 +1128,14 @@
       // ③ キャッシュ済みならすぐ、なければ次フレームで注入
       if (_detailCache.has(work.id)) {
         content.innerHTML = _detailCache.get(work.id);
-        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; });
+        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; initLightbox(content); });
       } else {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             content.innerHTML = getDetailHTML(work);
             sbAlign();
             if (sbWrap) sbWrap.style.display = 'block';
+            initLightbox(content);
           });
         });
       }
@@ -1192,6 +1193,49 @@
 
 
 
+    /* ════════  LIGHTBOX  ════════ */
+    (function() {
+      // ライトボックスDOM（一度だけ生成）
+      let lb = null;
+      function ensureLB() {
+        if (lb) return;
+        lb = document.createElement('div');
+        lb.id = 'wd-lb';
+        lb.innerHTML = '<div class="lb-backdrop"></div><button class="lb-close" aria-label="閉じる">&times;</button><div class="lb-img-wrap"><img class="lb-img" src="" alt=""></div>';
+        document.body.appendChild(lb);
+        lb.querySelector('.lb-backdrop').addEventListener('click', closeLB);
+        lb.querySelector('.lb-close').addEventListener('click', closeLB);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+      }
+      function openLB(src) {
+        ensureLB();
+        const img = lb.querySelector('.lb-img');
+        img.src = src;
+        lb.classList.add('lb-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB() {
+        if (!lb) return;
+        lb.classList.remove('lb-open');
+        document.body.style.overflow = '';
+      }
+      window.initLightbox = function(root) {
+        root.querySelectorAll('.lb-trigger').forEach(el => {
+          el.addEventListener('click', () => {
+            const src = el.querySelector('img')?.src;
+            if (src) openLB(src);
+          });
+          el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const src = el.querySelector('img')?.src;
+              if (src) openLB(src);
+            }
+          });
+        });
+      };
+    })();
+
     /* ════════  DETAIL HTML  ════════ */
     function buildDetailHTML(work) {
       const heroSrc = work.img;
@@ -1207,11 +1251,12 @@
       // 単枚スロット
       const isWide = work.layout === 'wide';
       const imgCls = isWide ? 'wide-single' : 'split-single';
-      const slotA  = imgs.a  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotA2 = imgs.a2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB  = imgs.b  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB2 = imgs.b2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const mkSlot = (src, cls) => `<div class="img-ph ${cls} lb-trigger" role="button" tabindex="0" aria-label="画像を拡大"><img src="${src}" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="lb-zoom-icon">&#10532;</span></div>`;
+      const slotA  = imgs.a  ? mkSlot(`${imgBase}_a.webp`,  imgCls) : '';
+      const slotA2 = imgs.a2 ? mkSlot(`${imgBase}_a2.webp`, imgCls) : '';
+      const slotB  = imgs.b  ? mkSlot(`${imgBase}_b.webp`,  imgCls) : '';
+      const slotB2 = imgs.b2 ? mkSlot(`${imgBase}_b2.webp`, imgCls) : '';
+      const slotC  = imgs.c  ? mkSlot(`${imgBase}_c.webp`,  'result-wide') : '';
       // 右カラムに2枚縦並びにする場合のラッパー
       const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : `<div class="img-col-stack">${slotA}${slotA2}</div>`) : '';
       const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : `<div class="img-col-stack">${slotB}${slotB2}</div>`) : '';
