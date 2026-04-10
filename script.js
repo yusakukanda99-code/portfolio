@@ -627,6 +627,7 @@
         img:'img/works/work_03/work_03.webp',
         imgs: { a:true, a2:true, b:true, b2:true },
         layout: 'wide',
+        captionA2: 'ミカタの相続サービスロゴ<br><a href="https://mikata-souzoku.jp/" target="_blank" rel="noopener">公式サイト：https://mikata-souzoku.jp/</a>',
         client:'ミカタグループ・大日本印刷株式会社・クラウドサーカス株式会社',
         d:{
           overview:'相続という複雑なテーマに不安を抱えるご家族へ「安心できる」「何をすればいいかわかる」と感じてもらえるウェブサイト＆パンフレットを制作。外部制作会社と連携しながら、ブランドとしての統一感を保つプロジェクト。',
@@ -1308,8 +1309,10 @@
           <div class="wis-dots">${slides.map((_,i)=>`<span class="wis-dot${i===0?' wis-dot-on':''}"></span>`).join('')}</div>
         </div>`;
       }
-      const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '';
-      const colA2caption = (slotA2 && d.captionA2) ? `<div class="centered-logo-wrap">${slotA2}<p class="img-caption">${d.captionA2}</p></div>` : (slotA2 ? `<div class="centered-logo-wrap">${slotA2}</div>` : '');
+      const colA = d.captionA2
+        ? (slotA ? `<div class="wide-single">${slotA}</div>` : '')
+        : ((slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '');
+      const colA2caption = (slotA2 && d.captionA2) ? `<div class="centered-logo-wrap">${slotA2}<p class="img-caption">${d.captionA2}</p></div>` : '';
       const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
