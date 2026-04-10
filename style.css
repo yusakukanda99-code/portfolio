@@ -1636,3 +1636,22 @@
   border: none;
   max-width: 100%;
 }
+
+/* ── creative section slider (work_02 s1-s5) ── */
+.slider-item {
+  width: 100%;
+  background: #ffffff;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.slider-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  object-fit: contain;
+}
+/* sliderラップ全体に白背景 */
+.wd-in-slider {
+  background: #fff;
+}
