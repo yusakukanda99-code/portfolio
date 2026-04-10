@@ -1309,6 +1309,7 @@
         </div>`;
       }
       const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '';
+      const colA2caption = (slotA2 && d.captionA2) ? `<div class="centered-logo-wrap">${slotA2}<p class="img-caption">${d.captionA2}</p></div>` : (slotA2 ? `<div class="centered-logo-wrap">${slotA2}</div>` : '');
       const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
