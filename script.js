@@ -1349,6 +1349,8 @@
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
             <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
+            ${colA}
+            ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : (colA || '')}
           </section>
           <section class="section">
