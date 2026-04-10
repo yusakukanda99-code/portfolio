@@ -1664,3 +1664,35 @@
 .wd-panel .wd-sections > section:last-child {
   padding-bottom: 45vh;
 }
+
+/* ── centered logo with caption (work_03 a2) ── */
+.centered-logo-wrap {
+  text-align: center;
+  margin: 24px auto;
+  width: 100%;
+}
+.centered-logo-wrap .img-ph {
+  display: inline-flex !important;
+  justify-content: center;
+  max-width: 480px;
+  width: 100%;
+  background: transparent !important;
+  min-height: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+.centered-logo-wrap .img-ph img {
+  width: 100% !important;
+  height: auto !important;
+  position: static !important;
+  inset: auto !important;
+  background: transparent !important;
+  object-fit: contain !important;
+}
+.img-caption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 8px;
+  text-align: center;
+}
