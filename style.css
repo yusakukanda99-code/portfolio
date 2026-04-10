@@ -1475,8 +1475,8 @@
       opacity: 0;
     }
     .wd-in-slider:hover .wis-btn { opacity: 1; }
-    .wis-prev { left: 8px; }
-    .wis-next { right: 8px; }
+    .wis-prev { left: -20px; }
+    .wis-next { right: -20px; }
     .wis-btn:hover { background: rgba(255,255,255,0.97); }
     /* ããã */
     .wis-dots {
@@ -1715,4 +1715,15 @@
   height: 100%;
   display: block;
   border: none;
+}
+
+/* ── slider arrow outside image ── */
+.wd-in-slider {
+  margin: 0 24px;
+  overflow: visible !important;
+}
+.wis-btn {
+  opacity: 1 !important;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
