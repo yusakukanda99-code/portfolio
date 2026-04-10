@@ -1449,7 +1449,7 @@
     }
     .wis-track { position: relative; }
     .wis-slide { display: none; }
-    .wis-slide.wis-active { display: block; }
+    .wis-slide.wis-active { display: block; animation: wisSlideIn 0.25s ease; }
     .wis-slide .img-ph {
       /* ã¹ã©ã¤ãã¼åã¯ãã¤ã³ã¿ã¼ãã®ã¾ã¾ã§lb-triggerã®zoom-inãä¸æ¸ã */
       cursor: default;
@@ -1695,4 +1695,10 @@
   color: #888;
   margin-top: 8px;
   text-align: center;
+}
+
+/* ── slider fade transition ── */
+@keyframes wisSlideIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
