@@ -584,6 +584,7 @@
     const PF_WORKS = [
       {
         id:1, year:'2025',
+        youtube:'Ll2MaM-uSSI',
         title:'企業動画 ー オーナーの一生に伴走する',
         category:'Branding / Video',
         tags:['ブランディング','動画制作','メールマガジン','ディレクション'],
@@ -1322,10 +1323,13 @@
         </div>
         ${slotHero2 ? `<div class="content-wrap">${slotHero2}</div>` : ''}
         <div class="content-wrap">
-          <section class="video-section">
-            <div class="video-wrapper"><div class="video-placeholder"><div class="video-play-icon"></div><p class="video-label">Video — Insert iframe or video tag here</p></div></div>
+          ${(work.youtube || work.vimeo) ? `<section class="video-section">
+            <div class="video-wrapper">
+              ${work.youtube ? `<iframe src="https://www.youtube.com/embed/${work.youtube}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>` : ''}
+              ${work.vimeo ? `<iframe src="https://player.vimeo.com/video/${work.vimeo}" title="${work.title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>` : ''}
+            </div>
             <p class="video-caption">${work.title}</p>
-          </section>
+          </section>` : ''}
           <div class="overview"><p>${toHTML(d.overview||'')}</p></div>
           <section class="section">
             <p class="section-label">Context</p>
