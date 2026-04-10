@@ -1461,8 +1461,8 @@
       transform: translateY(-50%);
       background: rgba(255,255,255,0.8);
       border: none;
-      width: 34px;
-      height: 34px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       font-size: 1rem;
       cursor: pointer;
@@ -1475,8 +1475,8 @@
       opacity: 0;
     }
     .wd-in-slider:hover .wis-btn { opacity: 1; }
-    .wis-prev { left: -20px; }
-    .wis-next { right: -20px; }
+    .wis-prev { left: -14px; }
+    .wis-next { right: -14px; }
     .wis-btn:hover { background: rgba(255,255,255,0.97); }
     /* ããã */
     .wis-dots {
@@ -1719,11 +1719,12 @@
 
 /* ── slider arrow outside image ── */
 .wd-in-slider {
-  margin: 0 24px;
+  margin: 0 20px;
   overflow: visible !important;
 }
 .wis-btn {
   opacity: 1 !important;
   background: rgba(255,255,255,0.9);
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  font-size: 0.75rem;
 }
