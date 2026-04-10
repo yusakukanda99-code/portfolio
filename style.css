@@ -1640,8 +1640,8 @@
 /* ── creative section slider (work_02 s1-s5) ── */
 .slider-item {
   width: 100%;
-  background: #ffffff;
-  padding: 16px;
+  background: transparent;
+  padding: 0;
   box-sizing: border-box;
 }
 .slider-item img {
@@ -1650,8 +1650,13 @@
   display: block;
   border-radius: 4px;
   object-fit: contain;
+  max-height: none;
 }
-/* sliderラップ全体に白背景 */
 .wd-in-slider {
-  background: #fff;
+  background: transparent;
+  width: 100%;
+}
+/* 役割セクションの下に50vhの余白 */
+.wd-panel .wd-sections > section:last-child {
+  padding-bottom: 50vh;
 }
