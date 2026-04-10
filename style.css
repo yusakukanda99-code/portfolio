@@ -1636,40 +1636,30 @@
   max-width: 100%;
 }
 
-
-
-/* ── slider item (work_02 creative) ── */
-.slider-item {
-  width: 100%;
-  background: transparent;
-  padding: 0;
-  box-sizing: border-box;
-}
-.slider-item img {
-  width: 100%;
-  height: auto;
-  max-height: none;
-  display: block;
-  object-fit: contain;
-}
-/* img-ph（プレースホルダー）のmin-height・背景をslider内では無効化 */
-.slider-item .img-ph {
+/* ── wis-slide内のimg-ph: 背景透過・高さ可変・トリミングなし ── */
+.wis-slide .img-ph {
   background: transparent !important;
   min-height: 0 !important;
   height: auto !important;
   overflow: visible !important;
   position: static !important;
+  display: block !important;
 }
-.slider-item .img-ph img {
+.wis-slide .img-ph img {
+  background: transparent !important;
   position: static !important;
+  inset: auto !important;
   width: 100% !important;
   height: auto !important;
-  min-height: 0 !important;
-  background: transparent !important;
   object-fit: contain !important;
-  inset: auto !important;
 }
-/* 役割セクション下 50vh 余白 */
+/* wd-in-slider本体 */
+.wd-in-slider {
+  background: transparent !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+/* 役割セクション下50vh */
 .wd-panel .wd-sections > section:last-child {
-  padding-bottom: 50vh;
+  padding-bottom: 50vh !important;
 }
