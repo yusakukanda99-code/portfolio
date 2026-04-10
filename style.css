@@ -1619,3 +1619,20 @@
 /* ── work_02 creative slider ── */
 .slider-item { width: 100%; }
 .slider-item img { width: 100%; height: auto; display: block; border-radius: 4px; }
+
+/* ── YouTube Shorts embed (work_02) ── */
+.yt-shorts-wrap {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+.yt-shorts-wrap iframe {
+  width: 315px;
+  height: 560px;
+  border-radius: 8px;
+  border: none;
+  max-width: 100%;
+}
