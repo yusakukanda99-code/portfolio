@@ -1296,50 +1296,155 @@
     .wd-end-hint { display: none; }
 
     /* detail content */
+    /* ════════  WORK DETAIL (シンプルリニューアル)  ════════ */
     .wd-detail-wrap {
-      --text: #1a1a1a; --text-mid: #555; --text-light: #888;
-      --accent: #C0C9DB; --accent-rgb: 192, 201, 219; --max-w: 1000px;
-      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-weight: 300; line-height: 1.8; color: #1a1a1a;
+      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', sans-serif;
+      font-weight: 300;
+      color: #1a1a1a;
+      background: #fff;
     }
-    .wd-detail-wrap .content-wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
-    .wd-detail-wrap .content-bottom-spacer { height: 10vh; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
-    .wd-detail-wrap .breadcrumb { padding: 20px 0 10px; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; }
-    .wd-detail-wrap .breadcrumb a { color: #888; text-decoration: none; }
-    .wd-detail-wrap .page-title { font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: clamp(1.1rem, 2.2vw, 1.55rem); font-weight: 500; letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 14px; }
-    .wd-detail-wrap .detail-meta-row { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-bottom: 16px; }
-    .wd-detail-wrap .detail-year { font-family: 'EB Garamond', serif; font-size: 0.8rem; letter-spacing: 0.18em; color: #7a8ba8; }
-    .wd-detail-wrap .detail-client { font-size: 0.75rem; color: #888; letter-spacing: 0.04em; }
-    .wd-detail-wrap .detail-tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 36px; }
-    .wd-detail-wrap .detail-tag { font-size: 0.65rem; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid rgba(122,139,168,0.4); border-radius: 2px; color: #7a8ba8; }
-    .wd-detail-wrap .hero-block { position: relative; max-width: calc(1000px + (100vw - 1000px)/2 - 32px); margin-bottom: 64px; }
-    .wd-detail-wrap .hero-image-wrap { width: 100%; height: min(58vh, 600px); background: #e9ecf1; overflow: hidden; }
-    .wd-detail-wrap .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .wd-detail-wrap .img-ph { background: #eceef2; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; min-height: 160px; }
-    .wd-detail-wrap .img-ph img { width: 100%; height: 100%; object-fit: contain; display: block; position: absolute; inset: 0; z-index: 1; background: #eceef2; }
-    .wd-detail-wrap .video-section { margin-bottom: 60px; }
-    .wd-detail-wrap .video-wrapper { width: 100%; aspect-ratio: 16/9; background: #111; overflow: hidden; }
-    .wd-detail-wrap .video-wrapper iframe, .wd-detail-wrap .video-wrapper video { width: 100%; height: 100%; display: block; border: none; }
-    .wd-detail-wrap .video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #1a1a1a; }
-    .wd-detail-wrap .video-play-icon { width: 56px; height: 56px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .wd-detail-wrap .video-play-icon::after { content: ''; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid rgba(255,255,255,0.5); margin-left: 3px; }
-    .wd-detail-wrap .video-label { font-family: 'EB Garamond', serif; font-size: 0.75rem; letter-spacing: 0.18em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
-    .wd-detail-wrap .video-caption { margin-top: 12px; font-size: 0.78rem; color: #888; letter-spacing: 0.06em; }
-    .wd-detail-wrap .overview { margin-bottom: 60px; padding: 22px 28px; background: rgba(192,201,219,0.08); border-left: 2px solid rgba(192,201,219,0.55); }
-    .wd-detail-wrap .overview p { font-size: 0.875rem; line-height: 2; color: #555; }
-    .wd-detail-wrap .section { margin-bottom: 60px; }
-    .wd-detail-wrap .section-label { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(192,201,219,0.9); filter: brightness(0.65) saturate(1.4); margin-bottom: 8px; }
-    .wd-detail-wrap .section-title { font-size: clamp(1rem, 1.7vw, 1.28rem); font-weight: 500; letter-spacing: 0.04em; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(192,201,219,0.35); display: flex; align-items: baseline; gap: 12px; }
-    .wd-detail-wrap .section-title .num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: #7a8ba8; line-height: 1; }
-    .wd-detail-wrap .section-body { font-size: 0.875rem; line-height: 2; color: #555; }
-    .wd-detail-wrap .section-body p + p { margin-top: 1.3em; }
-    .wd-detail-wrap .split-layout { display: flex; flex-direction: column; gap: 24px; align-items: stretch; }
-    .wd-detail-wrap .split-single { width: 100%; background: #eceef2; min-height: 200px; }
-    .wd-detail-wrap .wide-single { width: 100%; background: #eceef2; flex: 1; min-height: 200px; }
-    .wd-detail-wrap .wide-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .wd-detail-wrap .result-wide { width: 100%; background: #eceef2; margin-top: 32px; min-height: 200px; }
-    .wd-detail-wrap .img-col-stack { display: flex; flex-direction: column; gap: 16px; }
-    .wd-detail-wrap .hero2-wide { width: 100%; background: #eceef2; min-height: 320px; margin-bottom: 24px; }
-    .wd-detail-wrap .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 40px 0 56px; }
+
+    /* --- シンプルレイアウト --- */
+    .wd-simple {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    /* --- スライダー --- */
+    .wd-slider {
+      position: relative;
+      background: #f0f0ee;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .wd-slider-multi { cursor: pointer; }
+    .sl-track {
+      position: relative;
+      width: 100%;
+    }
+    .sl-slide {
+      display: none;
+      width: 100%;
+    }
+    .sl-slide.sl-active { display: block; }
+    .sl-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
+      object-fit: contain;
+      display: block;
+      background: #f0f0ee;
+    }
+    /* 前後ボタン */
+    .sl-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.7);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .sl-btn:hover { background: rgba(255,255,255,0.95); }
+    .sl-prev { left: 16px; }
+    .sl-next { right: 16px; }
+    /* ドット */
+    .sl-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index: 2;
+    }
+    .sl-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.25);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s;
+    }
+    .sl-dot.sl-dot-active { background: #1a1a1a; }
+
+    /* --- 情報エリア --- */
+    .wd-info {
+      padding: 40px 48px 60px;
+      max-width: 760px;
+    }
+    .wd-info-top { margin-bottom: 32px; }
+    .wd-info-year {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: #7a8ba8;
+      margin-bottom: 10px;
+    }
+    .wd-info-title {
+      font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+    .wd-info-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .wd-info-tags .detail-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border: 1px solid rgba(122,139,168,0.4);
+      border-radius: 2px;
+      color: #7a8ba8;
+    }
+    .wd-info-body {
+      border-top: 1px solid #e8e8e6;
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .wd-overview {
+      font-size: 0.9rem;
+      line-height: 1.95;
+      color: #444;
+    }
+    .wd-meta-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .wd-meta-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: #7a8ba8;
+      padding-top: 2px;
+    }
+    .wd-meta-val {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* --- ページャー --- */
+    .wd-detail-wrap .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 40px 48px 56px; border-top: 1px solid #e8e8e6; }
     .wd-detail-wrap .pager-prev, .wd-detail-wrap .pager-next { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #1a1a1a; transition: opacity 0.25s; cursor: pointer; background: none; border: none; }
     .wd-detail-wrap .pager-prev { justify-content: flex-start; }
     .wd-detail-wrap .pager-next { justify-content: flex-end; }
@@ -1353,7 +1458,7 @@
     .wd-detail-wrap .pager-prev .pager-texts { align-items: flex-start; }
     .wd-detail-wrap .pager-next .pager-texts { align-items: flex-end; }
     .wd-detail-wrap .pager-dir { font-family: 'EB Garamond', serif; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: #888; line-height: 1; margin-bottom: 4px; }
-    .wd-detail-wrap .pager-work-title { font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.03em; color: #1a1a1a; line-height: 1.5; max-width: 180px; }
+    .wd-detail-wrap .pager-work-title { font-family: 'Noto Sans JP', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.03em; color: #1a1a1a; line-height: 1.5; max-width: 180px; }
     .wd-detail-wrap .pager-next .pager-work-title { text-align: right; }
     .wd-detail-wrap .pager-center { padding: 0 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: none; border: none; }
     .wd-detail-wrap .pager-seemore-svg { width: 80px; height: 80px; display: block; animation: wd-spin 20s linear infinite; }
@@ -1398,7 +1503,9 @@
       /* モバイルではスクロール連動アニメーションが動かないため即時表示 */
       .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; opacity: 1 !important; transform: none !important; }
       .pf-card-img-wrap { flex: 1; min-height: 0; }
-      .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
+      .wd-info { padding: 28px 20px 48px; }
+      .sl-slide img { max-height: 55vh; }
+      .wd-detail-wrap .pager { padding: 32px 20px 48px; }
       /* modal */
       .wd-panel { width: 100% !important; }
       .wd-fade-bottom { width: 100% !important; }

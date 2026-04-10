@@ -1128,13 +1128,14 @@
       // ③ キャッシュ済みならすぐ、なければ次フレームで注入
       if (_detailCache.has(work.id)) {
         content.innerHTML = _detailCache.get(work.id);
-        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; });
+        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; initSlider(content); });
       } else {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             content.innerHTML = getDetailHTML(work);
             sbAlign();
             if (sbWrap) sbWrap.style.display = 'block';
+            initSlider(content);
           });
         });
       }
@@ -1192,6 +1193,40 @@
 
 
 
+    /* ════════  SLIDER  ════════ */
+    function initSlider(root) {
+      const track = root.querySelector('.sl-track');
+      if (!track) return;
+      const slides = Array.from(track.querySelectorAll('.sl-slide'));
+      if (slides.length < 2) return;
+
+      const dots  = Array.from(root.querySelectorAll('.sl-dot'));
+      let cur = 0;
+
+      function go(n) {
+        slides[cur].classList.remove('sl-active');
+        if (dots[cur]) dots[cur].classList.remove('sl-dot-active');
+        cur = (n + slides.length) % slides.length;
+        slides[cur].classList.add('sl-active');
+        if (dots[cur]) dots[cur].classList.add('sl-dot-active');
+        // 遅延ロード
+        const img = slides[cur].querySelector('img');
+        if (img && !img.src && img.dataset.src) img.src = img.dataset.src;
+      }
+
+      root.querySelector('.sl-prev')?.addEventListener('click', () => go(cur - 1));
+      root.querySelector('.sl-next')?.addEventListener('click', () => go(cur + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+
+      // Touch swipe
+      let tx = 0;
+      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      }, {passive:true});
+    }
+
     /* ════════  DETAIL HTML  ════════ */
     function buildDetailHTML(work) {
       const heroSrc = work.img;
@@ -1200,75 +1235,47 @@
       const toHTML = s => (s||'').replace(/\\n/g, '<br>');
       const tagsHTML = (work.tags||[]).map(t => `<span class="detail-tag">${t}</span>`).join('');
 
-      // imgs フラグで各スロットの表示を制御
-      // 例: imgs:{ a:true, b:true, c:true }
-      // 未指定はすべて false（プレースホルダーなし）
+      // スライダー用画像リストを構築
       const imgs = work.imgs || {};
-      // 単枚スロット
-      const isWide = work.layout === 'wide';
-      const imgCls = isWide ? 'wide-single' : 'split-single';
-      const slotA  = imgs.a  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotA2 = imgs.a2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_a2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB  = imgs.b  ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b.webp"  alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotB2 = imgs.b2 ? `<div class="img-ph ${imgCls}"><img src="${imgBase}_b2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      const slotC  = imgs.c  ? `<div class="img-ph result-wide"><img src="${imgBase}_c.webp"   alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
-      // 右カラムに2枚縦並びにする場合のラッパー
-      const colA = (slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : `<div class="img-col-stack">${slotA}${slotA2}</div>`) : '';
-      const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : `<div class="img-col-stack">${slotB}${slotB2}</div>`) : '';
-      // ヒーロー下のサブ横長画像
-      const slotHero2 = imgs.hero2 ? `<div class="img-ph hero2-wide"><img src="${imgBase}_hero2.webp" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : '';
+      const sliderSrcs = [heroSrc];
+      const suffixes = ['_a','_a2','_b','_b2','_c'];
+      const keys     = ['a','a2','b','b2','c'];
+      keys.forEach((k,i) => { if(imgs[k]) sliderSrcs.push(`${imgBase}${suffixes[i]}.webp`); });
+      if(imgs.hero2) sliderSrcs.splice(1, 0, `${imgBase}_hero2.webp`);
+
+      const slidesHTML = sliderSrcs.map((src, i) => `
+        <div class="sl-slide${i===0?' sl-active':''}">
+          <img src="${src}" alt="" decoding="async" loading="${i===0?'eager':'lazy'}"
+               onerror="this.parentNode.style.display='none'">
+        </div>`).join('');
+
+      const dotsHTML = sliderSrcs.length > 1
+        ? `<div class="sl-dots">${sliderSrcs.map((_,i)=>`<button class="sl-dot${i===0?' sl-dot-active':''}" data-sl="${i}" aria-label="image ${i+1}"></button>`).join('')}</div>`
+        : '';
+
+      const hasSlider = sliderSrcs.length > 1;
 
       return `
-        <div class="content-wrap">
-          <p class="breadcrumb"><a href="#">Work</a> / ${work.title}</p>
-          <h1 class="page-title">${work.title}</h1>
-          <div class="detail-meta-row">
-            <span class="detail-year">${work.year||''}</span>
-            <span class="detail-client">${work.client||''}</span>
+        <div class="wd-simple">
+          <div class="wd-slider${hasSlider?' wd-slider-multi':''}">
+            <div class="sl-track">${slidesHTML}</div>
+            ${hasSlider ? `
+            <button class="sl-btn sl-prev" aria-label="prev">&#8592;</button>
+            <button class="sl-btn sl-next" aria-label="next">&#8594;</button>
+            ${dotsHTML}` : ''}
           </div>
-          <div class="detail-tags-row">${tagsHTML}</div>
-        </div>
-        <div class="hero-block">
-          <div class="hero-image-wrap">
-            <img src="${heroSrc}" alt="${work.title}"
-              decoding="async" fetchpriority="low"
-              onerror="this.style.display='none';this.parentNode.style.background='#1a1a1a'">
+          <div class="wd-info">
+            <div class="wd-info-top">
+              <p class="wd-info-year">${work.year||''}</p>
+              <h1 class="wd-info-title">${work.title}</h1>
+              <div class="wd-info-tags">${tagsHTML}</div>
+            </div>
+            <div class="wd-info-body">
+              ${d.overview ? `<p class="wd-overview">${toHTML(d.overview)}</p>` : ''}
+              ${d.role ? `<div class="wd-meta-row"><span class="wd-meta-label">役割</span><span class="wd-meta-val">${toHTML(d.role)}</span></div>` : ''}
+              ${work.client ? `<div class="wd-meta-row"><span class="wd-meta-label">クライアント</span><span class="wd-meta-val">${work.client}</span></div>` : ''}
+            </div>
           </div>
-        </div>
-        ${slotHero2 ? `<div class="content-wrap">${slotHero2}</div>` : ''}
-        <div class="content-wrap">
-          <section class="video-section">
-            <div class="video-wrapper"><div class="video-placeholder"><div class="video-play-icon"></div><p class="video-label">Video — Insert iframe or video tag here</p></div></div>
-            <p class="video-caption">${work.title}</p>
-          </section>
-          <div class="overview"><p>${toHTML(d.overview||'')}</p></div>
-          <section class="section">
-            <p class="section-label">Context</p>
-            <h2 class="section-title"><span class="num">1</span>課題と背景</h2>
-            <div class="section-body"><p>${toHTML(d.challenge||'')}</p></div>
-          </section>
-          <section class="section">
-            <p class="section-label">Strategy</p>
-            <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
-            ${colA ? (isWide ? `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.approach||'')}</p></div>${colA}</div>`) : `<div class="section-body"><p>${toHTML(d.approach||'')}</p></div>`}
-          </section>
-          <section class="section">
-            <p class="section-label">Creative</p>
-            <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
-          </section>
-          <section class="section">
-            <p class="section-label">Results &amp; Transferability</p>
-            <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
-            <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
-            ${slotC}
-          </section>
-          <section class="section" style="margin-bottom:48px;">
-            <p class="section-label">Role</p>
-            <h2 class="section-title"><span class="num">5</span>役割（責任範囲）</h2>
-            <div class="section-body"><p>${toHTML(d.role||'')}</p></div>
-          </section>
-          <div class="content-bottom-spacer"></div>
         </div>`;
     }
 
