@@ -607,7 +607,7 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        imgs: { a:true, a2:true, b:true, b2:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
