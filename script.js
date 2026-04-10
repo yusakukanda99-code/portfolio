@@ -607,14 +607,15 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true, sliderC:true },
+        imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'税務・会計という難解なテーマを誰もが理解できる映像コンテンツに変換し、YouTubeで継続発信。専門家の知見を「受け身」から「積極発信」へと転換し、幅広い層のファン獲得に貢献したプロジェクトです。',
           challenge:'専門家が持つ知識の発信がこれまで受け身になりがちで、自ら情報を探している見込み客との接点が限られていました。税務・会計という難解なテーマを誰もが理解できる言葉と映像に置き換え、会社自ら積極的に情報を届ける仕組みの構築が求められました。',
           approach:'視聴者が実際に気になっているテーマ（法改正・節税・会社設立など）を起点に企画を立案。専門家の説明を図や動くイラストで補足し、難しい内容でも最後まで飽きずに見られる構成を追求しました。また、動画ごとの再生データを継続的に分析し、見出し画像の訴求内容や文字の大きさ・配置を日々見直すことで、より多くの方に動画を見てもらえるよう改善し続けました。',
           creative:'図解や動きのある演出を随所に盛り込むことで、長時間視聴しても単調に感じさせない画面設計を徹底しました。効果音も場面に応じて使い分け、説明の流れに自然なリズムが生まれるよう工夫しました。また、見出し画像（サムネイル）は「思わず押したくなる」一枚を目指し、文字の配置・色・人物の表情まで細かく調整しています。',
-          result:'担当者や各コンサルタント任せになりがちだった情報発信を、会社全体で取り組む仕組みへと転換。難しい専門知識を親しみやすい体験として届けることで、幅広い層のファン獲得に貢献しました。',
+          result:'担当者や各コンサルタント任せになりがちだった情報発信を、会社全体で取り組む仕組みへと転換。難しい専門知識を親しみやすい体験として届けることで、幅広い層のファン獲得に貢献しました。<br><br>また、Youtubeショートも実験的に投稿したところ視聴率が良かったため、こちらも作成させていただき、お客様から手軽に見ることができて良いとご好評でした。',
+          youtubeShort:'rFJLmQVPnyI',
           role:'企画立案、撮影、動画編集、見出し画像制作、視聴データの分析と改善まで一貫して担当。'
         }
       },
@@ -1358,6 +1359,7 @@
             <p class="section-label">Results &amp; Transferability</p>
             <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
             <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
+            ${work.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + work.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
             ${slotC}
           </section>
           <section class="section" style="margin-bottom:48px;">
