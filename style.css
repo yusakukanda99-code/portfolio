@@ -1475,8 +1475,8 @@
       opacity: 0;
     }
     .wd-in-slider:hover .wis-btn { opacity: 1; }
-    .wis-prev { left: -14px; }
-    .wis-next { right: -14px; }
+    .wis-prev { left: -32px; }
+    .wis-next { right: -32px; }
     .wis-btn:hover { background: rgba(255,255,255,0.97); }
     /* ããã */
     .wis-dots {
@@ -1719,7 +1719,7 @@
 
 /* ── slider arrow outside image ── */
 .wd-in-slider {
-  margin: 0 20px;
+  margin: 0 36px;
   overflow: visible !important;
 }
 .wis-btn {
