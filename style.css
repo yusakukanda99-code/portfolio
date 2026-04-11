@@ -1447,9 +1447,9 @@
       overflow: visible;
       height: auto;
     }
-    .wis-track { position: relative; }
-    .wis-slide { display: none; }
-    .wis-slide.wis-active { display: block; animation: wisSlideIn 0.25s ease; }
+    .wis-track { position: relative; overflow: hidden; }
+    .wis-slide { display: block; position: absolute; top: 0; left: 0; width: 100%; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .wis-slide.wis-active { position: relative; opacity: 1; pointer-events: auto; }
     .wis-slide .img-ph {
       /* ã¹ã©ã¤ãã¼åã¯ãã¤ã³ã¿ã¼ãã®ã¾ã¾ã§lb-triggerã®zoom-inãä¸æ¸ã */
       cursor: default;
