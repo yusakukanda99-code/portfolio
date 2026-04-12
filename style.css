@@ -1729,3 +1729,13 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   font-size: 0.75rem;
 }
+/* スライダー画像にpadding: 24px */
+.wis-slide {
+  padding: 24px;
+  box-sizing: border-box;
+}
+/* レスポンシブ: 小さい画面ではpadding縮小 */
+@media (max-width: 600px) {
+  .wis-slide { padding: 12px; }
+  .wd-in-slider { margin: 0 20px; }
+}
