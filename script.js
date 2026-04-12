@@ -695,8 +695,8 @@
         title:'ミカタグループ 創業30周年式典',
         category:'Event Management',
         tags:['イベント','資料制作','ディレクション','動画制作'],
-        img:'img/works/work_07/work_07.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        img:'img/works/work_07/work_07_b.webp',
+        imgs: { a:true, a2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'全国に分散する従業員・家族約700名が参加した創業30周年式典を、ゼロから企画・設計・運営。分単位の進行設計、投影資料・映像・BGM制作、会場との調整全般を担当し、無事完遂したプロジェクト。',
