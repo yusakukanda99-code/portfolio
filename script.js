@@ -1304,6 +1304,9 @@
       // スライダーラッパーを生成
 
       // sliderC: こだわりセクション用 s1-s5 スライダー
+      // sliderA: strategy slider (work_04 a+a2+b+b2)
+      const sliderASrcs = imgs.sliderA ? [slotA, slotA2, slotB, slotB2].filter(Boolean) : [];
+      const colSliderA = (imgs.sliderA && sliderASrcs.length) ? mkSlider(sliderASrcs) : '';
       const sliderCSrcs = imgs.sliderC
         ? ['s1','s2','s3','s4','s5'].map(function(s){ return mkSlot(imgBase+'_'+s+'.webp','slider-item'); })
         : [];
