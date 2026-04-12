@@ -1326,7 +1326,7 @@
         ? (slotA || '')
         : ((slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '');
       const colA2caption = work.captionA2 ? `<div class="img-caption-only"><p class="img-caption">${work.captionA2}</p></div>` : '';
-      const colB = (imgs.sliderA) ? '' : ((slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';);
+            const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
       // ヒーロー下のサブ横長画像
       const slotHero2 = work.youtubeHero2
         ? `<div class="video-wrapper hero2-video"><iframe src="https://www.youtube.com/embed/${work.youtubeHero2}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`
