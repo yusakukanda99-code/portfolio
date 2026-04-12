@@ -646,7 +646,7 @@
         img:'img/works/work_04/work_04.webp',
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
         youtubeHero2: 'YtF9PEItdBE',
-        imgs:{ a:true, a2:true, b:true, b2:true, c:true },
+        imgs:{ a:true, a2:true, b:true, b2:true, sliderA:true, c:true },
         d:{
           overview:'全国の経営者を対象としたビジネスセミナーをゼロから設計・運営。東京・大阪・名古屋・鹿児島・沖縄・軽井沢・六本木など年間を通じて全国各地で満員御礼を達成したプロジェクト。',
           challenge:'多忙な経営者に足を運んでいただくには、情報の価値だけでなく「この場に来る意味がある」と感じてもらえる期待感の演出が不可欠でした。対面と配信を同時に行うかたちは社内で前例がなく、進行の仕組みや資料のひな形もゼロから作り上げる必要があり、関係各所との調整を繰り返しながら、再現できる体制へと整えていきました。',
@@ -1323,7 +1323,7 @@
         ? (slotA || '')
         : ((slotA || slotA2) ? (isWide ? `<div class="wide-img-row">${slotA}${slotA2}</div>` : mkSlider([slotA, slotA2].filter(Boolean))) : '');
       const colA2caption = work.captionA2 ? `<div class="img-caption-only"><p class="img-caption">${work.captionA2}</p></div>` : '';
-      const colB = (slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';
+      const colB = (imgs.sliderA) ? '' : ((slotB || slotB2) ? (isWide ? `<div class="wide-img-row">${slotB}${slotB2}</div>` : mkSlider([slotB, slotB2].filter(Boolean))) : '';);
       // ヒーロー下のサブ横長画像
       const slotHero2 = work.youtubeHero2
         ? `<div class="video-wrapper hero2-video"><iframe src="https://www.youtube.com/embed/${work.youtubeHero2}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`
@@ -1365,7 +1365,7 @@
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
             <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
-            ${colA}
+            ${colSliderA || colA}
             ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
           </section>
