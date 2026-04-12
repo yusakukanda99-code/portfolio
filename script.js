@@ -1156,8 +1156,14 @@
       modal.classList.remove('wd-open');
       // GPUレイヤーを破棄しないよう visibility:hidden を使わない
       // opacity:0 + pointer-events:none (CSSで制御) のままにする
+      // lb（ライトボックス）を強制クローズしてゴーストクリックを防ぐ
+      const _lb = document.getElementById('wd-lb');
+      if (_lb) { _lb.classList.remove('lb-open'); _lb.style.display = 'none'; }
+      const _lbImg = document.querySelector('.lb-img');
+      if (_lbImg) _lbImg.src = '';
       setTimeout(() => {
         document.body.style.overflow = '';
+        if (_lb) _lb.style.display = '';
       }, 380);
     }
 
