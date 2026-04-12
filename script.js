@@ -647,6 +647,7 @@
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
         youtubeHero2: 'YtF9PEItdBE',
         imgs:{ a:true, a2:true, b:true, b2:true, sliderA:true, c:true },
+        resultImgRight: true,
         d:{
           overview:'全国の経営者を対象としたビジネスセミナーをゼロから設計・運営。東京・大阪・名古屋・鹿児島・沖縄・軽井沢・六本木など年間を通じて全国各地で満員御礼を達成したプロジェクト。',
           challenge:'多忙な経営者に足を運んでいただくには、情報の価値だけでなく「この場に来る意味がある」と感じてもらえる期待感の演出が不可欠でした。対面と配信を同時に行うかたちは社内で前例がなく、進行の仕組みや資料のひな形もゼロから作り上げる必要があり、関係各所との調整を繰り返しながら、再現できる体制へと整えていきました。',
@@ -1385,9 +1386,12 @@
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
             <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
-            <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
+            ${work.resultImgRight && slotC
+              ? `<div class="result-split-right"><div class="result-split-text section-body"><p>${toHTML(d.result||'')}</p></div><div class="result-split-img">${slotC}</div></div>`
+              : `<div class="section-body"><p>${toHTML(d.result||'')}</p></div>`
+            }
             ${d.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + d.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
-            ${imgs.sliderB ? '' : slotC}
+            ${(imgs.sliderB || work.resultImgRight) ? '' : slotC}
           </section>
           <section class="section" style="margin-bottom:48px;">
             <p class="section-label">Role</p>
