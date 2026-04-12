@@ -652,7 +652,7 @@
           challenge:'多忙な経営者に足を運んでいただくには、情報の価値だけでなく「この場に来る意味がある」と感じてもらえる期待感の演出が不可欠でした。対面と配信を同時に行うかたちは社内で前例がなく、進行の仕組みや資料のひな形もゼロから作り上げる必要があり、関係各所との調整を繰り返しながら、再現できる体制へと整えていきました。',
           approach:'集客のための案内資料・メール・チラシと当日の発表資料のデザインを統一し、参加前から当日まで一貫した印象を届けることで集客と認知を最大化。当日は秒単位の進行表を作成し、会場設営・配信会社との調整・カメラ撮影・食事の手配・アンケート管理まで、すべての業務を総合的に取りまとめました。',
           creative:'税務・労務という目に見えないサービスを扱うため、金融機関や信頼感を連想させる背景画像を取り入れながら、文字を大きく使った力強いデザインで表現しました。年に複数回開催するため、毎回似た印象にならないよう変化をつけながらも、重厚感と信頼感は一貫して守るよう丁寧に調整。参加者に「大切にされている」と感じてもらえるよう、細かな心配りを随所に盛り込みました。',
-          result:'東京・大阪・名古屋・鹿児島・沖縄・軽井沢・六本木など全国各地で満員御礼を達成し、多くの新規見込み客を獲得。\\n\\n【セミナー運営の実績】\\n2023〜2025年 東京（各300名程度）・大阪（各300名程度）\\n2024〜2025年 名古屋（各80名程度）\\n2024年 ミカタグループ創立30周年パーティ（700名程度）\\n2025年 鹿児島（100名）・六本木（90名）・沖縄（100名）・軽井沢（50名）',
+          result:'東京・大阪・名古屋・鹿児島・沖縄・軽井沢・六本木など全国各地で満員御礼を達成し、多くの新規見込み客を獲得。\\n\\n【セミナー運営の実績】\\n2023〜2025年 東京（各300名程度）・大阪（各300名程度）\\n2024〜2025年 名古屋（各80名程度）\\n2024年 ミカタグループ創立30周年パーティ（700名程度）\\n2025年 鹿児島（100名）・六本木（90名）・沖縄（100名）・軽井沢（50名）<br><br>セミナー集客ページ：<a href="https://mikata-c.co.jp/seminar/250912.html" target="_blank" rel="noopener">https://mikata-c.co.jp/seminar/250912.html</a>',
           role:'総合運営責任者。資料・案内物の制作、配信会社・会場・食事の手配、当日の進行指揮、カメラ撮影、アンケート管理まで一貫して担当。'
         }
       },
@@ -1375,7 +1375,7 @@
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
