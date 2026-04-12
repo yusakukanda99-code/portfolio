@@ -663,7 +663,7 @@
         tags:['ウェブデザイン','資料制作'],
         img:'img/works/work_05/work_05.webp',
         client:'ミカタ税理法人（ミカタグループ）',
-        imgs:{ hero2:false, a:true, a2:true, b:true, b2:true, c:true },
+        imgs:{ hero2:false, a:true, a2:true, b:true, b2:true, sliderB:true },
         d:{
           overview:'拠点増加に伴う情報分断・帰属感の希薄化という組織課題を解決するため、社内ポータルサイトの構想を短期・中期・長期の3段階で設計し提案したプロジェクト。',
           challenge:'拠点の増加に伴い、「必要な情報がどこにあるかわからない」「情報が古いまま更新されていない」「担当者が退職すると情報が消えてしまう」といった問題が各所で起きていました。情報を探すことに時間を取られることで業務効率が下がり、社員が会社への関わりに意欲を感じにくくなるという悪循環が生まれていました。また、M&Aによって拠点ごとに文化や人が異なる中、離れた拠点同士のつながりや一体感の醸成も急務でした。',
@@ -1307,7 +1307,12 @@
       // sliderA: strategy slider (work_04 a+a2+b+b2)
       const sliderASrcs = imgs.sliderA ? [slotA, slotA2, slotB, slotB2].filter(Boolean) : [];
       const colSliderA = (imgs.sliderA && sliderASrcs.length) ? mkSlider(sliderASrcs) : '';
-      const sliderCSrcs = imgs.sliderC
+      // sliderB: creative section slider (b + b2 + c merged)
+      const sliderBSrcs = imgs.sliderB
+        ? [slotB, slotB2, slotC].filter(Boolean)
+        : [];
+      const colSliderB = (imgs.sliderB && sliderBSrcs.length) ? mkSlider(sliderBSrcs) : '';
+            const sliderCSrcs = imgs.sliderC
         ? ['s1','s2','s3','s4','s5'].map(function(s){ return mkSlot(imgBase+'_'+s+'.webp','slider-item'); })
         : [];
       const colSliderC = (imgs.sliderC && sliderCSrcs.length) ? mkSlider(sliderCSrcs) : '';
@@ -1375,14 +1380,14 @@
           <section class="section">
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colSliderB ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colSliderB}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
           </section>
           <section class="section">
             <p class="section-label">Results &amp; Transferability</p>
             <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
             <div class="section-body"><p>${toHTML(d.result||'')}</p></div>
             ${d.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + d.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
-            ${slotC}
+            ${imgs.sliderB ? '' : slotC}
           </section>
           <section class="section" style="margin-bottom:48px;">
             <p class="section-label">Role</p>
