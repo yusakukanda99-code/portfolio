@@ -1183,8 +1183,9 @@
     .wd-modal.wd-open .wd-backdrop { opacity: 1; }
     .wd-panel {
       position: relative; z-index: 1;
-      width: calc(100% - 80px); max-width: 1200px;
+      width: calc(100% - 112px); max-width: 1160px;
       height: 100vh;
+      padding: 16px;
       background: #fff;
       overflow-y: scroll; overscroll-behavior: contain;
       scrollbar-width: none;
@@ -1301,7 +1302,7 @@
       --accent: #C0C9DB; --accent-rgb: 192, 201, 219; --max-w: 1000px;
       font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-weight: 300; line-height: 1.8; color: #1a1a1a;
     }
-    .wd-detail-wrap .content-wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+    .wd-detail-wrap .content-wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
     .wd-detail-wrap .content-bottom-spacer { height: 10vh; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
     .wd-detail-wrap .breadcrumb { padding: 20px 0 10px; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; }
     .wd-detail-wrap .breadcrumb a { color: #888; text-decoration: none; }
@@ -1400,7 +1401,7 @@
       .pf-card-img-wrap { flex: 1; min-height: 0; }
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
       /* modal */
-      .wd-panel { width: 100% !important; }
+      .wd-panel { width: 100% !important; padding: 8px !important; }
       .wd-fade-bottom { width: 100% !important; }
     }
 
