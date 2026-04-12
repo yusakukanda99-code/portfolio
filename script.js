@@ -678,7 +678,7 @@
         title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
         tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
-        img:'img/works/work_06/work_06.webp',
+        img:'img/works/work_06/work_06_a.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
