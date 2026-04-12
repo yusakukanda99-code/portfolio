@@ -1234,15 +1234,18 @@
       }
       window.initLightbox = function(root) {
         root.querySelectorAll('.lb-trigger').forEach(el => {
-          el.addEventListener('click', () => {
+          if (el.dataset.lbInit) return; // 二重登録防止
+          el.dataset.lbInit = '1';
+          const handler = () => {
+            if (!document.querySelector('.wd-modal.wd-open')) return; // モーダルが開いていない時は無視
             const src = el.querySelector('img')?.src;
             if (src) openLB(src);
-          });
+          };
+          el.addEventListener('click', handler);
           el.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              const src = el.querySelector('img')?.src;
-              if (src) openLB(src);
+              handler();
             }
           });
         });
