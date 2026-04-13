@@ -680,7 +680,7 @@
         category:'Event / Community Art',
         tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
         img:'img/works/work_06/work_06_a.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        imgs: { a:true, a2:true, b:true, b2:true, c:true, sliderC:true },
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
           overview:'地域活性化とアーティスト支援を目的に、大学・自治体・イベント事務局など多様な関係者を巻き込みながら公共の場に賑わいを生み出したプロジェクト。目標を上回る動員を達成し、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。',
@@ -1375,6 +1375,7 @@
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
             <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
             ${colSliderA || colA}
+            ${colSliderC}
             ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
           </section>
