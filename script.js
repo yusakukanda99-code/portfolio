@@ -664,7 +664,7 @@
         tags:['ウェブデザイン','資料制作'],
         img:'img/works/work_05/work_05.webp',
         client:'ミカタ税理法人（ミカタグループ）',
-        imgs:{ hero2:false, a:true, a2:true, b:true, b2:true, sliderB:true },
+        imgs:{ hero2:false, a:true, a2:true, b:true, b2:true, c:true, sliderA:true },
         d:{
           overview:'拠点増加に伴う情報分断・帰属感の希薄化という組織課題を解決するため、社内ポータルサイトの構想を短期・中期・長期の3段階で設計し提案したプロジェクト。',
           challenge:'拠点の増加に伴い、「必要な情報がどこにあるかわからない」「情報が古いまま更新されていない」「担当者が退職すると情報が消えてしまう」といった問題が各所で起きていました。情報を探すことに時間を取られることで業務効率が下がり、社員が会社への関わりに意欲を感じにくくなるという悪循環が生まれていました。また、M&Aによって拠点ごとに文化や人が異なる中、離れた拠点同士のつながりや一体感の醸成も急務でした。',
@@ -1306,7 +1306,7 @@
 
       // sliderC: こだわりセクション用 s1-s5 スライダー
       // sliderA: strategy slider (work_04 a+a2+b+b2)
-      const sliderASrcs = imgs.sliderA ? [slotA, slotA2, slotB, slotB2].filter(Boolean) : [];
+      const sliderASrcs = imgs.sliderA ? [slotA, slotA2, slotB, slotB2, slotC].filter(Boolean) : [];
       const colSliderA = (imgs.sliderA && sliderASrcs.length) ? mkSlider(sliderASrcs) : '';
       // sliderB: creative section slider (b + b2 + c merged)
       const sliderBSrcs = imgs.sliderB
