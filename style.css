@@ -1,4 +1,4 @@
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --text: #1a1a1a;
@@ -1185,7 +1185,7 @@
       position: relative; z-index: 1;
       width: calc(100% - 112px); max-width: 1160px;
       height: 100vh;
-      padding: 16px;
+      padding: 0 16px 16px;
       background: #fff;
       overflow-y: scroll; overscroll-behavior: contain;
       scrollbar-width: none;
@@ -1401,7 +1401,7 @@
       .pf-card-img-wrap { flex: 1; min-height: 0; }
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
       /* modal */
-      .wd-panel { width: 100% !important; padding: 8px !important; }
+      .wd-panel { width: 100% !important; padding: 0 8px 8px !important; }
       .wd-fade-bottom { width: 100% !important; }
     }
 
