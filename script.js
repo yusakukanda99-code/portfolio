@@ -662,7 +662,15 @@
         tags:['ウェブデザイン','資料制作'],
         img:'img/works/work_05/work_05.webp',
         client:'ミカタ税理法人（ミカタグループ）',
-        imgs:{ hero2:false, a:true, a2:true, b:true, b2:true, sliderA:true },
+        slides:[
+          'img/works/work_05/work_05_slide01.webp','img/works/work_05/work_05_slide02.webp',
+          'img/works/work_05/work_05_slide03.webp','img/works/work_05/work_05_slide04.webp',
+          'img/works/work_05/work_05_slide05.webp','img/works/work_05/work_05_slide06.webp',
+          'img/works/work_05/work_05_slide07.webp','img/works/work_05/work_05_slide08.webp',
+          'img/works/work_05/work_05_slide09.webp','img/works/work_05/work_05_slide10.webp',
+          'img/works/work_05/work_05_slide11.webp','img/works/work_05/work_05_slide12.webp',
+          'img/works/work_05/work_05_slide13.webp',
+        ],
         d:{
           overview:'拠点増加に伴う情報分断・帰属感の希薄化という組織課題を解決するため、社内ポータルサイトの構想を短期・中期・長期の3段階で設計し提案したプロジェクト。',
           challenge:'拠点の増加に伴い、「必要な情報がどこにあるかわからない」「情報が古いまま更新されていない」「担当者が退職すると情報が消えてしまう」といった問題が各所で起きていました。情報を探すことに時間を取られることで業務効率が下がり、社員が会社への関わりに意欲を感じにくくなるという悪循環が生まれていました。また、M&Aによって拠点ごとに文化や人が異なる中、離れた拠点同士のつながりや一体感の醸成も急務でした。',
@@ -1299,6 +1307,9 @@
         ? ['s1','s2','s3','s4','s5'].map(function(s){ return mkSlot(imgBase+'_'+s+'.webp','slider-item'); })
         : [];
       const colSliderC = (imgs.sliderC && sliderCSrcs.length) ? mkSlider(sliderCSrcs) : '';
+      const colSlides = (Array.isArray(work.slides) && work.slides.length)
+        ? mkSlider(work.slides.map(function(src){ return mkSlot(src, 'slider-item'); }))
+        : '';
       function mkSlider(slides) {
         if (!slides.length) return '';
         if (slides.length === 1) return slides[0]; // 1枚だけならそのまま
@@ -1356,7 +1367,7 @@
             <p class="section-label">Strategy</p>
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
             <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
-            ${colSliderA || colA}
+            ${colSlides || colSliderA || colA}
             ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
           </section>
