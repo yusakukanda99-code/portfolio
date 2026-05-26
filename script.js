@@ -686,14 +686,26 @@
         category:'Event / Community Art',
         tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
         img:'img/works/work_06/work_06_a.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true, sliderC:true },
+        slides:[
+          'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
+          'img/works/work_06/work_06_slide03.webp','img/works/work_06/work_06_slide04.webp',
+          'img/works/work_06/work_06_slide05.webp','img/works/work_06/work_06_slide06.webp',
+          'img/works/work_06/work_06_slide07.webp','img/works/work_06/work_06_slide08.webp',
+          'img/works/work_06/work_06_slide09.webp','img/works/work_06/work_06_slide10.webp',
+          'img/works/work_06/work_06_slide11.webp','img/works/work_06/work_06_slide12.webp',
+          'img/works/work_06/work_06_slide13.webp','img/works/work_06/work_06_slide14.webp',
+          'img/works/work_06/work_06_slide15.webp','img/works/work_06/work_06_slide16.webp',
+          'img/works/work_06/work_06_slide17.webp','img/works/work_06/work_06_slide18.webp',
+          'img/works/work_06/work_06_slide19.webp','img/works/work_06/work_06_slide20.webp',
+          'img/works/work_06/work_06_slide21.webp','img/works/work_06/work_06_slide22.webp',
+        ],
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
           overview:'地域活性化とアーティスト支援を目的に、大学・自治体・イベント事務局など多様な関係者を巻き込みながら公共の場に賑わいを生み出したプロジェクト。目標を上回る動員を達成し、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。',
           challenge:'地域活性化とアーティスト支援を目的に、大学・自治体・イベント事務局など多様な関係者を巻き込みながら、公共の場に賑わいを生み出す必要がありました。愛知トリエンナーレのパートナーとして参加するにあたり、一定の品質水準を満たすことも求められており、出展者・来場者・運営関係者それぞれに向けた丁寧な対応と、安全かつ公正な運営体制の構築が不可欠でした。',
           approach:'制作過程をインスタグラムで発信する「見せながら広げる」手法で認知と応募を同時に拡大。出展者が安心して参加できるよう、搬入・搬出の案内や著作権に関する規約など、必要な情報を整理してわかりやすく届けました。また、来場者が自然と写真を撮って発信したくなる空間づくりや、投稿してくれた方へのプレゼント企画など、口コミが広がる仕掛けも盛り込みました。インスタグラムでは写真だけでなく動画も制作・投稿し、親しみやすさと世界観の伝達を両立しました。',
           creative:'愛知トリエンナーレのアート性の高さに合わせつつ、幅広い人に親しんでもらえるよう、あえて親しみやすいポップなキャラクターを制作。目を引く明るいオレンジ色を採用し、動画ではキャラクターを大きく動かし効果音もつけることで、初めて見る方にも気軽に手に取ってもらいやすい雰囲気を演出しました。一回限りのイベントではなく継続的な活動を見据え、今回の運営データや反応を記録・蓄積することで、次回以降に活かせる基盤作りも意識しました。',
-          result:'目標を上回る動員を達成し、地域のアートイベントとしての基盤構築に成功。規約・案内の整備から会場設営まで一貫して取りまとめ、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。',
+          result:'目標を上回る動員を達成し、地域のアートイベントとしての基盤構築に成功。規約・案内の整備から会場設営まで一貫して取りまとめ、ゼロから企画を立ち上げて安全かつ円滑な運営を実現しました。<br><br>▶ 運用したInstagramアカウント：<a href="https://www.instagram.com/hits_mcd_artbook.project/" target="_blank" rel="noopener">@hits_mcd_artbook.project</a>',
           role:'企画・実行責任者。SNS運用、出展者選考から会場設営までの運営指揮。'
         }
       },
