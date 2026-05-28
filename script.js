@@ -586,7 +586,7 @@
         id:6, year:'2025',
         title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
-        tags:['SNS','イベント','資料制作','広報','動画制作','ディレクション','プライベート','デジタル運用'],
+        tags:['SNS','イベント','動画制作','プライベート','デジタル運用'],
         img:'img/works/work_06/work_06_a.webp',
         slides:[
           'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
@@ -616,7 +616,7 @@
         youtubeApproach:'nGfB2WvLpgQ',
         title:'YouTubeチャンネル ミカタチャンネル',
         category:'Digital / SNS',
-        tags:['SNS','動画制作','広報','ディレクション','デジタル運用'],
+        tags:['SNS','動画制作','デジタル運用'],
         img:'img/works/work_02/work_02.webp',
         imgs: { b:true, b2:true, sliderC:true },
         client:'ミカタ税理法人（ミカタグループ）',
@@ -635,7 +635,7 @@
         youtube:'Ll2MaM-uSSI',
         title:'企業動画 ー オーナーの一生に伴走する',
         category:'Branding / Video',
-        tags:['ブランディング','動画制作','メールマガジン','ディレクション'],
+        tags:['ブランディング','動画制作','メールマガジン'],
         img:'img/works/work_01/work_01.webp',
         client:'ミカタグループ・株式会社グラッドキューブ',
         imgs:{ a:false, b:false, c:false },
@@ -689,7 +689,7 @@
         id:12, year:'2023–2026',
         title:'デジタルマーケティング運用 ── 獲得から育成まで',
         category:'Digital Marketing',
-        tags:['ディスプレイ広告','デジタル運用','ウェブデザイン','広報'],
+        tags:['ディスプレイ広告','デジタル運用','ウェブデザイン'],
         img:'img/works/work_12/work_12.webp',
         slides:[
           'img/works/work_12/work_12_a.webp','img/works/work_12/work_12_a2.webp',
@@ -711,7 +711,7 @@
         id:10, year:'2023–2026',
         title:'採用ブランディング 基盤構築と撮影',
         category:'Recruiting / PR',
-        tags:['採用','ウェブデザイン','資料制作','写真','広報','ディレクション'],
+        tags:['採用','ウェブデザイン','写真'],
         img:'img/works/work_10/work_10.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
@@ -728,7 +728,7 @@
         id:24, year:'2026',
         title:'AI時代の社内PDF業務ツール ── 企画・デザイン・開発',
         category:'Product / Web App',
-        tags:['ウェブデザイン','ディレクション','デジタル運用'],
+        tags:['ウェブデザイン','デジタル運用'],
         img:'img/works/pdf_tool/pdf_tool.webp',
         client:'社内向けプロダクト（現職）',
         d:{
@@ -744,7 +744,7 @@
         id:4, year:'2023–2026',
         title:'ミカタ税理士法人 ビジネスセミナー運営',
         category:'Event Management',
-        tags:['セミナー','イベント','ウェブデザイン','メールマガジン','印刷物','資料制作','写真','広報','ディレクション'],
+        tags:['イベント','ウェブデザイン','メールマガジン','印刷物','写真'],
         img:'img/works/work_04/work_04.webp',
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
         youtubeHero2: 'YtF9PEItdBE',
@@ -777,7 +777,7 @@
         id:9, year:'2024',
         title:'マンガでカンタン！相続は7日間でわかります。',
         category:'Publishing / PR',
-        tags:['広報','ディレクション','印刷物','ブランディング'],
+        tags:['印刷物','ブランディング'],
         img:'img/works/work_09/work_09.webp',
         client:'ミカタ税理士法人・株式会社学研ホールディングス',
         d:{
@@ -793,7 +793,7 @@
         id:8, year:'2025',
         title:'ひのてり訪問看護ステーション 会社案内パンフレット',
         category:'Print / Branding',
-        tags:['資料制作','写真','印刷物','ディレクション','ブランディング'],
+        tags:['写真','印刷物','ブランディング'],
         img:'img/works/work_08/work_08.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'株式会社輪奏',
@@ -810,7 +810,7 @@
         id:20, year:'2024',
         title:'会社案内・営業資材 トータル制作',
         category:'Branding / Print',
-        tags:['印刷物','ブランディング','ディレクション','写真'],
+        tags:['印刷物','ブランディング','写真'],
         img:'img/works/work_20/work_20.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
@@ -827,7 +827,7 @@
         id:3, year:'2026',
         title:'ミカタの相続サイト & パンフレット制作',
         category:'Web / Print',
-        tags:['広報','ウェブデザイン','印刷物','ディレクション'],
+        tags:['ウェブデザイン','印刷物'],
         img:'img/works/work_03/work_03.webp',
         imgs: { a:true },
         layout: 'wide',
@@ -846,7 +846,7 @@
         id:21, year:'2024',
         title:'M&A 会社案内動画',
         category:'Video / Branding',
-        tags:['動画制作','写真','ブランディング','ディレクション'],
+        tags:['動画制作','写真','ブランディング'],
         img:'img/works/work_21/work_21.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
@@ -863,11 +863,11 @@
 
     const ALL_PF_TAGS = [
       // デザイン関係
-      'ウェブデザイン','ディスプレイ広告','印刷物','ブランディング','写真',
-      // 企画
-      'ディレクション','資料制作','セミナー','イベント',
-      // 運用
-      'SNS','メールマガジン','デジタル運用','広報','採用','動画制作',
+      'ウェブデザイン','印刷物','ブランディング','写真',
+      // マーケ・運用
+      'SNS','動画制作','メールマガジン','ディスプレイ広告','デジタル運用','採用',
+      // 企画・運営
+      'イベント',
       // プライベート
       'プライベート',
     ];
