@@ -1781,3 +1781,47 @@
     width: 100%;
   }
 }
+
+/* ── Slider: fixed aspect-ratio (PC/SP共通・object-fit:contain) ──
+   全スライド画像を 16:9 に揃える前提。画像とコンテナの比率が一致するため
+   contain でレターボックスは発生しない。比率が違う画像は contain で
+   余白が出る（切り抜かれない）。 */
+.wd-in-slider {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  height: auto !important;
+  /* overflow は visible のまま（左右の矢印ボタンが外側に出るため） */
+}
+.wis-track {
+  width: 100% !important;
+  height: 100% !important;
+}
+.wis-slide {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.wis-slide.wis-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.wis-slide .img-ph {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+.wis-slide .img-ph img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block;
+}
+@media (max-width: 600px) {
+  .wis-slide { padding: 0 !important; }
+}
