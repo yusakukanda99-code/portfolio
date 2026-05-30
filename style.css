@@ -1120,9 +1120,9 @@
     .pf-clear:hover { color: #1a1a1a; }
     .pf-clear.pf-visible { opacity: 1; pointer-events: all; }
     .pf-filter-divider { flex: 0 0 1px; height: 28px; background: rgba(0,0,0,0.08); margin: 0 18px; }
-    .pf-tag { flex: 0 0 auto; font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.06em; padding: 4px 8px; border: 0; background: transparent; color: #555; cursor: pointer; border-radius: 0; white-space: nowrap; transition: color 0.16s, font-weight 0.16s; }
-    .pf-tag:hover { color: #1a1a1a; }
-    .pf-tag.pf-active { color: #1a1a1a; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+    .pf-tag { flex: 0 0 auto; font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.06em; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.22); background: transparent; color: #555; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: border-color 0.16s, color 0.16s, font-weight 0.16s; }
+    .pf-tag:hover { border-color: rgba(0,0,0,0.5); color: #1a1a1a; }
+    .pf-tag.pf-active { border-color: #1a1a1a; color: #1a1a1a; font-weight: 700; }
     .pf-sort-hint { display: none; }
 
     /* ââ card area ââ */
