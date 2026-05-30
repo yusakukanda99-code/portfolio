@@ -669,7 +669,7 @@
         id:22, year:'2023–2026',
         title:'メールマガジン運用 ー Salesforce Pardot',
         category:'Email Marketing / Pardot',
-        tags:['メールマガジン','デジタル運用','ウェブデザイン','ブランディング','ディスプレイ広告'],
+        tags:['メールマガジン','デジタル運用','ウェブデザイン'],
         img:'img/works/work_22/work_22.webp',
         slides:[
           'img/works/work_22/work_22_banner01.webp',
@@ -689,7 +689,7 @@
         id:12, year:'2023–2026',
         title:'デジタルマーケティング運用 ── 獲得から育成まで',
         category:'Digital Marketing',
-        tags:['ディスプレイ広告','デジタル運用','ウェブデザイン'],
+        tags:['デジタル運用','ウェブデザイン'],
         img:'img/works/work_12/work_12.webp',
         slides:[
           'img/works/work_12/work_12_a.webp','img/works/work_12/work_12_a2.webp',
@@ -863,9 +863,9 @@
 
     const ALL_PF_TAGS = [
       // デザイン関係
-      'ウェブデザイン','印刷物','ブランディング','写真',
+      'ウェブデザイン','印刷物',
       // マーケ・運用
-      'SNS','動画制作','メールマガジン','ディスプレイ広告','デジタル運用','採用',
+      'SNS','動画制作','メールマガジン','デジタル運用','採用',
       // 企画・運営
       'イベント',
       // プライベート
