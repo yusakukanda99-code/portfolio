@@ -4,10 +4,6 @@
     // ── 画像リスト（仮画像 / 本番は実ファイルパスに差し替え） ──
     const IMAGE_SRCS = [
       "img/top/top_01.webp",
-      "img/top/top_02.webp",
-      "img/top/top_03.webp",
-      "img/top/top_04.webp",
-      "img/top/top_05.webp",
     ];
     const CYCLE_INTERVAL = 4000; // 4秒
 
