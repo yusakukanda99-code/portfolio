@@ -454,26 +454,35 @@
       heroText.style.opacity   = 1 - progress;
       document.querySelector('.col-right').style.pointerEvents = progress > 0.9 ? 'none' : '';
 
-      // Strong section + 見出し: bg-overlayが白くなった後半でフェードイン
-      const strongP = Math.min(1, Math.max(0, (progress - 0.6) / 0.4));
-      sSectionEl.style.opacity = strongP;
-
-      // 遷移完了後に白背景を付与
-      if (progress >= 1 && !bgReadyDone) {
-        bgReadyDone = true;
-        sSectionEl.classList.add('s-bg-ready');
-      } else if (progress < 1 && bgReadyDone) {
-        bgReadyDone = false;
-        sSectionEl.classList.remove('s-bg-ready');
-      }
-
-      // コンテンツアニメーション発火（一度だけ）
-      if (progress > 0.75 && !sContentRevealed) {
-        sContentRevealed = true;
-        revealStrongContent();
-      }
+      // Strengths のフェードイン・コンテンツ発火は IntersectionObserver 側で実施
+      // （DOM順序が Top → Work → Strengths となったため、scrollY ベースでは制御せず
+      //   strong-section が viewport に近づいた瞬間に1回だけ発火させる）
       }); // rAF
     }, { passive: true });
+
+    // Strengths セクションの初回表示時にフェードイン＋コンテンツアニメ発火
+    // （sContentRevealed フラグで一度だけ発火・以降は再発火しない）
+    if ('IntersectionObserver' in window) {
+      const strongObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !sContentRevealed) {
+            sContentRevealed = true;
+            sSectionEl.style.opacity = '1';
+            sSectionEl.classList.add('s-bg-ready');
+            bgReadyDone = true;
+            revealStrongContent();
+            strongObserver.disconnect();
+          }
+        });
+      }, { rootMargin: '-20% 0px' });
+      strongObserver.observe(sSectionEl);
+    } else {
+      // IntersectionObserver 非対応環境のフォールバック: 即時表示
+      sSectionEl.style.opacity = '1';
+      sSectionEl.classList.add('s-bg-ready');
+      bgReadyDone = true;
+      if (!sContentRevealed) { sContentRevealed = true; revealStrongContent(); }
+    }
 
     // ── Strong Section コンテンツアニメーション ──
 
@@ -1432,12 +1441,12 @@
   (function () {
     const TARGETS = {
       top:       () => ({ top: 0 }),
-      strengths: () => {
-        const el = document.getElementById('strong-section');
-        return el ? { top: el.getBoundingClientRect().top + window.scrollY - 0 } : { top: 0 };
-      },
       work: () => {
         const el = document.getElementById('pf-outer');
+        return el ? { top: el.getBoundingClientRect().top + window.scrollY - 0 } : { top: 0 };
+      },
+      strengths: () => {
+        const el = document.getElementById('strong-section');
         return el ? { top: el.getBoundingClientRect().top + window.scrollY - 0 } : { top: 0 };
       },
       about: () => {
