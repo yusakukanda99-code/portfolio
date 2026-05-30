@@ -674,7 +674,7 @@
         id:22, year:'2023–2026',
         title:'メールマガジン運用 ー Salesforce Pardot',
         category:'Email Marketing / Pardot',
-        tags:['メールマガジン','デジタル','デザイン'],
+        tags:['メルマガ','デジタル','デザイン'],
         img:'img/works/work_22/work_22.webp',
         slides:[
           'img/works/work_22/work_22_banner01.webp',
@@ -870,7 +870,7 @@
       // デザイン関係
       'デザイン','印刷物','ブランディング',
       // マーケ・運用
-      'SNS','動画制作','メールマガジン','デジタル','採用',
+      'SNS','動画制作','メルマガ','デジタル','採用',
       // 企画・運営
       'イベント',
       // プライベート
