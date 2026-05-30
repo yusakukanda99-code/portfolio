@@ -620,7 +620,8 @@
     .strong-section {
       position: relative;
       z-index: 2;
-      background: transparent; /* é·ç§»ä¸­ã¯bg-overlayã®ç½ã§è¦ããã */
+      background: transparent;
+      transition: opacity 0.6s ease; /* é·ç§»ä¸­ã¯bg-overlayã®ç½ã§è¦ããã */
     }
     /* é·ç§»å®äºå¾ã«ç½èæ¯ãä»ä¸ */
     .strong-section.s-bg-ready {
