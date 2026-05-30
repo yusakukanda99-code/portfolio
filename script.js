@@ -1296,24 +1296,24 @@
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
           </section>
           <section class="section">
-            <p class="section-label">Creative</p>
-            <h2 class="section-title"><span class="num">3</span>こだわり</h2>
-            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colSliderB ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colSliderB}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            <p class="section-label">Role</p>
+            <h2 class="section-title"><span class="num">3</span>役割（責任範囲）</h2>
+            <div class="section-body"><p>${toHTML(d.role||'')}</p></div>
           </section>
           <section class="section">
+            <p class="section-label">Creative</p>
+            <h2 class="section-title"><span class="num">4</span>こだわり</h2>
+            ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colSliderB ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colSliderB}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+          </section>
+          <section class="section" style="margin-bottom:48px;">
             <p class="section-label">Results &amp; Transferability</p>
-            <h2 class="section-title"><span class="num">4</span>成果と貢献</h2>
+            <h2 class="section-title"><span class="num">5</span>成果と貢献</h2>
             ${work.resultImgRight && slotC
               ? `<div class="result-split-right"><div class="result-split-text section-body"><p>${toHTML(d.result||'')}</p></div><div class="result-split-img">${slotC}</div></div>`
               : `<div class="section-body"><p>${toHTML(d.result||'')}</p></div>`
             }
             ${d.youtubeShort ? '<div class="yt-shorts-wrap"><iframe src="https://www.youtube.com/embed/' + d.youtubeShort + '?playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' : ''}
             ${(imgs.sliderB || work.resultImgRight) ? '' : slotC}
-          </section>
-          <section class="section" style="margin-bottom:48px;">
-            <p class="section-label">Role</p>
-            <h2 class="section-title"><span class="num">5</span>役割（責任範囲）</h2>
-            <div class="section-body"><p>${toHTML(d.role||'')}</p></div>
           </section>
           <div class="content-bottom-spacer"></div>
         </div>`;
