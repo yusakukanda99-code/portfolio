@@ -592,7 +592,7 @@
         title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
         tags:['SNS','イベント','動画制作','デジタル','プライベート','デザイン'],
-        img:'img/works/work_06/work_06_a.webp',
+        img:'img/works/work_06/work_06.webp',
         slides:[
           'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
           'img/works/work_06/work_06_slide03.webp','img/works/work_06/work_06_slide04.webp',
@@ -753,7 +753,7 @@
         title:'社内開発AI対応PDF業務基盤「pdf-annotator」',
         category:'Internal Tool / UX & Development',
         tags:['デジタル','デザイン'],
-        img:'img/works/pdf_tool/pdf_tool.webp',
+        img:'img/works/work_24/work_24.webp',
         client:'ミカタグループ（ミカタ税理士法人）',
         d:{
           overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
@@ -786,7 +786,7 @@
         title:'atelier privé ── アートが日常に滲み出す場の、設計と実装',
         category:'Personal Project / Platform Design & Development',
         tags:['デジタル','プライベート','デザイン'],
-        img:'img/works/atelier_prive/atelier_prive.webp',
+        img:'img/works/work_23/work_23.webp',
         client:'Personal Project',
         d:{
           overview:'招待制のアート鑑賞プラットフォーム「atelier privé」を、コンセプト設計から UI・独自カラー体系のデザイン、フロントエンド・バックエンド実装、AI機能、画像保護設計まで<strong>すべて一人で</strong>手がけた個人制作プロジェクト。「探すを出会うへ」を軸に、アートと日常の接点を再設計した。',
