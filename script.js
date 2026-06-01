@@ -592,7 +592,7 @@
         title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
         tags:['SNS','イベント','動画制作','デジタル','プライベート','デザイン'],
-        img:'img/works/work_06/work_06_a.webp',
+        img:'img/works/work_06/work_06.webp',
         slides:[
           'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
           'img/works/work_06/work_06_slide03.webp','img/works/work_06/work_06_slide04.webp',
@@ -753,7 +753,7 @@
         title:'社内開発AI対応PDF業務基盤「pdf-annotator」',
         category:'Internal Tool / UX & Development',
         tags:['デジタル','デザイン'],
-        img:'img/works/pdf_tool/pdf_tool.webp',
+        img:'img/works/work_24/work_24.webp',
         client:'ミカタグループ（ミカタ税理士法人）',
         d:{
           overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
@@ -786,7 +786,7 @@
         title:'atelier privé ── アートが日常に滲み出す場の、設計と実装',
         category:'Personal Project / Platform Design & Development',
         tags:['デジタル','プライベート','デザイン'],
-        img:'img/works/atelier_prive/atelier_prive.webp',
+        img:'img/works/work_23/work_23.webp',
         client:'Personal Project',
         d:{
           overview:'招待制のアート鑑賞プラットフォーム「atelier privé」を、コンセプト設計から UI・独自カラー体系のデザイン、フロントエンド・バックエンド実装、AI機能、画像保護設計まで<strong>すべて一人で</strong>手がけた個人制作プロジェクト。「探すを出会うへ」を軸に、アートと日常の接点を再設計した。',
@@ -804,12 +804,18 @@
         tags:['動画制作','ブランディング'],
         img:'img/works/work_21/work_21.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        slides:[
+          'img/works/work_21/work_21_a.webp',
+          'img/works/work_21/work_21_storyboard_p1.webp',
+          'img/works/work_21/work_21_storyboard_p2.webp',
+          'img/works/work_21/work_21_a2.webp',
+        ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&A商談時に売主様・従業員様へ「どんな会社に入るのか」を伝えるための会社案内動画を、<strong>約3週間・単独で完遂</strong>。撮影〜編集〜納品まで全工程を一人で担当し、グループインへの不安解消と承継プロセスの円滑化に貢献した。',
           challenge:'ミカタグループがM&Aで新たな拠点を承継する際、売主側の経営者・従業員にとって最大の不安は「どんな会社に入るのか」という点でした。商談での口頭・資料説明だけでは、グループの雰囲気・文化・働く仲間の声を直接感じてもらう機会が不足しており、承継への心理的ハードルが生じていました。',
           approach:'<ul><li><strong>「共感→信頼→安心」の3段階ストーリー設計：</strong> 「会社案内パート」→「代表からのメッセージ」→「働く従業員の声」という流れで構成し、視聴者が段階的に安心感を持てる物語に</li><li><strong>既存会社案内の素材を動画に流用：</strong> ブランドの一貫性を保ちながら制作期間を大幅短縮。<strong>短納期×ブランド統一</strong>を両立する設計判断</li></ul>',
-          role:'ディレクター兼カメラマンとして全工程を単独で担当。企画・構成設計、撮影セッティング（照明・機材）、代表および従業員インタビュー収録、動画編集・仕上げ、納品まで。',
+          role:'絵コンテ・図解作図含めた構成設計から、マイクを用いた音声収録設計・撮影、ノイズ除去を含む音声編集・映像編集まで、全工程を単独で担当。',
           creative:'<ul><li><strong>制約下のクリエイティブ判断：</strong> 既存パンフレットの素材を動画に転換することで、新規撮影リソースを最小化。ブランド世界観を崩さず短納期で完成度を担保</li><li><strong>単独進行による意思決定速度：</strong> 撮影〜編集〜納品の全工程を単独で行うことで、外部委託を介さない判断速度でイテレーションを重ねた</li></ul>',
           result:'<ul><li><strong>M&A商談時の説明ツールとして実運用</strong>。売主様・従業員様の「グループインへの不安解消」に貢献し、承継プロセスを円滑化</li><li><strong>約3週間という短納期で、撮影・編集・納品まで一人で完遂</strong></li><li><strong>外部委託ゼロで内製化</strong>を実現し、組織内で動画コンテンツを継続的に作れる体制の足場に</li></ul>'
         }
