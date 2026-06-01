@@ -593,6 +593,7 @@
         category:'Event / Community Art',
         tags:['SNS','イベント','動画制作','デジタル','プライベート','デザイン'],
         img:'img/works/work_06/work_06.webp',
+        hero:'img/works/work_06/work_06_a.webp',
         slides:[
           'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
           'img/works/work_06/work_06_slide03.webp','img/works/work_06/work_06_slide04.webp',
@@ -623,6 +624,7 @@
         category:'Digital / SNS',
         tags:['SNS','動画制作','デジタル','デザイン'],
         img:'img/works/work_02/work_02.webp',
+        hero:'img/works/work_02/work_02_hero.webp',
         imgs: { b:true, b2:true, sliderC:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
@@ -642,6 +644,7 @@
         category:'Branding / Video',
         tags:['動画制作','デジタル'],
         img:'img/works/work_01/work_01.webp',
+        hero:'img/works/work_01/work_01_hero.webp',
         client:'ミカタグループ・株式会社グラッドキューブ',
         imgs:{ a:false, b:false, c:false },
         d:{
@@ -696,6 +699,7 @@
         category:'Digital Marketing',
         tags:['デジタル','デザイン'],
         img:'img/works/work_12/work_12.webp',
+        hero:'img/works/work_12/work_12_hero.webp',
         slides:[
           'img/works/work_12/work_12_a.webp','img/works/work_12/work_12_a2.webp',
           'img/works/work_12/work_12_b.webp',
@@ -718,6 +722,7 @@
         category:'Recruitment Branding / Web & Content Design',
         tags:['採用','デジタル','デザイン'],
         img:'img/works/work_10/work_10.webp',
+        hero:'img/works/work_10/work_10_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
@@ -735,6 +740,7 @@
         category:'Web / Print',
         tags:['デジタル','印刷物'],
         img:'img/works/work_03/work_03.webp',
+        hero:'img/works/work_03/work_03_hero.webp',
         imgs: { a:true },
         layout: 'wide',
         captionA2: 'ミカタの相続サービスロゴ<br><a href="https://mikata-souzoku.jp/" target="_blank" rel="noopener">公式サイト：https://mikata-souzoku.jp/</a>',
@@ -770,6 +776,7 @@
         category:'Event Management',
         tags:['イベント','印刷物','デザイン'],
         img:'img/works/work_04/work_04.webp',
+        hero:'img/works/work_04/work_04_hero.webp',
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
         youtubeHero2: 'YtF9PEItdBE',
         d:{
@@ -803,12 +810,11 @@
         category:'Video / Branding',
         tags:['動画制作','ブランディング'],
         img:'img/works/work_21/work_21.webp',
+        hero:'img/works/work_21/work_21_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
-        slides:[
-          'img/works/work_21/work_21_a.webp',
+        storyboard:[
           'img/works/work_21/work_21_storyboard_p1.webp',
           'img/works/work_21/work_21_storyboard_p2.webp',
-          'img/works/work_21/work_21_a2.webp',
         ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
@@ -826,6 +832,7 @@
         category:'Publishing / PR',
         tags:['印刷物','デザイン'],
         img:'img/works/work_09/work_09.webp',
+        hero:'img/works/work_09/work_09_hero.webp',
         client:'ミカタ税理士法人・株式会社学研ホールディングス',
         d:{
           overview:'相続というテーマを「7日間の講義形式の漫画本」に落とし込んだ書籍『<strong>マンガでカンタン！相続は７日間でわかります</strong>』（学研出版）の制作プロジェクトに、社内側の窓口として参画。<strong>学研より全国出版・販売</strong>を実現し、複雑な専門知識を親しみやすい形で届け、ミカタグループのブランド信頼性向上に貢献した。',
@@ -842,6 +849,7 @@
         category:'Print / Branding',
         tags:['印刷物','デザイン'],
         img:'img/works/work_08/work_08.webp',
+        hero:'img/works/work_08/work_08_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'株式会社輪奏',
         d:{
@@ -859,6 +867,7 @@
         category:'Branding / Print',
         tags:['印刷物','デザイン'],
         img:'img/works/work_20/work_20.webp',
+        hero:'img/works/work_20/work_20_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
@@ -1208,7 +1217,7 @@
 
     /* ════════  DETAIL HTML  ════════ */
     function buildDetailHTML(work) {
-      const heroSrc = work.img;
+      const heroSrc = work.hero || work.img;
       const imgBase = work.img.replace(/\.[^.]+$/, '');
       const d = work.d || {};
       const toHTML = s => (s||'').replace(/\\n/g, '<br>');
@@ -1244,6 +1253,10 @@
       const colSliderC = (imgs.sliderC && sliderCSrcs.length) ? mkSlider(sliderCSrcs) : '';
       const colSlides = (Array.isArray(work.slides) && work.slides.length)
         ? mkSlider(work.slides.map(function(src){ return mkSlot(src, 'slider-item'); }))
+        : '';
+      // storyboard: 絵コンテ専用スライダー（既存の画像とは別枠で表示）
+      const colStoryboard = (Array.isArray(work.storyboard) && work.storyboard.length)
+        ? mkSlider(work.storyboard.map(function(src){ return mkSlot(src, 'slider-item'); }))
         : '';
       function mkSlider(slides) {
         if (!slides.length) return '';
@@ -1303,6 +1316,7 @@
             <h2 class="section-title"><span class="num">2</span>戦略的アプローチ</h2>
             <div class="section-body"><p>${toHTML(d.approach||'')}</p></div>
             ${colSlides || colSliderA || colA}
+            ${colStoryboard}
             ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
           </section>
