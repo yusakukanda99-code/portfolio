@@ -1130,9 +1130,9 @@
     .pf-track { display: flex; gap: 80px; height: 88%; align-items: flex-end; padding-left: calc(50vw - 130px); padding-right: calc(50vw - 130px); will-change: transform; }
 
     /* ââ cards ââ */
-    .pf-card { flex-shrink: 0; width: 260px; height: 100%; display: flex; flex-direction: column; cursor: pointer; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .pf-card { flex-shrink: 0; width: 260px; display: flex; flex-direction: column; cursor: pointer; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
     .pf-card.pf-card-in { opacity: 1; transform: translateY(0); }
-    .pf-card-img-wrap { flex: 1; overflow: hidden; background: #2a2a2a; position: relative; }
+    .pf-card-img-wrap { width: 100%; aspect-ratio: 9 / 16; overflow: hidden; background: #2a2a2a; position: relative; }
     .pf-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%); position: absolute; inset: 0; transform: scale(1); transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s; }
     .pf-card:hover .pf-card-img-wrap img { transform: scale(1.06); filter: grayscale(0); }
 
@@ -1398,8 +1398,9 @@
         height: auto;
       }
       /* ã¢ãã¤ã«ã§ã¯ã¹ã¯ã­ã¼ã«é£åã¢ãã¡ã¼ã·ã§ã³ãåããªãããå³æè¡¨ç¤º */
-      .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; height: 52vw; min-height: 220px; opacity: 1 !important; transform: none !important; }
-      .pf-card-img-wrap { flex: 1; min-height: 0; }
+      .pf-card { width: 68vw; max-width: 260px; flex-shrink: 0; opacity: 1 !important; transform: none !important; }
+      /* .pf-card-img-wrap は基本ルールの aspect-ratio: 9/16 を継承。
+         モバイルでも幅 (68vw, max 260px) × 9:16 で同じ比率を維持。 */
       .wd-detail-wrap .split-layout { grid-template-columns: 1fr; }
       /* modal */
       .wd-panel { width: 100% !important; padding: 0 8px 8px !important; }
