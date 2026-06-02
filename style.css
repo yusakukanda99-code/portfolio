@@ -1140,7 +1140,7 @@
     .pf-card:hover .pf-card-tab { background: rgba(255,255,255,0.9); }
     .pf-match-badge { display: inline-block; margin-left: 0.5rem; font-size: 10px; color: #aaa; }
     .pf-match-badge.pf-hl { color: #1a1a1a; }
-    .pf-tag-overlay { position: absolute; bottom: 28px; left: 0; right: 0; padding: 0.5rem 0.75rem; display: flex; flex-wrap: wrap; gap: 4px; background: none; }
+    .pf-card-tags { display: flex; flex-wrap: wrap; gap: 4px; padding: 14px 0 0; flex-shrink: 0; }
     .pf-ctag { font-size: 10px; font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-weight: 300; letter-spacing: 0.03em; padding: 0.12rem 0.44rem; border: 1px solid rgba(0,0,0,0.1); color: rgba(0,0,0,0.38); background: transparent; border-radius: 2px; }
     .pf-ctag.pf-matched { border-color: rgba(0,0,0,0.42); color: #1a1a1a; background: transparent; }
     .pf-card-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.5vw, 48px); font-weight: 400; color: #fff; position: absolute; bottom: -10px; left: 12px; line-height: 1; letter-spacing: 0.03em; z-index: 2; }
