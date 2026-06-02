@@ -1877,3 +1877,69 @@
 @media (max-width: 1023px) {
   .wd-in-slider .wis-btn { display: none; }
 }
+
+/* ──────────────────────────────────────────────────
+   SP モーダル: 画像レターボックス解消 + スライダー scroll-snap 化
+   (PC >=769px は完全に無変更。JS swipe ハンドラもそのまま残置)
+   ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* A. 単一画像 (.img-ph 1枚運用) のレターボックス解消
+     min-height: 160px + 絶対配置 img を解いて intrinsic 表示に */
+  .wd-detail-wrap .img-ph {
+    min-height: 0 !important;
+    height: auto !important;
+    position: relative;
+  }
+  .wd-detail-wrap .img-ph img {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: initial !important;
+  }
+
+  /* B. スライダーを scroll-snap 横スワイプに切り替え
+     aspect-ratio 16/9 + absolute slide を解いて、native horizontal scroll に。
+     .wis-track は display: contents で layout から外し、
+     .wis-slide が .wd-in-slider の直接 flex 子要素になるようにする
+     (slide 幅 = slider 親の 100% に揃う) */
+  .wd-in-slider {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .wd-in-slider::-webkit-scrollbar { display: none; }
+  .wis-track {
+    display: contents !important;
+  }
+  .wis-slide {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    flex: 0 0 100%;
+    min-width: 0 !important;
+    scroll-snap-align: start;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  /* スライド内の .img-ph / img も intrinsic 表示に統一 */
+  .wis-slide .img-ph {
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  .wis-slide .img-ph img {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: initial !important;
+  }
+}
