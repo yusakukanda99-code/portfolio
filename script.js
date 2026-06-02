@@ -700,7 +700,7 @@
         tags:['デジタル','デザイン'],
         img:'img/works/work_24/work_24.webp',
         hero:'img/works/work_24/work_24_hero.webp',
-        cta:{ label:'ガイドサイトを開く', url:'https://pdf-annotator-mycompany.netlify.app/about#annotate' },
+        cta:{ label:'ガイドサイトを開く', url:'https://pdf-annotator-mycompany.netlify.app/about' },
         client:'ミカタグループ（ミカタ税理士法人）',
         d:{
           overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
@@ -931,7 +931,6 @@
 
       currentWorks.forEach((work, i) => {
         const mHtml = pfSelected.size ? `<span class="pf-match-badge ${work.mc>0?'pf-hl':''}">${work.mc}/${work.tags.length}</span>` : '';
-        const tHtml = work.tags.map(t => `<span class="pf-ctag ${pfSelected.has(t)?'pf-matched':''}">${t}</span>`).join('');
         const card = document.createElement('div');
         card.className = 'pf-card';
         card.innerHTML = `
@@ -940,7 +939,6 @@
               onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(160deg,#1a1a1a 0%,#3a3a3a 100%)'">
             <span class="pf-card-num">${String(i+1).padStart(2,'0')}</span>
           </div>
-          <div class="pf-card-tags">${tHtml}</div>
           <div class="pf-card-footer">
             <div class="pf-card-dash"></div>
             <p class="pf-card-label">${work.title}</p>
