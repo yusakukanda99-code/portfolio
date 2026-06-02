@@ -1143,7 +1143,9 @@
     .pf-card-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.5vw, 48px); font-weight: 400; color: #fff; position: absolute; bottom: -10px; left: 12px; line-height: 1; letter-spacing: 0.03em; z-index: 2; }
     .pf-card-footer { padding: 20px 0 0; flex-shrink: 0; }
     .pf-card-dash { width: 18px; height: 1px; background: #1a1a1a; margin-bottom: 10px; }
-    .pf-card-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: #1a1a1a; letter-spacing: 0.04em; }
+    .pf-card-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: #1a1a1a; letter-spacing: 0.04em; line-height: 1.4; min-height: calc(1.4em * 3); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
+    .pf-card-label-main { display: block; }
+    .pf-card-label-sub { display: block; font-size: 12px; line-height: 1.5; margin-top: 2px; color: #555; }
     .pf-progress { position: absolute; bottom: 0; right: 40px; display: flex; align-items: center; gap: 14px; }
     .pf-progress-text { font-family: 'EB Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #aaa; text-transform: uppercase; }
     .pf-progress-bar { width: 80px; height: 1px; background: #e0e0e0; position: relative; overflow: hidden; }
