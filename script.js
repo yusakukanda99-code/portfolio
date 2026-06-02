@@ -663,6 +663,7 @@
         category:'Design Competition',
         tags:['プライベート','デザイン'],
         img:'img/works/work_17/work_17.webp',
+        hero:'img/works/work_17/work_17_hero.webp',
         slides:['img/works/work_17/work_17.webp'],
         client:'Sony Fashion Entertainments（個人応募）',
         d:{
@@ -680,6 +681,7 @@
         category:'Email Marketing / Pardot',
         tags:['メルマガ','デジタル','デザイン'],
         img:'img/works/work_22/work_22.webp',
+        hero:'img/works/work_22/work_22_hero.webp',
         slides:[
           'img/works/work_22/work_22_banner01.webp',
           'img/works/work_22/work_22_banner02.webp',
