@@ -1169,6 +1169,8 @@
       window.initLightbox = function(root) {
         root.querySelectorAll('.lb-trigger').forEach(el => {
           if (el.dataset.lbInit) return; // 二重登録防止
+          // スライダー内では lightbox を起動しない (タップで意図せず開くのを防止)
+          if (el.closest('.wis-slide')) return;
           el.dataset.lbInit = '1';
           const handler = () => {
             if (!document.querySelector('.wd-modal.wd-open')) return; // モーダルが開いていない時は無視

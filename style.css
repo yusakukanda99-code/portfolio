@@ -1993,3 +1993,18 @@
   .wis-prev { left: 8px !important; }
   .wis-next { right: 8px !important; }
 }
+
+/* ──────────────────────────────────────────────────
+   SP メモリ圧迫対策 (フリーズ防止)
+   - scroll-snap で全 slide が常時可視になるため、画像 decode の
+     メモリを viewport 外 slide で skip させる
+   - スライダー内では lightbox を起動しないので zoom-icon も非表示
+   ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .wis-slide {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vw 56vw;  /* おおよその予測サイズで layout shift 回避 */
+  }
+  .wis-slide .lb-zoom-icon { display: none !important; }
+  .wis-slide .lb-trigger { cursor: default !important; }
+}
