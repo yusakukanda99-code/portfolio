@@ -1974,6 +1974,11 @@
     overflow: hidden !important;
     max-width: 100%;
     box-sizing: border-box;
+    /* width:100% + margin:0 36px (line 1734) のオフセットバグ修正:
+       margin を 0 にして width:100% と整合させる。
+       矢印は PR #34 で内側 (left/right:8px) に移したため margin 不要 */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   .wis-slide {
     max-width: 100%;
