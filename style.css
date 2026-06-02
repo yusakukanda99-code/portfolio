@@ -1943,3 +1943,32 @@
     object-fit: initial !important;
   }
 }
+
+/* ──────────────────────────────────────────────────
+   PC P0 修正: モーダルスライダーの横オーバーフロー解消
+   - .wd-in-slider を overflow: hidden に変更してコンテンツを厳密にクリップ
+   - 矢印ボタンを slider 内側 (left/right: 8px) に移動して負方向オフセットを解消
+   - max-width/box-sizing で念のため横はみ出しを抑制
+   - フェード遷移を 0.25s → 0.18s に短縮 (前後 slide の重なり時間を縮める)
+   PC スコープ限定 (min-width: 769px) のため、SP の scroll-snap (PR #33)
+   には一切干渉しない。
+   ────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .wd-in-slider {
+    overflow: hidden !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .wis-slide {
+    max-width: 100%;
+    box-sizing: border-box;
+    transition: opacity 0.18s ease;
+  }
+  .wis-slide .img-ph,
+  .wis-slide .img-ph img {
+    max-width: 100% !important;
+  }
+  /* 矢印ボタンを slider 内側に配置 (旧: left/right -32px の負方向オフセット) */
+  .wis-prev { left: 8px !important; }
+  .wis-next { right: 8px !important; }
+}
