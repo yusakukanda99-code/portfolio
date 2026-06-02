@@ -1871,3 +1871,9 @@
 @media (max-width: 600px) {
   .cta-button { font-size: 13px; padding: 10px 18px; }
 }
+
+/* ── Task 4: モバイル / タブレットでスライダー左右ボタンを非表示
+   (スワイプ操作で統一・PC >=1024px では現状通り表示) ── */
+@media (max-width: 1023px) {
+  .wd-in-slider .wis-btn { display: none; }
+}
