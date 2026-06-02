@@ -599,14 +599,6 @@
           'img/works/work_06/work_06_slide01.webp','img/works/work_06/work_06_slide02.webp',
           'img/works/work_06/work_06_slide03.webp','img/works/work_06/work_06_slide04.webp',
           'img/works/work_06/work_06_slide05.webp','img/works/work_06/work_06_slide06.webp',
-          'img/works/work_06/work_06_slide07.webp','img/works/work_06/work_06_slide08.webp',
-          'img/works/work_06/work_06_slide09.webp','img/works/work_06/work_06_slide10.webp',
-          'img/works/work_06/work_06_slide11.webp','img/works/work_06/work_06_slide12.webp',
-          'img/works/work_06/work_06_slide13.webp','img/works/work_06/work_06_slide14.webp',
-          'img/works/work_06/work_06_slide15.webp','img/works/work_06/work_06_slide16.webp',
-          'img/works/work_06/work_06_slide17.webp','img/works/work_06/work_06_slide18.webp',
-          'img/works/work_06/work_06_slide19.webp','img/works/work_06/work_06_slide20.webp',
-          'img/works/work_06/work_06_slide21.webp','img/works/work_06/work_06_slide22.webp',
         ],
         client:'あいちトリエンナーレ・ながくてアートフェスティバル実行委員・名古屋芸術大学・日東工業株式会社',
         d:{
@@ -627,6 +619,7 @@
         img:'img/works/work_02/work_02.webp',
         hero:'img/works/work_02/work_02_hero.webp',
         imgs: { b:true, b2:true, sliderC:true },
+        cta:{ label:'チャンネルを見る', url:'https://www.youtube.com/channel/UC4vSTHWK-oJXdRNM9o8HAeA' },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'中小企業オーナー・経営者をターゲットに、税務・相続・経営の専門知識を動画コンテンツ化。<strong>企画MTGから撮影・編集・投稿・分析までを一人で担当</strong>した、ミカタ税理士法人の公式YouTubeチャンネル運用プロジェクト。',
