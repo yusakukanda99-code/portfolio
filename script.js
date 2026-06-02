@@ -589,7 +589,8 @@
     const PF_WORKS = [
       {
         id:6, year:'2025',
-        title:'ながくてアートブック（あいちトリエンナーレ パートナーシップ）',
+        title:'ながくてアートブック',
+        subtitle:'（あいちトリエンナーレ パートナーシップ）',
         category:'Event / Community Art',
         tags:['SNS','イベント','動画制作','デジタル','プライベート','デザイン'],
         img:'img/works/work_06/work_06.webp',
@@ -736,7 +737,7 @@
       },
       {
         id:10, year:'2026',
-        title:'MIKATAグループ採用サイト ── 採用ブランディングの統合設計と実装',
+        title:'MIKATAグループ採用サイト ── 採用ブランディングの統合',
         category:'Recruitment Branding / Web & Content Design',
         tags:['採用','デジタル','デザイン','ブランディング'],
         img:'img/works/work_10/work_10.webp',
@@ -941,7 +942,10 @@
           </div>
           <div class="pf-card-footer">
             <div class="pf-card-dash"></div>
-            <p class="pf-card-label">${work.title}</p>
+            <p class="pf-card-label">
+              <span class="pf-card-label-main">${work.title}</span>
+              ${work.subtitle ? `<span class="pf-card-label-sub">${work.subtitle}</span>` : ''}
+            </p>
           </div>`;
         const ci = i;
         card.addEventListener('click', () => openModal(ci));
