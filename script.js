@@ -662,7 +662,7 @@
         category:'Design Competition',
         tags:['プライベート','デザイン'],
         img:'img/works/work_17/work_17.webp',
-        imgs: { a:true },
+        slides:['img/works/work_17/work_17.webp'],
         client:'Sony Fashion Entertainments（個人応募）',
         d:{
           overview:'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに個人応募し、全国から<strong>32組の公認クリエイターに選出</strong>。採用デザインはソニー公式サイト・専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開された。',
@@ -938,9 +938,9 @@
           <div class="pf-card-img-wrap">
             <img src="${work.img}" alt="${work.title}" loading="lazy"
               onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(160deg,#1a1a1a 0%,#3a3a3a 100%)'">
-            <div class="pf-tag-overlay">${tHtml}</div>
             <span class="pf-card-num">${String(i+1).padStart(2,'0')}</span>
           </div>
+          <div class="pf-card-tags">${tHtml}</div>
           <div class="pf-card-footer">
             <div class="pf-card-dash"></div>
             <p class="pf-card-label">${work.title}</p>
