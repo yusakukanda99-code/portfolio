@@ -1908,8 +1908,8 @@
     height: auto !important;
     display: flex !important;
     flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -1922,9 +1922,11 @@
     position: static !important;
     inset: auto !important;
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
     flex: 0 0 100%;
     min-width: 0 !important;
+    box-sizing: border-box;
     scroll-snap-align: start;
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -1934,11 +1936,13 @@
     position: static !important;
     height: auto !important;
     min-height: 0 !important;
+    max-width: 100% !important;
   }
   .wis-slide .img-ph img {
     position: static !important;
     inset: auto !important;
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
     object-fit: initial !important;
   }
