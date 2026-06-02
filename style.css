@@ -1130,14 +1130,18 @@
     .pf-track { display: flex; gap: 80px; height: 88%; align-items: flex-end; padding-left: calc(50vw - 130px); padding-right: calc(50vw - 130px); will-change: transform; }
 
     /* ââ cards ââ */
-    .pf-card { flex-shrink: 0; width: 260px; display: flex; flex-direction: column; cursor: pointer; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .pf-card { flex-shrink: 0; width: 260px; display: flex; flex-direction: column; cursor: pointer; touch-action: manipulation; opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
     .pf-card.pf-card-in { opacity: 1; transform: translateY(0); }
     .pf-card-img-wrap { width: 100%; aspect-ratio: 9 / 16; overflow: hidden; background: #2a2a2a; position: relative; }
     .pf-card-img-wrap img { width: 100%; height: 100%; object-fit: contain; object-position: center center; display: block; filter: grayscale(20%); position: absolute; inset: 0; transform: scale(1); transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s; }
-    .pf-card:hover .pf-card-img-wrap img { transform: scale(1.06); filter: grayscale(0); }
+    @media (hover: hover) and (pointer: fine) {
+      .pf-card:hover .pf-card-img-wrap img { transform: scale(1.06); filter: grayscale(0); }
+    }
 
     .pf-card-tab { position: absolute; top: 0; left: -14px; z-index: 3; max-width: 88%; padding: 0.55rem 1.3rem 0.55rem 1rem; font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 12px; font-weight: 300; color: #1a1a1a; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgba(248,248,250,0.68); backdrop-filter: blur(20px) saturate(1.6) brightness(1.08); -webkit-backdrop-filter: blur(20px) saturate(1.6) brightness(1.08); border-right: 1px solid rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 2px 2px 18px rgba(0,0,0,0.07); border-radius: 3px 0 5px 0; transition: background 0.3s; }
-    .pf-card:hover .pf-card-tab { background: rgba(255,255,255,0.9); }
+    @media (hover: hover) and (pointer: fine) {
+      .pf-card:hover .pf-card-tab { background: rgba(255,255,255,0.9); }
+    }
     .pf-match-badge { display: inline-block; margin-left: 0.5rem; font-size: 10px; color: #aaa; }
     .pf-match-badge.pf-hl { color: #1a1a1a; }
     .pf-card-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.5vw, 48px); font-weight: 400; color: #fff; position: absolute; bottom: -10px; left: 12px; line-height: 1; letter-spacing: 0.03em; z-index: 2; }
@@ -1403,6 +1407,14 @@
       /* modal */
       .wd-panel { width: 100% !important; padding: 0 8px 8px !important; }
       .wd-fade-bottom { width: 100% !important; }
+
+      /* Task 1: close ボタンを iOS URL バーから逃がす (safe-area + ~30px) */
+      .wd-topbar { padding-top: calc(14px + env(safe-area-inset-top) + 30px); }
+      .wd-close-btn { min-height: 44px; padding: 6px 0; }
+
+      /* Task 3: hero 画像の上下隙間 (letterbox) を撤廃して自然な比率に */
+      .wd-detail-wrap .hero-image-wrap { height: auto; }
+      .wd-detail-wrap .hero-image-wrap img { height: auto; }
     }
 
 
