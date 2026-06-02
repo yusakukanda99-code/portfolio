@@ -642,7 +642,7 @@
         youtube:'Ll2MaM-uSSI',
         title:'企業動画 ー オーナーの一生に伴走する',
         category:'Branding / Video',
-        tags:['動画制作','デジタル'],
+        tags:['動画制作','デジタル','ブランディング'],
         img:'img/works/work_01/work_01.webp',
         hero:'img/works/work_01/work_01_hero.webp',
         client:'ミカタグループ・株式会社グラッドキューブ',
@@ -694,6 +694,24 @@
         }
       },
       {
+        id:24, year:'2026',
+        title:'社内開発AI対応PDF業務基盤「pdf-annotator」',
+        category:'Internal Tool / UX & Development',
+        tags:['デジタル','デザイン'],
+        img:'img/works/work_24/work_24.webp',
+        hero:'img/works/work_24/work_24_hero.webp',
+        cta:{ label:'ガイドサイトを開く', url:'https://pdf-annotator-mycompany.netlify.app/about#annotate' },
+        client:'ミカタグループ（ミカタ税理士法人）',
+        d:{
+          overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
+          challenge:'社内で長年使用していた既存ドキュメントツールには、公式サポート終了に伴うセキュリティ面の懸念、顧客納品時のPDF変換の手間、機能カスタマイズが不可といった複数の課題がありました。特に「AI（Claude／Gemini等）がファイルを直接読み込めない」点が業務効率化のボトルネックになっており、AIが直接扱えるPDF形式を中心に据えた自社専用のPDF業務基盤の構築が急務でした。',
+          approach:'<ul><li><strong>徹底した現場調査とPMF：</strong> 三島支店で現場担当者と連携し、利用実態とニーズを把握。生の声を開発に直接反映する体制を整備</li><li><strong>Figmaによる高速プロトタイピング：</strong> UI/UXとユーザビリティテストを繰り返し、現場が迷わず使えるデザインシステムを構築</li><li><strong>Claudeを活用したアジャイル開発：</strong> AIアシストで、現場からの要望（D&D結合・階層化グループ化・電子押印など）を短期で実装・継続反映</li></ul>',
+          role:'プロダクトマネージャー兼UI/UXデザイナーとして、企画・設計から実装まで<strong>一貫して担当</strong>。現場ニーズ分析、FigmaでのUI/UXデザイン・プロトタイプ作成、Claudeを活用した実装、機能カスタマイズ対応をワンストップで担当。',
+          creative:'<ul><li><strong>階層化したページのグループ化(しおり機能)：</strong> 複数PDFをまたいでページをグループ／サブグループに整理でき、保存時にAdobe Acrobat互換のしおり(Bookmark)として書き出し。書類整理から納品までを1ツールで完結</li><li><strong>業務に即した操作・保存設計：</strong> 日本式の電子押印（法人名・部署名・氏名のカスタム）、dpiを「印刷用・画面用・メール用」の用途語に翻訳した保存設計、複数PDFのD&D結合、完備されたキーボードショートカット、Undo/Redoまで Adobe や Office と同じ手の動きで操作可能。技術スタックは pdf.js / fabric.js / jsPDF（バニラJS+3ライブラリ／フレームワーク不使用）</li></ul>',
+          result:'<ul><li><strong>年間約1,200万円のコスト削減を試算</strong>（Adobe Acrobat Standard 約1,580円/人/月 × 634名 ≒ 月100万円）</li><li><strong>「PDF × AI」による業務プロセスの再設計：</strong> 書類のAI分析・転記ミス防止、複数年度の横断比較を自動化し、人は「精査・解釈・顧客提案」に集中できる環境を実現</li><li><strong>3層構成での製品化：</strong> ツール本体（PC専用・業務用）＋使い方ガイドサイト（レスポンシブ対応）＋社内発表資料まで設計・実装</li></ul><br>※ 今後は AI連携機能の継続強化（自動仕訳・書類分類など）と社内標準化に向けてアップデートを重ねる方針。'
+        }
+      },
+      {
         id:12, year:'2023–2026',
         title:'デジタルマーケティング運用 ── 獲得から育成まで',
         category:'Digital Marketing',
@@ -720,7 +738,7 @@
         id:10, year:'2026',
         title:'MIKATAグループ採用サイト ── 採用ブランディングの統合設計と実装',
         category:'Recruitment Branding / Web & Content Design',
-        tags:['採用','デジタル','デザイン'],
+        tags:['採用','デジタル','デザイン','ブランディング'],
         img:'img/works/work_10/work_10.webp',
         hero:'img/works/work_10/work_10_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
@@ -755,26 +773,10 @@
         }
       },
       {
-        id:24, year:'2026',
-        title:'社内開発AI対応PDF業務基盤「pdf-annotator」',
-        category:'Internal Tool / UX & Development',
-        tags:['デジタル','デザイン'],
-        img:'img/works/work_24/work_24.webp',
-        client:'ミカタグループ（ミカタ税理士法人）',
-        d:{
-          overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
-          challenge:'社内で長年使用していた既存ドキュメントツールには、公式サポート終了に伴うセキュリティ面の懸念、顧客納品時のPDF変換の手間、機能カスタマイズが不可といった複数の課題がありました。特に「AI（Claude／Gemini等）がファイルを直接読み込めない」点が業務効率化のボトルネックになっており、AIが直接扱えるPDF形式を中心に据えた自社専用のPDF業務基盤の構築が急務でした。',
-          approach:'<ul><li><strong>徹底した現場調査とPMF：</strong> 三島支店で現場担当者と連携し、利用実態とニーズを把握。生の声を開発に直接反映する体制を整備</li><li><strong>Figmaによる高速プロトタイピング：</strong> UI/UXとユーザビリティテストを繰り返し、現場が迷わず使えるデザインシステムを構築</li><li><strong>Claudeを活用したアジャイル開発：</strong> AIアシストで、現場からの要望（D&D結合・階層化グループ化・電子押印など）を短期で実装・継続反映</li></ul>',
-          role:'プロダクトマネージャー兼UI/UXデザイナーとして、企画・設計から実装まで<strong>一貫して担当</strong>。現場ニーズ分析、FigmaでのUI/UXデザイン・プロトタイプ作成、Claudeを活用した実装、機能カスタマイズ対応をワンストップで担当。',
-          creative:'<ul><li><strong>階層化したページのグループ化(しおり機能)：</strong> 複数PDFをまたいでページをグループ／サブグループに整理でき、保存時にAdobe Acrobat互換のしおり(Bookmark)として書き出し。書類整理から納品までを1ツールで完結</li><li><strong>業務に即した操作・保存設計：</strong> 日本式の電子押印（法人名・部署名・氏名のカスタム）、dpiを「印刷用・画面用・メール用」の用途語に翻訳した保存設計、複数PDFのD&D結合、完備されたキーボードショートカット、Undo/Redoまで Adobe や Office と同じ手の動きで操作可能。技術スタックは pdf.js / fabric.js / jsPDF（バニラJS+3ライブラリ／フレームワーク不使用）</li></ul>',
-          result:'<ul><li><strong>年間約1,200万円のコスト削減を試算</strong>（Adobe Acrobat Standard 約1,580円/人/月 × 634名 ≒ 月100万円）</li><li><strong>「PDF × AI」による業務プロセスの再設計：</strong> 書類のAI分析・転記ミス防止、複数年度の横断比較を自動化し、人は「精査・解釈・顧客提案」に集中できる環境を実現</li><li><strong>3層構成での製品化：</strong> ツール本体（PC専用・業務用）＋使い方ガイドサイト（レスポンシブ対応）＋社内発表資料まで設計・実装</li></ul><br>※ 今後は AI連携機能の継続強化（自動仕訳・書類分類など）と社内標準化に向けてアップデートを重ねる方針。'
-        }
-      },
-      {
         id:4, year:'2023–2026',
         title:'ミカタ税理士法人 ビジネスセミナー運営',
         category:'Event Management',
-        tags:['イベント','印刷物','デザイン'],
+        tags:['イベント','印刷物','デザイン','ブランディング'],
         img:'img/works/work_04/work_04.webp',
         hero:'img/works/work_04/work_04_hero.webp',
         client:'ミカタグループ・九段会館テラス（東京）・ホテルグランヴィア（大阪）・名古屋マリオットアソシアホテル・アークヒルズクラブ（六本木）等',
@@ -865,7 +867,7 @@
         id:20, year:'2024',
         title:'会社案内・営業資材 トータル制作',
         category:'Branding / Print',
-        tags:['印刷物','デザイン'],
+        tags:['印刷物','デザイン','ブランディング'],
         img:'img/works/work_20/work_20.webp',
         hero:'img/works/work_20/work_20_hero.webp',
         imgs: { a:true, a2:true, b:true, b2:true, c:true },
@@ -1296,6 +1298,7 @@
               onerror="this.style.display='none';this.parentNode.style.background='#1a1a1a'">
           </div>
         </div>
+        ${work.cta ? `<div class="content-wrap cta-wrap"><a class="cta-button" href="${work.cta.url}" target="_blank" rel="noopener noreferrer">${work.cta.label}<span class="cta-arrow" aria-hidden="true">↗</span></a></div>` : ''}
         ${slotHero2 ? `<div class="content-wrap">${slotHero2}</div>` : ''}
         <div class="content-wrap">
           ${(work.youtube || work.vimeo) ? `<section class="video-section">
