@@ -1178,7 +1178,7 @@
     .wd-backdrop {
       position: absolute; inset: 0;
       /* backdrop-filter ã¯å¨ç»é¢GPUåæç»ãå¼ãèµ·ããããåé¤ */
-      background: rgba(220,224,234,0.72);
+      background: rgba(220,224,234,1);
       opacity: 0;
       transition: opacity 0.35s ease;
       will-change: opacity;
