@@ -876,7 +876,13 @@
         tags:['印刷物','デザイン','ブランディング'],
         img:'img/works/work_20/work_20.webp',
         hero:'img/works/work_20/work_20_hero.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        slides:[
+          { src:'img/works/work_20/work_20_a.webp',  alt:'会社案内・営業資材 デザイン 1' },
+          { src:'img/works/work_20/work_20_a2.webp', alt:'会社案内・営業資材 デザイン 2' },
+          { src:'img/works/work_20/work_20_b.webp',  alt:'会社案内・営業資材 デザイン 3（こだわり）' },
+          { src:'img/works/work_20/work_20_b2.webp', alt:'会社案内・営業資材 デザイン 4（こだわり）' },
+          { src:'img/works/work_20/work_20_c.webp',  alt:'会社案内・営業資材 デザイン 5（成果）' },
+        ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'創業30周年を迎えるミカタグループの、会社案内（全16ページ）・営業チラシ・各種資材から、ブランドの象徴となる社章までをトータルで統一制作。戦略立案・フォトディレクション・ライティング・グラフィックデザイン・3Dモデリングまで、<strong>全工程を単独で担当</strong>したインハウスブランディングプロジェクト。',
