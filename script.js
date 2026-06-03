@@ -814,11 +814,7 @@
         tags:['動画制作','ブランディング'],
         img:'img/works/work_21/work_21.webp',
         hero:'img/works/work_21/work_21_hero.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
-        storyboard:[
-          'img/works/work_21/work_21_storyboard_p1.webp',
-          'img/works/work_21/work_21_storyboard_p2.webp',
-        ],
+        youtubeApproach:'eEJzbsaXgN8',
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&A商談時に売主様・従業員様へ「どんな会社に入るのか」を伝えるための会社案内動画を、<strong>約3週間・単独で完遂</strong>。撮影〜編集〜納品まで全工程を一人で担当し、グループインへの不安解消と承継プロセスの円滑化に貢献した。',
