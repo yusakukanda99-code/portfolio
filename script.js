@@ -655,7 +655,7 @@
         title:'Sony FES Watch U デザインコンペ',
         category:'Design Competition',
         tags:['プライベート','デザイン'],
-        img:'img/works/work_17/Thumbnail_Minamo.webp',
+        img:'img/works/work_17/work_17.webp',
         hero:'img/works/work_17/work_17_hero.webp',
         slides:[
           { src:'img/works/work_17/Detail1_Minamo.webp', alt:'FES Watch U デザイン『みなも』詳細1' },
