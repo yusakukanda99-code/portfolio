@@ -1017,13 +1017,17 @@
     const sbThumb  = document.getElementById('wd-sb-thumb');
     const sbPct    = document.getElementById('wd-sb-pct');
     let openIdx = 0, hintShown = false, closeTimer = null;
+    // sbWrap.offsetHeight は modal open 中変わらないため
+    // openModal / resize 時のみ更新してキャッシュ。panel.scroll 毎フレームの強制 reflow を回避
+    let _cachedTrackH = 0;
 
     // Align bar to right edge of the panel
     function sbAlign() {
       const r = panel.getBoundingClientRect();
       sbWrap.style.right = (window.innerWidth - r.right) + 'px';
     }
-    window.addEventListener('resize', () => { if (sbWrap.style.display !== 'none') sbAlign(); });
+    function refreshTrackH() { _cachedTrackH = sbWrap.offsetHeight; }
+    window.addEventListener('resize', () => { if (sbWrap.style.display !== 'none') { sbAlign(); refreshTrackH(); } });
 
     // HTMLキャッシュ（idleTime に事前生成）
     const _detailCache = new Map();
@@ -1068,13 +1072,14 @@
       // ③ キャッシュ済みならすぐ、なければ次フレームで注入
       if (_detailCache.has(work.id)) {
         content.innerHTML = _detailCache.get(work.id);
-        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; initLightbox(content); initWIS(content); });
+        requestAnimationFrame(() => { sbAlign(); if (sbWrap) sbWrap.style.display = 'block'; refreshTrackH(); initLightbox(content); initWIS(content); });
       } else {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             content.innerHTML = getDetailHTML(work);
             sbAlign();
             if (sbWrap) sbWrap.style.display = 'block';
+            refreshTrackH();
             initLightbox(content);
             initWIS(content);
           });
@@ -1117,8 +1122,8 @@
       if (sbThumb) sbThumb.style.height = pctVal + '%';
       if (sbPct) {
         sbPct.textContent = pctVal + '%';
-        // Position badge at the bottom of the thumb
-        const trackH = sbWrap.offsetHeight;
+        // キャッシュ済み trackH を使用 (毎フレームの sbWrap.offsetHeight 読み取りを廃止)
+        const trackH = _cachedTrackH || sbWrap.offsetHeight;
         const pos = trackH * pct;
         sbPct.style.bottom = (trackH - pos) + 'px';
         sbPct.style.transform = 'translateY(50%)';
