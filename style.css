@@ -2008,3 +2008,19 @@
   .wis-slide .lb-zoom-icon { display: none !important; }
   .wis-slide .lb-trigger { cursor: default !important; }
 }
+
+/* ──────────────────────────────────────────────────
+   SP scroll-to-close × slider 競合解消 (P0)
+   - slider 上の touch を縦方向に伝播させない (panel が誤スクロールしない)
+   - slider の overscroll を panel にチェインさせない
+   - panel は縦方向の touch のみ受ける
+   ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .wd-in-slider {
+    touch-action: pan-x;
+    overscroll-behavior: contain;
+  }
+  .wd-panel {
+    touch-action: pan-y;
+  }
+}
