@@ -855,7 +855,10 @@
         tags:['印刷物','デザイン'],
         img:'img/works/work_08/work_08.webp',
         hero:'img/works/work_08/work_08_hero.webp',
-        imgs: { a:true, a2:true, b:true, b2:true, c:true },
+        imgs: { b:true, b2:true },
+        slides:[
+          { src:'img/works/work_08/work_08_c.webp', alt:'ひのてり訪問看護 成果イメージ' },
+        ],
         client:'株式会社輪奏',
         d:{
           overview:'訪問看護という馴染みの薄い仕組みへの不安を解消し、「ひのてり」の強みを地域に伝えるパンフレットを制作。<strong>自ら現場に足を運んで撮影し、温かみのある実際の現場の表情</strong>を誌面に盛り込んだ。',
