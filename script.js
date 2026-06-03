@@ -815,6 +815,12 @@
         img:'img/works/work_21/work_21.webp',
         hero:'img/works/work_21/work_21_hero.webp',
         youtubeApproach:'eEJzbsaXgN8',
+        slides:[
+          { src:'img/works/work_21/MA_storyboard_p1.webp', alt:'M&A動画 絵コンテ 1（構成・導入）' },
+          { src:'img/works/work_21/MA_storyboard_p2.webp', alt:'M&A動画 絵コンテ 2（組織・強み）' },
+          { src:'img/works/work_21/MA_storyboard_p3.webp', alt:'M&A動画 絵コンテ 3（サービス内容）' },
+        ],
+        sliderPortrait:true,
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'M&A商談時に売主様・従業員様へ「どんな会社に入るのか」を伝えるための会社案内動画を、<strong>約3週間・単独で完遂</strong>。撮影〜編集〜納品まで全工程を一人で担当し、グループインへの不安解消と承継プロセスの円滑化に貢献した。',
@@ -1271,7 +1277,8 @@
         if (!slides.length) return '';
         if (slides.length === 1) return slides[0]; // 1枚だけならそのまま
         const inner = slides.map((s,i) => `<div class="wis-slide${i===0?' wis-active':''}">${s}</div>`).join('');
-        return `<div class="wd-in-slider" data-wis-total="${slides.length}">
+        const portraitCls = work.sliderPortrait ? ' wd-in-slider--portrait' : '';
+        return `<div class="wd-in-slider${portraitCls}" data-wis-total="${slides.length}">
           <div class="wis-track">${inner}</div>
           <button class="wis-btn wis-prev" aria-label="前の画像">&#8592;</button>
           <button class="wis-btn wis-next" aria-label="次の画像">&#8594;</button>
