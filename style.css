@@ -2045,3 +2045,21 @@
     height: calc(100dvh - env(safe-area-inset-top) - 30px) !important;
   }
 }
+
+/* ──────────────────────────────────────────────────
+   縦長 (portrait) スライダー対応 — PC 向け
+   - 既定 .wd-in-slider は aspect-ratio: 16/9 固定で、A4 縦などの
+     縦長画像が contain でレターボックスになる問題を解消
+   - work.sliderPortrait = true の作品にだけ適用 (他 work 影響なし)
+   - SP は既存の aspect-ratio: auto オーバーライド (line 1907) で
+     intrinsic 表示済のため対応不要
+   ────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .wd-in-slider--portrait {
+    /* MA_storyboard 系の実寸 (1600×2263) に合わせた縦長比率 */
+    aspect-ratio: 1600 / 2263 !important;
+    max-width: 540px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
