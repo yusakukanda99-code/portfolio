@@ -655,9 +655,14 @@
         title:'Sony FES Watch U デザインコンペ',
         category:'Design Competition',
         tags:['プライベート','デザイン'],
-        img:'img/works/work_17/work_17.webp',
+        img:'img/works/work_17/Thumbnail_Minamo.webp',
         hero:'img/works/work_17/work_17_hero.webp',
-        slides:['img/works/work_17/work_17.webp'],
+        slides:[
+          { src:'img/works/work_17/Detail1_Minamo.webp', alt:'FES Watch U デザイン『みなも』詳細1' },
+          { src:'img/works/work_17/Detail2_Minamo.webp', alt:'FES Watch U デザイン『みなも』詳細2' },
+          { src:'img/works/work_17/Detail3_Minamo.webp', alt:'FES Watch U デザイン『みなも』詳細3' },
+          { src:'img/works/work_17/Detail4_Minamo.webp', alt:'FES Watch U デザイン『みなも』詳細4' },
+        ],
         client:'Sony Fashion Entertainments（個人応募）',
         d:{
           overview:'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに個人応募し、全国から<strong>32組の公認クリエイターに選出</strong>。採用デザインはソニー公式サイト・専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開された。',
@@ -1236,7 +1241,7 @@
       // 単枚スロット
       const isWide = work.layout === 'wide';
       const imgCls = isWide ? 'wide-single' : 'split-single';
-      const mkSlot = (src, cls) => `<div class="img-ph ${cls} lb-trigger" role="button" tabindex="0" aria-label="画像を拡大"><img src="${src}" alt="" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="lb-zoom-icon">&#10532;</span></div>`;
+      const mkSlot = (src, cls, alt = '') => `<div class="img-ph ${cls} lb-trigger" role="button" tabindex="0" aria-label="画像を拡大"><img src="${src}" alt="${alt}" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="lb-zoom-icon">&#10532;</span></div>`;
       const slotA  = imgs.a  ? mkSlot(`${imgBase}_a.webp`,  imgCls) : '';
       const slotA2 = imgs.a2 ? mkSlot(`${imgBase}_a2.webp`, imgCls) : '';
       const slotB  = imgs.b  ? mkSlot(`${imgBase}_b.webp`,  imgCls) : '';
@@ -1258,7 +1263,9 @@
         : [];
       const colSliderC = (imgs.sliderC && sliderCSrcs.length) ? mkSlider(sliderCSrcs) : '';
       const colSlides = (Array.isArray(work.slides) && work.slides.length)
-        ? mkSlider(work.slides.map(function(src){ return mkSlot(src, 'slider-item'); }))
+        ? mkSlider(work.slides.map(function(s){
+            return (typeof s === 'string') ? mkSlot(s, 'slider-item') : mkSlot(s.src, 'slider-item', s.alt || '');
+          }))
         : '';
       // storyboard: 絵コンテ専用スライダー（既存の画像とは別枠で表示）
       const colStoryboard = (Array.isArray(work.storyboard) && work.storyboard.length)
