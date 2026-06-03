@@ -2024,3 +2024,24 @@
     touch-action: pan-y;
   }
 }
+
+/* ──────────────────────────────────────────────────
+   SP モーダル URL バー裏問題の解消 (P0)
+   - iOS Safari の 100vh は URL バー収納時の最大値を返すため、
+     align-items: flex-end の .wd-modal 内で panel が上方にズレ
+     sticky の .wd-topbar (CLOSE) が画面外へ出ていた
+   - .wd-scrollbar は top:0 で safe-area / URL バーを無視しており
+     0% バッジが URL バー裏に隠れていた
+   ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Fix A: panel 高さを動的ビューポートに追従させ、URL バー伸縮で
+     上方ズレが起きないようにする */
+  .wd-panel { height: 100dvh !important; }
+
+  /* Fix B: スクロールバー (= 0% バッジ親) を URL バー / ノッチ分
+     下にオフセット。topbar の余白パターン (safe-area + 30px) と統一 */
+  .wd-scrollbar {
+    top: calc(env(safe-area-inset-top) + 30px);
+    height: calc(100dvh - env(safe-area-inset-top) - 30px) !important;
+  }
+}
