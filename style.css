@@ -2063,3 +2063,26 @@
     margin-right: auto !important;
   }
 }
+
+/* ──────────────────────────────────────────────────
+   こだわりセクション 3 枚ギャラリー (work.creativeGallery)
+   - PC: 3 列横並びグリッド
+   - SP: 1 列縦並び
+   - work.creativeGallery を持つ作品のみ表示 (他 work 影響なし)
+   ────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .wd-creative-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .wd-creative-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+}
