@@ -883,6 +883,11 @@
           { src:'img/works/work_20/work_20_b2.webp', alt:'会社案内・営業資材 デザイン 4（こだわり）' },
           { src:'img/works/work_20/work_20_c.webp',  alt:'会社案内・営業資材 デザイン 5（成果）' },
         ],
+        creativeGallery:[
+          { src:'img/works/work_20/shasho_p3.webp', alt:'社章デザイン：金/銀の縁取り' },
+          { src:'img/works/work_20/shasho_p5.webp', alt:'社章デザイン：立体エンブレム（背景黒×銀／白×黒）' },
+          { src:'img/works/work_20/shasho_p7.webp', alt:'社章デザイン：金/銀のメタルプレート' },
+        ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
           overview:'創業30周年を迎えるミカタグループにおいて、既存のコーポレートロゴ（佐藤可士和氏）を基点に、会社案内（全16ページ）・営業チラシ・各種資材、そしてブランドの象徴となる社章までをトータルで統一デザインしたインハウスブランディングプロジェクト。戦略立案・フォトディレクション・ライティング・グラフィックデザイン・社章の3Dモデリングまで、<strong>応用制作の全工程を単独で担当</strong>。',
@@ -1355,6 +1360,7 @@
             <p class="section-label">Creative</p>
             <h2 class="section-title"><span class="num">4</span>こだわり</h2>
             ${colSliderC ? `<div class="section-body creative-slider-wrap"><p>${toHTML(d.creative||'')}</p></div>${colSliderC}` : colSliderB ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colSliderB}` : imgs.sliderA ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>` : colB ? (isWide ? `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}` : `<div class="split-layout"><div class="section-body"><p>${toHTML(d.creative||'')}</p></div>${colB}</div>`) : `<div class="section-body"><p>${toHTML(d.creative||'')}</p></div>`}
+            ${(Array.isArray(work.creativeGallery) && work.creativeGallery.length) ? `<div class="wd-creative-gallery">${work.creativeGallery.map(g => `<div class="img-ph"><img src="${g.src}" alt="${g.alt||''}" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`).join('')}</div>` : ''}
           </section>
           <section class="section" style="margin-bottom:48px;">
             <p class="section-label">Results &amp; Transferability</p>
