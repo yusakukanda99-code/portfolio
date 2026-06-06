@@ -696,18 +696,15 @@
       },
       {
         id:24, year:'2026',
-        title:'Document Workflow Suite（DocuWorks変換 ＋ PDF編集）',
-        category:'Internal Tool / Workflow Suite',
-        tags:['デジタル','デザイン','ツール','UI・UX','業務改善'],
+        title:'社内開発AI対応PDF業務基盤「pdf-annotator」',
+        category:'Internal Tool / UX & Development',
+        tags:['デジタル','デザイン'],
         img:'img/works/work_24/work_24.webp',
         hero:'img/works/work_24/work_24_hero.webp',
-        ctas:[
-          { label:'詳細ケーススタディを見る', url:'works/document-workflow-suite/' },
-          { label:'PDF編集ツール デモ', url:'https://pdf-annotator-mycompany.netlify.app/' },
-        ],
+        cta:{ label:'ガイドサイトを開く', url:'https://pdf-annotator-mycompany.netlify.app/about' },
         client:'ミカタグループ（ミカタ税理士法人）',
         d:{
-          overview:'DocuWorksのサポート縮退で<strong>将来開けなくなるリスクを抱える数千件の文書資産</strong>を、恒久的なPDFへ一括移行し、ブラウザ編集まで一気通貫。<strong>完全ローカル動作</strong>で機密文書も外部送信せず安全に扱える、自社専用のドキュメント業務基盤を設計・開発。<strong>年間約1,200万円のコスト削減を試算</strong>。',
+          overview:'AI時代の社内ドキュメント業務基盤を、ブラウザ完結の自社ツールとして設計・開発。現場調査・UI/UXデザイン・Claudeを活用した実装まで一貫して担当し、<strong>年間約1,200万円のコスト削減を試算</strong>。AI連携を含む業務再設計を目指したプロジェクト。',
           challenge:'社内で長年使用していた既存ドキュメントツールには、公式サポート終了に伴うセキュリティ面の懸念、顧客納品時のPDF変換の手間、機能カスタマイズが不可といった複数の課題がありました。特に「AI（Claude／Gemini等）がファイルを直接読み込めない」点が業務効率化のボトルネックになっており、AIが直接扱えるPDF形式を中心に据えた自社専用のPDF業務基盤の構築が急務でした。',
           approach:'<ul><li><strong>徹底した現場調査とPMF：</strong> 三島支店で現場担当者と連携し、利用実態とニーズを把握。生の声を開発に直接反映する体制を整備</li><li><strong>Figmaによる高速プロトタイピング：</strong> UI/UXとユーザビリティテストを繰り返し、現場が迷わず使えるデザインシステムを構築</li><li><strong>Claudeを活用したアジャイル開発：</strong> AIアシストで、現場からの要望（D&D結合・階層化グループ化・電子押印など）を短期で実装・継続反映</li></ul>',
           role:'プロダクトマネージャー兼UI/UXデザイナーとして、企画・設計から実装まで<strong>一貫して担当</strong>。現場ニーズ分析、FigmaでのUI/UXデザイン・プロトタイプ作成、Claudeを活用した実装、機能カスタマイズ対応をワンストップで担当。',
@@ -905,8 +902,6 @@
       'SNS','動画制作','メルマガ','デジタル','採用',
       // 企画・運営
       'イベント',
-      // ツール・業務改善
-      'ツール','UI・UX','業務改善',
       // プライベート
       'プライベート',
     ];
@@ -1326,7 +1321,7 @@
               onerror="this.style.display='none';this.parentNode.style.background='#1a1a1a'">
           </div>
         </div>
-        ${(work.cta || (work.ctas && work.ctas.length)) ? `<div class="content-wrap cta-wrap">${(work.ctas || [work.cta]).map(c => `<a class="cta-button" href="${c.url}" target="_blank" rel="noopener noreferrer">${c.label}<span class="cta-arrow" aria-hidden="true">↗</span></a>`).join('')}</div>` : ''}
+        ${work.cta ? `<div class="content-wrap cta-wrap"><a class="cta-button" href="${work.cta.url}" target="_blank" rel="noopener noreferrer">${work.cta.label}<span class="cta-arrow" aria-hidden="true">↗</span></a></div>` : ''}
         ${slotHero2 ? `<div class="content-wrap">${slotHero2}</div>` : ''}
         <div class="content-wrap">
           ${(work.youtube || work.vimeo) ? `<section class="video-section">

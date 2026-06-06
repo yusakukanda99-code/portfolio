@@ -1842,10 +1842,7 @@
 .cta-wrap {
   margin-top: -32px;     /* hero-block の margin-bottom: 64px を半分相殺して詰める */
   margin-bottom: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
+  text-align: left;
 }
 .cta-button {
   display: inline-flex;
