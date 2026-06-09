@@ -816,6 +816,7 @@
         category:'Personal Project / Platform Design & Development',
         tags:['デジタル','プライベート','デザイン'],
         img:'img/works/work_23/work_23.webp',
+        hero:'img/works/work_23/atelier_prive_hero.webp',
         client:'Personal Project',
         d:{
           overview:'招待制のアート鑑賞プラットフォーム「atelier privé」を、コンセプト設計から UI・独自カラー体系のデザイン、フロントエンド・バックエンド実装、AI機能、画像保護設計まで<strong>すべて一人で</strong>手がけた個人制作プロジェクト。「探すを出会うへ」を軸に、アートと日常の接点を再設計した。',
