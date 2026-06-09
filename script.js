@@ -704,8 +704,9 @@
         img:'img/works/work_22/work_22.webp',
         hero:'img/works/work_22/work_22_hero.webp',
         slides:[
-          'img/works/work_22/work_22_banner01.webp',
-          'img/works/work_22/work_22_banner02.webp',
+          { src:'img/works/work_22/mailmag_banner_zeisei.webp', alt:'メルマガ 令和7年度版 税制改正大綱バナー' },
+          { src:'img/works/work_22/2025_shotyumimai.webp',      alt:'メルマガ 暑中見舞いビジュアル (2025)' },
+          { src:'img/works/work_22/2024Christmas.webp',         alt:'メルマガ クリスマスビジュアル (2024)' },
         ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
