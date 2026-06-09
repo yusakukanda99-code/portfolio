@@ -611,6 +611,29 @@
         }
       },
       {
+        id:25, year:'2024–2026',
+        title:'MIKATA Lab.（オウンドメディア）── 企画・取材・執筆・デザイン・運営',
+        category:'Owned Media / Content Marketing',
+        tags:['デジタル','メルマガ','デザイン','SNS'],
+        img:'img/works/work_25/media_20250401_banner-main.webp',
+        hero:'img/works/work_25/media_20250401_banner-main.webp',
+        slides:[
+          { src:'img/works/work_25/media_20240805_teigakugenzei.webp', alt:'MIKATA Lab. 記事アイキャッチ 定額減税' },
+          { src:'img/works/work_25/media_20250114_banner.webp',         alt:'MIKATA Lab. 記事アイキャッチ バナー (2025/01)' },
+          { src:'img/works/work_25/media_20250312_nensyu.webp',         alt:'MIKATA Lab. 記事アイキャッチ 年収の壁' },
+          { src:'img/works/work_25/media_20250401_banner-main.webp',    alt:'MIKATA Lab. 記事アイキャッチ メインバナー (2025/04)' },
+        ],
+        client:'ミカタ税理法人（ミカタグループ）',
+        d:{
+          overview:'オーナー経営者向けオウンドメディア「MIKATA Lab.」に、企画から運用まで一貫して関与。記事アイキャッチの統一デザインに加え、一部記事は<strong>自身で企画・取材・執筆・作図・サムネイル制作まで単独で担当</strong>。メルマガ／YouTube と連動した<strong>コンテンツマーケのエコシステムの中核</strong>として運用。',
+          challenge:'オーナー経営者向けの経営・税務情報は、専門家向けの硬派なメディアと SEO 偏重の一般メディアに二極化しがちで、「経営判断に直結する深さ」と「読みやすさ」を両立した発信源が不足していました。グループの専門コンサルタントの知見をオウンドメディアとして体系化し、メルマガ・YouTube と連動する継続的な情報発信基盤を構築する必要がありました。',
+          approach:'<ul><li><strong>統一トーンで記事アイキャッチを量産：</strong> ミカタブランドのトンマナを軸に、多テーマ・多執筆者でも視覚の一貫性を担保。記事の鮮度・カテゴリ感を一目で伝えるデザインシステムを構築</li><li><strong>専門コンサルタントへの直接ヒアリング：</strong> 一部記事は自ら取材・執筆まで担当。専門家の暗黙知を、オーナー経営者が読み進めやすい形に再構成</li><li><strong>エコシステム連動：</strong> 単発のオウンドメディア記事に閉じず、メルマガ・YouTube・代表コラム「柴田昇の眼」と相互連動させ、継続的な接触機会を設計</li></ul>',
+          role:'<strong>企画 / 取材 (専門コンサルタントへのヒアリング) / 執筆 / 作図・サムネイル制作 / 執筆者・専門家との調整 / アカウント契約 / 継続運用</strong> までを一貫して担当。記事アイキャッチのデザインに加え、一部記事は自身で企画から執筆・サムネイル制作まで単独で担当。',
+          creative:'<strong>「マネーフォワード クラウド」連載</strong>（企画・取材・執筆・作図・サムネイルまで単独で担当）<ul><li>第1回 新規アカウントの登録方法<br><a href="https://mikata-c.co.jp/media-list/business/lab_240126" target="_blank" rel="noopener">記事を読む ↗</a></li><li>第2回 銀行口座などの連携方法<br><a href="https://mikata-c.co.jp/media-list/business/lab_240130" target="_blank" rel="noopener">記事を読む ↗</a></li><li>第3回 事業者設定のおススメと注意点！<br><a href="https://mikata-c.co.jp/media-list/business/lab_240131" target="_blank" rel="noopener">記事を読む ↗</a></li></ul>',
+          result:'<strong>コンテンツマーケのエコシステム連動：</strong><ul><li><strong>メディア:</strong> MIKATA Lab.（ビジネス／ファミリー／事業承継 カテゴリ、「柴田昇の眼」連載 ほか）</li><li><strong>⇄ メルマガ:</strong> 連載「柴田昇の眼」を第 4 回としてメルマガ配信し、媒体間で同一テーマを再接触させる導線</li><li><strong>⇄ ミカタチャンネル（YouTube）:</strong> 動画コンテンツと相互連動</li></ul>「<strong>企画 → 取材 → 執筆 → 作図 → 公開 → メルマガ配信</strong>」の一連を単独で運用できる体制を確立。<br>※ 記事数・PV・検索流入・リード等の数値は後日追記予定。'
+        }
+      },
+      {
         id:2, year:'2023–2026',
         youtubeApproach:'nGfB2WvLpgQ',
         title:'YouTubeチャンネル ミカタチャンネル',
