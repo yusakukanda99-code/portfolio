@@ -743,21 +743,31 @@
         img:'img/works/work_10/work_10.webp',
         hero:'img/works/work_10/work_10_hero.webp',
         slides:[
-          { src:'img/works/work_10/recruit_deck_p01.webp', alt:'会社紹介・採用資料 表紙' },
-          { src:'img/works/work_10/recruit_deck_p02.webp', alt:'会社紹介・採用資料 CONTENTS' },
-          { src:'img/works/work_10/recruit_deck_p22.webp', alt:'会社紹介・採用資料 現状と目標（同心円データビジュアル）' },
-          { src:'img/works/work_10/recruit_deck_p13.webp', alt:'会社紹介・採用資料 中期経営計画 VISION200億' },
-          { src:'img/works/work_10/recruit_deck_p18.webp', alt:'会社紹介・採用資料 目指すサービス' },
-          { src:'img/works/work_10/recruit_deck_p41.webp', alt:'会社紹介・採用資料 数字で見るミカタ' },
-          { src:'img/works/work_10/recruit_deck_p45.webp', alt:'会社紹介・採用資料 キャリアステップ' },
-          { src:'img/works/work_10/recruit_deck_p46.webp', alt:'会社紹介・採用資料 給与テーブル' },
+          { src:'img/works/work_10/recruit_deck_cover.webp',    alt:'会社紹介・採用資料 表紙' },
+          { src:'img/works/work_10/recruit_deck_contents.webp', alt:'会社紹介・採用資料 CONTENTS' },
+          { src:'img/works/work_10/recruit_deck_onestop.webp',  alt:'会社紹介・採用資料 ワンストップサービス' },
+          { src:'img/works/work_10/recruit_deck_bizmodel.webp', alt:'会社紹介・採用資料 ビジネスモデル' },
+          { src:'img/works/work_10/recruit_deck_value.webp',    alt:'会社紹介・採用資料 バリュー' },
+          { src:'img/works/work_10/recruit_deck_numbers.webp',  alt:'会社紹介・採用資料 数字で見るミカタ' },
+          { src:'img/works/work_10/recruit_deck_career.webp',   alt:'会社紹介・採用資料 キャリアステップ' },
+          { src:'img/works/work_10/recruit_deck_salary.webp',   alt:'会社紹介・採用資料 給与テーブル' },
         ],
+        photoDirection:{
+          heading:'採用ブランディング撮影 / フォトディレクション',
+          items:[
+            { src:'img/works/work_10/土肥さん単体_202510148.webp', alt:'採用ブランディング撮影 ポートレート' },
+            { src:'img/works/work_10/DSC04975.webp', alt:'採用ブランディング撮影 ポートレート' },
+            { src:'img/works/work_10/DSC05044.webp', alt:'採用ブランディング撮影 オフィス' },
+            { src:'img/works/work_10/DSC05039.webp', alt:'採用ブランディング撮影 集合写真' },
+            { src:'img/works/work_10/DSC05020.webp', alt:'採用ブランディング撮影 商談風景', caption:'自身が設計した会社紹介資料が、実際の商談で使われている様子（撮影も担当）' },
+          ],
+        },
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
-          overview:'MIKATAグループの採用サイトを、現場ヒアリングからサイト設計・コンテンツ制作・カメラマンのディレクション・Pardot実装まで一貫して担当。<strong>6つのコンサルタント職種ページ、6つの採用ルート、複数の社員インタビュー・座談会</strong>を含む多層IAを、採用ブランディング全体として設計・実装した。加えて、<strong>全52ページの会社紹介・採用資料</strong>を単独でデザインし、配色・タイポ・図解ルールを設計。このデザインが<strong>採用サイト全体のトンマナの基点</strong>となり、媒体横断のブランド一貫性を確立した。',
+          overview:'MIKATAグループの採用サイトを、現場ヒアリングからサイト設計・コンテンツ制作・撮影 (フォトディレクション)・Pardot実装まで一貫して担当。<strong>6つのコンサルタント職種ページ、6つの採用ルート、複数の社員インタビュー・座談会</strong>を含む多層IAを、採用ブランディング全体として設計・実装した。加えて、<strong>全49ページの会社紹介・採用資料</strong>を単独でデザインし、配色・タイポ・図解ルールを設計。このデザインが<strong>採用サイト全体のトンマナの基点</strong>となり、媒体横断のブランド一貫性を確立した。',
           challenge:'採用市場での専門コンサルタント獲得競争が激化する中、複数職種（事業承継・金融・M&A・財務・労務・相続）の特性とキャリア像を、応募者の納得感を持って伝える統合型サイトが必要でした。現場のリアルを応募者に届ける情報設計と、応募導線まで含めた仕組みが求められました。',
           approach:'<ul><li><strong>現場ヒアリング起点の情報設計：</strong> 採用担当者および各事業部のコンサルタントへヒアリングし、職種ごとのリアルを抽出。応募者の知りたい順にIAを組み立て</li><li><strong>職種別の深掘りコンテンツ：</strong> 金融コンサルタントをはじめ複数職種について、<strong>仕事内容・キャリアロードマップを企画・執筆・デザイン</strong>まで一貫して担当</li><li><strong>撮影ディレクション：</strong> カメラマンと連携し、社員インタビュー・座談会・働く環境の撮影を企画。応募者が「働く自分」を想像できるビジュアルに整理</li><li><strong>Pardotによる応募導線：</strong> カジュアル面談・応募フォームを Pardot で構築し、応募者の行動を計測できる体制を整備</li></ul>',
-          role:'採用ブランディング全体のディレクター兼デザイナーとして<strong>一貫して担当</strong>。現場ヒアリング、採用担当者とのコンテンツ調整、サイト設計、職種別ページ（コンテンツ作成・ロードマップ作成・デザイン）、カメラマンのディレクション、Pardot設定・実装、そして<strong>全52ページの会社紹介・採用資料の単独デザイン</strong>まで。<br>※ 墨絵風のブランドビジュアル（「山を登る経営者たち」）は制作会社による既存制作物です。本作品では、採用サイト・会社紹介資料それぞれのレイアウト・図解・データビジュアル・コンテンツのデザインを神田が担当しました。',
+          role:'採用ブランディング全体のディレクター兼デザイナーとして<strong>一貫して担当</strong>。現場ヒアリング、採用担当者とのコンテンツ調整、サイト設計、職種別ページ（コンテンツ作成・ロードマップ作成・デザイン）、撮影 (フォトディレクション)、Pardot設定・実装、そして<strong>全49ページの会社紹介・採用資料の単独デザイン</strong>まで。<br>※ 墨絵風のブランドビジュアル（「山を登る経営者たち」）は制作会社による既存制作物です。本作品では、採用サイト・会社紹介資料それぞれのレイアウト・図解・データビジュアル・コンテンツのデザイン、および採用写真の撮影 (フォトディレクション) を神田が担当しました。',
           creative:'<ul><li><strong>キャリアロードマップの設計：</strong> 「専門コンサルタント／経営コンサルタント／コーポレート」の3キャリアパスを可視化。職種別の成長軌道を、応募者が直感的に追える図として設計</li><li><strong>応募者視点のIA：</strong> 「会社を知る／環境／仕事／人／採用情報」の5本柱で、検討プロセスに沿った導線を構築。職種ページ・社員インタビュー・座談会を相互に行き来できる構造に</li><li><strong>撮影トーンの統一：</strong> 社員インタビュー・座談会・働く環境を、シネマティックでありながら親しみやすい光量・表情で統一</li></ul>',
           result:'<ul><li><strong>2026年公開</strong>。応募者が職種・キャリア・人・環境を多角的に検討できる<strong>統合型採用サイト</strong>として運用開始</li><li><strong>ブランドのトンマナを統一</strong>したまま、複数職種それぞれの魅力を分けて見せる構造を実現</li><li><strong>Pardotによる応募導線の可視化</strong>で、応募者の行動データを継続的に取得・改善できる土台を構築</li></ul><br>公開URL：<a href="https://mikata-c.co.jp/recruit.html" target="_blank" rel="noopener">mikata-c.co.jp/recruit.html</a>'
         }
@@ -1359,6 +1369,12 @@
             ${colStoryboard}
             ${colA2caption}
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
+            ${(work.photoDirection && Array.isArray(work.photoDirection.items) && work.photoDirection.items.length) ? `
+              <h3 class="wd-photo-direction-heading">${work.photoDirection.heading||''}</h3>
+              <div class="wd-photo-direction-gallery">
+                ${work.photoDirection.items.map(p => `<figure class="wd-photo-item"><div class="img-ph"><img src="${p.src}" alt="${p.alt||''}" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>${p.caption ? `<figcaption class="wd-photo-caption">${p.caption}</figcaption>` : ''}</figure>`).join('')}
+              </div>
+            ` : ''}
           </section>
           <section class="section">
             <p class="section-label">Role</p>
