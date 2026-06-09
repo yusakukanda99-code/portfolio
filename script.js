@@ -615,8 +615,8 @@
         title:'MIKATA Lab.（オウンドメディア）── 企画・取材・執筆・デザイン・運営',
         category:'Owned Media / Content Marketing',
         tags:['デジタル','メルマガ','デザイン','SNS'],
-        img:'img/works/work_25/media_20250401_banner-main.webp',
-        hero:'img/works/work_25/media_20250401_banner-main.webp',
+        img:'img/works/work_25/owned_media_card.webp',
+        hero:'img/works/work_25/owned_media_hero.webp',
         slides:[
           { src:'img/works/work_25/media_20240805_teigakugenzei.webp', alt:'MIKATA Lab. 記事アイキャッチ 定額減税' },
           { src:'img/works/work_25/media_20250114_banner.webp',         alt:'MIKATA Lab. 記事アイキャッチ バナー (2025/01)' },
