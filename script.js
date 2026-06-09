@@ -752,13 +752,14 @@
         ],
         photoDirection:{
           heading:'採用ブランディング撮影 / フォトディレクション',
+          note:'※ 上記 5 点はすべて神田による撮影・フォトディレクション。',
           rows:[2, 3],
           items:[
             { src:'img/works/work_10/土肥さん単体_202510148.webp', alt:'採用ブランディング撮影 ポートレート' },
             { src:'img/works/work_10/DSC04975.webp', alt:'採用ブランディング撮影 ポートレート' },
             { src:'img/works/work_10/DSC05044.webp', alt:'採用ブランディング撮影 オフィス' },
             { src:'img/works/work_10/DSC05039.webp', alt:'採用ブランディング撮影 集合写真' },
-            { src:'img/works/work_10/DSC05020.webp', alt:'採用ブランディング撮影 商談風景', caption:'自身が設計した会社紹介資料が、実際の商談で使われている様子（撮影も担当）' },
+            { src:'img/works/work_10/DSC05020.webp', alt:'採用ブランディング撮影 商談シーン (イメージ)', caption:'自身が設計した会社紹介資料が、商談で実際に使用される想定での撮影。' },
           ],
         },
         client:'ミカタ税理法人（ミカタグループ）',
@@ -1371,6 +1372,7 @@
             ${work.youtubeApproach ? `<div class="video-wrapper wd-approach-video"><iframe src="https://www.youtube.com/embed/${work.youtubeApproach}?rel=0" title="${work.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : ''}
             ${(work.photoDirection && Array.isArray(work.photoDirection.items) && work.photoDirection.items.length) ? `
               <h3 class="wd-photo-direction-heading">${work.photoDirection.heading||''}</h3>
+              ${work.photoDirection.note ? `<p class="wd-photo-direction-note">${work.photoDirection.note}</p>` : ''}
               <div class="wd-photo-direction-gallery">
                 ${(() => {
                   const items = work.photoDirection.items;
@@ -1380,7 +1382,7 @@
                   return rows.map(n => {
                     const slice = items.slice(idx, idx + n);
                     idx += n;
-                    return `<div class="wd-photo-row" style="--cols:${n}">${slice.map(renderItem).join('')}</div>`;
+                    return `<div class="wd-photo-row" data-cols="${n}" style="--cols:${n}">${slice.map(renderItem).join('')}</div>`;
                   }).join('');
                 })()}
               </div>
