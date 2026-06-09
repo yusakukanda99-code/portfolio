@@ -2086,3 +2086,53 @@
     margin-top: 20px;
   }
 }
+
+/* ──────────────────────────────────────────────────
+   フォトディレクション・ギャラリー (work.photoDirection)
+   - 縦並びカラム表示 (PC/SP 共通)
+   - 各画像は intrinsic 縦横比で表示 (混在比率対応・レターボックスなし)
+   - DSC05020 等のキャプション付き slide は figcaption で表示
+   ────────────────────────────────────────────────── */
+.wd-photo-direction-heading {
+  font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: 0.04em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.wd-photo-direction-gallery {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.wd-photo-item { margin: 0; }
+.wd-photo-direction-gallery .img-ph {
+  /* 混在縦横比対応: intrinsic 表示 (PC でも fixed aspect-ratio を強制しない) */
+  position: relative !important;
+  min-height: 0 !important;
+  height: auto !important;
+  display: block;
+}
+.wd-photo-direction-gallery .img-ph img {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: initial !important;
+  display: block;
+}
+.wd-photo-caption {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.7;
+}
+@media (min-width: 769px) {
+  .wd-photo-direction-heading { font-size: 20px; margin: 48px 0 20px; }
+  .wd-photo-direction-gallery { gap: 32px; max-width: 720px; }
+}
+@media (max-width: 768px) {
+  .wd-photo-direction-heading { font-size: 17px; margin: 36px 0 16px; }
+  .wd-photo-direction-gallery { gap: 20px; }
+}
