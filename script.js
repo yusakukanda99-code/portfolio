@@ -752,6 +752,7 @@
         ],
         photoDirection:{
           heading:'採用ブランディング撮影 / フォトディレクション',
+          rows:[2, 3],
           items:[
             { src:'img/works/work_10/土肥さん単体_202510148.webp', alt:'採用ブランディング撮影 ポートレート' },
             { src:'img/works/work_10/DSC04975.webp', alt:'採用ブランディング撮影 ポートレート' },
@@ -872,9 +873,10 @@
         tags:['印刷物','デザイン'],
         img:'img/works/work_08/work_08.webp',
         hero:'img/works/work_08/work_08_hero.webp',
-        imgs: { b:true, b2:true },
         slides:[
-          { src:'img/works/work_08/work_08_c.webp', alt:'ひのてり訪問看護 成果イメージ' },
+          { src:'img/works/work_08/work_08_b.webp',  alt:'ひのてり訪問看護 こだわり 1' },
+          { src:'img/works/work_08/work_08_b2.webp', alt:'ひのてり訪問看護 こだわり 2' },
+          { src:'img/works/work_08/work_08_c.webp',  alt:'ひのてり訪問看護 成果イメージ' },
         ],
         client:'株式会社輪奏',
         d:{
@@ -1370,7 +1372,17 @@
             ${(work.photoDirection && Array.isArray(work.photoDirection.items) && work.photoDirection.items.length) ? `
               <h3 class="wd-photo-direction-heading">${work.photoDirection.heading||''}</h3>
               <div class="wd-photo-direction-gallery">
-                ${work.photoDirection.items.map(p => `<figure class="wd-photo-item"><div class="img-ph"><img src="${p.src}" alt="${p.alt||''}" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>${p.caption ? `<figcaption class="wd-photo-caption">${p.caption}</figcaption>` : ''}</figure>`).join('')}
+                ${(() => {
+                  const items = work.photoDirection.items;
+                  const rows = Array.isArray(work.photoDirection.rows) && work.photoDirection.rows.length ? work.photoDirection.rows : [items.length];
+                  const renderItem = p => `<figure class="wd-photo-item"><div class="img-ph"><img src="${p.src}" alt="${p.alt||''}" decoding="async" loading="lazy" onerror="this.parentNode.style.display='none'"></div>${p.caption ? `<figcaption class="wd-photo-caption">${p.caption}</figcaption>` : ''}</figure>`;
+                  let idx = 0;
+                  return rows.map(n => {
+                    const slice = items.slice(idx, idx + n);
+                    idx += n;
+                    return `<div class="wd-photo-row" style="--cols:${n}">${slice.map(renderItem).join('')}</div>`;
+                  }).join('');
+                })()}
               </div>
             ` : ''}
           </section>
