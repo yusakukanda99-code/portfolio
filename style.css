@@ -2101,6 +2101,12 @@
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
+.wd-photo-direction-note {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+  margin: 0 auto;
+}
 .wd-photo-direction-gallery {
   display: flex;
   flex-direction: column;
@@ -2111,6 +2117,12 @@
   grid-template-columns: repeat(var(--cols, 1), 1fr);
   gap: 12px;
   align-items: start;
+  width: 100%;
+}
+/* ピン (portrait 単独 = 2col) はさらに小さく中央寄せ */
+.wd-photo-row[data-cols="2"] {
+  margin-left: auto;
+  margin-right: auto;
 }
 .wd-photo-item { margin: 0; }
 .wd-photo-direction-gallery .img-ph {
@@ -2135,12 +2147,16 @@
   line-height: 1.7;
 }
 @media (min-width: 769px) {
-  .wd-photo-direction-heading { font-size: 20px; margin: 48px 0 20px; }
+  .wd-photo-direction-heading { font-size: 20px; margin: 48px 0 8px; }
+  .wd-photo-direction-note { max-width: 680px; margin-bottom: 20px; }
   .wd-photo-direction-gallery { gap: 20px; max-width: 680px; }
   .wd-photo-row { gap: 16px; }
+  .wd-photo-row[data-cols="2"] { max-width: 440px; }
 }
 @media (max-width: 768px) {
-  .wd-photo-direction-heading { font-size: 17px; margin: 36px 0 16px; }
+  .wd-photo-direction-heading { font-size: 17px; margin: 36px 0 6px; }
+  .wd-photo-direction-note { font-size: 12px; margin-bottom: 14px; }
   .wd-photo-direction-gallery { gap: 16px; }
   .wd-photo-row { gap: 8px; }
+  .wd-photo-row[data-cols="2"] { max-width: 280px; }
 }
