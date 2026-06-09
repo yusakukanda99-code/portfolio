@@ -746,8 +746,6 @@
           { src:'img/works/work_10/recruit_deck_cover.webp',    alt:'会社紹介・採用資料 表紙' },
           { src:'img/works/work_10/recruit_deck_contents.webp', alt:'会社紹介・採用資料 CONTENTS' },
           { src:'img/works/work_10/recruit_deck_onestop.webp',  alt:'会社紹介・採用資料 ワンストップサービス' },
-          { src:'img/works/work_10/recruit_deck_bizmodel.webp', alt:'会社紹介・採用資料 ビジネスモデル' },
-          { src:'img/works/work_10/recruit_deck_value.webp',    alt:'会社紹介・採用資料 バリュー' },
           { src:'img/works/work_10/recruit_deck_numbers.webp',  alt:'会社紹介・採用資料 数字で見るミカタ' },
           { src:'img/works/work_10/recruit_deck_career.webp',   alt:'会社紹介・採用資料 キャリアステップ' },
           { src:'img/works/work_10/recruit_deck_salary.webp',   alt:'会社紹介・採用資料 給与テーブル' },
