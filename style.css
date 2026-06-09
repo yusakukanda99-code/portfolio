@@ -2106,6 +2106,12 @@
   flex-direction: column;
   margin: 0 auto;
 }
+.wd-photo-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), 1fr);
+  gap: 12px;
+  align-items: start;
+}
 .wd-photo-item { margin: 0; }
 .wd-photo-direction-gallery .img-ph {
   /* 混在縦横比対応: intrinsic 表示 (PC でも fixed aspect-ratio を強制しない) */
@@ -2130,9 +2136,11 @@
 }
 @media (min-width: 769px) {
   .wd-photo-direction-heading { font-size: 20px; margin: 48px 0 20px; }
-  .wd-photo-direction-gallery { gap: 32px; max-width: 720px; }
+  .wd-photo-direction-gallery { gap: 20px; max-width: 680px; }
+  .wd-photo-row { gap: 16px; }
 }
 @media (max-width: 768px) {
   .wd-photo-direction-heading { font-size: 17px; margin: 36px 0 16px; }
-  .wd-photo-direction-gallery { gap: 20px; }
+  .wd-photo-direction-gallery { gap: 16px; }
+  .wd-photo-row { gap: 8px; }
 }
