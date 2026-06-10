@@ -1307,7 +1307,7 @@
       font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-weight: 300; line-height: 1.8; color: #1a1a1a;
     }
     .wd-detail-wrap .content-wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
-    .wd-detail-wrap .content-bottom-spacer { height: 50vh; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
+    .wd-detail-wrap .content-bottom-spacer { height: 80vh; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
     .wd-detail-wrap .breadcrumb { padding: 20px 0 10px; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; }
     .wd-detail-wrap .breadcrumb a { color: #888; text-decoration: none; }
     .wd-detail-wrap .page-title { font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: clamp(1.1rem, 2.2vw, 1.55rem); font-weight: 500; letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 14px; }
