@@ -2160,3 +2160,63 @@
   .wd-photo-row { gap: 8px; }
   .wd-photo-row[data-cols="2"] { max-width: 280px; }
 }
+
+/* ──────────────────────────────────────────────────
+   オウンドメディア 連載記事リスト (work_25 creative 内)
+   - 既存デザイン言語に合わせた素朴な縦リスト
+   - サムネ (16:9) + タイトル + 「記事を読む ↗」リンク
+   - 装飾的なカード / border / hover lift は避け、薄いフェードのみ
+   ────────────────────────────────────────────────── */
+.wd-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+.wd-article-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+.wd-article-row:hover { opacity: 0.7; }
+.wd-article-thumb {
+  flex-shrink: 0;
+  width: 140px;
+  aspect-ratio: 16 / 9;
+  background: #f4f5f8;
+  overflow: hidden;
+}
+.wd-article-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wd-article-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.wd-article-title {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+  color: #1a1a1a;
+}
+.wd-article-link {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #999;
+}
+@media (max-width: 768px) {
+  .wd-article-row { gap: 12px; }
+  .wd-article-thumb { width: 110px; }
+  .wd-article-title { font-size: 13px; }
+}
