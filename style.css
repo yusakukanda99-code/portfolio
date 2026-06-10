@@ -1732,7 +1732,7 @@
 
 /* ── slider arrow outside image ── */
 .wd-in-slider {
-  margin: 0 36px;
+  margin: 32px 36px;
   overflow: visible !important;
 }
 .wis-btn {
@@ -1749,7 +1749,7 @@
 /* レスポンシブ: 小さい画面ではpadding縮小 */
 @media (max-width: 600px) {
   .wis-slide { padding: 12px; }
-  .wd-in-slider { margin: 0 20px; }
+  .wd-in-slider { margin: 24px 20px; }
 }
 
 /* ── result split layout: text left, image right ── */
