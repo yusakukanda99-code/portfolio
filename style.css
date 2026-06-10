@@ -2220,3 +2220,31 @@
   .wd-article-thumb { width: 110px; }
   .wd-article-title { font-size: 13px; }
 }
+
+/* ──────────────────────────────────────────────────
+   編集フロー図ブロック (work_25 result 内 = ③ 運用)
+   - 匿名化済みフロー図 + キャプション + 補足文を縦並びで表示
+   - 既存デザイン言語に合わせて装飾簡素
+   ────────────────────────────────────────────────── */
+.wd-editorial-flow {
+  margin: 28px 0 28px;
+}
+.wd-editorial-flow img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: #f4f5f8;
+}
+.wd-flow-caption {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+  margin: 10px 0 6px;
+}
+.wd-flow-note {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
