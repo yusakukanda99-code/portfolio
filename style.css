@@ -133,7 +133,7 @@
     .col-right .hero-text {
       position: relative;
       z-index: 1;
-      width: 100%;
+      width: max-content;
       max-width: 540px;
       text-align: center;
     }
