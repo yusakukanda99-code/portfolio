@@ -1480,22 +1480,6 @@
 ══════════════════════════════════ */
   /* ══  Profile Section — Avatar Upload & Timeline Reveal  ══ */
   (function () {
-    // Avatar upload
-    const profUpload = document.getElementById('profAvatarUpload');
-    const profImg    = document.getElementById('profAvatarImg');
-    if (profUpload && profImg) {
-      profUpload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          profImg.src = ev.target.result;
-          profImg.classList.add('loaded');
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
     // Timeline reveal on scroll (IntersectionObserver)
     const profItems = document.querySelectorAll('.prof-tl-item');
     if ('IntersectionObserver' in window) {

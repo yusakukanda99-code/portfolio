@@ -248,37 +248,8 @@
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
-      display: none;
+      display: block;
     }
-
-    .prof-avatar-img.loaded { display: block; }
-
-    .prof-avatar-placeholder {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      color: #888;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .prof-avatar-placeholder:hover {
-      background: rgba(0,0,0,0.05);
-      color: #444;
-    }
-
-    .prof-avatar-placeholder span {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif;
-    }
-
-    .prof-avatar-img.loaded + .prof-avatar-placeholder { display: none; }
 
     .prof-name {
       font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif;
