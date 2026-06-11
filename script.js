@@ -448,11 +448,13 @@
         }
       }
 
-      // TOP フェードアウト (bg-overlay が白くなってキャンバスを覆い隠す)
-      overlay.style.opacity    = progress;
-      colRightBg.style.opacity = 1 - progress;
-      heroText.style.opacity   = 1 - progress;
-      document.querySelector('.col-right').style.pointerEvents = progress > 0.9 ? 'none' : '';
+      // TOP フェードアウト: 表示アニメ (ease) と同じカーブを退場に逆適用 (線形 → ease-out-cubic)
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const eased = prefersReducedMotion ? progress : 1 - Math.pow(1 - progress, 3);
+      overlay.style.opacity    = eased;
+      colRightBg.style.opacity = 1 - eased;
+      heroText.style.opacity   = 1 - eased;
+      document.querySelector('.col-right').style.pointerEvents = eased > 0.9 ? 'none' : '';
 
       // Strengths のフェードイン・コンテンツ発火は IntersectionObserver 側で実施
       // （DOM順序が Top → Work → Strengths となったため、scrollY ベースでは制御せず
