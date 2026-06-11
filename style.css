@@ -2257,3 +2257,15 @@
    ────────────────────────────────────────────────── */
 .pf-card-num,
 .pf-card-footer { display: none; }
+
+/* ──────────────────────────────────────────────────
+   TOP 背景画像 + 中間バンド を一旦非表示
+   - 画像ファイル (top_01.webp / back_image.jpg) は残置、参照のみ外す
+   - #ink-canvas: TOP 背景の Ink Reveal Animation キャンバス
+   - .col-right-bg: ヒーロー文字下のフロストガラス装飾
+   - .prof-fullimg: Strengths と About の間の中間バンド (60vh)
+   - 復活: 本ブロック削除で元に戻る
+   ────────────────────────────────────────────────── */
+#ink-canvas,
+.col-right-bg,
+.prof-fullimg { display: none; }
