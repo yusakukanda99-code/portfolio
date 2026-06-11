@@ -1277,7 +1277,8 @@
         sbPct.style.transform = 'translateY(50%)';
       }
 
-      const atBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 4;
+      const isScrollable = panel.scrollHeight > panel.clientHeight + 4;
+      const atBottom = isScrollable && (panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 4);
       if (atBottom && !hintShown) {
         hintShown = true;
         if (sbThumb) sbThumb.classList.add('wd-sb-closing');
