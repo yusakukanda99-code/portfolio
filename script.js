@@ -1359,7 +1359,7 @@
       return `
         <div class="content-wrap">
           <p class="breadcrumb"><a href="#">Work</a> / ${work.title}</p>
-          <h1 class="page-title">${work.title}</h1>
+          <h2 class="page-title">${work.title}</h2>
           <div class="detail-meta-row">
             <span class="detail-year">${work.year||''}</span>
             <span class="detail-client">${work.client||''}</span>
