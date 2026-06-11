@@ -397,12 +397,13 @@
         padding: 0;
         justify-content: center;
         align-items: center;
+        overflow-y: auto;
       }
       .col-right-bg { display: none; }
       .col-right .hero-text {
         max-width: 100%;
         width: 100%;
-        padding: 1.4rem 8%;
+        padding: 1.4rem 5%;
         background: rgba(250, 250, 252, 0.55);
         backdrop-filter: blur(28px) saturate(1.5) brightness(1.05);
         -webkit-backdrop-filter: blur(28px) saturate(1.5) brightness(1.05);
@@ -416,11 +417,11 @@
         margin-bottom: 12px;
       }
       .name {
-        font-size: clamp(36px, 12vw, 52px);
+        font-size: clamp(28px, 10vw, 52px);
         margin-bottom: 0;
+        letter-spacing: 0.02em;
       }
       .divider { display: none; }
-      .description { display: none; }
     }
 
     /* ââ Profile message ââ */
