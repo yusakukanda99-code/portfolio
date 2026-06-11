@@ -142,7 +142,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-size: 14px;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.55em;
       color: var(--text-light);
       margin-bottom: 28px;
     }
@@ -166,6 +166,7 @@
       line-height: 2;
       color: #555;
       letter-spacing: 0.05em;
+      text-align: left;
     }
 
     /* ââ ã¢ãã¡ã¼ã·ã§ã³ ââ */
@@ -803,8 +804,8 @@
 
     /* main title */
     .strong-section .s-main-title {
-      font-family: 'Hiragino Mincho Pro', 'Yu Mincho', 'MS PMincho', serif;
-      font-weight: 400;
+      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif;
+      font-weight: 500;
       font-size: clamp(20px, 2.1vw, 26px);
       line-height: 1.9;
       color: var(--s-ink);
@@ -1003,9 +1004,9 @@
     }
 
     .strengths-section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif;
       font-size: clamp(52px, 6.5vw, 80px);
-      font-weight: 300;
+      font-weight: 700;
       letter-spacing: 0.01em;
       line-height: 0.9;
       color: #1a1a1a;
@@ -1022,7 +1023,7 @@
       text-align: center;
     }
     .pf-section-eyebrow { font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 10px; font-weight: 300; color: #999; letter-spacing: 0.18em; order: unset; }
-    .pf-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6.5vw, 80px); font-weight: 300; letter-spacing: 0.01em; line-height: 0.9; color: #1a1a1a; order: unset; }
+    .pf-section-title { font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: clamp(52px, 6.5vw, 80px); font-weight: 700; letter-spacing: 0.01em; line-height: 0.9; color: #1a1a1a; order: unset; }
 
     .prof-section-head {
       padding: 80px max(calc((100vw - 1000px)/2), 40px) 0;
@@ -1043,9 +1044,9 @@
     }
 
     .prof-section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', sans-serif;
       font-size: clamp(52px, 6.5vw, 80px);
-      font-weight: 300;
+      font-weight: 700;
       letter-spacing: 0.01em;
       line-height: 0.9;
       color: #1a1a1a;
