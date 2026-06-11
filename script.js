@@ -1010,11 +1010,19 @@
               ${work.subtitle ? `<span class="pf-card-label-sub">${work.subtitle}</span>` : ''}
             </p>
           </div>`;
-        const ci = i;
-        card.addEventListener('click', () => openModal(ci));
+        const wid = work.id;
+        card.addEventListener('click', () => navigateToWork(wid));
         track.appendChild(card);
       });
       pfRefresh();
+      // 初回ロード時の直リンク対応（#work-<id> があれば開く）
+      if (!modal.classList.contains('wd-open')) {
+        const m = location.hash.match(/^#work-(.+)$/);
+        if (m) {
+          const idx = findIdxById(m[1]);
+          if (idx >= 0) openModal(idx);
+        }
+      }
       requestAnimationFrame(() => {
         track.querySelectorAll('.pf-card').forEach(c => {
           if (c.getBoundingClientRect().left < window.innerWidth * 0.98) c.classList.add('pf-card-in');
@@ -1205,9 +1213,46 @@
       });
     }
 
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    // ── URL連動ヘルパー（openModal/closeModal はUI専用のまま温存） ──
+    function findIdxById(id) {
+      return currentWorks.findIndex(w => String(w.id) === String(id));
+    }
+
+    // カードクリック時：履歴を積んでから開く
+    function navigateToWork(id) {
+      const idx = findIdxById(id);
+      if (idx < 0) return;
+      history.pushState({ wdModal: true, id: id }, '', '#work-' + id);
+      openModal(idx);
+    }
+
+    // 閉じる操作（×ボタン / 背景 / Escape / 末尾自動クローズ）共通の入口
+    function dismissWork() {
+      if (!modal.classList.contains('wd-open')) return;
+      if (history.state && history.state.wdModal) {
+        // 自分で積んだ履歴がある → 戻れば popstate 経由で閉じる
+        history.back();
+      } else {
+        // 直リンクで開いた最初の状態 → ハッシュを消して直接閉じる
+        history.replaceState(null, '', location.pathname + location.search);
+        closeModal();
+      }
+    }
+
+    // 戻る/進む：ハッシュの状態に合わせてUIを同期
+    window.addEventListener('popstate', () => {
+      const m = location.hash.match(/^#work-(.+)$/);
+      if (m) {
+        const idx = findIdxById(m[1]);
+        if (idx >= 0) { openModal(idx); return; }
+      }
+      // ハッシュが無い／作品でない → 開いていれば閉じる
+      if (modal.classList.contains('wd-open')) closeModal();
+    });
+
+    closeBtn.addEventListener('click', dismissWork);
+    backdrop.addEventListener('click', dismissWork);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') dismissWork(); });
 
     // Scroll → grow bar height 0%→100%, auto-close at bottom
     let _panelRafId = null;
@@ -1232,7 +1277,7 @@
       if (atBottom && !hintShown) {
         hintShown = true;
         if (sbThumb) sbThumb.classList.add('wd-sb-closing');
-        closeTimer = setTimeout(closeModal, 300);
+        closeTimer = setTimeout(dismissWork, 300);
       }
       if (!atBottom && hintShown) {
         hintShown = false;
