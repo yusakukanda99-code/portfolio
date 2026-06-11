@@ -1088,6 +1088,8 @@
     // sbWrap.offsetHeight は modal open 中変わらないため
     // openModal / resize 時のみ更新してキャッシュ。panel.scroll 毎フレームの強制 reflow を回避
     let _cachedTrackH = 0;
+    // a11y: モーダルを開く前にフォーカスしていた要素を保持して、閉じた時に戻す
+    let _wdLastFocused = null;
 
     // Align bar to right edge of the panel
     function sbAlign() {
@@ -1153,6 +1155,14 @@
           });
         });
       }
+
+      // ── a11y: フォーカス移動・背景inert・ダイアログ名 ──
+      _wdLastFocused = document.activeElement;
+      modal.setAttribute('aria-label', work.title || 'Work detail');
+      // 背景をinert化（body直下の要素のうち、モーダル/ライトボックス/付随UI以外）
+      _wdSetBackgroundInert(true);
+      // フォーカスをCloseボタンへ
+      requestAnimationFrame(() => { closeBtn.focus(); });
     }
 
     function closeModal() {
@@ -1168,10 +1178,31 @@
       if (_lb) { _lb.classList.remove('lb-open'); _lb.style.display = 'none'; }
       const _lbImg = document.querySelector('.lb-img');
       if (_lbImg) _lbImg.src = '';
+      _wdSetBackgroundInert(false);
+      if (_wdLastFocused && typeof _wdLastFocused.focus === 'function') {
+        _wdLastFocused.focus();
+      }
+      _wdLastFocused = null;
       setTimeout(() => {
         document.body.style.overflow = '';
         if (_lb) _lb.style.display = '';
       }, 380);
+    }
+
+    // モーダル表示中、背景の要素にフォーカスが行かないようにする
+    function _wdSetBackgroundInert(on) {
+      // モーダル本体・ライトボックス・付随UIは除外
+      const keepIds = ['wd-modal', 'wd-lb', 'wd-scrollbar', 'wd-fade-bottom'];
+      Array.from(document.body.children).forEach(el => {
+        if (keepIds.includes(el.id)) return;
+        if (on) {
+          el.setAttribute('inert', '');
+          el.setAttribute('aria-hidden', 'true');
+        } else {
+          el.removeAttribute('inert');
+          el.removeAttribute('aria-hidden');
+        }
+      });
     }
 
     closeBtn.addEventListener('click', closeModal);
