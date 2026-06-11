@@ -1201,8 +1201,12 @@
     function _wdSetBackgroundInert(on) {
       // モーダル本体・ライトボックス・付随UIは除外
       const keepIds = ['wd-modal', 'wd-lb', 'wd-scrollbar', 'wd-fade-bottom'];
+      const modalEl = document.getElementById('wd-modal');
       Array.from(document.body.children).forEach(el => {
         if (keepIds.includes(el.id)) return;
+        // モーダルを内包する祖先 (site-wrap など) には inert を付けない
+        // (= モーダル自身が inert 継承で操作不能になる問題を回避)
+        if (modalEl && el.contains(modalEl)) return;
         if (on) {
           el.setAttribute('inert', '');
           el.setAttribute('aria-hidden', 'true');
