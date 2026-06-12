@@ -899,7 +899,7 @@
         id:8, year:'2025',
         title:'ひのてり訪問看護ステーション 会社案内パンフレット',
         category:'Print / Branding',
-        tags:['印刷物','デザイン'],
+        tags:['印刷物','デザイン','プライベート'],
         img:'img/works/work_08/work_08.webp',
         hero:'img/works/work_08/work_08_hero.webp',
         slides:[
