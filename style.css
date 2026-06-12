@@ -1989,7 +1989,7 @@
    ────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .wd-in-slider {
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     overscroll-behavior: contain;
   }
   .wd-panel {
