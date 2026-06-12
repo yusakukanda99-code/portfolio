@@ -838,6 +838,7 @@
       },
       {
         id:23, year:'2026',
+        hidden:true,
         title:'atelier privé ── アートが日常に滲み出す場の、設計と実装',
         category:'Personal Project / Platform Design & Development',
         tags:['デジタル','プライベート','デザイン'],
@@ -958,7 +959,7 @@
       'プライベート',
     ];
     let pfSelected = new Set();
-    let currentWorks = [...PF_WORKS];
+    let currentWorks = [...PF_WORKS].filter(w => !w.hidden);
 
     /* ════════  TAGS  ════════ */
     function pfRenderTags() {
@@ -980,6 +981,7 @@
       const track = document.getElementById('pf-track');
       track.innerHTML = '';
       currentWorks = [...PF_WORKS]
+        .filter(w => !w.hidden)
         .map(w => ({ ...w, mc: pfMatch(w) }))
         .filter(w => !pfSelected.size || w.mc > 0)
         .sort((a,b) => b.mc - a.mc);
