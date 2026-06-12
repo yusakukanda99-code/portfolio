@@ -1375,6 +1375,19 @@
           var dx = e.changedTouches[0].clientX - tx;
           if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
         }, {passive:true});
+        // SP の scroll-snap 完了後にドットを実位置と同期
+        if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+          sl.addEventListener('scroll', function() {
+            var w = sl.clientWidth;
+            if (w <= 0) return;
+            var idx = Math.round(sl.scrollLeft / w);
+            idx = Math.max(0, Math.min(slides.length - 1, idx));
+            if (idx === cur) return;
+            dots[cur] && dots[cur].classList.remove('wis-dot-on');
+            cur = idx;
+            dots[cur] && dots[cur].classList.add('wis-dot-on');
+          }, { passive: true });
+        }
       });
     };
 
