@@ -1199,22 +1199,28 @@
 
     // モーダル表示中、背景の要素にフォーカスが行かないようにする
     function _wdSetBackgroundInert(on) {
+      const modalEl = document.getElementById('wd-modal');
+      if (!modalEl) return;
       // モーダル本体・ライトボックス・付随UIは除外
       const keepIds = ['wd-modal', 'wd-lb', 'wd-scrollbar', 'wd-fade-bottom'];
-      const modalEl = document.getElementById('wd-modal');
-      Array.from(document.body.children).forEach(el => {
-        if (keepIds.includes(el.id)) return;
-        // モーダルを内包する祖先 (site-wrap など) には inert を付けない
-        // (= モーダル自身が inert 継承で操作不能になる問題を回避)
-        if (modalEl && el.contains(modalEl)) return;
-        if (on) {
-          el.setAttribute('inert', '');
-          el.setAttribute('aria-hidden', 'true');
-        } else {
-          el.removeAttribute('inert');
-          el.removeAttribute('aria-hidden');
-        }
-      });
+      let node = modalEl;
+      // モーダル → body まで、各階層で「モーダルへ至る要素」以外の兄弟を inert 化
+      while (node && node !== document.body) {
+        const parent = node.parentElement;
+        if (!parent) break;
+        Array.from(parent.children).forEach(sib => {
+          if (sib === node) return;             // モーダルへ至る祖先チェーンは除外
+          if (keepIds.includes(sib.id)) return; // モーダル付随UIは除外
+          if (on) {
+            sib.setAttribute('inert', '');
+            sib.setAttribute('aria-hidden', 'true');
+          } else {
+            sib.removeAttribute('inert');
+            sib.removeAttribute('aria-hidden');
+          }
+        });
+        node = parent;
+      }
     }
 
     // ── URL連動ヘルパー（openModal/closeModal はUI専用のまま温存） ──
