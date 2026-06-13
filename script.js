@@ -749,6 +749,8 @@
           'img/works/work_12/work_12_a.webp','img/works/work_12/work_12_a2.webp',
           'img/works/work_13/work_13_a.webp','img/works/work_13/work_13_a2.webp',
           'img/works/work_13/work_13_b.webp',
+          'img/works/work_12/work_12_d.webp',
+          'img/works/work_12/work_12_e.webp',
         ],
         client:'ミカタ税理法人（ミカタグループ）',
         d:{
