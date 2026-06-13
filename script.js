@@ -833,7 +833,7 @@
           approach:'<ul><li><strong>集客〜当日のデザイン統一：</strong> 案内資料・メール・チラシ・当日資料のトンマナを統一し、参加前から当日まで一貫した印象で集客と認知を最大化</li><li><strong>秒単位の進行設計：</strong> 当日は秒単位の進行表を作成し、会場・配信会社・撮影・食事・アンケートまでを取りまとめ</li><li><strong>再現できる体制化：</strong> ゼロから組み立てた進行表・資料のひな形を「再現可能な型」として残し、複数会場・複数年で横展開</li></ul>',
           role:'総合運営ディレクター。資料・案内物の制作、会場・食事の手配、当日の進行管理、アンケート管理までを担当。会場撮影・オンライン配信は配信会社に依頼し、その手配・調整・当日進行のディレクションを担当。',
           creative:'<ul><li><strong>信頼感を伝えるビジュアル：</strong> 目に見えないサービス（税務・労務）を扱うため、金融機関を連想させる背景と、文字を大きく使った力強いデザインで表現</li><li><strong>重厚感と新鮮さの両立：</strong> 年複数回開催で毎回印象が同じにならないよう変化をつけつつ、重厚感と信頼感は一貫して維持</li><li><strong>細やかな心配り：</strong> 参加者に「大切にされている」と感じてもらえるよう、案内物から当日進行まで細部に配慮</li></ul>',
-          result:'<ul><li>全国各地で開催し、多くの会場で満員を達成。多くの新規見込み客を獲得</li><li>セミナー運営の実績：<ul><li>2023〜2025年 東京・大阪（各<strong>300名</strong>）</li><li>2024〜2025年 名古屋（各<strong>80名</strong>）</li><li>2024年 ミカタグループ創立30周年パーティ（<strong>700名</strong>）※セミナーとは別の社内イベントとして運営</li><li>2025年 鹿児島（<strong>100名</strong>）・六本木（<strong>90名</strong>）・沖縄（<strong>100名</strong>）・軽井沢（<strong>50名</strong>）※招待制</li></ul></li></ul><br>公開URL：<a href="https://mikata-c.co.jp/seminar/250912.html" target="_blank" rel="noopener">mikata-c.co.jp/seminar/250912.html</a>'
+          result:'<ul><li>全国各地で開催し、多くの会場で満員を達成。多くの新規見込み客を獲得</li><li>セミナー運営の実績：<ul><li>2023〜2025年 東京・大阪（各<strong>300名</strong>）</li><li>2024〜2025年 名古屋（各<strong>80名</strong>）</li><li>2025年 鹿児島（<strong>100名</strong>）・六本木（<strong>90名</strong>）・沖縄（<strong>100名</strong>）・軽井沢（<strong>50名</strong>）※招待制</li></ul></li></ul><br>公開URL：<a href="https://mikata-c.co.jp/seminar/250912.html" target="_blank" rel="noopener">mikata-c.co.jp/seminar/250912.html</a>'
         }
       },
       {
