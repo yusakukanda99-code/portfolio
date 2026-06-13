@@ -1098,7 +1098,7 @@
     .pf-sort-hint { display: none; }
 
     /* ââ card area ââ */
-    .pf-card-area { flex: 1; overflow: clip; display: flex; align-items: flex-end; position: relative; padding-bottom: 80px; }
+    .pf-card-area { flex: 1; overflow: clip; display: flex; align-items: center; position: relative; padding-bottom: 80px; }
     .pf-track { display: flex; gap: 80px; height: 88%; align-items: flex-end; padding-left: calc(50vw - 130px); padding-right: calc(50vw - 130px); will-change: transform; }
 
     /* ââ cards ââ */
