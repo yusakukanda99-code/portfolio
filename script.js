@@ -747,7 +747,6 @@
         hero:'img/works/work_12/work_12_hero.webp',
         slides:[
           'img/works/work_12/work_12_a.webp','img/works/work_12/work_12_a2.webp',
-          'img/works/work_12/work_12_b.webp',
           'img/works/work_13/work_13_a.webp','img/works/work_13/work_13_a2.webp',
           'img/works/work_13/work_13_b.webp',
         ],
