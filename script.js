@@ -1383,6 +1383,8 @@
     /* ════════  WD INLINE SLIDER (wd-in-slider)  ════════ */
     window.initWIS = function(root) {
       root.querySelectorAll('.wd-in-slider').forEach(function(sl) {
+        if (sl.dataset.wisInit) return;
+        sl.dataset.wisInit = '1';
         const slides = Array.from(sl.querySelectorAll('.wis-slide'));
         const dots   = Array.from(sl.querySelectorAll('.wis-dot'));
         if (slides.length < 2) return;
