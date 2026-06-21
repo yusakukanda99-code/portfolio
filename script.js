@@ -1279,10 +1279,16 @@
       const m = location.hash.match(/^#work-(.+)$/);
       if (m) {
         const idx = findIdxById(m[1]);
-        if (idx >= 0) { openModal(idx); return; }
+        if (idx >= 0) {
+          // すでに別モーダルが開いている等の状態を一旦正規化してから開く
+          if (modal.classList.contains('wd-open')) { _wdSetBackgroundInert(false); }
+          openModal(idx);
+          return;
+        }
       }
       // ハッシュが無い／作品でない → 開いていれば閉じる
       if (modal.classList.contains('wd-open')) closeModal();
+      else { _wdSetBackgroundInert(false); document.body.style.overflow = ''; }
     });
 
     closeBtn.addEventListener('click', dismissWork);
