@@ -1149,6 +1149,8 @@
 
     function openModal(idx) {
       openIdx = idx;
+      // 前回の inert が残っていても必ず一旦解除してからやり直す（解除漏れ対策）
+      _wdSetBackgroundInert(false);
       const work = currentWorks[idx];
       topTitle.textContent = '';
 
