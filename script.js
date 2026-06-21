@@ -1196,6 +1196,9 @@
     }
 
     function closeModal() {
+      // どんな状態で呼ばれても背景の操作不能状態を必ず解く
+      _wdSetBackgroundInert(false);
+      document.body.style.overflow = '';
       hintShown = false;
       clearTimeout(closeTimer);
       sbWrap.style.display = 'none';
