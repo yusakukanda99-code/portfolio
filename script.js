@@ -116,7 +116,7 @@
         this.sy  = 0.76 + Math.random() * 0.48;
         this.ang = Math.random() * Math.PI * 2;
         this.done = false;
-        this.sats = Array.from({ length: 4 + Math.floor(Math.random() * 5) }, () => ({
+        this.sats = Array.from({ length: 2 + Math.floor(Math.random() * 2) }, () => ({
           a: Math.random() * Math.PI * 2,
           d: 0.48 + Math.random() * 0.5,
           r: 0.18 + Math.random() * 0.36,
