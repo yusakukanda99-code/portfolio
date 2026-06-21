@@ -1149,6 +1149,8 @@
 
     function openModal(idx) {
       openIdx = idx;
+      // 前回の inert が残っていても必ず一旦解除してからやり直す（解除漏れ対策）
+      _wdSetBackgroundInert(false);
       const work = currentWorks[idx];
       topTitle.textContent = '';
 
@@ -1194,6 +1196,9 @@
     }
 
     function closeModal() {
+      // どんな状態で呼ばれても背景の操作不能状態を必ず解く
+      _wdSetBackgroundInert(false);
+      document.body.style.overflow = '';
       hintShown = false;
       clearTimeout(closeTimer);
       sbWrap.style.display = 'none';
@@ -1274,10 +1279,16 @@
       const m = location.hash.match(/^#work-(.+)$/);
       if (m) {
         const idx = findIdxById(m[1]);
-        if (idx >= 0) { openModal(idx); return; }
+        if (idx >= 0) {
+          // すでに別モーダルが開いている等の状態を一旦正規化してから開く
+          if (modal.classList.contains('wd-open')) { _wdSetBackgroundInert(false); }
+          openModal(idx);
+          return;
+        }
       }
       // ハッシュが無い／作品でない → 開いていれば閉じる
       if (modal.classList.contains('wd-open')) closeModal();
+      else { _wdSetBackgroundInert(false); document.body.style.overflow = ''; }
     });
 
     closeBtn.addEventListener('click', dismissWork);
@@ -1372,6 +1383,8 @@
     /* ════════  WD INLINE SLIDER (wd-in-slider)  ════════ */
     window.initWIS = function(root) {
       root.querySelectorAll('.wd-in-slider').forEach(function(sl) {
+        if (sl.dataset.wisInit) return;
+        sl.dataset.wisInit = '1';
         const slides = Array.from(sl.querySelectorAll('.wis-slide'));
         const dots   = Array.from(sl.querySelectorAll('.wis-dot'));
         if (slides.length < 2) return;
