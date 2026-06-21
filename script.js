@@ -260,6 +260,12 @@
         ctx.drawImage(_maskedCanvas, 0, 0, W, H);
         ctx.globalAlpha = 1;
 
+        if (spread > 0.92) {
+          drawFull(img);
+          finished = true;
+          if (onDone) onDone();
+          return;
+        }
         if (drops.every(d => d.done)) {
           drawFull(img);
           finished = true;
