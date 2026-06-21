@@ -143,8 +143,8 @@
         c.scale(this.sx, this.sy);
         c.globalAlpha = Math.min(1, p * 5);
         c.beginPath();
-        for (let i = 0; i <= 20; i++) {
-          const a = (i / 20) * Math.PI * 2;
+        for (let i = 0; i <= 14; i++) {
+          const a = (i / 14) * Math.PI * 2;
           const n = 1
             + Math.sin(a * 3  + this.wb) * 0.09
             + Math.sin(a * 7  + 1.2)     * 0.055
