@@ -116,7 +116,7 @@
         this.sy  = 0.76 + Math.random() * 0.48;
         this.ang = Math.random() * Math.PI * 2;
         this.done = false;
-        this.sats = Array.from({ length: 4 + Math.floor(Math.random() * 5) }, () => ({
+        this.sats = Array.from({ length: 2 + Math.floor(Math.random() * 2) }, () => ({
           a: Math.random() * Math.PI * 2,
           d: 0.48 + Math.random() * 0.5,
           r: 0.18 + Math.random() * 0.36,
@@ -143,8 +143,8 @@
         c.scale(this.sx, this.sy);
         c.globalAlpha = Math.min(1, p * 5);
         c.beginPath();
-        for (let i = 0; i <= 20; i++) {
-          const a = (i / 20) * Math.PI * 2;
+        for (let i = 0; i <= 14; i++) {
+          const a = (i / 14) * Math.PI * 2;
           const n = 1
             + Math.sin(a * 3  + this.wb) * 0.09
             + Math.sin(a * 7  + 1.2)     * 0.055
@@ -195,7 +195,7 @@
         { x: W * .04, y: H * .96, d: 16 },
       ];
       drops = O.map(o => new InkDrop(o.x, o.y, o.d));
-      for (let i = 0; i < 22; i++)
+      for (let i = 0; i < 8; i++)
         drops.push(new InkDrop(Math.random() * W, Math.random() * H, 2 + Math.random() * 25));
     }
 
@@ -260,6 +260,12 @@
         ctx.drawImage(_maskedCanvas, 0, 0, W, H);
         ctx.globalAlpha = 1;
 
+        if (spread > 0.92) {
+          drawFull(img);
+          finished = true;
+          if (onDone) onDone();
+          return;
+        }
         if (drops.every(d => d.done)) {
           drawFull(img);
           finished = true;
@@ -373,6 +379,11 @@
     // 全画像をプリロード
     async function init() {
       setSize();
+
+      // reduced-motion 環境では重いインクアニメをスキップして即表示
+      const prefersReduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // 画像ロード有無にかかわらず必ずrevealする保険タイマー
       setTimeout(() => {
         if (!contentRevealed) { contentRevealed = true; revealContent(); }
@@ -382,6 +393,14 @@
         if (!contentRevealed) { contentRevealed = true; revealContent(); }
         return;
       }
+
+      if (prefersReduced) {
+        setSize();
+        drawFull(firstImg);
+        if (!contentRevealed) { contentRevealed = true; revealContent(); }
+        return;
+      }
+
       buildBlurLevels(firstImg);
       startAnim(firstImg, scheduleNextCycle);
       setTimeout(() => {
