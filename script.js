@@ -373,6 +373,11 @@
     // 全画像をプリロード
     async function init() {
       setSize();
+
+      // reduced-motion 環境では重いインクアニメをスキップして即表示
+      const prefersReduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // 画像ロード有無にかかわらず必ずrevealする保険タイマー
       setTimeout(() => {
         if (!contentRevealed) { contentRevealed = true; revealContent(); }
@@ -382,6 +387,14 @@
         if (!contentRevealed) { contentRevealed = true; revealContent(); }
         return;
       }
+
+      if (prefersReduced) {
+        setSize();
+        drawFull(firstImg);
+        if (!contentRevealed) { contentRevealed = true; revealContent(); }
+        return;
+      }
+
       buildBlurLevels(firstImg);
       startAnim(firstImg, scheduleNextCycle);
       setTimeout(() => {
