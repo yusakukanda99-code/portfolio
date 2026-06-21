@@ -195,7 +195,7 @@
         { x: W * .04, y: H * .96, d: 16 },
       ];
       drops = O.map(o => new InkDrop(o.x, o.y, o.d));
-      for (let i = 0; i < 22; i++)
+      for (let i = 0; i < 8; i++)
         drops.push(new InkDrop(Math.random() * W, Math.random() * H, 2 + Math.random() * 25));
     }
 
