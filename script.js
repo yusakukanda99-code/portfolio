@@ -1208,7 +1208,7 @@
       // opacity:0 + pointer-events:none (CSSで制御) のままにする
       // lb（ライトボックス）を強制クローズしてゴーストクリックを防ぐ
       const _lb = document.getElementById('wd-lb');
-      if (_lb) { _lb.classList.remove('lb-open'); _lb.style.display = 'none'; }
+      if (_lb) { _lb.classList.remove('lb-open'); _lb.style.removeProperty('display'); }
       const _lbImg = document.querySelector('.lb-img');
       if (_lbImg) _lbImg.src = '';
       _wdSetBackgroundInert(false);
@@ -1218,7 +1218,6 @@
       _wdLastFocused = null;
       setTimeout(() => {
         document.body.style.overflow = '';
-        if (_lb) _lb.style.display = '';
       }, 380);
     }
 
