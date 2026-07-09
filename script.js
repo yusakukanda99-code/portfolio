@@ -628,6 +628,7 @@
       },
       {
         id:26, year:'2026',
+        hidden:true,
         title:'保険証券解析システム ── PDFから自社フォーマットへ自動転記',
         category:'AI Tool / UX & Development',
         tags:['デジタル','デザイン'],
