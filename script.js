@@ -645,6 +645,25 @@
         }
       },
       {
+        id:27, year:'2026',
+        title:'旧システムのファイルからPDFへの変換ツール開発 ── DocuWorks（.xdw）→ PDF 一括変換ツール',
+        category:'Internal Tool / UX & Development',
+        tags:['デジタル','デザイン'],
+        img:'img/works/work_27/work_27.webp',
+        // TODO: hero 画像を後日 img/works/work_27/work_27_hero.webp として配置。暫定でサムネと同一パス
+        hero:'img/works/work_27/work_27.webp',
+        client:'個人開発（社内実務ツール）',
+        d:{
+          overview:'社内に蓄積された DocuWorks 独自形式（.xdw）を、ドラッグ＆ドロップだけで一括PDF化するローカルWebアプリ。専用ビューアに縛られる旧フォーマットの変換が手作業で、数千件規模では現実的でなかった。ITリテラシーにばらつきのある社員でも迷わず使えることを最優先に、UI・変換処理・配布までを一人で設計・実装した。',
+          challenge:'DocuWorksの.xdwは専用ソフトがないと開けず、PDF標準化の妨げになっていた。変換は手作業で非効率、数千件規模では非現実的。加えて、別途内製済みのPDF編集ツールとも連携できていなかった。',
+          approach:'<ul><li><strong>ローカルで完結する構成：</strong> ブラウザをUIに使いつつ、処理はすべてPC内で完結させるローカル構成（データは一切外部に出さない）。exeをダブルクリックすると Flask のローカルサーバが起動しブラウザが自動で開く</li><li><strong>ドロップするだけの操作：</strong> .xdw をドロップするだけで、フォルダごと入れればサブフォルダも自動検出し、ファイル単位で進捗（待機／変換中／完了／エラー）を表示。ITリテラシーにばらつきがあっても迷わず使える</li><li><strong>内製ツールとの一気通貫連携：</strong> 完了後はPCへ保存でき、内製のPDF編集ツールへワンクリックで遷移して「変換→編集」が完結。UIも両ツールで統一</li><li><strong>追加インストール不要の配布：</strong> ZIPを解凍して exe を叩くだけで動く</li></ul>',
+          // TODO: role 文面は仮案。本文の「一人で設計・実装した」から id:26 のトーンで起こしたもの。要確認
+          role:'企画・UI/UX設計・実装・配布設計まで<strong>一人で一貫して担当</strong>。DocuWorks DLL 呼び出しやエンコーディング問題の解消、PyInstaller での exe 化、内製 PDF 編集ツールとの UI 統一までをワンストップで構築。',
+          creative:'<ul><li><strong>DocuWorks DLL 呼び出しの調整：</strong> xdwapi.dll が想定と違い System32 側にあったため、xdwlib のソースを修正して対応</li><li><strong>日本語ファイル名の cp932 エンコーディング問題の解消：</strong> 一時ファイルを UUID（英数字）で保存し、一時フォルダを ASCII パス（C:\\xdw_tmp）に固定して根本解決</li><li><strong>配布性の担保：</strong> PyInstaller で 64bit 向けに exe 化し、配布先で追加インストール不要な状態を実現</li><li><strong>使用技術：</strong> Python / Flask（ローカルサーバ）、xdwlib（DocuWorks 変換エンジン）、PyInstaller（64bit exe化）、HTML / CSS / JS（フロント）。動作環境：Windows 10/11・DocuWorks 7.0以上・Chrome/Edge 推奨</li></ul>',
+          result:'DocuWorksがインストール済みのPCなら追加設定なしで動く状態まで到達。内製PDF編集ツールとの連携で「変換→編集」の社内フローを一本化した。現在はGoogle Drive連携（情シスとOAuth認証情報の発行を相談中）と、社内配布・動作確認を進行中。'
+        }
+      },
+      {
         id:10, year:'2026',
         title:'MIKATAグループ採用サイト ── 採用ブランディングの統合',
         category:'Recruitment Branding / Web & Content Design',
