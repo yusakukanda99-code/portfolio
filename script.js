@@ -676,7 +676,6 @@
           { src:'img/works/work_10/recruit_deck_onestop.webp',  alt:'会社紹介・採用資料 ワンストップサービス' },
           { src:'img/works/work_10/recruit_deck_numbers.webp',  alt:'会社紹介・採用資料 数字で見るミカタ' },
           { src:'img/works/work_10/recruit_deck_career.webp',   alt:'会社紹介・採用資料 キャリアステップ' },
-          { src:'img/works/work_10/recruit_deck_salary.webp',   alt:'会社紹介・採用資料 給与テーブル' },
         ],
         photoDirection:{
           heading:'採用ブランディング撮影 / フォトディレクション',
