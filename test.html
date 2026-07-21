@@ -484,12 +484,11 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
             </g>
             <g id="hmCore" opacity="0">
               <circle id="hmCoreC" r="54" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
-              <g id="hmCoreT">
-                <text class="jp-b" font-size="16" text-anchor="middle" x="600" y="266">コンセプト</text>
-                <text class="en-s" font-size="9.5" text-anchor="middle" x="600" y="282">Concept</text>
-              </g>
             </g>
-            <circle id="hmDot" cx="600" cy="270" r="7" fill="var(--accent)" opacity="0"/>
+            <g id="hmConcept" opacity="0">
+              <text class="jp-b" font-size="27" text-anchor="middle" x="600" y="272" letter-spacing=".1em">コンセプト</text>
+              <text class="en-s" font-size="11" text-anchor="middle" x="600" y="297">Concept</text>
+            </g>
             <text id="hmFormula" text-anchor="middle" x="600" y="279" opacity="0"
               font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
               letter-spacing=".06em">企 画<tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">デザイン</tspan><tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">運 営</tspan></text>
@@ -1004,7 +1003,7 @@ function initHeroMotion(){
     pill.setAttribute('width',CARD.w); pill.setAttribute('height',CARD.h);
     pill.setAttribute('rx',CARD.rx); pill.setAttribute('ry',CARD.rx);
     pill.style.opacity=1;
-    ['#hmA','#hmB','#hmC','#hmCore','#hmDot','#hmFormula'].forEach(s=>{q(s).style.opacity=0;});
+    ['#hmA','#hmB','#hmC','#hmCore','#hmConcept','#hmFormula'].forEach(s=>{q(s).style.opacity=0;});
     q('#hmState').style.opacity=1;
   };
   if(reduce||!window.gsap){ setEnd(); return; }
@@ -1038,20 +1037,19 @@ function initHeroMotion(){
     .to(['#hmA','#hmB','#hmC'],{opacity:0,duration:.22},'>-.08')
     .to('#hmCore',{opacity:1,duration:.3},'<')
     .from('#hmCoreC',{attr:{r:46},duration:.45,ease:'back.out(1.6)'},'<');
-  /* 3 — 外形が円になり、核が膨らんでから点へ凝縮 */
+  /* 3 — 外形が円になり、中央の小円は消えて「企画×デザイン×運営」が出る */
   loop.to(morph,{t:1,duration:1.05,onUpdate:setShape},'+=.35')
-    .to('#hmCoreT',{opacity:0,duration:.3},'<+.15')
-    .to('#hmCoreC',{attr:{r:72},duration:.5},'<')
-    .to('#hmCoreC',{attr:{r:7},duration:.6,ease:'power3.in'},'>')
-    .to('#hmCore',{opacity:0,duration:.12},'>-.05')
-    .to('#hmDot',{opacity:1,duration:.12},'<');
-  /* 4 — 点は見えなくなるまで小さくなり、円の中に「企画×デザイン×運営」 */
-  loop.to('#hmDot',{scale:0,transformOrigin:'center',duration:.45,ease:'power2.in'},'+=.35')
-    .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'<+.1')
-    .from('#hmFormula',{y:14,duration:.55,ease:'power2.out'},'<')
-    .to('#hmFormula',{opacity:0,y:-10,duration:.4},'+=1.15');
-  /* 5 — 凝縮 → ピル → カードが展開してステートメント */
-  loop.add(()=>{ gsap.set(pill,{opacity:1}); gsap.set(shape,{opacity:0}); },'>-.15')
+    .to('#hmCoreC',{attr:{r:0},duration:.55,ease:'power2.in'},'<+.3')
+    .to('#hmCore',{opacity:0,duration:.05},'>')
+    .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'>+.1')
+    .from('#hmFormula',{y:16,duration:.55,ease:'power2.out'},'<');
+  /* 4 — テキストが切り替わる：企画×デザイン×運営 → コンセプト */
+  loop.to('#hmFormula',{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.05')
+    .to('#hmConcept',{opacity:1,duration:.5,ease:'power1.out'},'>-.05')
+    .from('#hmConcept',{y:16,duration:.5,ease:'power2.out'},'<');
+  /* 5 — コンセプトが消えて凝縮 → ピル → カードが展開してステートメント */
+  loop.to('#hmConcept',{opacity:0,duration:.35,ease:'power1.in'},'+=1.0')
+    .add(()=>{ gsap.set(pill,{opacity:1}); gsap.set(shape,{opacity:0}); },'>-.1')
     .to(box,{w:64,h:64,rx:32,duration:.85,ease:'power3.inOut',onUpdate:setBox},'>')
     .to(box,{w:170,h:64,duration:.5,ease:'power2.inOut',onUpdate:setBox},'+=.25')
     .to(box,{w:CARD.w,h:CARD.h,rx:CARD.rx,duration:.9,ease:'expo.out',onUpdate:setBox},'+=.3')
@@ -1070,10 +1068,9 @@ function initHeroMotion(){
     gsap.set('#hmB',{x:V[1][0],y:V[1][1],opacity:0});
     gsap.set('#hmC',{x:V[0][0],y:V[0][1],opacity:0});
     gsap.set(['#hmA text','#hmB text','#hmC text'],{opacity:1});
-    gsap.set('#hmCoreT',{opacity:1});
+    gsap.set('#hmCore',{opacity:0});
     gsap.set('#hmCoreC',{attr:{r:54}});
-    gsap.set('#hmFormula',{y:0});
-    gsap.set('#hmDot',{scale:1,opacity:0});
+    gsap.set(['#hmFormula','#hmConcept'],{y:0,opacity:0});
     gsap.set('#hmState',{opacity:0});
     setPillBox(CR*2,CR*2,CR);
     box.w=CR*2; box.h=CR*2; box.rx=CR;
