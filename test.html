@@ -488,7 +488,7 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
               <text class="en-s" font-size="9.5" text-anchor="middle" y="15">Operation</text>
             </g>
             <g id="hmCore" opacity="0">
-              <circle id="hmCoreC" r="54" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
+              <circle id="hmCoreC" r="46" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
             </g>
             <text id="hmFormula" text-anchor="middle" x="600" y="279" opacity="0"
               font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
@@ -983,11 +983,20 @@ function initHeroMotion(){
     baseR.push(RIN/Math.cos(m*Math.PI/180));
   }
   // 三角→円：半径プロファイルを移動平均で均す＝角から丸くなっていく
+  // 窓幅は小数のまま端に重みを付けて補間（整数刻みだと1フレームごとに
+  // カクッと段が付くため）
   const shapeD=t=>{
-    const w=Math.round(t*N*0.42), r=[];
-    if(w<1){ for(let i=0;i<N;i++) r.push(baseR[i]); }
-    else{ for(let i=0;i<N;i++){ let s=0;
-      for(let k=-w;k<=w;k++) s+=baseR[(i+k+N*3)%N]; r.push(s/(2*w+1)); } }
+    const wf=t*N*0.42, r=[];
+    if(wf<0.001){ for(let i=0;i<N;i++) r.push(baseR[i]); }
+    else{
+      const wi=Math.floor(wf), frac=wf-wi, tot=2*wi+1+2*frac;
+      for(let i=0;i<N;i++){
+        let s=0;
+        for(let k=-wi;k<=wi;k++) s+=baseR[(i+k+N*3)%N];
+        s+=frac*(baseR[(i-wi-1+N*3)%N]+baseR[(i+wi+1+N*3)%N]);
+        r.push(s/tot);
+      }
+    }
     let d='';
     for(let i=0;i<=N;i++){
       const j=i%N, a=(-90+i*360/N)*Math.PI/180;
@@ -1038,9 +1047,10 @@ function initHeroMotion(){
     // 円が重なるのと同時に「コンセプト」は中心へ縮んで消える
     .to('#hmConcept',{scale:0,svgOrigin:'600 272',duration:.55,ease:'power2.in'},'<')
     .to(morph,{t:.32,duration:.95,onUpdate:setShape},'<')
-    .to(['#hmA','#hmB','#hmC'],{opacity:0,duration:.22},'>-.08')
-    .to('#hmCore',{opacity:1,duration:.3},'<')
-    .from('#hmCoreC',{attr:{r:46},duration:.45,ease:'back.out(1.6)'},'<')
+    // 収束が完了した瞬間に1フレームで差し替える（クロスフェードだと
+    // 重なった線の透明度が足し合わさって一瞬色が濃く見えるため）
+    .set(['#hmA','#hmB','#hmC'],{opacity:0},'>+.08')
+    .set('#hmCore',{opacity:1},'<')
     .set('#hmConcept',{opacity:0},'<');
   /* 3 — 外形が円になり、中央の小円は消えて「企画×デザイン×運営」が出る */
   loop.to(morph,{t:1,duration:1.05,onUpdate:setShape},'+=.35')
@@ -1070,7 +1080,7 @@ function initHeroMotion(){
     gsap.set('#hmC',{x:V[0][0],y:V[0][1],opacity:0});
     gsap.set(['#hmA text','#hmB text','#hmC text'],{opacity:1});
     gsap.set('#hmCore',{opacity:0});
-    gsap.set('#hmCoreC',{attr:{r:54}});
+    gsap.set('#hmCoreC',{attr:{r:46}});
     gsap.set('#hmFormula',{y:0,opacity:0});
     gsap.set('#hmConcept',{scale:1,opacity:0});
     gsap.set('#hmState',{opacity:0});
