@@ -467,6 +467,11 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
           <svg id="hmSvg" viewBox="0 28 1200 452" fill="none">
             <path id="hmShape" stroke="#4a4b44" stroke-width="2.4" fill="none"/>
             <rect id="hmPill" stroke="#4a4b44" stroke-width="2.4" fill="var(--paper)" opacity="0"/>
+            <!-- コンセプト：三角形の中心に最初から居る（収束する円に覆われて消える） -->
+            <g id="hmConcept" opacity="0">
+              <text class="jp-b" font-size="24" text-anchor="middle" x="600" y="268" letter-spacing=".1em">コンセプト</text>
+              <text class="en-s" font-size="10.5" text-anchor="middle" x="600" y="291">Concept</text>
+            </g>
             <g id="hmA" opacity="0">
               <circle r="46" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
               <text class="jp-b" font-size="17" text-anchor="middle" y="-1">企 画</text>
@@ -484,10 +489,6 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
             </g>
             <g id="hmCore" opacity="0">
               <circle id="hmCoreC" r="54" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
-            </g>
-            <g id="hmConcept" opacity="0">
-              <text class="jp-b" font-size="27" text-anchor="middle" x="600" y="272" letter-spacing=".1em">コンセプト</text>
-              <text class="en-s" font-size="11" text-anchor="middle" x="600" y="297">Concept</text>
             </g>
             <text id="hmFormula" text-anchor="middle" x="600" y="279" opacity="0"
               font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
@@ -1027,28 +1028,28 @@ function initHeroMotion(){
     .set(shape,{strokeDasharray:'none'});
   /* ここから無限ループ */
   const loop=gsap.timeline({repeat:-1,repeatDelay:.25,defaults:{ease:'power2.inOut'}});
-  /* 1 — 3つの円がポップ */
-  loop.to(['#hmC','#hmA','#hmB'],{opacity:1,duration:.45,stagger:.16,ease:'power1.out'},.15)
+  /* 1 — 三角形の中心に「コンセプト」、頂点に3つの円がポップ */
+  loop.to('#hmConcept',{opacity:1,duration:.55,ease:'power1.out'},.2)
+    .to(['#hmC','#hmA','#hmB'],{opacity:1,duration:.45,stagger:.16,ease:'power1.out'},.15)
     .from(['#hmC','#hmA','#hmB'],{scale:.55,duration:.55,stagger:.16,ease:'back.out(2.2)',transformOrigin:'center'},.15);
   /* 2 — 中央へ収束してコンセプトに。角も丸まり始める */
   loop.to(['#hmA','#hmB','#hmC'],{x:CX,y:CY,duration:.95,ease:'power3.inOut',stagger:.03},'+=.45')
     .to(['#hmA text','#hmB text','#hmC text'],{opacity:0,duration:.35},'<+.25')
+    // 円が重なるのと同時に「コンセプト」は中心へ縮んで消える
+    .to('#hmConcept',{scale:0,svgOrigin:'600 272',duration:.55,ease:'power2.in'},'<')
     .to(morph,{t:.32,duration:.95,onUpdate:setShape},'<')
     .to(['#hmA','#hmB','#hmC'],{opacity:0,duration:.22},'>-.08')
     .to('#hmCore',{opacity:1,duration:.3},'<')
-    .from('#hmCoreC',{attr:{r:46},duration:.45,ease:'back.out(1.6)'},'<');
+    .from('#hmCoreC',{attr:{r:46},duration:.45,ease:'back.out(1.6)'},'<')
+    .set('#hmConcept',{opacity:0},'<');
   /* 3 — 外形が円になり、中央の小円は消えて「企画×デザイン×運営」が出る */
   loop.to(morph,{t:1,duration:1.05,onUpdate:setShape},'+=.35')
     .to('#hmCoreC',{attr:{r:0},duration:.55,ease:'power2.in'},'<+.3')
     .to('#hmCore',{opacity:0,duration:.05},'>')
     .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'>+.1')
     .from('#hmFormula',{y:16,duration:.55,ease:'power2.out'},'<');
-  /* 4 — テキストが切り替わる：企画×デザイン×運営 → コンセプト */
-  loop.to('#hmFormula',{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.05')
-    .to('#hmConcept',{opacity:1,duration:.5,ease:'power1.out'},'>-.05')
-    .from('#hmConcept',{y:16,duration:.5,ease:'power2.out'},'<');
-  /* 5 — コンセプトが消えて凝縮 → ピル → カードが展開してステートメント */
-  loop.to('#hmConcept',{opacity:0,duration:.35,ease:'power1.in'},'+=1.0')
+  /* 4 — 読み切れるまでホールド → 凝縮 → ピル → カードが展開してステートメント */
+  loop.to('#hmFormula',{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.6')
     .add(()=>{ gsap.set(pill,{opacity:1}); gsap.set(shape,{opacity:0}); },'>-.1')
     .to(box,{w:64,h:64,rx:32,duration:.85,ease:'power3.inOut',onUpdate:setBox},'>')
     .to(box,{w:170,h:64,duration:.5,ease:'power2.inOut',onUpdate:setBox},'+=.25')
@@ -1070,7 +1071,8 @@ function initHeroMotion(){
     gsap.set(['#hmA text','#hmB text','#hmC text'],{opacity:1});
     gsap.set('#hmCore',{opacity:0});
     gsap.set('#hmCoreC',{attr:{r:54}});
-    gsap.set(['#hmFormula','#hmConcept'],{y:0,opacity:0});
+    gsap.set('#hmFormula',{y:0,opacity:0});
+    gsap.set('#hmConcept',{scale:1,opacity:0});
     gsap.set('#hmState',{opacity:0});
     setPillBox(CR*2,CR*2,CR);
     box.w=CR*2; box.h=CR*2; box.rx=CR;
