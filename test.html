@@ -492,9 +492,12 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
             <g id="hmCore" opacity="0">
               <circle id="hmCoreC" r="46" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
             </g>
-            <text id="hmFormula" text-anchor="middle" x="600" y="279" opacity="0"
+            <text id="hmFormula" text-anchor="middle" x="600" y="262" opacity="0"
               font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
               letter-spacing=".06em">企 画<tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">デザイン</tspan><tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">運 営</tspan></text>
+            <text id="hmFormulaSub" text-anchor="middle" x="600" y="308" opacity="0"
+              font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
+              letter-spacing=".06em">の一気通貫</text>
             <g id="hmState" opacity="0">
               <text class="jp-b" id="hmL1" font-size="28" text-anchor="middle" x="600" y="260" letter-spacing=".08em">つくって、終わらせない。</text>
               <text class="jp-b" id="hmL2" font-size="28" text-anchor="middle" x="600" y="302" letter-spacing=".08em">ブランドを育てていく。</text>
@@ -1015,7 +1018,7 @@ function initHeroMotion(){
     pill.setAttribute('width',CARD.w); pill.setAttribute('height',CARD.h);
     pill.setAttribute('rx',CARD.rx); pill.setAttribute('ry',CARD.rx);
     pill.style.opacity=1;
-    ['#hmA','#hmB','#hmC','#hmCore','#hmConcept','#hmFormula'].forEach(s=>{q(s).style.opacity=0;});
+    ['#hmA','#hmB','#hmC','#hmCore','#hmConcept','#hmFormula','#hmFormulaSub'].forEach(s=>{q(s).style.opacity=0;});
     q('#hmState').style.opacity=1;
   };
   if(reduce||!window.gsap){ setEnd(); return; }
@@ -1059,9 +1062,12 @@ function initHeroMotion(){
     .to('#hmCoreC',{attr:{r:0},duration:.55,ease:'power2.in'},'<+.3')
     .to('#hmCore',{opacity:0,duration:.05},'>')
     .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'>+.1')
-    .from('#hmFormula',{y:16,duration:.55,ease:'power2.out'},'<');
+    .from('#hmFormula',{y:16,duration:.55,ease:'power2.out'},'<')
+    // ワンテンポ遅れて「の一気通貫」が続き、文が完成する
+    .to('#hmFormulaSub',{opacity:1,duration:.45,ease:'power1.out'},'>-.15')
+    .from('#hmFormulaSub',{y:10,duration:.45,ease:'power2.out'},'<');
   /* 4 — 読み切れるまでホールド → 凝縮 → ピル → カードが展開してステートメント */
-  loop.to('#hmFormula',{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.6')
+  loop.to(['#hmFormula','#hmFormulaSub'],{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.7')
     .add(()=>{ gsap.set(pill,{opacity:1}); gsap.set(shape,{opacity:0}); },'>-.1')
     .to(box,{w:64,h:64,rx:32,duration:.85,ease:'power3.inOut',onUpdate:setBox},'>')
     .to(box,{w:170,h:64,duration:.5,ease:'power2.inOut',onUpdate:setBox},'+=.25')
@@ -1083,7 +1089,7 @@ function initHeroMotion(){
     gsap.set(['#hmA text','#hmB text','#hmC text'],{opacity:1});
     gsap.set('#hmCore',{opacity:0});
     gsap.set('#hmCoreC',{attr:{r:46}});
-    gsap.set('#hmFormula',{y:0,opacity:0});
+    gsap.set(['#hmFormula','#hmFormulaSub'],{y:0,opacity:0});
     gsap.set('#hmConcept',{scale:1,opacity:0});
     gsap.set('#hmState',{opacity:0});
     setPillBox(CR*2,CR*2,CR);
