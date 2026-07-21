@@ -115,6 +115,8 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 @media(max-width:820px){
   .hero h1{font-size:clamp(38px,11vw,64px)}
   .hero .hero-lead{max-width:none}
+  /* SP：図形は中央よりやや上に */
+  .hero .hm-stage{top:-5svh}
 }
 
 /* ---------- STRENGTHS — スライダー最終幕：ステートメントが覆い被さる ---------- */
@@ -202,22 +204,29 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 .ft-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,10vh,110px) 40px 36px}
 .ft-label{color:rgba(252,252,251,.55)}
 .ft-lead{margin-top:18px;font-size:clamp(15px,1.4vw,19px);line-height:2;color:rgba(252,252,251,.78)}
-.ft-cta{display:flex;width:fit-content;align-items:baseline;gap:.18em;margin-top:clamp(18px,3vh,30px);
-  font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.05;
-  font-size:clamp(52px,8.5vw,128px);color:var(--paper);transition:color .3s var(--ease)}
-.ft-cta .ft-arrow{font-weight:400;font-size:.62em;transform:translateY(-.06em);display:inline-block;
-  color:var(--accent);transition:transform .35s var(--ease)}
-.ft-cta:hover{color:var(--accent)}
-.ft-cta:hover .ft-arrow{transform:translate(14px,-.06em)}
-.ft-mail{display:inline-block;margin-top:14px;font-family:"Inter",sans-serif;font-size:14px;letter-spacing:.06em;
-  color:rgba(252,252,251,.6);border-bottom:1px solid rgba(252,252,251,.25);padding-bottom:3px;transition:color .3s,border-color .3s}
-.ft-mail:hover{color:var(--paper);border-color:var(--paper)}
+.ft-mail{display:inline-block;margin-top:clamp(20px,3.5vh,34px);font-family:"Inter","Noto Sans JP",sans-serif;
+  font-size:clamp(22px,3.6vw,44px);font-weight:500;letter-spacing:.01em;line-height:1.2;color:var(--paper);
+  border-bottom:1px solid rgba(252,252,251,.35);padding-bottom:8px;overflow-wrap:anywhere;
+  transition:color .3s,border-color .3s}
+.ft-mail:hover{color:var(--accent);border-color:var(--accent)}
 .ft-bottom{margin-top:clamp(48px,8vh,86px);padding-top:22px;border-top:1px solid rgba(252,252,251,.16);
   display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .ft-nav{display:flex;gap:26px}
 .ft-nav a{font-size:13px;letter-spacing:.08em;color:rgba(252,252,251,.75);transition:color .3s}
 .ft-nav a:hover{color:var(--paper)}
 .ft-copy{font-size:10px;color:rgba(252,252,251,.4);font-weight:300;letter-spacing:.04em}
+
+/* ===== SP：ピン留め演出を廃止して通常の縦積みスクロールに ===== */
+@media(max-width:820px){
+  html.sp-flow .hgal{height:auto;overflow:visible}
+  html.sp-flow .hgal-track{height:auto}
+  html.sp-flow .hgal-track > *{opacity:1}
+  html.sp-flow .hg-item{position:relative;inset:auto;height:100svh;pointer-events:auto;overflow:hidden}
+  html.sp-flow .hg-hero{position:relative;inset:auto;height:100svh}
+  html.sp-flow .hg-ui,html.sp-flow .hg-shade{display:none}
+  html.sp-flow .hg-strengths{position:relative;inset:auto;pointer-events:auto;perspective:none}
+  html.sp-flow .hgst-card{position:relative;inset:auto;transform:none;opacity:1;visibility:visible;padding:70px 0}
+}
 
 /* ---------- SCREEN-TRANSITION SHEET ---------- */
 .swipe{position:fixed;inset:0;z-index:7000;background:var(--paper);transform:translateY(100%);pointer-events:none;will-change:transform,filter}
@@ -713,7 +722,6 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
     <div class="ft-inner">
       <span class="mono-label ft-label">Contact</span>
       <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
-      <a class="ft-cta" href="mailto:yusaku.kanda99@gmail.com">Let's talk<span class="ft-arrow">→</span></a>
       <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
       <div class="ft-bottom">
         <nav class="ft-nav">
@@ -1005,6 +1013,9 @@ function splitHeroChars(){
 const HM={played:false,tl:null};
 function initHeroMotion(){
   const svg=document.getElementById('hmSvg'); if(!svg) return;
+  // SP：描画領域を中央にズームして図形を大きく見せる（座標系は共通のまま）
+  if(window.matchMedia('(max-width:820px)').matches)
+    svg.setAttribute('viewBox','250 28 700 452');
   const q=s=>svg.querySelector(s);
   const shape=q('#hmShape'), pill=q('#hmPill');
   const CX=600, CY=270, R=185, RIN=R/2, CR=180, N=240;
@@ -1547,7 +1558,7 @@ function showScreen(which){
     dt.classList.add('off');
     topScreens().forEach(s=>s.classList.remove('off'));
     window.scrollTo(0,0);
-    GAL=initGallery();
+    if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
     initAboutFx();
   }
   ScrollTrigger.refresh();
@@ -1732,7 +1743,11 @@ function goToDetail(caseKey,workIdx){
 function returnToWork(){
   transitionTo(()=>{
     showScreen('slider');
-    if(!GAL) return;
+    if(!GAL){
+      const p=document.querySelectorAll('.hgal-track > *')[RETURN_IDX];
+      if(p) window.scrollTo(0,Math.round(p.getBoundingClientRect().top+window.scrollY));
+      return;
+    }
     const i=RETURN_IDX;
     // middle of the clicked work's settled zone on the timeline
     const s0 = (i===0) ? GAL.PRE : (GAL.startAt[i]+GAL.REV);
@@ -1773,8 +1788,16 @@ function initAnim(){
     .forEach(m=>{m.style.overflow='visible';});},1800);
   // detail is a separate screen — hidden and NOT built until a work is clicked
   document.querySelector('.showcase').classList.add('off');
-  GAL=initGallery();
-  initHeroMotion();     // ローダー明けにヒーローの図形モーションを1回再生
+  // SP：ピン留めスライダーは使わず、通常の縦スクロールで閲覧する
+  if(window.matchMedia('(max-width:820px)').matches){
+    document.documentElement.classList.add('sp-flow');
+    // 縦積みでは「作品 → スキル」の順になるよう、オーバーレイ用に
+    // 手前置きしてあったスキル節をトラックの後ろへ移動
+    const sec=document.querySelector('.hgal'), stn=sec&&sec.querySelector('.hg-strengths');
+    if(stn) sec.appendChild(stn);
+  }
+  if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
+  initHeroMotion();     // ローダー明けにヒーローの図形モーションを再生
   initAboutFx();
   ScrollTrigger.refresh();
   initReveals();
@@ -1796,7 +1819,9 @@ function initAnim(){
       e.preventDefault();
       const inDetail=!document.querySelector('.showcase').classList.contains('off');
       if(inDetail){ returnToWork(); }
-      else{ window.scrollTo(0, a.classList.contains('brand')||!GAL ? 0 : Math.round(GAL.st.start)); }
+      else if(GAL){ window.scrollTo(0, Math.round(GAL.st.start)); }
+      else{ const el=document.querySelector('.hgal-track');
+        window.scrollTo(0, el?Math.round(el.getBoundingClientRect().top+window.scrollY):0); }
     });
   });
   // footer links — jump to sections (footer only exists on the TOP screen)
@@ -1805,9 +1830,9 @@ function initAnim(){
       e.preventDefault();
       const t=a.getAttribute('href');
       if(t==='#top'){ window.scrollTo(0,0); return; }
-      if(!GAL) return;
-      if(t==='#work'){ window.scrollTo(0,Math.round(GAL.st.start)); }
-      else if(t==='#strengths'){ if(GAL) window.scrollTo(0,Math.round(GAL.st.start+((GAL.WORKEND+2.4)/GAL.total)*(GAL.st.end-GAL.st.start))); }
+      const go=el=>{ if(el) window.scrollTo(0,Math.round(el.getBoundingClientRect().top+window.scrollY)); };
+      if(t==='#work'){ GAL?window.scrollTo(0,Math.round(GAL.st.start)):go(document.querySelector('.hgal-track')); }
+      else if(t==='#strengths'){ GAL?window.scrollTo(0,Math.round(GAL.st.start+((GAL.WORKEND+2.4)/GAL.total)*(GAL.st.end-GAL.st.start))):go(document.querySelector('.hg-strengths')); }
       else if(t==='#about'){ window.scrollTo(0,Math.round(document.getElementById('about').offsetTop-20)); }
     });
   });
