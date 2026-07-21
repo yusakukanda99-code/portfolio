@@ -113,6 +113,8 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 @media(max-width:820px){
   .hero h1{font-size:clamp(38px,11vw,64px)}
   .hero .hero-lead{max-width:none}
+  /* SP：図形は左右中央（PCの「気持ち右」オフセットを解除） */
+  .hero .hm-stage{left:0}
 }
 
 /* ---------- STRENGTHS — スライダー最終幕：ステートメントが覆い被さる ---------- */
@@ -1046,14 +1048,14 @@ function initHeroMotion(){
     .to(['#hmA text','#hmB text','#hmC text'],{opacity:0,duration:.35},'<+.25')
     // 円が重なるのと同時に「コンセプト」は中心へ縮んで消える
     .to('#hmConcept',{scale:0,svgOrigin:'600 272',duration:.55,ease:'power2.in'},'<')
-    .to(morph,{t:.32,duration:.95,onUpdate:setShape},'<')
+    .to(morph,{t:.32,duration:.95,ease:'power1.in',onUpdate:setShape},'<')
     // 収束が完了した瞬間に1フレームで差し替える（クロスフェードだと
     // 重なった線の透明度が足し合わさって一瞬色が濃く見えるため）
     .set(['#hmA','#hmB','#hmC'],{opacity:0},'>+.08')
     .set('#hmCore',{opacity:1},'<')
     .set('#hmConcept',{opacity:0},'<');
-  /* 3 — 外形が円になり、中央の小円は消えて「企画×デザイン×運営」が出る */
-  loop.to(morph,{t:1,duration:1.05,onUpdate:setShape},'+=.35')
+  /* 3 — 外形は止まらずそのまま円へ、中央の小円は消えて「企画×デザイン×運営」が出る */
+  loop.to(morph,{t:1,duration:1.05,ease:'power2.out',onUpdate:setShape},'>-.08')
     .to('#hmCoreC',{attr:{r:0},duration:.55,ease:'power2.in'},'<+.3')
     .to('#hmCore',{opacity:0,duration:.05},'>')
     .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'>+.1')
