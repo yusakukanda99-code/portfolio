@@ -128,7 +128,7 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 .hgst-card .sk-label{display:block;margin-bottom:clamp(20px,3.5vh,40px)}
 .lin{background:var(--paper);padding:clamp(80px,12vh,130px) 0 clamp(60px,9vh,110px)}
 .lin .lin-head{margin-bottom:clamp(18px,3vh,36px)}
-.lin .lin-head h2{margin-top:18px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em}
+.lin .lin-head h2{margin-top:10px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em}
 .lin .lin-head h2 em{font-style:italic;color:var(--accent)}
 .lin .lin-sub{margin-top:16px;color:var(--ink-soft);font-size:clamp(13.5px,1.05vw,15.5px);line-height:1.85;max-width:58ch}
 /* 5ケースのリードは控えめな1行（証明はスライダー本体が担う） */
@@ -138,16 +138,16 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 /* ---------- ABOUT — 経歴と実績（現サイトのデザインをそのまま流用） ---------- */
 .abt{position:relative;background:#fff}
 /* ABOUT見出し — 他セクション（Strengths等）と同じ「英字モノラベル＋セリフ見出し」型 */
-.prof-section-head{max-width:1000px;margin:0 auto;padding:80px 40px 0;display:block;text-align:left}
+.prof-section-head{max-width:1000px;margin:0 auto;padding:clamp(36px,6vh,56px) 40px 0;display:block;text-align:left}
 .abt-head{font-family:"Inter","Noto Sans JP",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:500;
-  margin-top:18px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
-.prof-hero{display:grid;grid-template-columns:280px 1fr;max-width:1000px;margin:0 auto;padding:56px 40px 48px;gap:0}
-.prof-left{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 40px 40px 0}
+  margin-top:10px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.prof-hero{display:grid;grid-template-columns:280px 1fr;max-width:1000px;margin:0 auto;padding:18px 40px 32px;gap:0}
+.prof-left{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 40px 16px 0}
 .prof-avatar-wrap{width:180px;height:180px;border-radius:50%;background:#d8d4ce;position:relative;margin-bottom:24px}
 .prof-avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .prof-name{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:30px;font-weight:400;letter-spacing:.02em;white-space:nowrap;margin-bottom:6px;text-align:center;color:#1a1a1a;line-height:1.2}
 .prof-kana{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:12px;color:#999;letter-spacing:.2em;text-align:center}
-.prof-right{padding:40px 0 40px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.prof-right{padding:16px 0 16px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
 .prof-diagonal{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .prof-diagonal line{stroke:rgba(0,0,0,.07);stroke-width:1}
 .prof-timeline{position:relative;display:flex;flex-direction:column;gap:28px;z-index:1}
@@ -173,15 +173,15 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 .prof-message p{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:2.4;color:#555;font-weight:300;margin-top:36px}
 /* スキル索引（原稿マスター分）— 同じ幅に合わせて掲載 */
 /* 一列マーキー — 左へ流れ続けるスキル索引 */
-.sm-group{margin:0 0 14px}
+.sm-group{margin:0 0 clamp(16px,2.6vh,26px)}
 .lin .sm-group:first-of-type{margin-top:clamp(30px,4.5vh,50px)}
-.skill-marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;width:100vw;margin-left:calc(50% - 50vw);pointer-events:auto}
+.skill-marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(16px,2.6vh,26px) 0;width:100vw;margin-left:calc(50% - 50vw);pointer-events:auto}
 /* ホバー中は流れを止めて読めるように */
 .skill-marquee:hover .sm-track{animation-play-state:paused}
 .sm-track{display:flex;white-space:nowrap;width:max-content;animation:smScroll var(--smdur,30s) linear infinite}
 .skill-marquee.mr .sm-track{animation-direction:reverse}   /* 左→右 */
 .sm-seq{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;
-  font-size:clamp(16px,1.7vw,23px);font-weight:300;letter-spacing:.03em;color:#9a9a94}
+  font-size:clamp(24px,3.2vw,46px);font-weight:300;letter-spacing:.03em;color:#9a9a94}
 .sm-seq b{font-weight:400;color:var(--accent)}
 @keyframes smScroll{to{transform:translateX(-50%)}}
 @media(max-width:760px){
@@ -195,17 +195,29 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 }
 
 /* ---------- FOOTER — 現サイト踏襲のシンプル構成 ---------- */
-.site-foot{position:relative;z-index:10;background:#fff;padding:60px 40px 40px;max-width:1000px;margin:0 auto;
-  font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif}
-.footer-home{font-size:20px;font-weight:400;letter-spacing:.02em;color:#1a1a1a;padding-bottom:12px;
-  border-bottom:1px solid #1a1a1a;margin-bottom:28px;display:flex;align-items:center;gap:4px}
-.footer-home .arrow,.footer-nav-col .arrow{font-style:normal;display:inline-block;font-size:16px;transition:transform .25s ease}
-.footer-home:hover .arrow,.footer-nav-col a:hover .arrow{transform:translateX(5px)}
-.footer-nav{display:flex;gap:0;align-items:flex-start}
-.footer-nav-col{flex:1}
-.footer-nav-col a{display:block;color:#1a1a1a;font-size:14px;font-weight:400;letter-spacing:.03em;margin-bottom:12px}
-.footer-nav-col .arrow{margin-right:4px}
-.footer-copyright{margin-top:60px;text-align:right;font-size:9px;color:#b0b0b0;font-weight:300;letter-spacing:.05em}
+.site-foot{position:relative;z-index:10;background:var(--ink);color:var(--paper);
+  font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;
+  /* TOPと同じ極薄ドットグリッド（暗色版） */
+  background-image:radial-gradient(circle,rgba(252,252,251,.07) 1px,transparent 1.4px);background-size:18px 18px}
+.ft-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,10vh,110px) 40px 36px}
+.ft-label{color:rgba(252,252,251,.55)}
+.ft-lead{margin-top:18px;font-size:clamp(15px,1.4vw,19px);line-height:2;color:rgba(252,252,251,.78)}
+.ft-cta{display:flex;width:fit-content;align-items:baseline;gap:.18em;margin-top:clamp(18px,3vh,30px);
+  font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.05;
+  font-size:clamp(52px,8.5vw,128px);color:var(--paper);transition:color .3s var(--ease)}
+.ft-cta .ft-arrow{font-weight:400;font-size:.62em;transform:translateY(-.06em);display:inline-block;
+  color:var(--accent);transition:transform .35s var(--ease)}
+.ft-cta:hover{color:var(--accent)}
+.ft-cta:hover .ft-arrow{transform:translate(14px,-.06em)}
+.ft-mail{display:inline-block;margin-top:14px;font-family:"Inter",sans-serif;font-size:14px;letter-spacing:.06em;
+  color:rgba(252,252,251,.6);border-bottom:1px solid rgba(252,252,251,.25);padding-bottom:3px;transition:color .3s,border-color .3s}
+.ft-mail:hover{color:var(--paper);border-color:var(--paper)}
+.ft-bottom{margin-top:clamp(48px,8vh,86px);padding-top:22px;border-top:1px solid rgba(252,252,251,.16);
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.ft-nav{display:flex;gap:26px}
+.ft-nav a{font-size:13px;letter-spacing:.08em;color:rgba(252,252,251,.75);transition:color .3s}
+.ft-nav a:hover{color:var(--paper)}
+.ft-copy{font-size:10px;color:rgba(252,252,251,.4);font-weight:300;letter-spacing:.04em}
 
 /* ---------- SCREEN-TRANSITION SHEET ---------- */
 .swipe{position:fixed;inset:0;z-index:7000;background:var(--paper);transform:translateY(100%);pointer-events:none;will-change:transform,filter}
@@ -698,14 +710,18 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-foot screen" id="foot">
-    <a href="#top" class="footer-home"><span class="arrow">›</span> Top</a>
-    <nav class="footer-nav">
-      <div class="footer-nav-col"><a href="#work"><span class="arrow">›</span> Work</a></div>
-      <div class="footer-nav-col"><a href="#strengths"><span class="arrow">›</span> Skills</a></div>
-      <div class="footer-nav-col"><a href="#about"><span class="arrow">›</span> About</a></div>
-      <div class="footer-nav-col"><a href="mailto:yusaku.kanda99@gmail.com"><span class="arrow">›</span> Contact</a></div>
-    </nav>
-    <p class="footer-copyright">神田 有作のデザインのポートフォリオとなり、無断転載等の一切を禁止しております</p>
+    <div class="ft-inner">
+      <span class="mono-label ft-label">Contact</span>
+      <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
+      <a class="ft-cta" href="mailto:yusaku.kanda99@gmail.com">Let's talk<span class="ft-arrow">→</span></a>
+      <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+      <div class="ft-bottom">
+        <nav class="ft-nav">
+          <a href="#top">Top</a><a href="#work">Work</a><a href="#strengths">Skills</a><a href="#about">About</a>
+        </nav>
+        <p class="ft-copy">© Yusaku Kanda — 本サイトは神田有作のポートフォリオであり、無断転載等の一切を禁止しております</p>
+      </div>
+    </div>
   </footer>
 
   <!-- ===== FULLSCREEN SHOWCASE ===== -->
