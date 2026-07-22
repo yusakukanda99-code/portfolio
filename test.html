@@ -391,9 +391,8 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 .panel.work .g-jp{display:block;font-family:"Noto Sans JP","Inter",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:500;line-height:1.14;color:var(--ink);font-size:clamp(26px,3.2vw,48px)}
 .panel.work.gcard .g-grid{display:grid;grid-template-columns:1fr 1fr}
 @media(min-width:821px){
-  .panel.work.gcard .g-grid{max-height:calc(100vh - var(--nav-h) - 110px);overflow-y:auto;overscroll-behavior:contain;padding-right:8px}
-  .panel.work.gcard .g-grid::-webkit-scrollbar{width:4px}
-  .panel.work.gcard .g-grid::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+  /* リストの縦流しはページスクロール（スクラブ）が担当するため overflow は隠す */
+  .panel.work.gcard .g-grid{max-height:calc(100vh - var(--nav-h) - 110px);overflow:hidden;padding-right:8px}
 }
 .panel.work.gcard .g-cell{border-top:1px solid var(--line);border-left:1px solid var(--line);padding:clamp(16px,2.2vw,38px) clamp(18px,2vw,44px)}
 .panel.work.gcard .g-cell:nth-child(1),.panel.work.gcard .g-cell:nth-child(2){border-top:none}
@@ -1430,13 +1429,23 @@ function initShowcase(){
       // when the LAST media reaches centre the hold ends and the next card rises
       cursor = pos + HCARD_LEN;
     } else if(p.classList.contains('gcard')){
-      // ---- gcard: left label + right Point grid; label then cells reveal on scroll ----
+      // ---- gcard: 左の「判断」は固定、Pointリストはページスクロールに同期して
+      //      下まで流れ、流れ切ってから次のカードが上がってくる ----
       const label=p.querySelector('.g-label');
       const cells=p.querySelectorAll('.g-cell');
+      const grid=p.querySelector('.g-grid');
       gsap.set(label,{yPercent:28,opacity:0}); gsap.set(cells,{y:38,opacity:0});
+      if(grid) grid.scrollTop=0;
       tl.fromTo(label,{yPercent:28,opacity:0},{yPercent:0,opacity:1,duration:.8,ease:'power2.out'},pos+1.3)
         .fromTo(cells,{y:38,opacity:0},{y:0,opacity:1,duration:.7,stagger:.13,ease:'power2.out'},pos+1.7);
-      cursor = pos + 4.4; // grid card — a touch shorter than the media cards
+      let ext=0;
+      const over=grid?Math.max(0,grid.scrollHeight-grid.clientHeight):0;
+      if(over>8){
+        ext=1.9;
+        tl.to(grid,{scrollTop:over,duration:ext,ease:'none'},pos+3.0)  // リストが流れる
+          .to({},{duration:.45},pos+3.0+ext);                          // 読み切りの一拍
+      }
+      cursor = pos + 4.4 + (ext ? ext+.45 : 0);
     } else if(p.classList.contains('pcard')){
       // ---- pcard: Step cards rise from below to centre; each new one stacks on
       //      top while the earlier ones recede upward a notch ----
