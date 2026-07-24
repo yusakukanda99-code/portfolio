@@ -108,7 +108,9 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 /* TOPの背景：あるかないか分からない程の細かいドットグリッド */
 .js .hg-hero .hero{background-image:radial-gradient(circle,rgba(20,21,15,.055) 1px,transparent 1.4px);background-size:18px 18px}
 /* ---------- HERO MOTION（図形モーション） ---------- */
-.hero .hm-stage{width:min(1160px,94vw);height:min(48vh,440px);margin:0 auto;will-change:transform,opacity;position:relative;top:clamp(24px,9vh,104px)}
+.hero .hm-stage{width:min(1160px,94vw);height:min(48vh,440px);
+  /* 親のパディングより広くても真の左右中央に来るよう、余白を計算で割り付ける */
+  margin:0 calc((100% - min(1160px,94vw))/2);will-change:transform,opacity;position:relative;top:clamp(24px,9vh,104px)}
 /* 名前は左下へ・大きく。すぐ下にリード文 */
 .hg-hero .eyebrow{margin:clamp(10px,1.8vh,20px) 0 0;align-items:flex-start}
 .hg-hero .eyebrow .dot{display:none}
