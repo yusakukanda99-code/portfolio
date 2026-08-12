@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YUSAKU KANDA — Portfolio</title>
+<meta name="description" content="Portfolio of Yusaku Kanda — Product / UI・UX Designer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#FAF9F6;       /* white-based */
+  --paper-2:#F3F4F2;
+  --ink:#1c1c1c;
+  --ink-soft:#6C6E68;
+  --line:#E5E5E0;
+  --accent:#1e8f83;      /* single point accent (teal) */
+  --accent-2:#16211F;
+  --radius:14px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --nav-h:76px;
+  --pad:clamp(20px,5vw,80px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* NOTE: no `scroll-behavior:smooth` here — it conflicts with GSAP ScrollTrigger
+   pinning and makes the pinned section jump/skip. */
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Inter","Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400;line-height:1.5;overflow-x:hidden;
+}
+body.locked{overflow:hidden;height:100vh}
+::selection{background:var(--accent);color:#FAF9F6}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,h4{font-family:"Inter","Noto Sans JP",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:500;line-height:1;letter-spacing:-.01em}
+.mono-label{font-family:"Inter",sans-serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.wrap{width:100%;max-width:1500px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+/* reveal helper — CSS transitions toggled by IntersectionObserver (.in) */
+.js .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .line-mask{overflow:hidden;display:block}
+.js .line-mask > *{display:block;transform:translateY(110%);transition:transform 1s var(--ease)}
+.js .line-mask.in > *{transform:translateY(0)}
+/* ---------- CURSOR ---------- */
+.cursor,.cursor-follow{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.cursor{width:7px;height:7px;background:#FAF9F6}
+.cursor-follow{width:40px;height:40px;border:1px solid #FAF9F6;transition:width .3s var(--ease),height .3s var(--ease)}
+.cursor-follow.grow{width:90px;height:90px;background:rgba(255,255,255,.10)}
+.cursor-follow .cur-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#FAF9F6;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:0;transition:opacity .25s;mix-blend-mode:normal}
+.cursor-follow.grow .cur-txt{opacity:1}
+@media (hover:none),(max-width:900px){.cursor,.cursor-follow{display:none!important}}
+/* ---------- LOADER ---------- */
+#loader{position:fixed;inset:0;z-index:10000;background:var(--paper);display:flex;align-items:flex-end;justify-content:space-between;padding:var(--pad)}
+#loader .l-count{font-family:"Inter","Noto Sans JP",sans-serif;font-weight:300;font-size:clamp(90px,22vw,320px);line-height:.8;letter-spacing:-.03em}
+#loader .l-word span{display:inline-block;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-soft)}
+#loader .lw-sep{margin:0 .5em}
+#loader .lw-yr{margin-left:.5em}
+/* SP：数字の幅に押されて動かないよう右端に固定し、改行して小さく */
+@media(max-width:820px){
+  #loader .l-word{position:absolute;right:var(--pad);bottom:calc(var(--pad) + 4px);text-align:right}
+  #loader .l-word span{display:block;font-size:9px;letter-spacing:.2em;line-height:2}
+  #loader .l-word .lw-sep{display:none}
+  #loader .lw-yr{margin-left:0}
+}
+.loader-bar{position:fixed;left:0;bottom:0;height:2px;background:var(--accent);width:0;z-index:10001}
+:root{--fs-case-head:clamp(26px,3.2vw,48px);--fs-case-body:clamp(13px,1.05vw,16px)}
+/* ---------- NAV ---------- */
+/* 現サイトと同じ「すりガラス」ナビ：左上に張り付くfit-widthバー */
+header.nav{position:fixed;top:0;left:0;width:100%;height:var(--nav-h);z-index:9800;display:flex;align-items:center;padding:0 clamp(20px,2.8vw,40px);color:#1c1c1c;
+  background:rgba(250,249,246,.35);
+  backdrop-filter:blur(22px) saturate(1.5) brightness(1.05);
+  -webkit-backdrop-filter:blur(22px) saturate(1.5) brightness(1.05);
+  box-shadow:0 2px 16px rgba(0,0,0,.015)}
+header.nav nav{display:flex;align-items:center;width:100%}
+header.nav nav a{font-family:"Noto Sans JP","Inter",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-size:16px;font-weight:400;letter-spacing:.05em;color:#1c1c1c;padding:8px 20px;position:relative;transition:color .25s;white-space:nowrap}
+header.nav nav a:last-child{padding-right:2px}
+header.nav nav a:hover{color:#FAF9F6;text-shadow:0 2px 12px rgba(80,80,110,.8),0 0 24px rgba(100,100,140,.6),0 0 48px rgba(120,120,160,.3)}
+header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;border-radius:50%;
+  background:radial-gradient(ellipse 85% 75% at 50% 50%,rgba(215,215,228,.95) 0%,rgba(222,222,236,.5) 52%,transparent 75%);
+  filter:blur(7px);z-index:-1}
+/* Contact：右端・グリーンのテキストのみ */
+header.nav .nav-contact{margin-left:auto;color:var(--accent);font-weight:500;transition:color .3s var(--ease)}
+header.nav .nav-contact:hover{color:#14695f;text-shadow:none}
+header.nav .nav-contact:hover::before{display:none}
+@media(max-width:900px){header.nav nav a{font-size:14px;padding:8px 12px}}
+
+/* ---------- HERO — typographic statement overlay. Scroll fades it away while
+   work 01 grows from a small card to fill the screen ---------- */
+.hero{position:relative;min-height:100vh;background:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 20px) var(--pad) 100px}
+.hg-hero .hero{position:absolute;inset:0;min-height:0}
+.hg-hero{display:none}
+/* スクラブがtransformを毎フレーム書くので、ヒーロー内のrevealはopacityのみ遷移 */
+.js .hg-hero .reveal{transition:opacity .9s var(--ease)}
+/* 見出しの1文字span（バラバラに時差で手前へ抜ける） */
+.hg-hero h1 .ch{display:inline-block;will-change:transform,opacity}
+.js .hg-hero{display:block;position:absolute;inset:0;pointer-events:none;z-index:80;background:var(--paper);will-change:opacity,transform}
+.hero .eyebrow{display:flex;gap:14px;align-items:center;margin-bottom:clamp(24px,4vh,42px)}
+.hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,8.2vw,140px);line-height:1.04;letter-spacing:-.02em;max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .hero-lead{margin-top:clamp(26px,4.5vh,52px);max-width:52ch;color:var(--ink-soft);font-size:clamp(14px,1.2vw,18px);line-height:1.85}
+.hero .hero-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(24px,4.5vh,44px);display:flex;align-items:flex-end;justify-content:space-between}
+.hero .scroll-cue{display:inline-flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.hero .scroll-cue .ln{width:1px;height:44px;background:var(--ink-soft);animation:cueDrop 2.4s var(--ease) infinite}
+@keyframes cueDrop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* TOPの背景：あるかないか分からない程の細かいドットグリッド */
+.js .hg-hero .hero{background-image:radial-gradient(circle,rgba(20,21,15,.055) 1px,transparent 1.4px);background-size:18px 18px}
+/* ---------- HERO MOTION（図形モーション） ---------- */
+.hero .hm-stage{width:min(1160px,94vw);height:min(48vh,440px);
+  /* 親のパディングより広くても真の左右中央に来るよう、余白を計算で割り付ける */
+  margin:0 calc((100% - min(1160px,94vw))/2);will-change:transform,opacity;position:relative;top:clamp(24px,9vh,104px)}
+/* 名前は左下へ・大きく。すぐ下にリード文 */
+.hg-hero .eyebrow{margin:clamp(10px,1.8vh,20px) 0 0;align-items:flex-start}
+.hg-hero .eyebrow .dot{display:none}
+.hg-hero .eyebrow .mono-label{font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600;font-size:clamp(34px,4.5vw,72px);letter-spacing:.02em;text-transform:none;color:var(--ink);line-height:1.1}
+.hg-hero .hero-lead{margin-top:clamp(8px,1.2vh,14px);max-width:none}
+.hero .hm-stage{pointer-events:auto}
+.hm-mag{width:100%;height:100%;will-change:transform}
+.hm-stage svg{width:100%;height:100%;display:block;overflow:visible}
+.hm-stage .jp-b{font-family:"Noto Sans JP",sans-serif;font-weight:700;fill:var(--ink)}
+.hm-stage .en-s{font-family:"Inter",sans-serif;font-weight:500;fill:#9a9a94;letter-spacing:.08em}
+/* stagger the hero headline lines + lead */
+.js .hero h1 .line-mask:nth-child(2) > *{transition-delay:.14s}
+.js .hero .hero-lead{transition-delay:.28s}
+@media(max-width:820px){
+  .hero h1{font-size:clamp(38px,11vw,64px)}
+  .hero .hero-lead{max-width:none}
+  /* SP：図形は中央よりやや上に */
+  .hero .hm-stage{top:-2svh}
+}
+
+/* ---------- STRENGTHS — スライダー最終幕：ステートメントが覆い被さる ---------- */
+.hg-shade{display:none}
+.js .hg-shade{display:block;position:absolute;inset:0;z-index:60;background:rgba(28,28,28,1);opacity:0;pointer-events:none}
+.hg-strengths{display:none}
+.js .hg-strengths{display:block;position:absolute;inset:0;z-index:65;pointer-events:none;perspective:1300px}
+.hgst-card{position:absolute;inset:0;background:#FAF9F6;will-change:transform;overflow:hidden;
+  box-shadow:0 48px 120px rgba(28,28,28,.40);display:flex;flex-direction:column;justify-content:center}
+.hgst-card.lin{padding:0}
+.hgst-card .sk-label{display:block;margin-bottom:clamp(20px,3.5vh,40px)}
+.lin{background:var(--paper);padding:clamp(80px,12vh,130px) 0 clamp(60px,9vh,110px)}
+.lin .lin-head{margin-bottom:clamp(18px,3vh,36px)}
+.lin .lin-head h2{margin-top:10px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em}
+.lin .lin-head h2 em{font-style:italic;color:var(--accent)}
+.lin .lin-sub{margin-top:16px;color:var(--ink-soft);font-size:clamp(13.5px,1.05vw,15.5px);line-height:1.85;max-width:58ch}
+/* 5ケースのリードは控えめな1行（証明はスライダー本体が担う） */
+.lin-cases{margin-top:clamp(36px,5vh,60px);border-top:1px solid var(--line);padding-top:20px;
+  color:var(--ink-soft);font-size:12.5px;letter-spacing:.05em;line-height:2}
+
+/* ---------- ABOUT — 経歴と実績（現サイトのデザインをそのまま流用） ---------- */
+.abt{position:relative;background:#FAF9F6}
+/* ABOUT見出し — 他セクション（Strengths等）と同じ「英字モノラベル＋セリフ見出し」型 */
+.prof-section-head{max-width:1000px;margin:0 auto;padding:clamp(36px,6vh,56px) 40px 0;display:block;text-align:left}
+.abt-head{font-family:"Inter","Noto Sans JP",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:500;
+  margin-top:10px;font-size:clamp(28px,3.6vw,54px);line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.prof-hero{display:grid;grid-template-columns:280px 1fr;max-width:1000px;margin:0 auto;padding:18px 40px 32px;gap:0}
+.prof-left{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 40px 16px 0}
+.prof-avatar-wrap{width:180px;height:180px;border-radius:50%;background:#d8d4ce;position:relative;margin-bottom:24px}
+.prof-avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.prof-name{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:30px;font-weight:400;letter-spacing:.02em;white-space:nowrap;margin-bottom:6px;text-align:center;color:#1c1c1c;line-height:1.2}
+.prof-kana{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:12px;color:#999;letter-spacing:.2em;text-align:center}
+.prof-right{padding:16px 0 16px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.prof-diagonal{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.prof-diagonal line{stroke:rgba(0,0,0,.07);stroke-width:1}
+.prof-timeline{position:relative;display:flex;flex-direction:column;gap:28px;z-index:1}
+.prof-tl-item{display:flex;align-items:center;gap:16px;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+.prof-tl-item.visible{opacity:1;transform:translateY(0)}
+/* スクラブ駆動時はCSSトランジションを切る（gsapとの競合防止） */
+.js .prof-tl-item{transition:none}
+.prof-tl-item:nth-child(1){margin-left:0}
+.prof-tl-item:nth-child(2){margin-left:40px;transition-delay:.05s}
+.prof-tl-item:nth-child(3){margin-left:80px;transition-delay:.1s}
+.prof-tl-item:nth-child(4){margin-left:80px;transition-delay:.15s}
+.prof-tl-item:nth-child(5){margin-left:80px;transition-delay:.2s}
+.prof-tl-item:nth-child(6){margin-left:120px;transition-delay:.25s}
+.prof-tl-item:nth-child(7){margin-left:160px;transition-delay:.3s}
+.prof-tl-item:nth-child(8){margin-left:20px;transition-delay:.35s}
+.prof-tl-item:nth-child(9){margin-left:60px;transition-delay:.4s}
+.prof-tl-year-wrap{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0}
+.prof-tl-since{font-size:8px;letter-spacing:.12em;color:#999;margin-bottom:1px}
+.prof-tl-year{font-size:11px;font-weight:500;background:#1c1c1c;color:#FAF9F6;padding:2px 8px;letter-spacing:.05em;white-space:nowrap}
+.prof-tl-text{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:1.6;color:#1c1c1c;white-space:nowrap}
+.prof-tl-now{text-align:right;font-size:11px;color:#999;font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;margin-top:12px;letter-spacing:.15em;padding-right:4px;z-index:1;position:relative}
+.prof-message{max-width:1000px;margin:0 auto;padding:0 40px 64px}
+.prof-message p{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:2.4;color:#555;font-weight:300;margin-top:36px}
+/* スキル索引（原稿マスター分）— 同じ幅に合わせて掲載 */
+/* 一列マーキー — 左へ流れ続けるスキル索引 */
+.sm-group{margin:0 0 clamp(16px,2.6vh,26px)}
+.lin .sm-group:first-of-type{margin-top:clamp(30px,4.5vh,50px)}
+.skill-marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(16px,2.6vh,26px) 0;width:100vw;margin-left:calc(50% - 50vw);pointer-events:auto}
+/* ホバー中は流れを止めて読めるように */
+.skill-marquee:hover .sm-track{animation-play-state:paused}
+.sm-track{display:flex;white-space:nowrap;width:max-content;animation:smScroll var(--smdur,30s) linear infinite}
+.skill-marquee.mr .sm-track{animation-direction:reverse}   /* 左→右 */
+.sm-seq{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;
+  font-size:clamp(24px,3.2vw,46px);font-weight:300;letter-spacing:.03em;color:#9a9a94}
+.sm-seq b{font-weight:400;color:var(--accent)}
+@keyframes smScroll{to{transform:translateX(-50%)}}
+@media(max-width:760px){
+  .prof-hero{grid-template-columns:1fr;padding:24px 24px 28px}
+  .prof-left{padding:0 0 24px;border-bottom:1px solid #e8e7e3}
+  .prof-right{padding:24px 0 0}
+  .prof-timeline{transform:scale(.78);transform-origin:top left;margin-bottom:-18%}
+  .prof-tl-text{white-space:normal}
+  .prof-message{padding:0 24px 48px}
+  .prof-section-head{padding-top:48px}
+}
+
+/* ---------- FOOTER — 現サイト踏襲のシンプル構成 ---------- */
+.site-foot{position:relative;z-index:10;background:var(--ink);color:var(--paper);
+  font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;
+  /* TOPと同じ極薄ドットグリッド（暗色版） */
+  background-image:radial-gradient(circle,rgba(250,249,246,.07) 1px,transparent 1.4px);background-size:18px 18px}
+.ft-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,10vh,110px) 40px 36px}
+.ft-label{color:rgba(250,249,246,.55)}
+.ft-lead{margin-top:18px;font-size:clamp(15px,1.4vw,19px);line-height:2;color:rgba(250,249,246,.78)}
+.ft-mail{display:inline-block;margin-top:clamp(20px,3.5vh,34px);font-family:"Inter","Noto Sans JP",sans-serif;
+  font-size:clamp(22px,3.6vw,44px);font-weight:500;letter-spacing:.01em;line-height:1.2;color:var(--paper);
+  border-bottom:1px solid rgba(250,249,246,.35);padding-bottom:8px;overflow-wrap:anywhere;
+  transition:color .3s,border-color .3s}
+.ft-mail:hover{color:var(--accent);border-color:var(--accent)}
+.ft-bottom{margin-top:clamp(48px,8vh,86px);padding-top:22px;border-top:1px solid rgba(250,249,246,.16);
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.ft-nav{display:flex;gap:26px}
+.ft-nav a{font-size:13px;letter-spacing:.08em;color:rgba(250,249,246,.75);transition:color .3s}
+.ft-nav a:hover{color:var(--paper)}
+.ft-copy{font-size:10px;color:rgba(250,249,246,.4);font-weight:300;letter-spacing:.04em}
+
+/* ===== SP：ピン留め演出を廃止して通常の縦積みスクロールに ===== */
+@media(max-width:820px){
+  html.sp-flow .hgal{height:auto;overflow:visible}
+  html.sp-flow .hgal-track{height:auto}
+  html.sp-flow .hgal-track > *{opacity:1}
+  html.sp-flow .hg-item{position:relative;inset:auto;height:100svh;pointer-events:auto;overflow:hidden}
+  html.sp-flow .hg-hero{position:relative;inset:auto;height:100svh}
+  html.sp-flow .hg-ui,html.sp-flow .hg-shade{display:none}
+  html.sp-flow .hg-strengths{position:relative;inset:auto;pointer-events:auto;perspective:none}
+  html.sp-flow .hgst-card{position:relative;inset:auto;transform:none;opacity:1;visibility:visible;padding:70px 0}
+}
+
+/* ===== SP：作品詳細もピン留めなし・縦積み＋フェードインのみ ===== */
+@media(max-width:820px){
+  html.sp-flow .showcase .panel{height:auto;min-height:100svh}
+  html.sp-flow .showcase .sc-ui{display:none}
+  /* 背景は白と薄いグリーンの交互 */
+  html.sp-flow .showcase .panel{background:#FAF9F6}
+  html.sp-flow .showcase .panel:nth-of-type(odd){background:#EDF4F1}
+  /* hcard：画像の直下にその説明文（画像→文章→画像→文章…の縦積み） */
+  html.sp-flow .panel.work.hcard{display:block}
+  html.sp-flow .panel.work.hcard .h-stage{position:relative;inset:auto;overflow:visible;display:block;padding:calc(var(--nav-h) + 8px) var(--pad) 0}
+  html.sp-flow .panel.work.hcard .h-track{display:block;transform:none!important;padding:0}
+  html.sp-flow .panel.work.hcard .h-slide{width:100%;height:auto;flex:none;margin:0 0 26px;
+    background:#FAF9F6;border-radius:16px;padding:14px 14px 22px;box-shadow:0 12px 34px rgba(20,15,10,.09)}
+  html.sp-flow .panel.work.hcard .h-slide .frame{position:relative;inset:auto;height:52vw;border-radius:10px;box-shadow:none}
+  html.sp-flow .panel.work.hcard .h-slide .hc-cap{position:relative;left:auto;bottom:auto;width:100%;margin-top:16px;padding:0 6px;opacity:1!important;visibility:visible!important}
+  html.sp-flow .panel.work.hcard .hc-cap h2{font-size:24px}
+  html.sp-flow .panel.work.hcard .w-caption{position:relative;left:auto;bottom:auto;width:auto;padding:0 var(--pad) 44px}
+  html.sp-flow .panel.work.hcard .hc-track{min-height:0}
+  html.sp-flow .panel.work.hcard::after{display:none}
+  /* gcard（判断）：一列に並べて文字を大きく */
+  html.sp-flow .panel.work.gcard .g-grid{grid-template-columns:1fr}
+  html.sp-flow .panel.work.gcard .g-cell{border-left:none;padding:20px 2px}
+  html.sp-flow .panel.work.gcard .g-cell:nth-child(2){border-top:1px solid var(--line)}
+  html.sp-flow .panel.work.gcard .g-empty{display:none}
+  html.sp-flow .panel.work.gcard .g-pt{font-size:14px;margin-bottom:8px}
+  html.sp-flow .panel.work.gcard .g-head{font-size:19px;margin-bottom:10px}
+  html.sp-flow .panel.work.gcard .g-text{font-size:13px;line-height:1.9}
+  /* pcard：ステップカードは縦に並べる */
+  html.sp-flow .panel.work.pcard .p-stack{height:auto}
+  html.sp-flow .panel.work.pcard .p-step{position:relative;inset:auto;height:auto;margin:0 0 14px;transform:none!important}
+}
+
+/* ===== ALL WORKS ページ（オーバーレイ型・通常スクロール） ===== */
+.aw{position:fixed;inset:0;z-index:700;background:var(--paper);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  background-image:radial-gradient(circle,rgba(28,28,28,.05) 1px,transparent 1.4px);background-size:18px 18px}
+.aw.on{display:block}
+.aw-inner{max-width:1280px;margin:0 auto;padding:calc(var(--nav-h) + clamp(22px,4.5vh,48px)) clamp(20px,3vw,40px) 90px}
+.aw-head{margin-bottom:clamp(26px,5vh,46px)}
+.aw-head h2{margin-top:12px;font-size:clamp(30px,3.6vw,54px);color:var(--ink);font-weight:500}
+.aw-head p{margin-top:12px;font-size:13.5px;color:#7a7b74;line-height:1.9;max-width:56ch}
+body.aw-lock{overflow:hidden}
+/* プロジェクト間はしっかり距離を取る */
+.aw .wk-sec{margin-bottom:clamp(72px,13vh,120px)}
+.aw .wk-sec:last-child{margin-bottom:0}
+.wk-sec-cta{display:flex;justify-content:center;margin-top:clamp(22px,4vh,36px)}
+.wk-sec-cta .wk-cta{display:inline-flex;align-items:center;gap:10px;margin:0;font-size:14px;letter-spacing:.04em;
+  border:1px solid var(--ink);border-radius:100px;padding:14px 30px;background:none;cursor:pointer;
+  color:var(--ink);transition:.35s var(--ease);font-family:"Noto Sans JP","Inter",sans-serif}
+.wk-sec-cta .wk-cta span{color:var(--accent);transition:transform .4s var(--ease),color .35s}
+.wk-sec-cta .wk-cta:hover{background:var(--ink);color:#FAF9F6}
+.wk-sec-cta .wk-cta:hover span{color:#FAF9F6;transform:translateX(5px)}
+/* ===== WORKS（制作物モーダル＋ライトボックス） ===== */
+.wk-btn{position:fixed;right:clamp(16px,2vw,28px);bottom:clamp(16px,3vh,28px);z-index:6500;display:none;
+  align-items:center;gap:8px;padding:13px 22px;border-radius:100px;background:var(--ink);color:#FAF9F6;
+  font-size:13px;letter-spacing:.06em;cursor:pointer;border:none;box-shadow:0 14px 40px rgba(28,28,28,.28);
+  font-family:"Noto Sans JP","Inter",sans-serif;transition:transform .3s var(--ease),background .3s}
+.wk-btn b{color:var(--accent);font-weight:600;font-family:"Inter",sans-serif}
+.wk-btn:hover{transform:translateY(-2px);background:#2a2a28}
+body.detail-on .wk-btn{display:inline-flex}
+.wk-modal{position:fixed;inset:0;z-index:9500;display:none}
+.wk-modal.on{display:block}
+.wk-back{position:absolute;inset:0;background:rgba(28,28,28,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.wk-panel{position:absolute;inset:clamp(12px,3vh,36px);background:var(--paper);border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 40px 120px rgba(28,28,28,.35)}
+.wk-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px clamp(18px,3vw,34px);border-bottom:1px solid var(--line);flex:none}
+.wk-title{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+.wk-close{border:1px solid var(--line);background:none;border-radius:100px;padding:8px 18px;font-size:12px;cursor:pointer;color:var(--ink);transition:.3s}
+.wk-close:hover{background:var(--ink);color:#FAF9F6}
+.wk-body{overflow-y:auto;padding:clamp(18px,3vw,34px);-webkit-overflow-scrolling:touch}
+.wk-sec{margin-bottom:clamp(30px,5vh,48px)}
+.wk-sec:last-child{margin-bottom:0}
+.wk-sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.wk-sec-head .wk-case{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.16em;color:var(--accent)}
+.wk-sec-head h3{font-size:clamp(15px,1.4vw,19px);color:var(--ink);font-weight:500}
+.wk-open-case{margin-left:auto;font-size:12.5px;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--ink);padding:0 0 2px;cursor:pointer;letter-spacing:.04em}
+.wk-open-case:hover{color:var(--accent);border-color:var(--accent)}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.wk-card{cursor:pointer;background:#F3F2EE;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:box-shadow .35s var(--ease),transform .35s var(--ease)}
+.wk-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(28,28,28,.12)}
+.wk-thumb{aspect-ratio:4/3;background:#E9E8E3;overflow:hidden}
+.wk-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+.wk-card:hover .wk-thumb img{transform:scale(1.05)}
+.wk-meta{padding:12px 14px 14px}
+.wk-meta h4{font-size:13.5px;line-height:1.5;color:var(--ink);font-weight:500}
+.wk-meta .wk-sub{margin-top:5px;font-size:11px;color:#9a9a94;letter-spacing:.03em}
+.wk-meta .wk-role{margin-top:4px;font-size:11px;color:#6f7069}
+.wk-meta .wk-n{margin-top:6px;font-size:10.5px;color:var(--accent);letter-spacing:.06em}
+/* ライトボックス */
+.wk-lb{position:fixed;inset:0;z-index:9600;background:rgba(28,28,28,.93);display:none;align-items:center;justify-content:center;flex-direction:column;padding:4vh 4vw}
+.wk-lb.on{display:flex}
+.wk-lb img{max-width:90vw;max-height:74vh;object-fit:contain;border-radius:6px;background:#FAF9F6}
+.wk-lb-cap{margin-top:14px;color:rgba(250,249,246,.85);font-size:13px;text-align:center;line-height:1.6}
+.wk-lb-cap span{display:block;font-size:11px;color:rgba(250,249,246,.5);margin-top:4px;letter-spacing:.08em}
+.wk-lb-x{position:absolute;top:18px;right:22px;background:none;border:1px solid rgba(250,249,246,.4);color:#FAF9F6;border-radius:100px;padding:8px 18px;font-size:12px;cursor:pointer}
+.wk-lb-prev,.wk-lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#FAF9F6;font-size:34px;cursor:pointer;padding:20px;opacity:.75}
+.wk-lb-prev:hover,.wk-lb-next:hover{opacity:1}
+.wk-lb-prev{left:6px}.wk-lb-next{right:6px}
+@media(max-width:820px){
+  .wk-panel{inset:10px}
+  .wk-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .wk-open-case{margin-left:0}
+  .wk-btn{padding:12px 18px}
+}
+
+/* ---------- SCREEN-TRANSITION SHEET ---------- */
+.swipe{position:fixed;inset:0;z-index:7000;background:var(--paper);transform:translateY(100%);pointer-events:none;will-change:transform,filter}
+/* while the detail page rises from the bottom over the cover (click transition) */
+.showcase.rise{position:fixed;inset:0;z-index:7100;height:100vh;overflow:hidden;will-change:transform}
+/* slider & detail are separate screens — only one is live at a time */
+.screen.off{display:none!important}
+/* =========================================================
+   HORIZONTAL GALLERY — full-screen panels, scroll drives sideways
+   each work = a full-bleed image with the text laid over it
+   ========================================================= */
+.hgal{position:relative;background:var(--paper)}
+.js .hgal{height:100vh;overflow:hidden}
+.hgal-track{position:relative}
+.js .hgal-track{height:100vh}
+/* every panel fills the screen */
+.hg-item{position:relative;width:100vw;height:100vh}
+/* when JS runs: panels stack on top of each other; each next one bleeds in
+   with the ink-spread filter */
+.js .hg-item{position:absolute;inset:0;pointer-events:none;will-change:opacity,filter;overflow:hidden}
+/* before JS sets opacities, show only the first work (prevents the last panel
+   flashing while the loader lifts) */
+.js .hgal-track > *{opacity:0}
+.js .hgal-track > :first-child{opacity:1}
+
+/* work — full-bleed image + overlaid text */
+.hg-media{display:block;position:absolute;inset:0;overflow:hidden}
+.hg-media .img{position:absolute;top:0;left:-7%;width:114%;height:100%;background-size:cover;background-position:center;will-change:transform}
+.hg-media img,.hg-media .gif{position:absolute;top:0;left:-7%;width:114%;height:100%;object-fit:cover}
+/* legibility scrim (top + bottom) so overlaid text always reads */
+.hg-item::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(12,14,12,.30) 0%,rgba(12,14,12,0) 20%,rgba(12,14,12,.10) 42%,rgba(12,14,12,.52) 66%,rgba(12,14,12,.84) 100%)}
+.hg-overlay{position:absolute;inset:0;z-index:2;color:#FAF9F6;pointer-events:none;
+  padding:calc(var(--nav-h) + clamp(16px,3.5vh,44px)) var(--pad) clamp(38px,7vh,92px);
+  display:flex;flex-direction:column;justify-content:flex-end}
+.hg-cat{display:inline-flex;gap:12px;align-items:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#FAF9F6;margin-bottom:clamp(14px,2vh,22px)}
+.hg-cat::before{content:"";width:30px;height:1px;background:var(--accent);flex:none}
+.hg-title{color:#FAF9F6;font-size:clamp(30px,4.4vw,68px);line-height:1.08;letter-spacing:-.01em;max-width:22ch}
+.hg-title em{font-style:italic;color:var(--accent)}
+.hg-lead{margin-top:clamp(16px,2.4vh,28px);max-width:54ch;color:rgba(255,255,255,.9);font-size:clamp(14px,1.15vw,17px);line-height:1.75}
+.hg-foot{display:flex;align-items:center;gap:clamp(20px,3vw,44px);margin-top:clamp(22px,3vh,38px);flex-wrap:wrap}
+.hg-foot .view{pointer-events:auto;display:inline-flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.04em;color:#FAF9F6;
+  border:1px solid rgba(255,255,255,.6);padding:12px 24px;border-radius:100px;transition:.35s var(--ease)}
+.hg-foot .view:hover{background:#FAF9F6;color:var(--ink);border-color:#FAF9F6}
+
+/* persistent UI (pinned) */
+.hg-ui{position:absolute;z-index:90;color:#FAF9F6;mix-blend-mode:difference;pointer-events:none}
+.hg-idx{left:var(--pad);top:calc(var(--nav-h) + 6px);font-family:"Inter",sans-serif;font-size:14px;letter-spacing:.05em}
+.hg-label{right:var(--pad);top:calc(var(--nav-h) + 8px);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.hg-prog{left:var(--pad);right:var(--pad);bottom:clamp(22px,4vh,40px);height:1px;background:rgba(255,255,255,.28)}
+.hg-prog i{position:absolute;left:0;top:0;height:100%;width:0;background:#FAF9F6}
+
+@media(max-width:820px){
+  .hg-title{font-size:clamp(24px,6.6vw,38px);line-height:1.14}
+  .hg-lead{font-size:14px;max-width:none}
+  .hg-foot{gap:16px}
+}
+/* =========================================================
+   FULLSCREEN SHOWCASE (the TOP experience)
+   Each work = one full viewport. Scroll swaps the whole screen.
+   ========================================================= */
+.showcase{position:relative}
+/* pinned state (added by JS when GSAP is ready) */
+.showcase.is-pinned{height:100vh;overflow:hidden}
+.showcase.is-pinned .panel{position:absolute;inset:0;height:100vh}
+
+.panel{position:relative;height:100vh;width:100%;overflow:hidden;display:flex}
+/* stacking order is assigned in JS (per panel, in DOM order) so later panels
+   reveal on top of earlier ones. Fallback stacks vertically so z is not needed. */
+
+/* work panels — a composed card: text + images that animate in */
+.panel.work{background:var(--card-bg,#f1ece4);color:var(--ink)}
+.panel.work .w-inner{position:relative;width:100%;height:100%;display:grid;
+  grid-template-columns:.82fr 1.18fr;gap:clamp(24px,4vw,70px);align-items:center;padding-top:var(--nav-h)}
+.panel.work .frame{position:absolute;inset:0;overflow:hidden;border-radius:12px;box-shadow:0 30px 70px rgba(20,15,10,.2)}
+.panel.work .frame .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center}
+/* drop a GIF/image straight in: <div class="frame"><img class="gif" src="your.gif"></div> */
+.panel.work .frame img,.panel.work .frame .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.panel.work .ghost{position:absolute;left:calc(-1 * clamp(4px,.6vw,12px));bottom:-4%;z-index:0;font-family:"Inter",sans-serif;font-size:clamp(150px,20vw,300px);line-height:.7;color:rgba(20,18,16,.05);pointer-events:none;font-style:italic}
+@media(max-width:820px){
+}
+
+/* card variant "hcard" — big centered image, caption bottom-left,
+   images flow right -> left on scroll */
+/* media sit in a horizontal row and flow LEFT on scroll; the stage's left/right
+   edges fade out so incoming/outgoing media glide in softly (no hard peek) */
+.panel.work.hcard .h-stage{position:absolute;inset:var(--nav-h) 0 0 0;display:flex;align-items:center;overflow:hidden;z-index:1;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%)}
+.panel.work.hcard .h-track{display:flex;gap:16vw;padding-left:14vw;align-items:center;will-change:transform}
+.panel.work.hcard .h-slide{position:relative;flex:0 0 72vw;height:70vh}
+.panel.work.hcard .h-slide .frame{box-shadow:0 40px 90px rgba(20,15,10,.22)}
+/* soft backing ONLY behind the bottom-left caption (keeps the image itself crisp,
+   no full-width bottom fade) — remove this rule entirely for a totally clean image */
+.panel.work.hcard::after{content:"";position:absolute;left:0;bottom:0;width:min(52vw,760px);height:46%;
+  background:radial-gradient(125% 120% at 0% 100%,var(--card-bg) 0%,rgba(255,255,255,0) 60%);z-index:2;pointer-events:none}
+.panel.work.hcard .w-caption{position:absolute;left:var(--pad);bottom:clamp(40px,8vh,88px);z-index:5;width:min(460px,42vw)}
+/* caption text SWAPS between tools on scroll — states stacked & crossfaded in place */
+.panel.work.hcard .hc-track{position:relative;min-height:clamp(150px,23vh,210px)}
+.panel.work.hcard .hc-cap{position:absolute;left:0;bottom:0;width:100%}
+.panel.work.hcard .hc-cap h2{font-size:var(--fs-case-head);line-height:1.08;letter-spacing:-.01em;margin-top:2px}
+.js .panel.work.hcard .hc-cap{opacity:0}
+.js .panel.work.hcard .hc-cap:first-child{opacity:1}
+.panel.work.hcard .hc-cap .cap-detail{margin-top:16px;color:var(--ink-soft);max-width:42ch;font-size:var(--fs-case-body);line-height:1.75}
+.panel.work.hcard .w-meta{margin-top:22px}
+.panel.work.hcard .ghost{z-index:0}
+@media(max-width:820px){
+  .panel.work.hcard .h-slide{flex:0 0 82vw;height:48vh}
+  .panel.work.hcard .h-track{padding-left:9vw;gap:24vw}
+  .panel.work.hcard .w-caption{width:86vw}
+  .panel.work.hcard .hc-track{min-height:200px}
+}
+
+/* card variant "gcard" — left section label + right 2-column Point grid w/ rules */
+.panel.work.gcard .g-inner{display:grid;grid-template-columns:minmax(150px,19%) 1fr;gap:clamp(28px,4.5vw,80px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.gcard .g-label{align-self:center}
+/* unified section label — small accent EN kicker + JP serif heading (shared by gcard & pcard) */
+.panel.work .g-en{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;display:inline-flex;gap:12px;align-items:center;margin-bottom:18px}
+.panel.work .g-en::before{content:"";width:32px;height:1px;background:var(--accent);flex:none}
+.panel.work .g-jp{display:block;font-family:"Noto Sans JP","Inter",-apple-system,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:500;line-height:1.14;color:var(--ink);font-size:clamp(26px,3.2vw,48px)}
+.panel.work.gcard .g-grid{display:grid;grid-template-columns:1fr 1fr}
+@media(min-width:821px){
+  /* リストの縦流しはページスクロール（スクラブ）が担当するため overflow は隠す */
+  .panel.work.gcard .g-grid{max-height:calc(100vh - var(--nav-h) - 110px);overflow:hidden;padding-right:8px}
+}
+.panel.work.gcard .g-cell{border-top:1px solid var(--line);border-left:1px solid var(--line);padding:clamp(16px,2.2vw,38px) clamp(18px,2vw,44px)}
+.panel.work.gcard .g-cell:nth-child(1),.panel.work.gcard .g-cell:nth-child(2){border-top:none}
+/* no outer line on the left — keep only the centre divider between the two columns */
+.panel.work.gcard .g-cell:nth-child(odd){border-left:none}
+.panel.work.gcard .g-pt{font-size:clamp(14px,1.4vw,19px);font-weight:500;letter-spacing:.02em;margin-bottom:12px}
+.panel.work.gcard .g-pt span{color:var(--accent)}
+.panel.work.gcard .g-head{font-size:clamp(18px,1.8vw,26px);line-height:1.3;margin-bottom:clamp(14px,1.8vh,26px);color:var(--ink)}
+.panel.work.gcard .g-text{font-size:var(--fs-case-body);line-height:1.9;color:var(--ink-soft)}
+@media(max-width:820px){
+  .panel.work.gcard .g-inner{grid-template-columns:1fr;gap:14px;align-content:center;padding-top:calc(var(--nav-h) + 1vh)}
+  .panel.work.gcard .g-label{align-self:start}
+  .panel.work.gcard .g-cell{padding:12px 14px}
+  .panel.work.gcard .g-pt{font-size:12px;margin-bottom:6px}
+  .panel.work.gcard .g-head{font-size:15px;margin-bottom:8px}
+  .panel.work.gcard .g-text{font-size:9.5px;line-height:1.75}
+}
+
+/* card variant "pcard" — left "工程" label + right stack of Step cards that
+   rise from below and stack on top of one another on scroll */
+.panel.work.pcard .p-inner{display:grid;grid-template-columns:minmax(120px,15%) 1fr;gap:clamp(22px,3.5vw,64px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.pcard .p-label{align-self:center}
+.panel.work.pcard .p-stack{position:relative;height:min(66vh,600px)}
+.panel.work.pcard .p-step{position:absolute;inset:0;margin:auto;width:100%;height:min(60vh,540px);
+  background:var(--paper);border-radius:18px;box-shadow:0 34px 80px rgba(20,15,10,.18);
+  display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(22px,3vw,54px);align-items:center;
+  padding:clamp(26px,3.6vw,58px);overflow:hidden;will-change:transform}
+.panel.work.pcard .ps-no{font-size:clamp(14px,1.4vw,19px);font-weight:500;letter-spacing:.02em;color:var(--ink);margin-bottom:14px}
+.panel.work.pcard .ps-no span{color:var(--accent)}
+.panel.work.pcard .ps-head{font-size:var(--fs-case-head);line-height:1.18;margin-bottom:clamp(18px,2.4vh,30px);color:var(--ink)}
+.panel.work.pcard .ps-sub{font-size:clamp(13px,1.2vw,17px);margin-bottom:6px;color:var(--ink)}
+.panel.work.pcard .ps-stack{font-size:11px;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:16px}
+.panel.work.pcard .ps-text{font-size:var(--fs-case-body);line-height:1.85;color:var(--ink-soft);max-width:42ch}
+.panel.work.pcard .ps-media{position:relative;height:80%;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:center;justify-content:center}
+.panel.work.pcard .ps-media span{color:var(--ink-soft);font-size:13px;letter-spacing:.12em}
+.panel.work.pcard .ps-media img,.panel.work.pcard .ps-media .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel.work.pcard .ps-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* 実メディアが入ったカードは、SPで映像の比率に合わせて大きく表示 */
+@media(max-width:820px){
+  html.sp-flow .panel.work.pcard .ps-media.has-video{height:auto;aspect-ratio:1280/528}
+  html.sp-flow .panel.work.pcard .ps-media.has-video video{position:static;width:100%;height:100%}
+}
+@media(max-width:820px){
+  .panel.work.pcard .p-inner{grid-template-columns:1fr;gap:14px;align-content:center;padding-top:calc(var(--nav-h) + 1vh)}
+  .panel.work.pcard .p-label{align-self:start}
+  .panel.work.pcard .p-stack{height:64vh}
+  .panel.work.pcard .p-step{grid-template-columns:1fr;height:60vh;gap:14px;padding:18px}
+  .panel.work.pcard .ps-head{font-size:22px;margin-bottom:12px}
+  .panel.work.pcard .ps-media{height:36%}
+}
+
+/* card variant "tcard" — left text column (write your copy here) + right image */
+.panel.work.tcard .t-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.tcard .t-text{max-width:580px}
+.panel.work.tcard .t-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;gap:12px;align-items:center}
+.panel.work.tcard .t-eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+.panel.work.tcard .t-head{font-size:var(--fs-case-head);line-height:1.14;letter-spacing:-.01em;margin-bottom:clamp(22px,3vh,40px);color:var(--ink)}
+.panel.work.tcard .t-body p{font-size:var(--fs-case-body);line-height:2;color:var(--ink-soft);margin-bottom:1.15em}
+.panel.work.tcard .t-body p:last-child{margin-bottom:0}
+.panel.work.tcard .t-media{position:relative;height:min(74vh,660px)}
+.panel.work.tcard .t-media .frame{position:absolute;inset:0;border-radius:14px;overflow:hidden;box-shadow:0 34px 80px rgba(20,15,10,.2)}
+.panel.work.tcard .t-media .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center}
+.panel.work.tcard .t-media img,.panel.work.tcard .t-media .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:820px){
+  .panel.work.tcard .t-inner{grid-template-columns:1fr;gap:20px;align-content:center}
+  .panel.work.tcard .t-media{height:38vh;order:-1}
+  .panel.work.tcard .t-head{font-size:26px}
+  .panel.work.tcard .t-text{max-width:none}
+}
+
+/* card variant "ccard" — centred, text-only conclusion */
+.panel.work.ccard .c-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:var(--nav-h)}
+.panel.work.ccard .c-eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(28px,4vh,44px);display:inline-flex;gap:14px;align-items:center}
+.panel.work.ccard .c-eyebrow::before,.panel.work.ccard .c-eyebrow::after{content:"";width:36px;height:1px;background:var(--accent)}
+.panel.work.ccard .c-head{font-size:var(--fs-case-head);line-height:1.34;letter-spacing:.005em;color:var(--ink);max-width:24ch}
+.panel.work.ccard .c-head em{font-style:italic;color:var(--accent)}
+.panel.work.ccard .c-text{margin-top:clamp(26px,3.6vh,40px);font-size:clamp(14px,1.35vw,19px);line-height:1.9;color:var(--ink-soft);max-width:54ch}
+@media(max-width:820px){
+  .panel.work.ccard .c-head{font-size:clamp(28px,8vw,40px)}
+  .panel.work.ccard .c-text{font-size:14px}
+}
+
+/* back-to-top button, shown on the conclusion */
+.panel.work.ccard .c-top{margin-top:clamp(32px,5vh,58px);display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;border:1px solid var(--ink);padding:14px 30px;border-radius:100px;background:none;cursor:pointer;color:var(--ink);transition:.35s var(--ease)}
+.panel.work.ccard .c-top span{color:var(--accent);transition:transform .4s var(--ease),color .35s}
+.panel.work.ccard .c-top:hover{background:var(--ink);color:var(--paper)}
+.panel.work.ccard .c-top:hover span{color:var(--paper);transform:translateY(-4px)}
+/* showcase persistent UI (index + progress), pinned with the showcase */
+.sc-ui{position:absolute;z-index:60;color:#FAF9F6;mix-blend-mode:difference;pointer-events:none}
+.sc-index{left:var(--pad);top:calc(var(--nav-h) + 6px);font-family:"Inter",sans-serif;font-size:14px;letter-spacing:.05em}
+.sc-index b{font-size:14px}
+.sc-progress{right:var(--pad);bottom:clamp(46px,9vh,110px);width:1px;height:120px;background:rgba(255,255,255,.35)}
+.sc-progress i{position:absolute;left:0;top:0;width:100%;height:0;background:#FAF9F6;transform-origin:top}
+.sc-scroll{left:50%;bottom:26px;transform:translateX(-50%);font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.sc-scroll .ln{width:1px;height:40px;background:rgba(255,255,255,.5);position:relative;overflow:hidden}
+.sc-scroll .ln::after{content:"";position:absolute;top:-100%;left:0;width:100%;height:100%;background:#FAF9F6;animation:scrolldown 1.8s var(--ease) infinite}
+@keyframes scrolldown{0%{top:-100%}60%,100%{top:100%}}
+@media(max-width:900px){.sc-progress{display:none}}
+.mag{display:inline-block;will-change:transform}
+.g1{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZThlZmVjIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iMTIwIiBmaWxsPSIjZmZmZmZmIi8+PHJlY3QgeD0iNzAiIHk9IjQ0IiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxZThmODMiIG9wYWNpdHk9IjEiLz48Y2lyY2xlIGN4PSIxNDAwIiBjeT0iNjAiIHI9IjEwIiBmaWxsPSIjY2ZkNmQzIiBvcGFjaXR5PSIxIi8+PGNpcmNsZSBjeD0iMTQ0NiIgY3k9IjYwIiByPSIxMCIgZmlsbD0iI2NmZDZkMyIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjE0OTIiIGN5PSI2MCIgcj0iMTAiIGZpbGw9IiNjZmQ2ZDMiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSI3MCIgeT0iMTgwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9Ijc0MCIgcng9IjIwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEwIiB5PSIyMzAiIHdpZHRoPSIyMjAiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI2VlZjJmMCIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjExMCIgeT0iMzI1IiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjU0IiByeD0iMTIiIGZpbGw9IiNlZWYyZjAiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTAiIHk9IjQyMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSI1NCIgcng9IjEyIiBmaWxsPSIjZWVmMmYwIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEwIiB5PSI1MTUiIHdpZHRoPSIyMjAiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI2VlZjJmMCIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjExMCIgeT0iNjEwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjU0IiByeD0iMTIiIGZpbGw9IiNlZWYyZjAiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTAiIHk9IjcwNSIgd2lkdGg9IjIyMCIgaGVpZ2h0PSI1NCIgcng9IjEyIiBmaWxsPSIjZWVmMmYwIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEwIiB5PSI4MDAiIHdpZHRoPSIyMjAiIGhlaWdodD0iNTQiIHJ4PSIxMiIgZmlsbD0iI2VlZjJmMCIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjExMCIgeT0iMjMwIiB3aWR0aD0iMTIiIGhlaWdodD0iNTQiIHJ4PSI2IiBmaWxsPSIjMWU4ZjgzIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEwIiB5PSIzMjUiIHdpZHRoPSIxMiIgaGVpZ2h0PSI1NCIgcng9IjYiIGZpbGw9IiMxZThmODMiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTAiIHk9IjQyMCIgd2lkdGg9IjEyIiBoZWlnaHQ9IjU0IiByeD0iNiIgZmlsbD0iIzFlOGY4MyIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjQzMCIgeT0iMTgwIiB3aWR0aD0iNTQwIiBoZWlnaHQ9Ijc0MCIgcng9IjIwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIxIi8+PGxpbmUgeDE9IjQ4MCIgeTE9IjI1MCIgeDI9IjkwMCIgeTI9IjI1MCIgc3Ryb2tlPSIjZTJlN2U1IiBzdHJva2Utd2lkdGg9IjgiIG9wYWNpdHk9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSI0ODAiIHkxPSIzMDgiIHgyPSI5MDAiIHkyPSIzMDgiIHN0cm9rZT0iI2UyZTdlNSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iNDgwIiB5MT0iMzY2IiB4Mj0iOTAwIiB5Mj0iMzY2IiBzdHJva2U9IiNlMmU3ZTUiIHN0cm9rZS13aWR0aD0iOCIgb3BhY2l0eT0iMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjQ4MCIgeTE9IjQyNCIgeDI9IjkwMCIgeTI9IjQyNCIgc3Ryb2tlPSIjZTJlN2U1IiBzdHJva2Utd2lkdGg9IjgiIG9wYWNpdHk9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSI0ODAiIHkxPSI0ODIiIHgyPSI5MDAiIHkyPSI0ODIiIHN0cm9rZT0iI2UyZTdlNSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iNDgwIiB5MT0iNTQwIiB4Mj0iOTAwIiB5Mj0iNTQwIiBzdHJva2U9IiNlMmU3ZTUiIHN0cm9rZS13aWR0aD0iOCIgb3BhY2l0eT0iMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjQ4MCIgeTE9IjU5OCIgeDI9IjkwMCIgeTI9IjU5OCIgc3Ryb2tlPSIjZTJlN2U1IiBzdHJva2Utd2lkdGg9IjgiIG9wYWNpdHk9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSI0ODAiIHkxPSI2NTYiIHgyPSI5MDAiIHkyPSI2NTYiIHN0cm9rZT0iI2UyZTdlNSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iNDgwIiB5MT0iNzE0IiB4Mj0iOTAwIiB5Mj0iNzE0IiBzdHJva2U9IiNlMmU3ZTUiIHN0cm9rZS13aWR0aD0iOCIgb3BhY2l0eT0iMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjQ4MCIgeTE9Ijc3MiIgeDI9IjkwMCIgeTI9Ijc3MiIgc3Ryb2tlPSIjZTJlN2U1IiBzdHJva2Utd2lkdGg9IjgiIG9wYWNpdHk9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSI0ODAiIHkxPSI4MzAiIHgyPSI5MDAiIHkyPSI4MzAiIHN0cm9rZT0iI2UyZTdlNSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cmVjdCB4PSIxMDMwIiB5PSIxODAiIHdpZHRoPSI1MDAiIGhlaWdodD0iNTQwIiByeD0iMjAiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjEiLz48bGluZSB4MT0iMTA4MCIgeTE9IjI1MCIgeDI9IjE0NzAiIHkyPSIyNTAiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjMwOCIgeDI9IjE0NzAiIHkyPSIzMDgiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjM2NiIgeDI9IjE0NzAiIHkyPSIzNjYiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjQyNCIgeDI9IjE0NzAiIHkyPSI0MjQiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjQ4MiIgeDI9IjE0NzAiIHkyPSI0ODIiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjU0MCIgeDI9IjE0NzAiIHkyPSI1NDAiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjU5OCIgeDI9IjE0NzAiIHkyPSI1OTgiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTA4MCIgeTE9IjY1NiIgeDI9IjE0NzAiIHkyPSI2NTYiIHN0cm9rZT0iI2U2ZWJlOSIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cmVjdCB4PSIxMDMwIiB5PSI3NjAiIHdpZHRoPSI1MDAiIGhlaWdodD0iMTYwIiByeD0iMjAiIGZpbGw9IiMxZThmODMiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMDcwIiB5PSI4MDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC45Ii8+PC9zdmc+") center/cover no-repeat}
+.g2{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZjJlOWRmIi8+PHJlY3QgeD0iNzAiIHk9IjE1MCIgd2lkdGg9Ijc2MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxOCIgZmlsbD0iIzI0MWExMiIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjcwIiB5PSIzMjAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMTUwIiByeD0iMTgiIGZpbGw9IiMyNDFhMTIiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSI3MCIgeT0iNTIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjY0IiByeD0iMzIiIGZpbGw9IiNjOTZhM2MiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSI5MDAiIHk9IjEyMCIgd2lkdGg9IjYzMCIgaGVpZ2h0PSI3NjAiIHJ4PSIyNiIgZmlsbD0iI2M5NmEzYyIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjEyMTUiIGN5PSI0NzAiIHI9IjE1MCIgZmlsbD0iI2YyZTlkZiIgb3BhY2l0eT0iMC4yNSIvPjxyZWN0IHg9IjcwIiB5PSI3MjAiIHdpZHRoPSI1MjAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iIzI0MWExMiIgb3BhY2l0eT0iMC4yNSIvPjxyZWN0IHg9IjcwIiB5PSI3NzAiIHdpZHRoPSI0MjAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iIzI0MWExMiIgb3BhY2l0eT0iMC4xOCIvPjwvc3ZnPg==") center/cover no-repeat}
+.g3{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZTllNmY0Ii8+PHJlY3QgeD0iNjAwIiB5PSI5MCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSI4MjAiIHJ4PSI1NCIgZmlsbD0iIzFjMTgzNiIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjYyNCIgeT0iMTIwIiB3aWR0aD0iMzUyIiBoZWlnaHQ9Ijc2MCIgcng9IjQwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNjY0IiB5PSIxNzAiIHdpZHRoPSIxODAiIGhlaWdodD0iMzAiIHJ4PSIxNSIgZmlsbD0iIzFjMTgzNiIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjY2NCIgeT0iMjQwIiB3aWR0aD0iMjcyIiBoZWlnaHQ9IjE1MCIgcng9IjIyIiBmaWxsPSIjNWI1M2M2IiBvcGFjaXR5PSIxIi8+PGNpcmNsZSBjeD0iNzIwIiBjeT0iMzE1IiByPSIzNCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC45Ii8+PHJlY3QgeD0iNjY0IiB5PSI0MzAiIHdpZHRoPSIyNzIiIGhlaWdodD0iNzIiIHJ4PSIxOCIgZmlsbD0iI2VlZWNmNyIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjY2NCIgeT0iNTMwIiB3aWR0aD0iMjcyIiBoZWlnaHQ9IjcyIiByeD0iMTgiIGZpbGw9IiNlZWVjZjciIG9wYWNpdHk9IjEiLz48cmVjdCB4PSI2NjQiIHk9IjYzMCIgd2lkdGg9IjI3MiIgaGVpZ2h0PSI3MiIgcng9IjE4IiBmaWxsPSIjZWVlY2Y3IiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNjY0IiB5PSI3MzAiIHdpZHRoPSIyNzIiIGhlaWdodD0iNzIiIHJ4PSIxOCIgZmlsbD0iI2VlZWNmNyIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjcwNCIgY3k9IjQ2NiIgcj0iMjIiIGZpbGw9IiM1YjUzYzYiIG9wYWNpdHk9IjEiLz48Y2lyY2xlIGN4PSI3MDQiIGN5PSI1NjYiIHI9IjIyIiBmaWxsPSIjNWI1M2M2IiBvcGFjaXR5PSIxIi8+PGNpcmNsZSBjeD0iNzA0IiBjeT0iNjY2IiByPSIyMiIgZmlsbD0iIzViNTNjNiIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjcwNCIgY3k9Ijc2NiIgcj0iMjIiIGZpbGw9IiM1YjUzYzYiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIzMDAiIHk9IjMwMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIyMjAiIHJ4PSIyNiIgZmlsbD0iIzViNTNjNiIgb3BhY2l0eT0iMC41Ii8+PHJlY3QgeD0iMTA5MCIgeT0iNTIwIiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgcng9IjI2IiBmaWxsPSIjMWMxODM2IiBvcGFjaXR5PSIwLjM1Ii8+PC9zdmc+") center/cover no-repeat}
+.g4{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjMGYyMjMzIi8+PHJlY3QgeD0iNzAiIHk9IjExMCIgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MCIgcng9IjIwIiBmaWxsPSIjMjY0NDVlIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNzAiIHk9IjIxMCIgd2lkdGg9IjAiIGhlaWdodD0iMCIgcng9IjE0IiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNzAiIHk9IjIxMCIgd2lkdGg9IjAiIGhlaWdodD0iMCIgcng9IjE0IiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNzAiIHk9IjIxMCIgd2lkdGg9IjAiIGhlaWdodD0iMCIgcng9IjE0IiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNzAiIHk9IjIwMCIgd2lkdGg9IjQ0MCIgaGVpZ2h0PSIyNTAiIHJ4PSIyMCIgZmlsbD0iIzE2MzI0YSIgb3BhY2l0eT0iMSIvPjxwb2x5bGluZSBwb2ludHM9IjExMCwyODAgMTU1LDI5MCAyMDAsMzQwIDI0NSwzNTAgMjkwLDQwMCAzMzUsMzUwIDM4MCwzNDAgNDI1LDI5MCA0NzAsMjgwIiBmaWxsPSJub25lIiBzdHJva2U9IiM0OWE2ZTAiIHN0cm9rZS13aWR0aD0iNyIvPjxyZWN0IHg9IjU2MCIgeT0iMjAwIiB3aWR0aD0iMCIgaGVpZ2h0PSIwIiByeD0iMTQiIGZpbGw9IiMxNjMyNGEiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSI1NjAiIHk9IjIwMCIgd2lkdGg9IjAiIGhlaWdodD0iMCIgcng9IjE0IiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNTYwIiB5PSIyMDAiIHdpZHRoPSIwIiBoZWlnaHQ9IjAiIHJ4PSIxNCIgZmlsbD0iIzE2MzI0YSIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjU2MCIgeT0iMjAwIiB3aWR0aD0iNDcwIiBoZWlnaHQ9IjEyMCIgcng9IjE4IiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNTYwIiB5PSIzNDAiIHdpZHRoPSI0NzAiIGhlaWdodD0iMTEwIiByeD0iMTgiIGZpbGw9IiMxNjMyNGEiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMDgwIiB5PSIyMDAiIHdpZHRoPSI0NTAiIGhlaWdodD0iMjUwIiByeD0iMjAiIGZpbGw9IiMxNjMyNGEiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTIwIiB5PSIyNDAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgiIHJ4PSI5IiBmaWxsPSIjMjY0NDVlIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEyMCIgeT0iMjgwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4IiByeD0iOSIgZmlsbD0iIzI2NDQ1ZSIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjExMjAiIHk9IjMyMCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxOCIgcng9IjkiIGZpbGw9IiMyNjQ0NWUiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTIwIiB5PSIzNjAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgiIHJ4PSI5IiBmaWxsPSIjMjY0NDVlIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTEyMCIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4IiByeD0iOSIgZmlsbD0iIzI2NDQ1ZSIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjcwIiB5PSI1MDAiIHdpZHRoPSI0NTAiIGhlaWdodD0iMzYwIiByeD0iMjAiIGZpbGw9IiMxNjMyNGEiIG9wYWNpdHk9IjEiLz48Y2lyY2xlIGN4PSIxNjAiIGN5PSI2MDAiIHI9IjU0IiBmaWxsPSIjNDlhNmUwIiBvcGFjaXR5PSIwLjkiLz48cmVjdCB4PSIxMjAiIHk9IjY5MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMCIgcng9IjEwIiBmaWxsPSIjMjY0NDVlIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTIwIiB5PSI3MzAiIHdpZHRoPSIyMjAiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iIzI2NDQ1ZSIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjU2MCIgeT0iNTAwIiB3aWR0aD0iNDUwIiBoZWlnaHQ9IjM2MCIgcng9IjIwIiBmaWxsPSIjMTYzMjRhIiBvcGFjaXR5PSIxIi8+PGNpcmNsZSBjeD0iNjUwIiBjeT0iNjAwIiByPSI1NCIgZmlsbD0iIzQ5YTZlMCIgb3BhY2l0eT0iMC45Ii8+PHJlY3QgeD0iNjEwIiB5PSI2OTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iIzI2NDQ1ZSIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjYxMCIgeT0iNzMwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjIwIiByeD0iMTAiIGZpbGw9IiMyNjQ0NWUiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMDUwIiB5PSI1MDAiIHdpZHRoPSI0NTAiIGhlaWdodD0iMzYwIiByeD0iMjAiIGZpbGw9IiMxNjMyNGEiIG9wYWNpdHk9IjEiLz48Y2lyY2xlIGN4PSIxMTQwIiBjeT0iNjAwIiByPSI1NCIgZmlsbD0iIzQ5YTZlMCIgb3BhY2l0eT0iMC45Ii8+PHJlY3QgeD0iMTEwMCIgeT0iNjkwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwIiByeD0iMTAiIGZpbGw9IiMyNjQ0NWUiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMTAwIiB5PSI3MzAiIHdpZHRoPSIyMjAiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iIzI2NDQ1ZSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==") center/cover no-repeat}
+.g5{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZjRlYWU3Ii8+PHJlY3QgeD0iNjAiIHk9IjEyMCIgd2lkdGg9IjkwMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0iIzFhMTUxMiIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjYwIiB5PSIyNzAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjEyMCIgcng9IjEwIiBmaWxsPSIjZDg0MTJiIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNjAiIHk9IjQyMCIgd2lkdGg9Ijc2MCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0iIzFhMTUxMiIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjEzNTAiIGN5PSIzMDAiIHI9IjE4MCIgZmlsbD0iI2Q4NDEyYiIgb3BhY2l0eT0iMC4xOCIvPjxyZWN0IHg9IjYwIiB5PSI2NDAiIHdpZHRoPSIxNDcwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjMWExNTEyIiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSI2MCIgeT0iNzAwIiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjIwMCIgcng9IjE2IiBmaWxsPSIjZWFkZmRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iOTAiIHk9Ijc0MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMCIgcng9IjEwIiBmaWxsPSIjZDg0MTJiIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iOTAiIHk9Ijc5MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxNiIgcng9IjgiIGZpbGw9IiMxYTE1MTIiIG9wYWNpdHk9IjAuNSIvPjxyZWN0IHg9IjU2MCIgeT0iNzAwIiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjIwMCIgcng9IjE2IiBmaWxsPSIjZWFkZmRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iNTkwIiB5PSI3NDAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iI2Q4NDEyYiIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjU5MCIgeT0iNzkwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2IiByeD0iOCIgZmlsbD0iIzFhMTUxMiIgb3BhY2l0eT0iMC41Ii8+PHJlY3QgeD0iMTA2MCIgeT0iNzAwIiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjIwMCIgcng9IjE2IiBmaWxsPSIjZWFkZmRhIiBvcGFjaXR5PSIxIi8+PHJlY3QgeD0iMTA5MCIgeT0iNzQwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjIwIiByeD0iMTAiIGZpbGw9IiNkODQxMmIiIG9wYWNpdHk9IjEiLz48cmVjdCB4PSIxMDkwIiB5PSI3OTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTYiIHJ4PSI4IiBmaWxsPSIjMWExNTEyIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=") center/cover no-repeat}
+.g6{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjMTUxNzFjIi8+PGNpcmNsZSBjeD0iODAwIiBjeT0iNDcwIiByPSIyMzAiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjEiLz48Y2lyY2xlIGN4PSI4MDAiIGN5PSI0NzAiIHI9IjIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTllNWRkIiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTY5MCA1NjAgTDY5MCAzODAgTDgwMCA1MjAgTDkxMCAzODAgTDkxMCA1NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5ZTVkZCIgc3Ryb2tlLXdpZHRoPSIxNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iNjYwIiB5PSI3NjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iI2U5ZTVkZCIgb3BhY2l0eT0iMSIvPjxyZWN0IHg9IjcwMCIgeT0iODA2IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE4IiByeD0iOSIgZmlsbD0iIzhmODU3OCIgb3BhY2l0eT0iMSIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjM2MCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjQyMCIgY3k9IjEyMCIgcj0iMTAiIGZpbGw9IiNlOWU1ZGQiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==") center/cover no-repeat}
+/* ==== 実画像（現行サイト素材・取り急ぎ差し込み） ==== */
+.img.hero-p01{background:#1c1c1c url("assets/img/works/work_24_work_24_hero.webp") center/cover no-repeat}
+.img.hero-p03{background:#1c1c1c url("assets/img/works/work_01_work_01_hero.webp") center/cover no-repeat}
+.img.hero-p04{background:#1c1c1c url("assets/img/works/work_20_work_20_hero.webp") center/cover no-repeat}
+.img.hero-p05{background:#1c1c1c url("assets/img/works/work_08_work_08_hero.webp") center/cover no-repeat}
+.img.hero-p06{background:#1c1c1c url("assets/img/works/work_17_work_17_hero.webp") center/cover no-repeat}
+.img.hero-p07{background:#1c1c1c url("assets/img/works/work_06_work_06_a.webp") center/cover no-repeat}
+.img.ctx-c01{background:#1c1c1c url("assets/img/works/work_24_work_24_hero.webp") center/cover no-repeat}
+.img.tool-conv{background:#FAF9F6 url("assets/img/works/work_27_work_27.webp") center/cover no-repeat}
+.img.tool-annot{background:#FAF9F6 url("assets/img/works/work_24_work_24.webp") center/cover no-repeat}
+.img.ctx-c03{background:#1c1c1c url("assets/img/works/work_12_work_12_hero.webp") center/cover no-repeat}
+.img.ctx-c04{background:#1c1c1c url("assets/img/works/work_20_work_20_hero.webp") center/cover no-repeat}
+.img.ctx-c05{background:#1c1c1c url("assets/img/works/work_08_work_08_hero.webp") center/cover no-repeat}
+.img.ctx-c06{background:#1c1c1c url("assets/img/works/work_17_work_17_hero.webp") center/cover no-repeat}
+.img.ctx-c07{background:#1c1c1c url("assets/img/works/work_06_work_06_a.webp") center/cover no-repeat}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+  .js .line-mask > *{transform:none}
+  .js .lin .wrap{opacity:1;transform:none}
+  .js .stg-path{stroke-dashoffset:0}
+  .js .stg-node{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+<div class="cursor-follow"><span class="cur-txt">View</span></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-count" data-count>00</div>
+  <div class="l-word"><span>YUSAKU KANDA</span><span class="lw-sep">—</span><span>PORTFOLIO</span><span class="lw-yr">©2026</span></div>
+</div>
+<div class="loader-bar"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <nav><a href="#top" class="nav-top">Top</a><a href="#work">Project</a><a href="#allworks" class="nav-aw">All Works</a><a href="#about" class="nav-about">About</a><a href="mailto:yusaku.kanda99@gmail.com" class="nav-contact">Contact</a></nav>
+</header>
+
+<main id="top">
+
+  <!-- ===== FULL-SCREEN HORIZONTAL GALLERY (opens with the hero cover) ===== -->
+  <section class="hgal screen" id="work">
+    <div class="hg-ui hg-idx"><b data-cur>01</b> <span style="opacity:.6">/ 06</span></div>
+    <div class="hg-ui hg-label">Projects</div>
+    <div class="hg-ui hg-prog"><i data-prog></i></div>
+
+    <!-- opening cover — the hero. Scroll splits it vertically (left/right),
+         then the dark sheet beneath splits horizontally (top/bottom). -->
+    <!-- opening — hero statement. scroll fades it while work 01 grows to fit -->
+    <div class="hg-hero">
+      <div class="hero">
+        <!-- HERO MOTION：三角（企画×デザイン×運営）→ コンセプト → 凝縮 → ステートメント -->
+        <div class="hm-stage" role="img" aria-label="企画×デザイン×運営 — つくって、終わらせない。ブランドを育てていく。">
+          <div class="hm-mag">
+          <svg id="hmSvg" viewBox="0 28 1200 452" fill="none">
+            <path id="hmShape" stroke="#4a4b44" stroke-width="2.4" fill="none"/>
+            <rect id="hmPill" stroke="#4a4b44" stroke-width="2.4" fill="var(--paper)" opacity="0"/>
+            <!-- コンセプト：三角形の中心に最初から居る（収束する円に覆われて消える） -->
+            <g id="hmConcept" opacity="0">
+              <text class="jp-b" font-size="24" text-anchor="middle" x="600" y="268" letter-spacing=".1em">コンセプト</text>
+              <text class="en-s" font-size="10.5" text-anchor="middle" x="600" y="291">Concept</text>
+            </g>
+            <g id="hmA" opacity="0">
+              <circle r="46" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
+              <text class="jp-b" font-size="17" text-anchor="middle" y="-1">企 画</text>
+              <text class="en-s" font-size="9.5" text-anchor="middle" y="15">Plan</text>
+            </g>
+            <g id="hmB" opacity="0">
+              <circle r="46" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
+              <text class="jp-b" font-size="17" text-anchor="middle" y="-1">デザイン</text>
+              <text class="en-s" font-size="9.5" text-anchor="middle" y="15">Creative</text>
+            </g>
+            <g id="hmC" opacity="0">
+              <circle r="46" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
+              <text class="jp-b" font-size="17" text-anchor="middle" y="-1">運 営</text>
+              <text class="en-s" font-size="9.5" text-anchor="middle" y="15">Operation</text>
+            </g>
+            <g id="hmCore" opacity="0">
+              <circle id="hmCoreC" r="46" cx="600" cy="270" fill="var(--paper)" stroke="#4a4b44" stroke-width="2.2"/>
+            </g>
+            <text id="hmFormula" text-anchor="middle" x="600" y="262" opacity="0"
+              font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
+              letter-spacing=".06em">企 画<tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">デザイン</tspan><tspan fill="var(--accent)" font-size="23" dy="-2"> × </tspan><tspan dy="2">運 営</tspan></text>
+            <text id="hmFormulaSub" text-anchor="middle" x="600" y="308" opacity="0"
+              font-family="'Noto Sans JP',sans-serif" font-weight="700" font-size="29" fill="var(--ink)"
+              letter-spacing=".06em">の一気通貫</text>
+            <g id="hmState" opacity="0">
+              <text class="jp-b" id="hmL1" font-size="28" text-anchor="middle" x="600" y="260" letter-spacing=".08em">つくって、終わらせない。</text>
+              <text class="jp-b" id="hmL2" font-size="28" text-anchor="middle" x="600" y="302" letter-spacing=".08em">ブランドを育てていく。</text>
+            </g>
+          </svg>
+          </div>
+        </div>
+        <div class="eyebrow reveal"><span class="dot"></span><span class="mono-label">Yusaku Kanda<br>Portfolio</span></div>
+        <p class="hero-lead reveal">現場の制約から出発し、既にある環境を働かせて成果へ変える。プロダクト／UI・UX を中心に、設計と実装をひとりで一気通貫するデザイナー。</p>
+        <div class="hero-foot">
+          <span class="mono-label reveal">Projects ↓</span>
+          <span class="scroll-cue reveal">Scroll<span class="ln"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="hg-shade" aria-hidden="true"></div>
+    <!-- 最終幕：スキル（左右に流れるテキスト）が最後の作品に覆い被さる -->
+    <div class="hg-strengths">
+      <div class="hgst-card lin">
+        <div class="wrap"><span class="mono-label sk-label">Skills</span></div>
+      <div class="sm-group">
+        <div class="skill-marquee mr" style="--smdur:36s">
+          <div class="sm-track"><span class="sm-seq"><b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　<b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　</span><span class="sm-seq" aria-hidden="true"><b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　<b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　</span></div>
+        </div>
+      </div>
+      <div class="sm-group">
+        <div class="skill-marquee " style="--smdur:30s">
+          <div class="sm-track"><span class="sm-seq"><b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　<b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　<b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　</span><span class="sm-seq" aria-hidden="true"><b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　<b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　<b>Development</b>：・AIを活用した開発（Claude / React / Python / Supabase）　　</span></div>
+        </div>
+      </div>
+      <div class="sm-group">
+        <div class="skill-marquee mr" style="--smdur:32s">
+          <div class="sm-track"><span class="sm-seq"><b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　<b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　</span><span class="sm-seq" aria-hidden="true"><b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　<b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　</span></div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="hgal-track">
+
+      <!-- Work 01 — real, full-bleed image + overlaid text -->
+      <article class="hg-item" data-i="1">
+        <a class="hg-media" href="portfolio.html"><div class="img hero-p01"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 01 — ミカタグループ（ミカタ税理士法人） / 2026</span>
+            <h3 class="hg-title">サポート終了の電子文書システムから、<em>AI対応システム</em>への移行</h3>
+            <p class="hg-lead">長年使ってきた文書システムはサポートが終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装した。</p>
+            <div class="hg-foot"><a href="portfolio.html" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 03 — 構造を見ている -->
+      <article class="hg-item" data-i="2">
+        <a class="hg-media" href="#"><div class="img hero-p03"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 03 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
+            <h3 class="hg-title">続くことが事業になる商材を、<em>続く状態</em>にする</h3>
+            <p class="hg-lead">顧問契約は、獲得して終わりではなく、お客様の信頼を得て伴走できることに価値がある。認知から契約後の関係維持までの6つの接点を、契約の前と後で役割を分けて設計し、クリエイティブは社内で回した。重心は、契約後の側に置いている。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 04 — 判断を持っている -->
+      <article class="hg-item" data-i="3">
+        <a class="hg-media" href="#"><div class="img hero-p04"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 04 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
+            <h3 class="hg-title">ミカタというブランドを、<em>全方位</em>で運用した</h3>
+            <p class="hg-lead">ロゴとロゴマニュアルはあっても、現場はトンマナが分からず困っていた。ルールを増やすのではなく、実物を作ることで基準を示した。会社案内・社章・社内報・採用・相続——ミカタの顔を4面すべて一人で持っている。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 05 — 言葉を作る -->
+      <article class="hg-item" data-i="4">
+        <a class="hg-media" href="#"><div class="img hero-p05"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 05 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
+            <h3 class="hg-title">理念が、まだ<em>成立</em>していなかった</h3>
+            <p class="hg-lead">依頼は会社案内の制作だったが、最初に取り組んだのは企業理念と代表メッセージの言語化である。言葉が決まらなければ、紙面も決まらない。そこから撮影・作図・執筆・デザインまで、全工程を単独で担当した。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 06 — 第三者が評価した -->
+      <article class="hg-item" data-i="5">
+        <a class="hg-media" href="#"><div class="img hero-p06"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 06 — Sony Fashion Entertainments（個人応募） / 2018</span>
+            <h3 class="hg-title">Sony <em>FES Watch U</em> デザインコンペ</h3>
+            <p class="hg-lead">電子ペーパー製ウォッチのデザインコンペに個人で応募し、全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトや専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開されている。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 07 — 運用を渡す -->
+      <article class="hg-item" data-i="6">
+        <a class="hg-media" href="#"><div class="img hero-p07"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 07 — MCD MIX（母校の卒業生コミュニティ） / 個人制作</span>
+            <h3 class="hg-title">卒業生コミュニティの受け皿を、<em>運用し続けられる形</em>で作った</h3>
+            <p class="hg-lead">母校の卒業生を含むコミュニティ「MCD MIX」に、その拠点となるサイトを作った。運営するのはデザイナーでもエンジニアでもないため、作って渡すだけでは止まってしまう。非技術者でも自分で運用し続けられる状態まで含めて、単独で構築した。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ===== ABOUT — 経歴と実績（現サイトのデザイン・内容をそのまま流用） ===== -->
+  <section class="abt screen" id="about">
+    <div class="abt-pin">
+    <div class="prof-section-head">
+      <span class="mono-label">About</span>
+      <h2 class="abt-head">経歴と実績</h2>
+    </div>
+
+    <div class="prof-hero">
+      <div class="prof-left">
+        <div class="prof-avatar-wrap">
+          <img src="assets/img/kanda_yusaku.webp" alt="Yusaku Kanda" class="prof-avatar-img">
+        </div>
+        <h2 class="prof-name">Yusaku Kanda</h2>
+        <p class="prof-kana">かんだ ゆうさく</p>
+      </div>
+
+      <div class="prof-right">
+        <svg class="prof-diagonal" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="0" x2="100" y2="100" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="prof-timeline">
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap">
+              <span class="prof-tl-since">Since</span>
+              <span class="prof-tl-year">1994.09</span>
+            </div>
+            <p class="prof-tl-text">出身地 愛知県 名古屋市</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2013.04</span></div>
+            <p class="prof-tl-text">名古屋芸術大学 デザイン学部 入学</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2017.03</span></div>
+            <p class="prof-tl-text">名古屋芸術大学 デザイン学部 卒業</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2017.04</span></div>
+            <p class="prof-tl-text">ARアドバンストテクノロジ株式会社にてインハウスデザイナーとして勤務</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2017.09</span></div>
+            <p class="prof-tl-text">大名古屋電脳博覧会 2017 展示</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2018.10</span></div>
+            <p class="prof-tl-text">Sony's FES Watch U Creative Festival デザイン採用</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2021.06</span></div>
+            <p class="prof-tl-text">病気療養のため退職（現在は回復）</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2023.03</span></div>
+            <p class="prof-tl-text">ミカタ税理士法人にてインハウスデザイナーとして勤務</p>
+          </div>
+          <div class="prof-tl-item">
+            <div class="prof-tl-year-wrap"><span class="prof-tl-year">2025.10</span></div>
+            <p class="prof-tl-text">「ながくてアートブック」開催（企画及び運営）</p>
+          </div>
+        </div>
+        <p class="prof-tl-now">現在に至る</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="prof-message">
+      <p>形になっていないものに、構造と言葉を与えて、人が使える状態にする——課題の発見から浸透まで、1本の線で担ってきました。企画の立案から数値改善、そしてデザインがもたらす感動までを、すべて地続きのプロセスとして捉え、形にしています。次は前例のない環境に身を置き、この職能の幅を最大限に活かして、新たな価値を創造したいと考えています。</p>
+    </div>
+
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-foot screen" id="foot">
+    <div class="ft-inner">
+      <span class="mono-label ft-label">Contact</span>
+      <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
+      <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+      <div class="ft-bottom">
+        <nav class="ft-nav">
+          <a href="#top">Top</a><a href="#work">Project</a><a href="#allworks" class="nav-aw">All Works</a><a href="#strengths">Skills</a><a href="#about">About</a>
+        </nav>
+        <p class="ft-copy">© Yusaku Kanda — 本サイトは神田有作のポートフォリオであり、無断転載等の一切を禁止しております</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FULLSCREEN SHOWCASE ===== -->
+  <section class="showcase screen" id="case">
+
+    <!-- persistent UI -->
+    <div class="sc-ui sc-index"><b data-cur>01</b> <span style="opacity:.6" data-tot>/ 05</span></div>
+    <div class="sc-ui sc-progress"><i data-prog></i></div>
+    <div class="sc-ui sc-scroll" data-hint>Scroll<span class="ln"></span></div>
+
+    <!-- Panel 1 — tcard: 課題と背景 (the base panel — visible on entry) -->
+    <div class="panel work tcard" data-i="01" style="--card-bg:#F1F4F4">
+      <div class="t-inner wrap">
+        <div class="t-text">
+          <span class="t-eyebrow t-anim">Context</span>
+          <h2 class="t-head t-anim">課題と背景</h2>
+          <div class="t-body">
+            <p class="t-anim">社内の文書は、すべて独自形式で管理・蓄積されていた。専用ソフトがなければ開けず、公式サポートは終了し、機能のカスタマイズもできない。顧客への納品時には、毎回PDFへ変換する必要があった。</p>
+            <p class="t-anim">社内にはすでに Google Workspace の Gemini があり、現場でも自発的にAIを使った効率化が始まっていた。とはいえ書類は独自形式のままで、AIにそのまま渡せるものは限られていた。</p>
+            <p class="t-anim">このシステムを使う社員は全国で634名おり、ITリテラシーにも差がある。ヒアリングで見えたのは、元データと変換後データの二重管理が人によってばらばらなこと、そして操作感が変わると使われなくなること、の2つだった。</p>
+          </div>
+        </div>
+        <div class="t-media">
+          <div class="frame"><div class="img ctx-c01"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2 — hcard: big centered image, caption bottom-left; images flow R→L
+         and the caption TEXT swaps to whichever tool the centred image shows -->
+    <div class="panel work hcard" data-i="02" style="--card-bg:#FBFAF8">
+      <span class="ghost">02</span>
+      <!-- 3 media in a row; they flow LEFT on scroll. Each .img is a placeholder —
+           swap for a GIF:  <div class="frame"><img class="gif" src="your.gif"></div> -->
+      <div class="h-stage">
+        <div class="h-track">
+          <div class="h-slide s1"><div class="frame"><div class="img tool-conv"></div></div></div>
+          <div class="h-slide"><div class="frame"><div class="img tool-annot"></div></div></div>
+          <div class="h-slide"><div class="frame"><div class="img g3"></div></div></div>
+        </div>
+      </div>
+      <div class="w-caption">
+        <div class="hc-track">
+          <div class="hc-cap">
+            <span class="p-cat">Tool 01 / 変換</span>
+            <h2>形式を解放する</h2>
+            <p class="cap-detail">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結し、データは外に出ない。専用ソフトなしで開ける状態になる。</p>
+          </div>
+          <div class="hc-cap">
+            <span class="p-cat">Tool 02 / 管理</span>
+            <h2>PDFで管理する</h2>
+            <p class="cap-detail">複数のPDFをまたぐ階層グループ化を、Acrobat互換のしおりとして書き出す。日本式の電子押印や結合にも対応し、変換ツールからワンクリックでつながる。</p>
+          </div>
+          <div class="hc-cap">
+            <span class="p-cat">Tool 03 / 解析</span>
+            <h2>解析にかける</h2>
+            <p class="cap-detail">PDFになった書類を投入する。書式がばらばらでも、項目構造（JSON）で抽出し、Excelへ自動転記する。手作業の転記がなくなる。</p>
+          </div>
+        </div>
+        <div class="w-meta"><span class="yr">2026</span><a href="#top" class="view mag">View project ↗</a></div>
+      </div>
+    </div>
+
+    <!-- Panel 3 — gcard: left section label + right 2-column Point grid -->
+    <div class="panel work gcard" data-i="03" style="--card-bg:#F1F5F4">
+      <div class="g-inner wrap">
+        <div class="g-label">
+          <span class="g-en">JUDGMENT</span>
+          <span class="g-jp">判断</span>
+        </div>
+        <div class="g-grid">
+          <div class="g-cell">
+            <div class="g-pt">Point<span>01</span></div>
+            <h3 class="g-head">AIを進めているのに、AIが使いにくい環境だった</h3>
+            <p class="g-text">Google Workspace を導入してAIによる業務改善を進めてはいたが、文書がその形式のままではAIに読み込めず、AIはメール文を作る道具という認識にとどまっていた。サポートの終わった形式のまま重要な書類が保存され続ける状況も放置できないと考え、着手した。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>02</span></div>
+            <h3 class="g-head">Claudeは用途で判断して採用した</h3>
+            <p class="g-text">会社に導入する前に、自分の負担で検証し、業務用の資料を実際に作って代表に提示した。結論は「Gemini の置き換えではなく、役割が違う」。以降は実装を Claude、日常の分析を Gemini と使い分け、現在では一部の部署で必須のツールになっている。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>03</span></div>
+            <h3 class="g-head">設計の順番と、着手の順番を分けた</h3>
+            <p class="g-text">到達点も工程も、着手する前から見えていた。それでも最初に作ったのは、変換ツールではなく編集ツール（pdf-annotator）だった。変換は「できない」のではなく「非効率」の問題にすぎない。一方、PDFにした後の編集・階層管理・押印には、そもそも手段がなかった。だから手段のない方から先に作った。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>04</span></div>
+            <h3 class="g-head">3本に分けた</h3>
+            <p class="g-text">すべてを1本にまとめると操作が複雑になり、工程によっては使わない機能も出てくる。そのため、機能を3本に分けた。工程をまたいでも操作に迷わないよう、UIは3本で統一している。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>05</span></div>
+            <h3 class="g-head">プレゼンをきっかけに、範囲が広がった</h3>
+            <p class="g-text">編集ツールを作り、代表にプレゼンした。その結果、変換ツールの開発を依頼された。個人の判断で始めたものが、この場で組織の要件になった。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>06</span></div>
+            <h3 class="g-head">新しい操作を増やさない</h3>
+            <p class="g-text">現場調査で分かった一番の障害は、機能の不足ではなく「新しい操作を覚えること」だった。ショートカットやUndo/Redoは Adobe・Office と同じ操作にそろえ、dpi は「印刷用・画面用・メール用」と用途の言葉に置き換えた。使い慣れた操作の上に載せ、目新しさは加えていない。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 4 — pcard: "工程" label + Step cards that rise & stack on scroll -->
+    <div class="panel work pcard" data-i="04" style="--card-bg:#FAF9F6">
+      <div class="p-inner wrap">
+        <div class="p-label">
+          <span class="g-en">PROCESS</span>
+          <span class="g-jp">工程</span>
+        </div>
+        <div class="p-stack">
+          <div class="p-step">
+            <div class="ps-body">
+              <div class="ps-no">Step<span>01</span></div>
+              <h3 class="ps-head">形式を解放する</h3>
+              <div class="ps-sub">変換ツール（DocuWorks → PDF 一括変換）</div>
+              <div class="ps-stack">Python / Flask / xdwlib / PyInstaller</div>
+              <p class="ps-text">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結し、データは外に出ない。これで、専用ソフトなしで開ける状態になる。</p>
+            </div>
+            <div class="ps-media"><span>画像</span></div>
+          </div>
+          <div class="p-step">
+            <div class="ps-body">
+              <div class="ps-no">Step<span>02</span></div>
+              <h3 class="ps-head">PDFで管理する</h3>
+              <div class="ps-sub">編集ツール（pdf-annotator）</div>
+              <div class="ps-stack">pdf.js / fabric.js / jsPDF（フレームワーク不使用）</div>
+              <p class="ps-text">複数のPDFをまたぐ階層グループ化を、Acrobat互換のしおりとして書き出す。日本式の電子押印やドラッグ&amp;ドロップでの結合にも対応し、変換ツールからワンクリックでつながる。これで、書類の管理がPDF上で完結する。</p>
+            </div>
+            <div class="ps-media"><span>画像</span></div>
+          </div>
+          <div class="p-step">
+            <div class="ps-body">
+              <div class="ps-no">Step<span>03</span></div>
+              <h3 class="ps-head">解析にかける</h3>
+              <div class="ps-sub">保険分析ツール</div>
+              <div class="ps-stack">React / Claude API / SheetJS</div>
+              <p class="ps-text">PDFになった書類を投入する。書式がばらばらでも、項目構造（JSON）で抽出し、Excelへ自動転記する。これで、手作業の転記がなくなる。</p>
+            </div>
+            <div class="ps-media"><span>画像</span></div>
+          </div>
+          <div class="p-step">
+            <div class="ps-body">
+              <div class="ps-no">Step<span>04</span></div>
+              <h3 class="ps-head">AIに渡す</h3>
+              <div class="ps-sub">ツールはない</div>
+              <div class="ps-stack">─</div>
+              <p class="ps-text">ここに専用のツールはない。3本のツールを通した結果、書類がAIに直接渡せる状態に到達する。Claude・Gemini に書類をそのまま読ませ、転記ミスの確認、顧客情報の分析、複数年度の比較ができる。この状態そのものが、成果である。</p>
+            </div>
+            <div class="ps-media"><span>画像</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 5 — ccard: centred, text-only conclusion -->
+    <div class="panel work ccard" data-i="05" style="--card-bg:#F6F6F3">
+      <div class="c-inner wrap">
+        <span class="c-eyebrow c-anim">Result</span>
+        <h2 class="c-head c-anim">既にある環境を働かせ、<em>AIが読める状態</em>へ移行した</h2>
+        <p class="c-text c-anim">年間約1,200万円のコスト削減を試算（Adobe Acrobat Standard 約1,580円/人/月 × 634名）。「変換 → 編集 → AI分析」の社内フローを一本化し、人の仕事を、転記から精査・解釈・顧客提案へ移した。</p>
+        <a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<section class="aw" id="allworks" aria-label="All Works">
+  <div class="aw-inner">
+    <div class="aw-head">
+      <span class="mono-label" style="color:var(--accent)">All Works</span>
+      <h2>すべての制作物</h2>
+      <p>各プロジェクトに紐づく制作物の一覧です。カードをクリックすると画像を拡大表示します。「プロジェクトを読む」から、判断と経緯をまとめた各プロジェクトへ移動できます。</p>
+    </div>
+    <div data-aw-body></div>
+  </div>
+</section>
+
+<button class="wk-btn" type="button" aria-label="このプロジェクトの制作物を見る">制作物 <b data-wk-count>0</b> →</button>
+<div class="wk-modal" role="dialog" aria-modal="true">
+  <div class="wk-back" data-wk-close></div>
+  <div class="wk-panel">
+    <div class="wk-head">
+      <span class="wk-title" data-wk-title>All Works</span>
+      <button class="wk-close" type="button" data-wk-close>閉じる ×</button>
+    </div>
+    <div class="wk-body" data-wk-body></div>
+  </div>
+</div>
+<div class="wk-lb">
+  <button class="wk-lb-x" type="button" data-lb-close>閉じる ×</button>
+  <button class="wk-lb-prev" type="button" aria-label="前へ">‹</button>
+  <img alt="">
+  <div class="wk-lb-cap"></div>
+  <button class="wk-lb-next" type="button" aria-label="次へ">›</button>
+</div>
+
+<div class="swipe" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* Exactly ONE screen (slider / detail) is alive at a time — each holds {st,tl}.
+   Switching kills the old ScrollTrigger (reverting its pin spacer so no dead
+   scroll space is left behind) and rebuilds the incoming screen from scroll 0,
+   which keeps the progress bar, the counter and the panels in sync. */
+let GAL=null, DET=null;
+
+function runLoader(done){
+  const el=document.querySelector('[data-count]'),bar=document.querySelector('.loader-bar'),loader=document.getElementById('loader');
+  document.body.classList.add('locked');
+  let n=0;
+  const step=()=>{n+=Math.floor(Math.random()*8)+3;if(n>=100)n=100;el.textContent=String(n).padStart(2,'0');if(bar)bar.style.width=n+'%';
+    if(n<100)setTimeout(step,80);else setTimeout(hide,420);};
+  const hide=()=>{document.body.classList.remove('locked');
+    if(window.gsap)gsap.to(loader,{yPercent:-100,duration:1,ease:'expo.inOut',onComplete:()=>{loader.style.display='none';done&&done();}});
+    else{loader.style.display='none';done&&done();}};
+  if(reduce){el.textContent='100';hide();return;}
+  step();
+}
+
+function initCursor(){
+  if(window.matchMedia('(hover:none)').matches||window.innerWidth<900)return;
+  const dot=document.querySelector('.cursor'),fol=document.querySelector('.cursor-follow');
+  let mx=innerWidth/2,my=innerHeight/2,fx=mx,fy=my;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+  (function loop(){fx+=(mx-fx)*.18;fy+=(my-fy)*.18;fol.style.transform=`translate(${fx}px,${fy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+  document.querySelectorAll('.hg-media,.view,.c-top').forEach(t=>{
+    t.addEventListener('mouseenter',()=>{fol.classList.add('grow');fol.querySelector('.cur-txt').style.opacity=1;});
+    t.addEventListener('mouseleave',()=>fol.classList.remove('grow'));
+  });
+}
+
+function initMagnetic(){
+  if(window.innerWidth<900)return;
+  document.querySelectorAll('.mag').forEach(el=>{
+    el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
+      el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.3}px,${(e.clientY-r.top-r.height/2)*.4}px)`;});
+    el.addEventListener('mouseleave',()=>{el.style.transform='';el.style.transition='transform .5s cubic-bezier(.22,1,.36,1)';setTimeout(()=>el.style.transition='',500);});
+  });
+  // TOPの図形モーション：カーソルに吸い付くように少しだけズレる
+  // （面積が大きいので係数は「TOPへ戻る」ボタンよりかなり控えめ）
+  const hmStage=document.querySelector('.hm-stage'), hmMag=document.querySelector('.hm-mag');
+  if(hmStage&&hmMag){
+    hmStage.addEventListener('mousemove',e=>{const r=hmStage.getBoundingClientRect();
+      hmMag.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.05}px,${(e.clientY-r.top-r.height/2)*.07}px)`;});
+    hmStage.addEventListener('mouseleave',()=>{hmMag.style.transform='';hmMag.style.transition='transform .5s cubic-bezier(.22,1,.36,1)';setTimeout(()=>hmMag.style.transition='',500);});
+  }
+}
+
+/* per-panel ink-SPREAD filters: fractal noise becomes growing alpha blobs
+   (the image opens from several spots and spreads to cover), and the blob
+   edges are displaced for a wet-ink bleed. Resolves to crisp when settled.
+   Built ONCE and cached — initGallery() itself can be re-run freely. */
+let GALF=null;
+function buildGalleryFilters(count){
+  const NS='http://www.w3.org/2000/svg';
+  const fsvg=document.createElementNS(NS,'svg');
+  fsvg.style.cssText='position:absolute;width:0;height:0;pointer-events:none';
+  const flt=[];
+  for(let i=0;i<count;i++){
+    const f=document.createElementNS(NS,'filter');
+    f.setAttribute('id','nij'+i);
+    f.setAttribute('x','-15%');f.setAttribute('y','-15%');f.setAttribute('width','130%');f.setAttribute('height','130%');
+    f.setAttribute('color-interpolation-filters','sRGB');
+    const t=document.createElementNS(NS,'feTurbulence');
+    t.setAttribute('type','fractalNoise');t.setAttribute('baseFrequency','0.0038 0.0058');
+    t.setAttribute('numOctaves','3');t.setAttribute('seed',String(i*13+4));t.setAttribute('result','noise');
+    const dm=document.createElementNS(NS,'feDisplacementMap');
+    dm.setAttribute('in','SourceGraphic');dm.setAttribute('in2','noise');dm.setAttribute('scale','0');
+    dm.setAttribute('xChannelSelector','R');dm.setAttribute('yChannelSelector','G');dm.setAttribute('result','disp');
+    const ct=document.createElementNS(NS,'feComponentTransfer');
+    ct.setAttribute('in','noise');ct.setAttribute('result','mask');
+    const fa=document.createElementNS(NS,'feFuncA');
+    fa.setAttribute('type','linear');fa.setAttribute('slope','2.0');fa.setAttribute('intercept','-2.2');
+    ct.appendChild(fa);
+    const co=document.createElementNS(NS,'feComposite');
+    co.setAttribute('in','disp');co.setAttribute('in2','mask');co.setAttribute('operator','in');
+    f.appendChild(t);f.appendChild(dm);f.appendChild(ct);f.appendChild(co);
+    fsvg.appendChild(f);
+    flt[i]={dm,fa};
+  }
+  document.body.appendChild(fsvg);
+  return flt;
+}
+
+/* hero見出しを1文字ずつ<span class="ch">に分割（初回のみ） */
+function splitHeroChars(){
+  const h1=document.querySelector('.hg-hero h1');
+  if(!h1||h1.dataset.split) return;
+  h1.dataset.split='1';
+  const wrap=(node)=>{
+    Array.from(node.childNodes).forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        Array.from(n.textContent).forEach(c=>{
+          const s=document.createElement('span');
+          s.className='ch'; s.textContent=c; frag.appendChild(s);
+        });
+        n.replaceWith(frag);
+      }else if(n.nodeType===1) wrap(n);
+    });
+  };
+  h1.querySelectorAll('.line-mask > span').forEach(wrap);
+}
+
+/* HERO MOTION — 読み込み時に1回だけ再生：
+   三角（企画×デザイン×運営）→ 収束してコンセプト → 円 → 点に凝縮
+   → 「企画×デザイン×運営」→ ピル → ステートメントカード */
+const HM={played:false,tl:null};
+function initHeroMotion(){
+  const svg=document.getElementById('hmSvg'); if(!svg) return;
+  // SP：描画領域を中央にズームして図形を大きく見せる（座標系は共通のまま）
+  if(window.matchMedia('(max-width:820px)').matches)
+    svg.setAttribute('viewBox','250 28 700 452');
+  const q=s=>svg.querySelector(s);
+  const shape=q('#hmShape'), pill=q('#hmPill');
+  const CX=600, CY=270, R=185, RIN=R/2, CR=180, N=240;
+  const V=[[600,85],[760.2,362.5],[439.8,362.5]];   // top / br / bl
+  const CARD={w:660,h:164,rx:34};
+  const baseR=[];
+  for(let i=0;i<N;i++){
+    const deg=-90+i*360/N, m=(((deg-30)%120)+120)%120-60;
+    baseR.push(RIN/Math.cos(m*Math.PI/180));
+  }
+  // 三角→円：半径プロファイルを移動平均で均す＝角から丸くなっていく
+  // 窓幅は小数のまま端に重みを付けて補間（整数刻みだと1フレームごとに
+  // カクッと段が付くため）
+  const shapeD=t=>{
+    const wf=t*N*0.42, r=[];
+    if(wf<0.001){ for(let i=0;i<N;i++) r.push(baseR[i]); }
+    else{
+      const wi=Math.floor(wf), frac=wf-wi, tot=2*wi+1+2*frac;
+      for(let i=0;i<N;i++){
+        let s=0;
+        for(let k=-wi;k<=wi;k++) s+=baseR[(i+k+N*3)%N];
+        s+=frac*(baseR[(i-wi-1+N*3)%N]+baseR[(i+wi+1+N*3)%N]);
+        r.push(s/tot);
+      }
+    }
+    let d='';
+    for(let i=0;i<=N;i++){
+      const j=i%N, a=(-90+i*360/N)*Math.PI/180;
+      const rr=r[j]+(CR-r[j])*t*t;
+      d+=(i?'L':'M')+(CX+rr*Math.cos(a)).toFixed(1)+' '+(CY+rr*Math.sin(a)).toFixed(1);
+    }
+    return d+'Z';
+  };
+  const morph={t:0};
+  const setShape=()=>shape.setAttribute('d',shapeD(morph.t));
+  const setEnd=()=>{                     // 完成形：カード＋ステートメントで静止
+    shape.style.opacity=0;
+    pill.setAttribute('x',CX-CARD.w/2); pill.setAttribute('y',CY-CARD.h/2);
+    pill.setAttribute('width',CARD.w); pill.setAttribute('height',CARD.h);
+    pill.setAttribute('rx',CARD.rx); pill.setAttribute('ry',CARD.rx);
+    pill.style.opacity=1;
+    ['#hmA','#hmB','#hmC','#hmCore','#hmConcept','#hmFormula','#hmFormulaSub'].forEach(s=>{q(s).style.opacity=0;});
+    q('#hmState').style.opacity=1;
+  };
+  if(reduce||!window.gsap){ setEnd(); return; }
+  if(HM.played) return;          // ループ再生中 — 再構築時に作り直さない
+  HM.played=true;
+  setShape();
+  const len=shape.getTotalLength();
+  gsap.set(shape,{strokeDasharray:len,strokeDashoffset:len});
+  gsap.set('#hmA',{x:V[2][0],y:V[2][1]});          // 企画=左下
+  gsap.set('#hmB',{x:V[1][0],y:V[1][1]});          // デザイン=右下
+  gsap.set('#hmC',{x:V[0][0],y:V[0][1]});          // 運営=上
+  const setPillBox=(w,h,rx)=>gsap.set(pill,{attr:{x:CX-w/2,y:CY-h/2,width:w,height:h,rx:rx,ry:rx}});
+  setPillBox(CR*2,CR*2,CR);
+  const box={w:CR*2,h:CR*2,rx:CR};
+  const setBox=()=>setPillBox(box.w,box.h,Math.min(box.rx,box.h/2));
+
+  const tl=gsap.timeline({defaults:{ease:'power2.inOut'}});
+  HM.tl=tl;
+  /* 0 — 初回のみ：三角形が線で描かれる */
+  tl.to(shape,{strokeDashoffset:0,duration:1.15,ease:'power2.out'})
+    .set(shape,{strokeDasharray:'none'});
+  /* ここから無限ループ */
+  const loop=gsap.timeline({repeat:-1,repeatDelay:.25,defaults:{ease:'power2.inOut'}});
+  /* 1 — 三角形の中心に「コンセプト」、頂点に3つの円がポップ */
+  loop.to('#hmConcept',{opacity:1,duration:.55,ease:'power1.out'},.2)
+    .to(['#hmC','#hmA','#hmB'],{opacity:1,duration:.45,stagger:.16,ease:'power1.out'},.15)
+    .from(['#hmC','#hmA','#hmB'],{scale:.55,duration:.55,stagger:.16,ease:'back.out(2.2)',transformOrigin:'center'},.15);
+  /* 2 — 中央へ収束してコンセプトに。角も丸まり始める */
+  loop.to(['#hmA','#hmB','#hmC'],{x:CX,y:CY,duration:.95,ease:'power3.inOut',stagger:.03},'+=.45')
+    .to(['#hmA text','#hmB text','#hmC text'],{opacity:0,duration:.35},'<+.25')
+    // 円が重なるのと同時に「コンセプト」は中心へ縮んで消える
+    .to('#hmConcept',{scale:0,svgOrigin:'600 272',duration:.55,ease:'power2.in'},'<')
+    .to(morph,{t:.32,duration:.95,ease:'power1.in',onUpdate:setShape},'<')
+    // 収束が完了した瞬間に1フレームで差し替える（クロスフェードだと
+    // 重なった線の透明度が足し合わさって一瞬色が濃く見えるため）
+    .set(['#hmA','#hmB','#hmC'],{opacity:0},'>+.08')
+    .set('#hmCore',{opacity:1},'<')
+    .set('#hmConcept',{opacity:0},'<');
+  /* 3 — 外形は止まらずそのまま円へ、中央の小円は消えて「企画×デザイン×運営」が出る */
+  loop.to(morph,{t:1,duration:1.05,ease:'power2.out',onUpdate:setShape},'>-.08')
+    .to('#hmCoreC',{attr:{r:0},duration:.55,ease:'power2.in'},'<+.3')
+    .to('#hmCore',{opacity:0,duration:.05},'>')
+    .to('#hmFormula',{opacity:1,duration:.55,ease:'power1.out'},'>+.1')
+    .from('#hmFormula',{y:16,duration:.55,ease:'power2.out'},'<')
+    // ワンテンポ遅れて「の一気通貫」が続き、文が完成する
+    .to('#hmFormulaSub',{opacity:1,duration:.45,ease:'power1.out'},'>-.15')
+    .from('#hmFormulaSub',{y:10,duration:.45,ease:'power2.out'},'<');
+  /* 4 — 読み切れるまでホールド → 凝縮 → ピル → カードが展開してステートメント */
+  loop.to(['#hmFormula','#hmFormulaSub'],{opacity:0,y:-14,duration:.45,ease:'power2.in'},'+=1.7')
+    .add(()=>{ gsap.set(pill,{opacity:1}); gsap.set(shape,{opacity:0}); },'>-.1')
+    .to(box,{w:64,h:64,rx:32,duration:.85,ease:'power3.inOut',onUpdate:setBox},'>')
+    .to(box,{w:170,h:64,duration:.5,ease:'power2.inOut',onUpdate:setBox},'+=.25')
+    .to(box,{w:CARD.w,h:CARD.h,rx:CARD.rx,duration:.9,ease:'expo.out',onUpdate:setBox},'+=.3')
+    .to('#hmState',{opacity:1,duration:.01},'<+.25')
+    .from(['#hmL1','#hmL2'],{opacity:0,y:22,duration:.6,stagger:.14,ease:'power3.out'},'<');
+  /* 6 — 逆再生ブリッジ：文字が消え → 円に戻り → 三角形へ → 冒頭に繋がる */
+  loop.to('#hmState',{opacity:0,duration:.45,ease:'power1.in'},'+=2.1')
+    .to(box,{w:64,h:64,rx:32,duration:.75,ease:'power3.inOut',onUpdate:setBox},'>-.1')
+    .to(box,{w:CR*2,h:CR*2,rx:CR,duration:.85,ease:'power2.inOut',onUpdate:setBox},'+=.15')
+    .add(()=>{ morph.t=1; setShape();
+      gsap.set(shape,{opacity:1}); gsap.set(pill,{opacity:0}); })
+    .to(morph,{t:0,duration:1.0,ease:'power2.inOut',onUpdate:setShape},'+=.05');
+  /* 7 — 状態リセット（次周の準備）：円は頂点へ、ラベル復帰 */
+  loop.add(()=>{
+    gsap.set('#hmA',{x:V[2][0],y:V[2][1],opacity:0});
+    gsap.set('#hmB',{x:V[1][0],y:V[1][1],opacity:0});
+    gsap.set('#hmC',{x:V[0][0],y:V[0][1],opacity:0});
+    gsap.set(['#hmA text','#hmB text','#hmC text'],{opacity:1});
+    gsap.set('#hmCore',{opacity:0});
+    gsap.set('#hmCoreC',{attr:{r:46}});
+    gsap.set(['#hmFormula','#hmFormulaSub'],{y:0,opacity:0});
+    gsap.set('#hmConcept',{scale:1,opacity:0});
+    gsap.set('#hmState',{opacity:0});
+    setPillBox(CR*2,CR*2,CR);
+    box.w=CR*2; box.h=CR*2; box.rx=CR;
+  },'+=.2');
+  tl.add(loop);
+  tl.timeScale(1.2);
+}
+
+/* SLIDER screen — builds its timeline + pinned ScrollTrigger from scroll 0.
+   Call only while .hgal is visible. Returns {st,tl} (killed on screen switch). */
+function initGallery(){
+  splitHeroChars();
+  const sec=document.querySelector('.hgal');
+  const panels=gsap.utils.toArray('.hgal-track > *');
+  const items=gsap.utils.toArray('.hg-item');
+  const curEl=sec.querySelector('[data-cur]');
+  const progEl=sec.querySelector('[data-prog]');
+
+  if(!GALF) GALF=buildGalleryFilters(panels.length);
+  const flt=GALF;
+
+  // pristine state — also resets leftovers when the screen is rebuilt
+  panels.forEach((p,i)=>{ p.style.zIndex=i+1; p.style.filter='none';
+    p.style.pointerEvents='none'; });
+  gsap.set(panels,{opacity:0,yPercent:0,z:0,rotationX:0,scale:1,borderRadius:0});
+  // 各作品のテキスト初期状態：見出しは下に待機、他は透明
+  items.forEach(it=>{
+    const t=it.querySelector('.hg-title');
+    if(t) gsap.set(t,{y:54,autoAlpha:0});
+    gsap.set(it.querySelectorAll('.hg-cat,.hg-lead,.hg-foot'),{autoAlpha:0});
+  });
+  // work 01 waits as a small centered card (revealed as the hero fades)
+  gsap.set(panels[0],{opacity:1,scale:0.3,borderRadius:18,
+    boxShadow:'0 40px 110px rgba(28,28,28,.35)'});
+  if(progEl) progEl.style.width='0%';
+  if(curEl) curEl.textContent='01';
+
+  // opening — hero overlay visible at scroll 0; work 01 waits as a small card
+  const heroOv=sec.querySelector('.hg-hero');
+  const uiEls=sec.querySelectorAll('.hg-ui');
+  const stOv=sec.querySelector('.hg-strengths');
+  const stCard=sec.querySelector('.hgst-card');
+  const shade=sec.querySelector('.hg-shade');
+  const sLabel=stOv?stOv.querySelector('.sk-label'):null;
+  const sGroups=stOv?Array.from(stOv.querySelectorAll('.sm-group')):[];
+  if(heroOv) gsap.set(heroOv,{autoAlpha:1,yPercent:0,scale:1});
+  gsap.set(uiEls,{opacity:0});
+  // 待機状態：ほぼ水平（上辺が奥・下辺が手前）＋完全不可視。中身も非表示
+  if(stCard) gsap.set(stCard,{transformOrigin:'50% 50%',yPercent:-105,rotationX:78,z:0,autoAlpha:0});
+  if(shade) gsap.set(shade,{opacity:0});
+  gsap.set([sLabel].concat(sGroups).filter(Boolean),{autoAlpha:0,y:24});
+
+  const tl=gsap.timeline();
+  const HOLD=1.15, REV=2.2, MAXDISP=130;               // dwell, then spreading bleed
+  // OPENING — ヒーローの文字がすっと消えながら、work 01 が小さなカードから
+  // 徐々に大きくなり、画面いっぱいにフィットする
+  const HFADE=1.1, GROW=2.2, GROW_AT=0.35, PRE=GROW_AT+GROW;
+  // ヒーローは“手前・左上”へ抜けながら消える。層ごとに拡大率と移動量を変えて
+  // 遠近感を出す：見出し（手前）は速く大きく、リード文や小要素（奥）は控えめに
+  if(heroOv){
+    const hStage=heroOv.querySelector('.hm-stage');
+    const hEye=heroOv.querySelector('.eyebrow');
+    const hLead=heroOv.querySelector('.hero-lead');
+    const hFoot=heroOv.querySelector('.hero-foot');
+    gsap.set([hEye,hLead,hFoot],{scale:1,xPercent:0,yPercent:0});
+    if(hStage) gsap.set(hStage,{scale:1,xPercent:0,yPercent:0,opacity:1});
+    tl.to(heroOv,{autoAlpha:0,duration:HFADE,ease:'power1.in'},0);
+    // 図形モーション（手前の層）は大きく手前・左上へ抜けていく
+    if(hStage) tl.to(hStage,{scale:1.8,xPercent:-7,yPercent:-10,
+      duration:HFADE*0.92,ease:'power2.in'},0);
+    // 奥の層は控えめに（遠近感）
+    tl.to(hLead,{scale:1.32,xPercent:-5,yPercent:-7,duration:HFADE,ease:'power1.in'},0);
+    tl.to(hEye, {scale:1.22,xPercent:-4,yPercent:-6,duration:HFADE,ease:'power1.in'},0);
+    tl.to(hFoot,{scale:1.1,xPercent:-2,yPercent:-3,duration:HFADE,ease:'power1.in'},0);
+  }
+  tl.fromTo(panels[0],
+    {scale:0.3,borderRadius:18,boxShadow:'0 40px 110px rgba(28,28,28,.35)'},
+    {scale:1,borderRadius:0,boxShadow:'0 0 0 rgba(0,0,0,0)',
+     duration:GROW,ease:'power2.inOut',immediateRender:false},GROW_AT);
+  tl.to(uiEls,{opacity:1,duration:.5,ease:'none'},PRE*0.75);
+  // 作品テキストの登場：見出しは下から、他はフェードイン
+  const textIn=(p,at)=>{
+    const t=p.querySelector('.hg-title');
+    const rest=p.querySelectorAll('.hg-cat,.hg-lead,.hg-foot');
+    if(t) tl.fromTo(t,{y:54,autoAlpha:0},
+      {y:0,autoAlpha:1,duration:.55,ease:'none',immediateRender:false},at);
+    if(rest.length) tl.fromTo(rest,{autoAlpha:0},
+      {autoAlpha:1,duration:.5,ease:'none',immediateRender:false},at+0.15);
+  };
+  textIn(panels[0],GROW_AT+GROW*0.6);
+  const startAt=[];
+  let cursor=PRE+HOLD;
+  for(let i=1;i<panels.length;i++){
+    const at=cursor; startAt[i]=at;
+    const p=panels[i], F=flt[i], st={s:1};
+    // s:1 → hidden (blobs closed, max warp) ; s:0 → fully open & crisp
+    tl.to(st,{s:0,duration:REV,ease:'power2.inOut',
+      onUpdate:()=>{
+        F.dm.setAttribute('scale',(st.s*MAXDISP).toFixed(1));
+        F.fa.setAttribute('intercept',(-2.2 + (1-st.s)*2.85).toFixed(3)); // spots grow & spread
+        p.style.filter=`url(#nij${i})`;
+      },
+      onComplete:()=>{ p.style.filter='none'; },
+      onReverseComplete:()=>{ p.style.filter='none'; }
+    },at);
+    tl.fromTo(p,{opacity:0},{opacity:1,duration:0.3,ease:'none'},at);
+    textIn(p,at+REV*0.55);
+    cursor = at + HOLD + REV;
+  }
+
+  // FINALE — 最後の作品に、強みのステートメントが立体回転で覆い被さる。
+  // 着地後、スクロールに応じてラベル→見出し→補足→6ケースの線が順に出る
+  const SLAND=cursor+0.4, SDUR=2.2;
+  if(stCard){
+    tl.fromTo(stCard,{yPercent:-105,rotationX:78},
+      {yPercent:0,rotationX:0,duration:SDUR,ease:'power1.inOut',immediateRender:false},SLAND);
+    tl.fromTo(stCard,{autoAlpha:0},
+      {autoAlpha:1,duration:SDUR*0.12,ease:'none',immediateRender:false},SLAND);
+    if(shade) tl.fromTo(shade,{opacity:0},
+      {opacity:.55,duration:SDUR*0.85,ease:'power1.in',immediateRender:false},SLAND);
+    tl.to(uiEls,{opacity:0,duration:.5,ease:'none'},SLAND+SDUR*0.55);
+    const IN=SLAND+SDUR+0.1;
+    [[sLabel,IN,.3]].concat(sGroups.map((g,i)=>[g,IN+0.25+i*0.35,.45])).forEach(a=>{
+      if(a[0]) tl.fromTo(a[0],{autoAlpha:0,y:24},
+        {autoAlpha:1,y:0,duration:a[2],ease:'none',immediateRender:false},a[1]);
+    });
+    tl.to({},{duration:.3},IN+1.6);
+  }
+  const WORKEND=SLAND;
+
+  const total=tl.totalDuration();
+
+  // カウンター・クリック可否は「実際に描画されている進捗」で同期する。
+  // スクラブは1秒遅れて追従するため、スクロール位置基準だと高速スクロール
+  // 直後に“見えている作品”と“クリックで開く作品”がズレてしまう。
+  const syncCp=()=>{
+    const t=tl.progress()*total;
+    let cp=0;
+    for(let i=1;i<panels.length;i++){ if(t >= (startAt[i]+REV*0.5)) cp=i; }
+    const open = t > PRE*0.92 && t < SLAND+SDUR*0.3;
+    panels.forEach((p,i)=> p.style.pointerEvents=(open&&i===cp)?'auto':'none');
+    if(curEl){ const work=Math.min(items.length, cp+1);
+      curEl.textContent=String(work).padStart(2,'0'); }
+  };
+  tl.eventCallback('onUpdate',syncCp);
+  syncCp();
+
+  const strig=ScrollTrigger.create({
+    animation:tl,trigger:sec,start:'top top',
+    end:()=> '+=' + Math.round(total*Math.max(window.innerHeight,600)*0.44),
+    pin:true,scrub:1,anticipatePin:1,
+    onUpdate:self=>{ if(progEl) progEl.style.width=(self.progress*100)+'%'; }
+  });
+
+  return {st:strig,tl:tl,startAt:startAt,total:total,REV:REV,PRE:PRE,WORKEND:WORKEND};
+}
+
+/* DETAIL screen — panel 01 (課題と背景) is the base, panels 02+ rise & stack.
+   Rebuilt fresh on every entry (see showScreen), so every gsap.set below also
+   serves as a reset of any leftover state from the previous visit.
+   Returns {st,tl}. */
+function initShowcase(){
+  const showcase=document.querySelector('.showcase');
+  const panels=gsap.utils.toArray('.showcase .panel');
+  /* SP：ピン留めのカード積み上げはやめて、縦積み＋各パネルのフェードインだけ */
+  if(document.documentElement.classList.contains('sp-flow')){
+    showcase.classList.remove('is-pinned');
+    gsap.set(panels,{clearProps:'all'});
+    panels.forEach(p=>{p.style.zIndex='';});
+    // hcard：画像と説明文はリンクしているので、各画像の直下に対応する文章を移動
+    showcase.querySelectorAll('.hcard').forEach(hc=>{
+      const slides=hc.querySelectorAll('.h-slide');
+      hc.querySelectorAll('.hc-cap').forEach((c,i)=>{
+        if(slides[i]&&c.parentElement!==slides[i]) slides[i].appendChild(c);
+      });
+    });
+    gsap.set(showcase.querySelectorAll(
+      '.h-track,.h-slide .frame,.w-caption,.hc-cap,.g-label,.g-cell,.p-label,.p-step,.c-anim,.t-anim,.t-media .frame,.t-media .img'
+    ),{clearProps:'all'});
+    const sts=[];
+    panels.forEach((p,i)=>{
+      sts.push(ScrollTrigger.create({trigger:p,start:'top 85%',
+        animation:gsap.fromTo(p,{autoAlpha:0,y:24},
+          {autoAlpha:1,y:0,duration:.7,ease:'power2.out',paused:true}),
+        toggleActions:'play none none none'}));
+    });
+    return {st:{kill:()=>sts.forEach(t=>{ if(t.animation) t.animation.kill(); t.kill(true); })},tl:null};
+  }
+  const curEl=showcase.querySelector('[data-cur]');
+  const progEl=showcase.querySelector('[data-prog]');
+  const hintEl=showcase.querySelector('[data-hint]');
+  const works=panels.length;  // 5 → the counter reads 01〜05
+
+  showcase.classList.add('is-pinned');
+  // assign stacking order in DOM order (later panels reveal on top)
+  panels.forEach((p,i)=>{p.style.zIndex=i+1;});
+  // incoming panels start as a smaller card, waiting below the fold
+  gsap.set(panels.slice(1),{yPercent:100,scale:.84,borderRadius:'30px',
+    transformOrigin:'50% 50%',boxShadow:'0 50px 100px rgba(0,0,0,.4)'});
+  gsap.set(panels[0],{yPercent:0,scale:1,borderRadius:'0px'});
+
+  const setUI=(idx)=>{ if(curEl) curEl.textContent=String(idx).padStart(2,'0');
+    if(hintEl) hintEl.style.opacity = idx>=works ? 0 : 1; };
+  const totEl=showcase.querySelector('[data-tot]');
+  if(totEl) totEl.textContent='/ '+String(works).padStart(2,'0');
+  if(progEl) progEl.style.height='0%';
+  setUI(1);
+
+  // Each card gets its own scroll "budget" (LEN). The hcard needs more because
+  // it plays a center-out mask reveal then fades through 3 media, each with a
+  // HOLD so it's easy to stop scrolling on the one you want to watch.
+  const STD_LEN=4.7, HCARD_LEN=7.0, HOLD0=1.5;
+  const tl=gsap.timeline();
+  const starts=[];            // rise-start time of each work card (for the index counter)
+  let cursor=HOLD0;           // dwell on 課題と背景 before card 02 rises
+  for(let i=1;i<panels.length;i++){
+    const p=panels[i];
+    const pos=cursor;
+    starts.push(pos);
+
+    // 1) card rises + grows to fit — slower, more gradual switch (all cards)
+    tl.to(p,{yPercent:0,scale:1,borderRadius:'0px',boxShadow:'0 0px 0px rgba(0,0,0,0)',
+             duration:1.7,ease:'power2.out'},pos);
+
+    if(p.classList.contains('hcard')){
+      // ---- hcard: caption bottom-left; media 1 masks open from the CENTRE once
+      //      it fits; media 2 & 3 fade in on scroll, each after a HOLD ----
+      const track=p.querySelector('.h-track');
+      const s1f=p.querySelector('.h-slide.s1 .frame');
+      const capWrap=p.querySelector('.w-caption');
+      const caps=gsap.utils.toArray(p.querySelectorAll('.hc-cap'));
+      gsap.set(caps,{opacity:0}); gsap.set(caps[0],{opacity:1});
+      gsap.set(track,{x:0});
+      gsap.set(capWrap,{yPercent:16,opacity:0});
+      gsap.set(s1f,{clipPath:'inset(50% 50% 50% 50% round 12px)'});
+      // centre-to-centre step = slide width + gap (matches the CSS; mobile differs)
+      const stepFrac=()=> (window.innerWidth<=820 ? 1.06 : 0.88);
+      tl.fromTo(capWrap,{yPercent:16,opacity:0},{yPercent:0,opacity:1,duration:.7,ease:'power2.out'},pos+1.3)
+        // MEDIA 1 — clipping-mask reveal growing out from the centre
+        .fromTo(s1f,{clipPath:'inset(50% 50% 50% 50% round 12px)'},
+                {clipPath:'inset(0% 0% 0% 0% round 12px)',duration:1.1,ease:'power2.out'},pos+2.0)
+        // the row flows LEFT: media 2 settles at centre, then media 3 settles at
+        // centre — each pause makes it easy to stop on the one you want
+        .fromTo(track,{x:0},{x:()=>-(window.innerWidth*stepFrac()),ease:'power1.inOut',duration:1.3},pos+3.6)
+        .to(track,{x:()=>-(window.innerWidth*stepFrac()*2),ease:'power1.inOut',duration:1.3},pos+5.3);
+      // the caption TEXT crossfades to the tool whose image is at centre
+      tl.to(caps[0],{opacity:0,duration:.5,ease:'none'},pos+4.0)
+        .to(caps[1],{opacity:1,duration:.5,ease:'none'},pos+4.0)
+        .to(caps[1],{opacity:0,duration:.5,ease:'none'},pos+5.7)
+        .to(caps[2],{opacity:1,duration:.5,ease:'none'},pos+5.7);
+      // when the LAST media reaches centre the hold ends and the next card rises
+      cursor = pos + HCARD_LEN;
+    } else if(p.classList.contains('gcard')){
+      // ---- gcard: 左の「判断」は固定、Pointリストはページスクロールに同期して
+      //      下まで流れ、流れ切ってから次のカードが上がってくる ----
+      const label=p.querySelector('.g-label');
+      const cells=p.querySelectorAll('.g-cell');
+      const grid=p.querySelector('.g-grid');
+      gsap.set(label,{yPercent:28,opacity:0}); gsap.set(cells,{y:38,opacity:0});
+      if(grid) grid.scrollTop=0;
+      tl.fromTo(label,{yPercent:28,opacity:0},{yPercent:0,opacity:1,duration:.8,ease:'power2.out'},pos+1.3)
+        .fromTo(cells,{y:38,opacity:0},{y:0,opacity:1,duration:.7,stagger:.13,ease:'power2.out'},pos+1.7);
+      let ext=0;
+      const over=grid?Math.max(0,grid.scrollHeight-grid.clientHeight):0;
+      if(over>8){
+        ext=1.9;
+        tl.to(grid,{scrollTop:over,duration:ext,ease:'none'},pos+3.0)  // リストが流れる
+          .to({},{duration:.45},pos+3.0+ext);                          // 読み切りの一拍
+      }
+      cursor = pos + 4.4 + (ext ? ext+.45 : 0);
+    } else if(p.classList.contains('pcard')){
+      // ---- pcard: Step cards rise from below to centre; each new one stacks on
+      //      top while the earlier ones recede upward a notch ----
+      const label=p.querySelector('.p-label');
+      const steps=gsap.utils.toArray(p.querySelectorAll('.p-step'));
+      gsap.set(label,{yPercent:22,opacity:0});
+      // Step 1 is already centred from the start; the rest wait below the fold
+      steps.forEach((c,i)=>gsap.set(c,{yPercent:i===0?0:120,scale:1,zIndex:i+1,transformOrigin:'50% 0%'}));
+      tl.fromTo(label,{yPercent:22,opacity:0},{yPercent:0,opacity:1,duration:.7,ease:'power2.out'},pos+1.2);
+      const START=1.9, ENTER=1.0, HOLD=0.75, CYCLE=ENTER+HOLD;
+      // only steps 2..N rise & stack on scroll (Step 1 is shown immediately)
+      for(let i=1;i<steps.length;i++){
+        const at=pos+START+(i-1)*CYCLE;
+        // incoming card slides up to the centre and stops
+        tl.to(steps[i],{yPercent:0,duration:ENTER,ease:'power2.out'},at);
+        // the cards already stacked recede one more level (peek above)
+        for(let j=0;j<i;j++){
+          tl.to(steps[j],{yPercent:-(i-j)*7,scale:1-(i-j)*0.045,duration:ENTER,ease:'power2.out'},at);
+        }
+      }
+      cursor = pos + START + (steps.length-1)*CYCLE + 0.3;
+    } else if(p.classList.contains('ccard')){
+      // ---- ccard: centred, text-only conclusion — lines reveal in order,
+      //      then HOLD so the fully-revealed conclusion (incl. back-to-top) stays ----
+      const anim=p.querySelectorAll('.c-anim');
+      gsap.set(anim,{y:46,opacity:0});
+      tl.fromTo(anim,{y:46,opacity:0},{y:0,opacity:1,duration:.85,stagger:.16,ease:'power2.out'},pos+1.4);
+      tl.to(p,{duration:1.8},pos+3.1); // hold (no visual change, keeps everything shown)
+      cursor = pos + 5.0;
+    } else {
+      cursor = pos + STD_LEN;  // fallback for any future card type
+    }
+  }
+  const totalDur=tl.totalDuration();
+  const dst=ScrollTrigger.create({
+    animation:tl,trigger:showcase,start:'top top',
+    // longer scroll budget → each scroll advances the timeline less (more gradual)
+    end:()=> '+=' + Math.round(totalDur*Math.max(window.innerHeight,600)*1.05),
+    pin:true,scrub:1.4,anticipatePin:1,
+    onUpdate:self=>{
+      if(progEl) progEl.style.height=(self.progress*100)+'%';
+      const t=self.progress*totalDur;
+      let idx=1;               // panel 01 (課題と背景) is on screen from the start
+      for(let k=0;k<starts.length;k++){ if(t>=starts[k]+0.8) idx=k+2; }
+      setUI(Math.min(works,idx));
+    }
+  });
+
+  return {st:dst,tl:tl};
+}
+
+/* ---------- SCROLL REVEALS (CSS + IntersectionObserver, gsap-independent) ---------- */
+function initReveals(){
+  const show=el=>el.classList.add(el.classList.contains('prof-tl-item')?'visible':'in');
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal,.line-mask,.prof-tl-item').forEach(show);return;
+  }
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ show(e.target); io.unobserve(e.target); } });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal,.line-mask').forEach(el=>io.observe(el));
+  // (strengths is now driven by the slider timeline itself, not by an observer)
+}
+
+
+/* ---------- SCREEN TRANSITION (ink-bleed wipe between slider & detail) ----------
+   click a work → a paper sheet rises from below (covering), the scroll jumps
+   behind it, then the sheet melts away as ink blobs (にじみ) revealing the new
+   screen. "TOP へ戻る" does the same back to the slider. */
+let SWF=null, swapping=false;
+function buildSwipeFilter(){
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg'); svg.style.cssText='position:absolute;width:0;height:0;pointer-events:none';
+  const f=document.createElementNS(NS,'filter'); f.setAttribute('id','swnij');
+  f.setAttribute('x','-12%');f.setAttribute('y','-12%');f.setAttribute('width','124%');f.setAttribute('height','124%');
+  f.setAttribute('color-interpolation-filters','sRGB');
+  const t=document.createElementNS(NS,'feTurbulence');
+  t.setAttribute('type','fractalNoise');t.setAttribute('baseFrequency','0.004 0.006');
+  t.setAttribute('numOctaves','3');t.setAttribute('seed','11');t.setAttribute('result','n');
+  const dm=document.createElementNS(NS,'feDisplacementMap');
+  dm.setAttribute('in','SourceGraphic');dm.setAttribute('in2','n');dm.setAttribute('scale','0');
+  dm.setAttribute('xChannelSelector','R');dm.setAttribute('yChannelSelector','G');dm.setAttribute('result','disp');
+  const ct=document.createElementNS(NS,'feComponentTransfer');ct.setAttribute('in','n');ct.setAttribute('result','mask');
+  const fa=document.createElementNS(NS,'feFuncA');fa.setAttribute('type','linear');fa.setAttribute('slope','2');fa.setAttribute('intercept','3');
+  ct.appendChild(fa);
+  const co=document.createElementNS(NS,'feComposite');co.setAttribute('in','disp');co.setAttribute('in2','mask');co.setAttribute('operator','in');
+  f.appendChild(t);f.appendChild(dm);f.appendChild(ct);f.appendChild(co);svg.appendChild(f);document.body.appendChild(svg);
+  return {dm,fa};
+}
+function transitionTo(jump, after){
+  const sw=document.querySelector('.swipe');
+  if(!window.gsap||!sw){ jump(); after&&after(); return; }
+  if(swapping) return; swapping=true;
+  if(!SWF) SWF=buildSwipeFilter();
+  const F=SWF;
+  F.fa.setAttribute('intercept','3'); F.dm.setAttribute('scale','0'); sw.style.filter='none';
+  gsap.set(sw,{x:0,y:0,xPercent:0,yPercent:100,opacity:1});
+  const tl=gsap.timeline({onComplete:()=>{ sw.style.filter='none'; gsap.set(sw,{x:0,y:0,xPercent:0,yPercent:100}); swapping=false; }});
+  tl.to(sw,{yPercent:0,duration:.55,ease:'power3.inOut'});                 // rise from below → cover
+  tl.add(()=>{ jump(); if(window.ScrollTrigger)ScrollTrigger.update(); after&&after(); }); // jump behind cover
+  const st={s:0};
+  tl.to(st,{s:1,duration:1.05,ease:'power2.inOut',onUpdate:()=>{           // melt away = にじみ reveal
+    F.dm.setAttribute('scale',(st.s*95).toFixed(1));
+    F.fa.setAttribute('intercept',(3 - st.s*5.5).toFixed(3));
+    sw.style.filter='url(#swnij)';
+  }},'+=.05');
+}
+/* switch which screen is live. The outgoing screen's ScrollTrigger is killed
+   WITH revert (its pin spacer disappears → no dead scroll space, the document
+   is exactly as tall as the active screen). The incoming screen is rebuilt
+   from scratch at scroll 0 — timeline, bar and counter all restart together,
+   so nothing can rewind or drift out of sync. */
+function killScreen(o){ if(!o) return; if(o.st) o.st.kill(true); if(o.tl) o.tl.kill(); }
+/* the TOP screen = slider (incl. hero cover) + line + about (toggled together) */
+function topScreens(){ return Array.from(document.querySelectorAll('.hgal,#about,#foot')); }
+
+/* ---------- ABOUT — スクロール連動の段階表示 ----------
+   写真が中央からクリッピングマスクで開き、年表が上から順に（各行は下から
+   浮き上がって）現れ、最後にスキル索引が出る。全てスクラブ＝スクロール量に
+   完全連動し、逆スクロールで巻き戻る。 */
+let ABT=[];
+function killAbout(){ ABT.forEach(s=>{ if(s.animation) s.animation.kill(); s.kill(true); }); ABT=[]; }
+function initAboutFx(){
+  killAbout();
+  const S=(el,from,to,pos)=>{ if(!el) return;
+    ABT.push(ScrollTrigger.create(Object.assign({trigger:el,scrub:true},pos,{
+      animation:gsap.fromTo(el,from,Object.assign({ease:'none',paused:true},to))
+    })));
+  };
+  // プロフィール（写真＋年表）は画面を固定して1本のスクラブで進める：
+  // まず写真が中央から円形マスクで開き、続いて年表が上から順番に現れる
+  const hero=document.querySelector('.abt-pin');   // 見出し（About／経歴と実績）ごと固定する
+  // SP：ピン留めの順次アニメはなし——完成状態のままセクション全体を一括フェードイン
+  if(hero && window.matchMedia('(max-width:820px)').matches){
+    gsap.set('.prof-avatar-wrap',{clipPath:'none'});
+    gsap.set(['.prof-section-head','.prof-name','.prof-kana','.prof-tl-now'],{autoAlpha:1,y:0});
+    document.querySelectorAll('.prof-tl-item').forEach(el=>{
+      gsap.set([el,el.querySelector('.prof-tl-year-wrap'),el.querySelector('.prof-tl-text')].filter(Boolean),
+        {autoAlpha:1,y:0,clipPath:'none'});
+    });
+    ABT.push(ScrollTrigger.create({trigger:hero,start:'top 80%',
+      animation:gsap.fromTo(hero,{autoAlpha:0,y:26},
+        {autoAlpha:1,y:0,duration:.8,ease:'power2.out',paused:true}),
+      toggleActions:'play none none none'}));
+    S(document.querySelector('.prof-message p'),{y:30,autoAlpha:0},{y:0,autoAlpha:1},{start:'top 90%',end:'top 64%'});
+    return;
+  }
+  if(hero){
+    const av=document.querySelector('.prof-avatar-wrap');
+    const nm=document.querySelector('.prof-name'), kn=document.querySelector('.prof-kana');
+    const now=document.querySelector('.prof-tl-now');
+    const head=document.querySelector('.prof-section-head');
+    const tl=gsap.timeline({paused:true});
+    if(head) tl.fromTo(head,{y:46,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'none'},0);
+    if(av) tl.fromTo(av,{clipPath:'circle(0% at 50% 50%)'},
+      {clipPath:'circle(75% at 50% 50%)',duration:1.2,ease:'none'},0.55);
+    if(nm) tl.fromTo(nm,{y:26,autoAlpha:0},{y:0,autoAlpha:1,duration:.6,ease:'none'},0.85);
+    if(kn) tl.fromTo(kn,{y:20,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'none'},1.1);
+    let t0=1.95;  // 写真が開き切ってから年表が始まる
+    document.querySelectorAll('.prof-tl-item').forEach(el=>{
+      const yr=el.querySelector('.prof-tl-year-wrap');
+      const tx=el.querySelector('.prof-tl-text');
+      tl.fromTo(el,{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.12,ease:'none'},t0);
+      if(yr) tl.fromTo(yr,{clipPath:'inset(100% 0% 0% 0%)',y:12},
+        {clipPath:'inset(0% 0% 0% 0%)',y:0,duration:.45,ease:'none'},t0+0.04);
+      if(tx) tl.fromTo(tx,{clipPath:'inset(0% 100% 0% 0%)'},
+        {clipPath:'inset(0% 0% 0% 0%)',duration:.55,ease:'none'},t0+0.28);
+      t0+=0.55;
+    });
+    if(now) tl.fromTo(now,{autoAlpha:0},{autoAlpha:1,duration:.4,ease:'none'},t0+0.1);
+    tl.to({},{duration:.5},t0+0.5);   // 揃った状態で一拍
+    const dur=tl.duration();
+    ABT.push(ScrollTrigger.create({trigger:hero,start:'top 4%',
+      end:()=>'+='+Math.round(dur*Math.max(window.innerHeight,600)*0.5),
+      pin:true,scrub:1,anticipatePin:1,animation:tl}));
+  }
+  // 3) メッセージ → スキル索引
+  S(document.querySelector('.prof-message p'),{y:30,autoAlpha:0},{y:0,autoAlpha:1},{start:'top 90%',end:'top 64%'});
+}
+function showScreen(which){
+  const dt=document.querySelector('.showcase');
+  if(which==='detail'){
+    killScreen(GAL); GAL=null; killAbout();
+    closeWorksPage();
+    topScreens().forEach(s=>s.classList.add('off'));
+    dt.classList.remove('off');
+    window.scrollTo(0,0);
+    DET=initShowcase();
+    document.body.classList.add('detail-on'); updateWkBtn();
+  }else{
+    killScreen(DET); DET=null;
+    document.body.classList.remove('detail-on');
+    closeWorksPage();
+    dt.classList.add('off');
+    topScreens().forEach(s=>s.classList.remove('off'));
+    window.scrollTo(0,0);
+    if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
+    initAboutFx();
+  }
+  ScrollTrigger.refresh();
+  window.scrollTo(0,0);
+}
+/* ---------- CASE CONTENT (原稿マスター準拠) ----------
+   CASE 01 は作り込んだ既存DOMをそのまま使い、03〜06 は共通フォーマット
+   （Context → 判断 → 実物 → Result）をデータから生成する。器は同じ、中身が違う。 */
+const CASES={
+  c03:{
+    context:{img:'ctx-c03',paras:[
+      'ミカタグループは税理士・会計・法務を持つ総合的なグループだが、扱う商材はいずれも無形で、お客様へ伝わりにくい。加えて「税理士は事務的で、過去の数字を扱う仕事」という固定観念もあり、コンサルタントとしての認識を持ってもらう必要もあった。',
+      '情報発信は各現場の担当者に任されており、税制改正のような時事性の高い情報も、季節の挨拶のような関係維持のやり取りも、会社として管理されていない。そのため、会社としてのコミュニケーションができていない状態だった。',
+      'また、商材によっては長期的な対策や準備が必要なものもある。相続や事業承継、M&Aは思い立って翌週に決まるものではなく、決まるのは数年後になる。だからこそ、複数のタッチポイントと、早い段階での課題認識が必要となる。']},
+    judgment:[
+      {h:'ターゲットやフェーズによって、届けるべき情報は異なる',t:'契約前は「知らない人にミカタを知ってもらう」、契約後は「すでに顧客である人と関係を続ける」ことが目的になる。これを混ぜると、どちらにも届かないものになってしまう。企業動画は認知だけを狙いコンバージョンを求めず、メルマガは新規を狙わず既存顧客への定期的な接触に絞った。それぞれの接点に、役割をひとつだけ持たせている。'},
+      {h:'重心を、契約後に置いた',t:'顧問契約は継続課金であり、事業の収益は続いている契約から生まれる。そこでメルマガを幹に据えた。1配信あたり約16,500件を、開封率の高い火〜木の8時台にそろえ、月6本のペースで配信している。この幹があることで、YouTubeもオウンドメディアも「見つけてもらう」必要がなくなり、こちらから届けられるようになった。'},
+      {h:'オウンドメディアを、オンラインで両側に届くハブにした',t:'記事のテーマは、定額減税や年収の壁のように、困った人が実際に検索する言葉から選んでいる。これによって広告費をかけずに新規が入ってくる。同じ記事が、メルマガを通じて既存顧客にも届く。1本作れば両側に効くこの設計は、一人で6つの接点を回すための仕組みでもある。'},
+      {h:'セミナーを、契約の前と後の両方が集まる場にした',t:'新規への周知と、既存顧客への改めての挨拶を、同じ場で行っている。知らない人と長年の顧客が、同じ日に同じ部屋にいる状態を作れる唯一の接点である。対面と配信を組み合わせたハイブリッド形式は社内に前例がなく、秒単位の進行表と資料のひな形をゼロから組み、あとから再現できる型として残した。'},
+      {h:'自分で作るものと、外に出すものを分けた',t:'一人で6つの接点は回らない。そのため、物量のかかる部分は外部に出している。企業動画の制作は制作会社、広告の入札・配信運用は代理店、セミナーの撮影・配信は配信会社と分担。自分の手元に残したのは、判断とクリエイティブ、そして接点どうしのつなぎの部分である。この3つは、外に出すと全体の線が切れてしまう。'}],
+    evidence:[
+      {no:'知らない人に',h:'会社を知ってもらう',sub:'企業動画／ディスプレイ広告',stack:'TVer・YouTube・DSP・タクシー広告・屋外大型ビジョン',t:'企業動画「オーナーの一生に伴走する」は認知だけを狙う。広告はAI生成画像をレタッチしてターゲット別に最適化し、日々ABテストを回す。'},
+      {no:'両側に届く',h:'契約の前と後をつなぐ',sub:'MIKATA Lab.（オウンドメディア）／全国ビジネスセミナー',stack:'SEO・Pardot・対面＋配信ハイブリッド',t:'オンラインはSEOで新規、メルマガで既存に同じ記事が届く MIKATA Lab.。代表コラム「柴田昇の眼」は連載として出し、媒体をまたいで同じテーマに再度触れてもらう導線にしている。オフラインは両側が同じ部屋に集まる唯一の場、全国ビジネスセミナー。'},
+      {no:'顧客に',h:'関係を続ける',sub:'メルマガ（Pardot）／YouTube',stack:'実益型＋情緒型の2系統・長尺解説＋ショート',t:'幹はメルマガ。実益型（税制改正）と情緒型（季節の挨拶）の2系統で、定期接触の経路として月6本を配信する。中身はYouTube——長尺は解説、ショートは認知と役割を分け、ストック型で企画する。'}],
+    result:{head:'担当者任せだった発信が、会社として<em>続けられる仕組み</em>になった',paras:[
+      'Role — デジタルマーケティング全体のクリエイティブと設計を担当。メルマガは実装・デザイン・執筆・配信・分析まで単独、セミナーは総合運営ディレクター。企業動画・広告運用・配信は外部と分担し、方針とクリエイティブの判断を担当している。',
+      'メルマガは到達率99.77%・平均開封率約30%（B2B平均を上回る水準）・CTR1.54%。YouTubeは贈与の解説動画1本で累計45万回再生・登録約4,000件、ショートは月間約11.7万人にリーチし視聴継続率60.9%。セミナーはキャパシティの1.2倍で集客する型を確立し、全国7会場・3年で展開。オウンドメディアは広告費をかけず、問い合わせ・受注を継続的に生んでいる。']}},
+  c04:{
+    context:{img:'ctx-c04',paras:[
+      'ロゴはあり、マニュアルもあった。それでも現場は困っていた。ロゴマニュアルが定めているのはロゴの使い方だけで、その先——配色をどう組むか、フォントに何を選ぶか、図をどう描くか——には答えがなかったからである。営業担当は商談のたびに自分で資料を作り、品質もトンマナもそろわない。',
+      'ビジョン・ミッション・バリューも、独自のコアサービス「ビジネス＆ライフ・コンサルティング」の全体像も、体系的に伝える統一クリエイティブが存在しなかった。ロゴに見合う品質の資料が一つもない、という状態が一番の問題だった。']},
+    judgment:[
+      {h:'ルールを配るのではなく、実物を作った',t:'ルールブックを読んで理解できる人は、そもそも困っていない。そこで先に実物を作った。会社案内（全16ページ）・営業チラシ・各種資材。「ミカタとはこういう見た目である」を現物として示した結果、現場が資料を分解し、部品を取りにくる状態になった。これが実質的なデザインシステムとして機能している。あわせて、複雑なサービスも図に翻訳した。'},
+      {h:'依頼に対して、選択肢を作って返した',t:'社章は代表からの依頼だった。コーポレートロゴはシンプルで、そのまま立体にしても社章としては成立しない。金・銀の縁取りや立体加工の陰影を変えた複数案を Maya で3Dモデリング・レンダリングして提案し、実物ができる前に経営層が判断できる状態を作った。意思決定はその場で通っている。'},
+      {h:'情報が揃うのを待たず、仮で組んで進めた',t:'社内報「お元氣様です」は、情報が集まってから作り始めると発行が動かない。デザインを先に組み、集まっていない箇所は自分で仮の内容を作って総務に確認する進め方にした。枠を待つのではなく、枠を埋めた状態で相談することで、総務は「何を集めるか」ではなく「これで合っているか」に答えればよくなり、確認の負担が下がる。'},
+      {h:'社内で作ったデザインを、外注のガイドにした',t:'採用サイトは制作会社との連携案件だった。通常であれば、制作会社が作るトンマナに社内が合わせることになる。今回は、その逆にした。先に全49ページの会社紹介・採用資料を単独でデザインし、その配色・タイポ・図解ルールが、採用サイト全体のトンマナの基点になっている。外に出す前に、基準を内側に作っておいた。'},
+      {h:'そろえるべきものを見極めて、あえて外した',t:'相続サイトとパンフレットだけは、緑を基調にしている。手に取るのは大切な方を亡くされた直後の家族で、既存の資料は文字量が多く、かえって不安をあおっていた。年配の方でも優しく感じられ、それでいてビジネスとして信頼できる——その両立点として緑を選んだ。同じ見た目にすることが一貫性ではなく、一貫しているべきなのは、相手に対する態度のほうだと考えている。'}],
+    evidence:[
+      {no:'対外',h:'会社案内・営業チラシ・各種資材',sub:'全16P・戦略立案から単独',stack:'フォトディレクション／ライティング／カラー・フォント設計',t:'墨絵風の既存ビジュアルを活かし、黒・グレーのグラデーションに差し色の赤。複雑なサービスは図に翻訳した——法人と個人の2つの財布、6ステップの成長支援、4つのソリューション体系。'},
+      {no:'社内',h:'社章／社内報「お元氣様です」',sub:'季刊・紙・全従業員の自宅へ発送',stack:'Maya 3Dモデリング／編集・デザイン',t:'社章は複数案を3Dレンダリングで提示し、意思決定を通した。社内報はVol.54からVol.64で誌面を刷新した。'},
+      {no:'採用',h:'採用サイト・会社紹介／採用資料',sub:'全49P・2026年公開',stack:'IA設計／6職種のコンテンツ企画／Pardot実装',t:'49P資料は単独デザイン。その配色・タイポが採用サイト全体の基点になった。6職種のキャリアステップは図解だけでなく、内容の一部も自分で構成している。'},
+      {no:'サービス',h:'相続サイト・パンフレット',sub:'2026年2月公開',stack:'緑基調の選定／フォント条件の指定／ブランド整合の管理',t:'読者は深い悲しみの中にいるご家族。優しさとビジネスの信頼、その両立点として緑を選び、色とフォントの方向を自分でインプットして制作会社と進めた。'}],
+    result:{head:'ルールではなく、<em>実物</em>が基準として機能した',paras:[
+      'Role — ミカタの顔4面（対外／社内／採用／サービス）のクリエイティブを一人で担当。対外は全工程単独、社内報は総務と協働、採用サイトはディレクター兼デザイナー、相続はディレクション。',
+      '現場が資材を分解し、部品として自分たちの資料に流用している。営業現場からは「組織体制や、法人と個人の両軸によるサポートといった強みを説明しやすくなった」の声。資材の統一で従業員間の理念・サービス認識がそろい、インナーブランディングにも波及した。採用サイトは2026年公開、相続サイトは2026年2月公開。']}},
+  c05:{
+    context:{img:'ctx-c05',paras:[
+      '訪問看護は、多くの人にとってなじみの薄いサービスである。何をしてくれるのか、いくらかかるのか、誰が来るのか。分からないことが、そのまま不安につながる。そして、相手は利用者本人だけではない。実際に利用を決めるのは、家族であることが多い。利用者本人の不安と、家族の不安は、同じではない。',
+      '「ひのてり」の強みは、身体のケアだけでなく心のケアまで寄り添う姿勢にあった。ただ、それを言い表す言葉が、まだ社内になかった。強みは実際にあるのに、地域には伝わっていない状態だった。']},
+    judgment:[
+      {h:'理念そのものが、まだ成立していなかった',t:'あったのは「幸せを多くの人に響かせる」という一言だけで、このまま掲げると宗教的な印象に受け取られかねない。内閣府の統計から社会課題を起点に据え、理念を3つの具体に分解した。「幸せ」という言葉は捨てず、前提から結論へ移し、社名「輪奏」の輪につなげて着地させている。デザインの前に、まず理念を成立させることが最初の仕事だった。'},
+      {h:'2つの不安に、2つの成果物で答えた',t:'「誰が家に来るのか」にはチラシで答えた——従業員の顔が分かる紙面。「何をしてくれるのか」には会社案内で答えた——連携体制とサービスの流れを大きく図に描き起こし、利用者の悩みと家族の悩みを分けて構成。1冊にまとめず、不安の種類ごとに分けている。'},
+      {h:'素材を、自分で撮りに行った',t:'温かみは、文章で書いても伝わらない。現場に足を運び、スタッフと利用者を撮影した。ストックで済ませれば手間は減るが、それをやると自分で作った理念の言葉が嘘になってしまう。言葉を自分で作った以上、それを裏切る素材は使えなかった。'}],
+    evidence:[
+      {no:'言葉',h:'理念の構築',sub:'企業理念3つ＋代表メッセージ',stack:'内閣府の統計を起点に言語化',t:'「幸せを多くの人に響かせる」の一言から、社会課題を起点とした3つの企業理念を構築。代表メッセージも執筆した。'},
+      {no:'素材',h:'現場での撮影',sub:'スタッフ・利用者',stack:'撮影も単独',t:'実際のスタッフと利用者の表情が、そのまま誌面に載っている。'},
+      {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になる。'},
+      {no:'成果物 ②',h:'会社案内',sub:'「何をしてくれるのか」に答える',stack:'オレンジ基調・写真とイラスト中心',t:'強みの整理、連携体制・サービスフローの作図。利用者／家族どちらの立場で手に取っても自分ごとになる構成にした。'}],
+    result:{head:'一言だった理念が、<em>掲げられる言葉</em>になった',paras:[
+      'Role — 企画（理念・代表メッセージの言語化を含む）・撮影・作図・デザイン・執筆まで、全工程を単独で担当した社外クライアント案件。',
+      '窓口での説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。']}},
+  c07:{
+    context:{img:'ctx-c07',paras:[
+      '母校の卒業生を含むコミュニティ「MCD MIX」に、拠点となるサイトが必要だった。大学時代からの縁で運営にも関わってきたが、このケースで扱うのはサイトの構築である。',
+      '運営メンバーはデザイナーやエンジニアではない。更新できる状態で渡さなければ、公開した時点で止まってしまう。']},
+    judgment:[
+      {h:'単発ではなく、組織のサイトとして設計した',t:'イベントごとの告知サイトではなく、卒業生が継続的に集まる組織の器として設計した。特定のイベントに紐づけず、コミュニティそのものの拠点になるように構成している。'},
+      {h:'ビジュアルを、卒業生のアーカイブから構成した',t:'新しく作り込むのではなく、これまでの卒業生の作品アーカイブを素材として構成した。コミュニティの蓄積そのものを、サイトのビジュアルにしている。'},
+      {h:'非技術者が運用し続けられる状態まで作り込んだ',t:'WordPressテーマをゼロから構築し、FAQやEventの構造化データ、SEOの設定を一通り整えた。加えて、技術者でなくても更新できるよう運用マニュアルを用意している。社内634名向けのPROJECT 01と同じ考え方で、社外・非技術者に対しても同じ設計をした。'}],
+    evidence:[
+      {no:'土台',h:'WordPressテーマ',sub:'フルスクラッチ',stack:'WordPress',t:'既製テーマに載せず、テーマをゼロから構築。運用する人が触る画面から逆算して作っている。'},
+      {no:'構造',h:'FAQ・Event の構造化データ／SEO一式',sub:'検索から見つかる状態に',stack:'構造化データ・SEO',t:'FAQとイベントを構造化データで整備し、SEOを一式実装。コミュニティの活動が検索に正しく拾われる。'},
+      {no:'見た目',h:'卒業生アーカイブのビジュアル構成',sub:'蓄積を素材にする',stack:'アーカイブ構成',t:'これまでの卒業生の作品からビジュアルを構成。コミュニティの蓄積そのものが、サイトの顔になる。'},
+      {no:'引き渡し',h:'運用マニュアル',sub:'非技術者向け',stack:'運用設計',t:'作って渡して終わりにしない。非技術者が自分で更新し続けられるマニュアルまで含めて引き渡した。'}],
+    result:{head:'公開・運用開始——<em>受け皿を先に</em>作った',paras:[
+      'Role — サイトの企画・設計・実装・運用設計まで単独。',
+      '公開・運用を開始している（mcdmix.com）。WordPressテーマから運用マニュアルまでを含め、非技術者が自分で更新できる状態で引き渡した。コミュニティとしての本格的な稼働はこれからで、まずその受け皿を先に作った段階である。']}},
+  c06:{
+    context:{img:'ctx-c06',paras:[
+      'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに、個人で応募した。文字盤が電子ペーパー＝「紙」であること。その素材の性質をどう読むかが、デザインの出発点になった。']},
+    judgment:[
+      {h:'文字盤が「紙」であることに着目した',t:'水墨画や日本美術が持つ「余白の力」を、デジタルデバイスの上で再現する方針にした。「動かないなかに時間が流れている」という一見矛盾した美しさを、最小限の要素で表現している。全体はモノクロームに絞り、大きな余白と最小限の線・形だけで構成。水面に映る月のような円形のモチーフで、静けさのなかにある動きを視覚化した。'}],
+    evidence:null,
+    result:{head:'全国から、<em>32組</em>の公認クリエイターに選出',paras:[
+      '全国から集まった応募作品の中から、32組の公認クリエイターに選出（PR TIMES掲載・公式発表）。',
+      '採用デザインはソニー公式サイト・専用アプリ「FES Closet」を通じて世界へ配信。阪急メンズ東京・高島屋横浜店・静岡伊勢丹・大丸神戸店にて展示販売された。']}}
+};
+function renderCase(d){
+  let h='';
+  h+='<div class="panel work tcard" data-i="01" style="--card-bg:#F1F4F4"><div class="t-inner wrap"><div class="t-text">'
+    +'<span class="t-eyebrow t-anim">Context</span><h2 class="t-head t-anim">課題と背景</h2><div class="t-body">'
+    +d.context.paras.map(p=>'<p class="t-anim">'+p+'</p>').join('')
+    +'</div></div><div class="t-media"><div class="frame"><div class="img '+d.context.img+'"></div></div></div></div></div>';
+  h+='<div class="panel work gcard" style="--card-bg:#F1F5F4"><div class="g-inner wrap">'
+    +'<div class="g-label"><span class="g-en">JUDGMENT</span><span class="g-jp">判断</span></div><div class="g-grid">'
+    +d.judgment.map(c=>'<div class="g-cell"><div class="g-pt">Point</div><h3 class="g-head">'+c.h+'</h3><p class="g-text">'+c.t+'</p></div>').join('')
+    +(d.judgment.length%2?'<div class="g-cell g-empty"></div>':'')
+    +'</div></div></div>';
+  if(d.evidence){
+    h+='<div class="panel work pcard" style="--card-bg:#FAF9F6"><div class="p-inner wrap">'
+      +'<div class="p-label"><span class="g-en">EVIDENCE</span><span class="g-jp">実物</span></div><div class="p-stack">'
+      +d.evidence.map(s=>'<div class="p-step"><div class="ps-body"><div class="ps-no">'+s.no+'</div><h3 class="ps-head">'+s.h+'</h3>'
+        +(s.sub?'<div class="ps-sub">'+s.sub+'</div>':'')+(s.stack?'<div class="ps-stack">'+s.stack+'</div>':'')
+        +'<p class="ps-text">'+s.t+'</p></div><div class="ps-media"><span>画像</span></div></div>').join('')
+      +'</div></div></div>';
+  }
+  h+='<div class="panel work ccard" style="--card-bg:#F6F6F3"><div class="c-inner wrap">'
+    +'<span class="c-eyebrow c-anim">Result</span><h2 class="c-head c-anim">'+d.result.head+'</h2>'
+    +d.result.paras.map(p=>'<p class="c-text c-anim">'+p+'</p>').join('')
+    +'<a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a></div></div>';
+  return h;
+}
+let CURRENT_CASE='c01', CASE01_HTML=null;
+function setCase(key){
+  const showcase=document.querySelector('.showcase');
+  if(CASE01_HTML===null)
+    CASE01_HTML=Array.from(showcase.querySelectorAll('.panel')).map(p=>p.outerHTML).join('');
+  if(key===CURRENT_CASE) return;
+  showcase.querySelectorAll('.panel').forEach(p=>p.remove());
+  showcase.insertAdjacentHTML('beforeend', key==='c01' ? CASE01_HTML : renderCase(CASES[key]));
+  CURRENT_CASE=key;
+}
+
+/* click on a work — a crisp two-beat transition:
+   1) the paper sheet sweeps in RIGHT→LEFT, covering the slider
+   2) the work detail page rises up from the BOTTOM over the sheet */
+let RETURN_IDX=0;   // which work was clicked — the return lands back on it
+function goToDetail(caseKey,workIdx){
+  RETURN_IDX = workIdx||0;
+  const sl=document.querySelector('.hgal'), dt=document.querySelector('.showcase');
+  if(!window.gsap){ dt.classList.remove('off'); sl.classList.add('off'); return; }
+  if(swapping) return; swapping=true;
+  const sw=document.querySelector('.swipe');
+  // x/y:0 clears the CSS translateY(100%) that gsap caches as a PIXEL offset —
+  // without it the percent-based moves would leave the sheet stuck offscreen
+  gsap.set(sw,{x:0,y:0,xPercent:100,yPercent:0,opacity:1}); sw.style.filter='none';
+  const tl=gsap.timeline();
+  // 1) sheet wipes in from the right
+  tl.to(sw,{xPercent:0,duration:.55,ease:'power4.inOut'});
+  // 2) behind the cover: swap in THIS case's content; the detail waits below
+  //    the viewport, already reset so nothing stale shows
+  tl.add(()=>{
+    killScreen(GAL); GAL=null; killAbout();
+    closeWorksPage();   // All Worksページはシートに隠れたこの瞬間に畳む
+    topScreens().forEach(s=>s.classList.add('off'));
+    setCase(caseKey||'c01');
+    dt.classList.remove('off');
+    dt.classList.add('rise');
+    document.body.classList.add('detail-on'); updateWkBtn();
+    window.scrollTo(0,0);
+    const panels=gsap.utils.toArray('.showcase .panel');
+    if(!document.documentElement.classList.contains('sp-flow')){
+      gsap.set(panels.slice(1),{yPercent:100,scale:.84,borderRadius:'30px'});
+      gsap.set(panels[0],{yPercent:0,scale:1,borderRadius:'0px'});
+    }
+    const cur=dt.querySelector('[data-cur]'); if(cur) cur.textContent='01';
+    const pr=dt.querySelector('[data-prog]'); if(pr) pr.style.height='0%';
+    const hint=dt.querySelector('[data-hint]'); if(hint) hint.style.opacity=1;
+    gsap.set(dt,{yPercent:100});
+    // inner entrance for 課題と背景 — plays while the page rises
+    const p=dt.querySelector('.tcard');
+    if(p){
+      gsap.fromTo(p.querySelectorAll('.t-anim'),{y:42,opacity:0},
+        {y:0,opacity:1,duration:.8,stagger:.12,ease:'power2.out',delay:.3,overwrite:'auto'});
+      gsap.fromTo(p.querySelector('.t-media .frame'),{clipPath:'inset(0% 0% 100% 0%)'},
+        {clipPath:'inset(0% 0% 0% 0%)',duration:1,ease:'power2.out',delay:.4,overwrite:'auto'});
+      gsap.fromTo(p.querySelector('.t-media .img'),{scale:1.14},
+        {scale:1,duration:1.3,ease:'power2.out',delay:.4,overwrite:'auto'});
+    }
+  });
+  // 3) the detail page rises from the bottom (fast launch, smooth settle)
+  tl.to(dt,{yPercent:0,duration:.8,ease:'power4.out'},'+=.08');
+  // 4) settle: hand the page over to its ScrollTrigger, tidy the sheet
+  tl.add(()=>{
+    dt.classList.remove('rise');
+    gsap.set(dt,{clearProps:'transform'});
+    DET=initShowcase();
+    ScrollTrigger.refresh();
+    window.scrollTo(0,0);
+    gsap.set(sw,{x:0,y:0,xPercent:0,yPercent:100});
+    swapping=false;
+  });
+}
+/* back from a detail: land the slider DIRECTLY on the clicked work (cover
+   already open), snapping the timeline there so nothing plays catch-up */
+function returnToWork(){
+  transitionTo(()=>{
+    showScreen('slider');
+    if(!GAL){
+      const p=document.querySelectorAll('.hgal-track > *')[RETURN_IDX];
+      if(p) window.scrollTo(0,Math.round(p.getBoundingClientRect().top+window.scrollY));
+      return;
+    }
+    const i=RETURN_IDX;
+    // middle of the clicked work's settled zone on the timeline
+    const s0 = (i===0) ? GAL.PRE : (GAL.startAt[i]+GAL.REV);
+    const s1 = (GAL.startAt[i+1]!==undefined) ? GAL.startAt[i+1] : (GAL.WORKEND||GAL.total);
+    const t  = (s0+s1)/2;
+    const y  = Math.round(GAL.st.start + (t/GAL.total)*(GAL.st.end-GAL.st.start));
+    window.scrollTo(0,y);
+    ScrollTrigger.update();
+    // スクラブの追従トゥイーンを「殺さずに」瞬時に完了させる（公式の作法）。
+    // killTweensOf だと追従トゥイーン自体が死に、以後スクロールに反応しなくなる
+    const sc=GAL.st.getTween && GAL.st.getTween();
+    if(sc) sc.progress(1);
+    else if(GAL.st.animation) GAL.st.animation.progress(t/GAL.total);
+  });
+}
+
+
+
+/* ═══════ WORKS モーダル（制作物一覧）＋ライトボックス ═══════ */
+const WORKS=[
+  {w:'work_24',c:'c01',t:'pdf-annotator ── PDF業務基盤',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',imgs:["work_24_work_24.webp", "work_24_work_24_hero.webp"]},
+  {w:'work_27',c:'c01',t:'DocuWorks → PDF 一括変換ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・実装・配布設計まで単独',imgs:["work_27_work_27.webp"]},
+  {w:'work_01',c:'c03',t:'企業動画「オーナーの一生に伴走する」',y:'2025',cat:'Branding / Video',role:'企画・制作・配信ディレクション',imgs:["work_01_work_01.webp", "work_01_work_01_hero.webp"]},
+  {w:'work_21',c:'c03',t:'M&A 会社案内動画',y:'2024',cat:'Video / Branding',role:'企画・ディレクション',imgs:["work_21_work_21.webp", "work_21_MA_storyboard_p1.webp", "work_21_MA_storyboard_p2.webp", "work_21_MA_storyboard_p3.webp", "work_21_work_21_hero.webp"]},
+  {w:'work_02',c:'c03',t:'YouTube ミカタチャンネル',y:'2023–2026',cat:'Digital / SNS',role:'企画・サムネイル・運用分析',imgs:["work_02_work_02.webp", "work_02_work_02_b.webp", "work_02_work_02_b2.webp", "work_02_work_02_hero.webp", "work_02_work_02_s1.webp", "work_02_work_02_s2.webp", "work_02_work_02_s3.webp", "work_02_work_02_s4.webp", "work_02_work_02_s5.webp"]},
+  {w:'work_04',c:'c03',t:'全国ビジネスセミナー運営',y:'2023–2026',cat:'Event Management',role:'総合運営ディレクター',imgs:["work_04_work_04.webp", "work_04_work_04_hero.webp"]},
+  {w:'work_12',c:'c03',t:'デジタルマーケティング運用',y:'2023–2026',cat:'Digital Marketing',role:'広告クリエイティブ・AB運用',imgs:["work_12_work_12.webp", "work_12_work_12_a.webp", "work_12_work_12_a2.webp", "work_12_work_12_d.webp", "work_12_work_12_e.webp", "work_12_work_12_hero.webp"]},
+  {w:'work_22',c:'c03',t:'メールマガジン運用（Pardot）',y:'2023–2026',cat:'Email Marketing',role:'実装・執筆・配信・分析まで単独',imgs:["work_22_work_22.webp", "work_22_2024Christmas.webp", "work_22_2025_shotyumimai.webp", "work_22_mailmag_banner_zeisei.webp", "work_22_work_22_hero.webp"]},
+  {w:'work_25',c:'c03',t:'MIKATA Lab.（オウンドメディア）',y:'2024–2026',cat:'Owned Media',role:'編集フロー設計・統一デザイン',imgs:["work_25_media_20240805_teigakugenzei.webp", "work_25_media_20250114_banner.webp", "work_25_media_20250312_nensyu.webp", "work_25_media_20250401_banner-main.webp", "work_25_media_mf_1_account.webp", "work_25_media_mf_2_renkei.webp", "work_25_media_mf_3_settei.webp", "work_25_owned_media_card.webp", "work_25_owned_media_flow_redacted.webp", "work_25_owned_media_hero.webp"]},
+  {w:'work_09',c:'c03',t:'マンガでカンタン！相続は7日間でわかります。',y:'2024',cat:'Publishing / PR',role:'学研との出版協働・企画',imgs:["work_09_work_09.webp", "work_09_work_09_hero.webp"]},
+  {w:'work_20',c:'c04',t:'会社案内・営業資材 トータル制作',y:'2024',cat:'Branding / Print',role:'戦略立案から全工程単独',imgs:["work_20_work_20.webp", "work_20_shasho_p3.webp", "work_20_shasho_p5.webp", "work_20_shasho_p7.webp", "work_20_work_20_a.webp", "work_20_work_20_a2.webp", "work_20_work_20_b.webp", "work_20_work_20_b2.webp", "work_20_work_20_c.webp", "work_20_work_20_hero.webp"]},
+  {w:'work_10',c:'c04',t:'MIKATAグループ採用サイト',y:'2026',cat:'Recruitment Branding',role:'IA設計・コンテンツ・撮影・Pardot',imgs:["work_10_work_10.webp", "work_10_202510148.webp", "work_10_DSC04975.webp", "work_10_DSC05020.webp", "work_10_DSC05039.webp", "work_10_DSC05044.webp", "work_10_recruit_deck_career.webp", "work_10_recruit_deck_contents.webp", "work_10_recruit_deck_cover.webp", "work_10_recruit_deck_numbers.webp", "work_10_recruit_deck_onestop.webp", "work_10_work_10_hero.webp"]},
+  {w:'work_03',c:'c04',t:'ミカタの相続サイト & パンフレット',y:'2026',cat:'Web / Print',role:'ディレクション（色・フォント設計）',imgs:["work_03_work_03.webp", "work_03_work_03_a.webp", "work_03_work_03_hero.webp"]},
+  {w:'work_08',c:'c05',t:'ひのてり訪問看護 会社案内・チラシ',y:'2025',cat:'Print / Branding',role:'理念の言語化から全工程単独',imgs:["work_08_work_08.webp", "work_08_work_08_b.webp", "work_08_work_08_b2.webp", "work_08_work_08_c.webp", "work_08_work_08_hero.webp"]},
+  {w:'work_17',c:'c06',t:'Sony FES Watch U デザインコンペ',y:'2018',cat:'Design Competition',role:'個人応募・32組の公認クリエイター選出',imgs:["work_17_work_17.webp", "work_17_Detail1_Minamo.webp", "work_17_Detail2_Minamo.webp", "work_17_Detail3_Minamo.webp", "work_17_Detail4_Minamo.webp", "work_17_work_17_hero.webp"]},
+  {w:'work_06',c:'c07',t:'ながくてアートブック',y:'2025',cat:'Event / Community',role:'サイト構築・イベント企画運営',imgs:["work_06_work_06.webp", "work_06_work_06_a.webp", "work_06_work_06_slide01.webp", "work_06_work_06_slide02.webp", "work_06_work_06_slide03.webp", "work_06_work_06_slide04.webp", "work_06_work_06_slide05.webp", "work_06_work_06_slide06.webp"]}
+];
+const CASE_KEYS=['c01','c03','c04','c05','c06','c07'];
+const CASE_META={
+  c01:{no:'PROJECT 01',t:'サポート終了の電子文書システムから、AI対応システムへの移行'},
+  c03:{no:'PROJECT 03',t:'続くことが事業になる商材を、続く状態にする'},
+  c04:{no:'PROJECT 04',t:'ミカタというブランドを、全方位で運用した'},
+  c05:{no:'PROJECT 05',t:'理念が、まだ成立していなかった'},
+  c06:{no:'PROJECT 06',t:'Sony FES Watch U デザインコンペ'},
+  c07:{no:'PROJECT 07',t:'卒業生コミュニティの受け皿を、運用し続けられる形で作った'}
+};
+const WKIMG='assets/img/works/';
+function wkCard(w,idx){
+  return `<div class="wk-card" data-wk="${idx}">
+    <div class="wk-thumb"><img src="${WKIMG+w.imgs[0]}" alt="${w.t}" loading="lazy"></div>
+    <div class="wk-meta"><h4>${w.t}</h4>
+      <div class="wk-sub">${w.y}　${w.cat}</div>
+      <div class="wk-role">${w.role}</div>
+      ${w.imgs.length>1?`<div class="wk-n">${w.imgs.length} images ↗</div>`:''}
+    </div></div>`;
+}
+function buildAllSections(){
+  return CASE_KEYS.map(k=>{
+    const list=WORKS.map((w,i)=>[w,i]).filter(([w])=>w.c===k);
+    if(!list.length) return '';
+    return `<div class="wk-sec">
+      <div class="wk-sec-head"><span class="wk-case">${CASE_META[k].no}</span><h3>${CASE_META[k].t}</h3></div>
+      <div class="wk-grid">${list.map(([w,i])=>wkCard(w,i)).join('')}</div>
+      <div class="wk-sec-cta"><button class="wk-open-case wk-cta" data-case="${k}">プロジェクトを読む <span aria-hidden="true">→</span></button></div></div>`;
+  }).join('');
+}
+/* 左下から円が広がるリビール */
+function circleIn(el,inner){
+  if(!window.gsap||reduce){ if(inner) gsap&&gsap.set(inner,{opacity:1}); return; }
+  gsap.fromTo(el,{clipPath:'circle(0% at 0% 100%)'},
+    {clipPath:'circle(160% at 0% 100%)',duration:.75,ease:'power3.inOut',
+     onComplete:()=>{ el.style.clipPath='none'; }});
+  if(inner) gsap.fromTo(inner,{opacity:0,y:26},{opacity:1,y:0,duration:.6,ease:'power2.out',delay:.4});
+}
+/* プロジェクト内クイックモーダル（ケース絞り込み） */
+function openWorks(filter){
+  const md=document.querySelector('.wk-modal');
+  const body=md.querySelector('[data-wk-body]');
+  const title=md.querySelector('[data-wk-title]');
+  title.textContent=(CASE_META[filter]?CASE_META[filter].no:'')+' — Works';
+  const list=WORKS.map((w,i)=>[w,i]).filter(([w])=>w.c===filter);
+  body.innerHTML='<div class="wk-grid">'+list.map(([w,i])=>wkCard(w,i)).join('')+'</div>';
+  body.scrollTop=0;
+  md.classList.add('on'); md.style.opacity='1';
+  document.body.classList.add('locked');
+  if(window.gsap&&!reduce){
+    gsap.fromTo(md.querySelector('.wk-back'),{opacity:0},{opacity:1,duration:.4});
+    circleIn(md.querySelector('.wk-panel'),body);
+  }
+}
+function closeWorks(){
+  const md=document.querySelector('.wk-modal');
+  if(!md.classList.contains('on')) return;
+  const done=()=>{ md.classList.remove('on'); md.style.opacity='';
+    document.body.classList.remove('locked'); };
+  if(window.gsap&&!reduce) gsap.to(md,{opacity:0,duration:.32,ease:'power1.out',onComplete:done});
+  else done();
+}
+/* All Works ＝ ページ（オーバーレイ型） */
+function openWorksPage(){
+  const aw=document.querySelector('.aw');
+  if(aw.classList.contains('on')) return;
+  aw.querySelector('[data-aw-body]').innerHTML=buildAllSections();
+  aw.scrollTop=0;
+  aw.classList.add('on');
+  document.body.classList.add('aw-lock');
+  circleIn(aw,aw.querySelector('.aw-inner'));
+}
+function closeWorksPage(){
+  const aw=document.querySelector('.aw');
+  if(!aw.classList.contains('on')) return;
+  aw.classList.remove('on');
+  aw.style.clipPath='';
+  document.body.classList.remove('aw-lock');
+}
+/* All Works → 該当プロジェクトへ */
+/* 「プロジェクトを読む」→ 該当プロジェクト詳細の冒頭（課題と背景）へ */
+function jumpToCase(key){
+  closeWorks();
+  const idx=Math.max(0,CASE_KEYS.indexOf(key));
+  RETURN_IDX=idx;
+  const inDetail=!document.querySelector('.showcase').classList.contains('off');
+  if(!inDetail){ goToDetail(key,idx); return; }   // ページはシート裏で畳まれる
+  if(CURRENT_CASE===key){ closeWorksPage(); window.scrollTo(0,0); return; }
+  transitionTo(()=>{
+    closeWorksPage();
+    killScreen(DET); DET=null;
+    setCase(key);
+    DET=initShowcase();
+    updateWkBtn();
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
+    window.scrollTo(0,0);
+  });
+}
+/* ライトボックス */
+const LB={imgs:[],cap:'',i:0};
+function lbShow(){
+  const lb=document.querySelector('.wk-lb');
+  lb.querySelector('img').src=WKIMG+LB.imgs[LB.i];
+  lb.querySelector('.wk-lb-cap').innerHTML=LB.cap+(LB.imgs.length>1?`<span>${LB.i+1} / ${LB.imgs.length}</span>`:'');
+  lb.classList.add('on');
+}
+function lbClose(){ document.querySelector('.wk-lb').classList.remove('on'); }
+function updateWkBtn(){
+  const n=WORKS.filter(w=>w.c===CURRENT_CASE).length;
+  const el=document.querySelector('[data-wk-count]'); if(el) el.textContent=n;
+  const btn=document.querySelector('.wk-btn'); if(btn) btn.style.display=n? '':'none';
+}
+function initWorksUI(){
+  document.querySelector('.wk-btn').addEventListener('click',()=>openWorks(CURRENT_CASE));
+  document.querySelectorAll('[data-wk-close]').forEach(el=>el.addEventListener('click',closeWorks));
+  document.querySelectorAll('.nav-aw').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openWorksPage();}));
+  const wkClick=e=>{
+    const oc=e.target.closest('.wk-open-case');
+    if(oc){ jumpToCase(oc.dataset.case); return; }
+    const card=e.target.closest('.wk-card');
+    if(card){ const w=WORKS[+card.dataset.wk];
+      LB.imgs=w.imgs; LB.i=0; LB.cap=w.t; lbShow(); }
+  };
+  document.querySelector('[data-wk-body]').addEventListener('click',wkClick);
+  document.querySelector('[data-aw-body]').addEventListener('click',wkClick);
+  const lb=document.querySelector('.wk-lb');
+  lb.querySelector('[data-lb-close]').addEventListener('click',lbClose);
+  lb.querySelector('.wk-lb-prev').addEventListener('click',()=>{LB.i=(LB.i-1+LB.imgs.length)%LB.imgs.length;lbShow();});
+  lb.querySelector('.wk-lb-next').addEventListener('click',()=>{LB.i=(LB.i+1)%LB.imgs.length;lbShow();});
+  lb.addEventListener('click',e=>{ if(e.target===lb) lbClose(); });
+  window.addEventListener('keydown',e=>{
+    if(document.querySelector('.wk-lb').classList.contains('on')){
+      if(e.key==='Escape') lbClose();
+      if(e.key==='ArrowLeft'){LB.i=(LB.i-1+LB.imgs.length)%LB.imgs.length;lbShow();}
+      if(e.key==='ArrowRight'){LB.i=(LB.i+1)%LB.imgs.length;lbShow();}
+    }else if(document.querySelector('.wk-modal').classList.contains('on')&&e.key==='Escape') closeWorks();
+    else if(document.querySelector('.aw').classList.contains('on')&&e.key==='Escape')
+      transitionTo(()=>closeWorksPage());
+  });
+}
+
+/* ---------- BOOT ---------- */
+function initAnim(){
+  if(!window.gsap||reduce){
+    document.querySelectorAll('.reveal,.line-mask').forEach(e=>e.classList.add('in'));
+    document.querySelectorAll('.prof-tl-item').forEach(e=>e.classList.add('visible'));
+    document.querySelectorAll('.hgal-track > *').forEach(p=>{p.style.opacity=1;});
+    // no scrub — show the hero statically, drop the sheet, unhide the UI,
+    // and let the strengths flow statically after the works
+    document.querySelectorAll('.hg-sheet').forEach(e=>{e.style.display='none';});
+    document.querySelectorAll('.hg-ui').forEach(e=>{e.style.opacity=1;});
+    const hs=document.querySelector('.hg-strengths');
+    if(hs){ hs.style.position='relative';
+      const c=hs.querySelector('.hgst-card'); if(c) c.style.position='static'; }
+    initHeroMotion();   // モーションなし → 完成形（カード）で静止表示
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  // 登場演出（行マスクのライズ）が終わったらマスクを解除——
+  // 文字が拡大して飛ぶとき、行の枠でクリップされないように
+  setTimeout(()=>{document.querySelectorAll('.hg-hero .line-mask')
+    .forEach(m=>{m.style.overflow='visible';});},1800);
+  // detail is a separate screen — hidden and NOT built until a work is clicked
+  document.querySelector('.showcase').classList.add('off');
+  // SP：ピン留めスライダーは使わず、通常の縦スクロールで閲覧する
+  if(window.matchMedia('(max-width:820px)').matches){
+    document.documentElement.classList.add('sp-flow');
+    // 縦積みでは「作品 → スキル」の順になるよう、オーバーレイ用に
+    // 手前置きしてあったスキル節をトラックの後ろへ移動
+    const sec=document.querySelector('.hgal'), stn=sec&&sec.querySelector('.hg-strengths');
+    if(stn) sec.appendChild(stn);
+  }
+  if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
+  initHeroMotion();     // ローダー明けにヒーローの図形モーションを再生
+  initAboutFx();
+  ScrollTrigger.refresh();
+  initReveals();
+  // each work opens ITS case detail ; TOP へ戻る -> back to the slider
+  const KEYS=['c01','c03','c04','c05','c06','c07'];
+  document.querySelectorAll('.hg-item').forEach((item,idx)=>{
+    item.querySelectorAll('.view,.hg-media').forEach(a=>{
+      a.addEventListener('click',e=>{ e.preventDefault(); goToDetail(KEYS[idx]||'c01', idx); });
+    });
+  });
+  // delegated — the c-top link is re-created whenever the case content swaps
+  document.querySelector('.showcase').addEventListener('click',e=>{
+    const b=e.target.closest('.c-top');
+    if(b){ e.preventDefault(); returnToWork(1); }
+  });
+  // スクロール先の算出：Project=作品01が据わった位置／About=見出しが出切った位置
+  const workZoneY=()=>{
+    if(GAL){
+      const s1=(GAL.startAt&&GAL.startAt[1]!==undefined)?GAL.startAt[1]:(GAL.WORKEND||GAL.total);
+      const t=(GAL.PRE+s1)/2;
+      return Math.round(GAL.st.start+(t/GAL.total)*(GAL.st.end-GAL.st.start));
+    }
+    const el=document.querySelector('.hgal-track');
+    return el?Math.round(el.getBoundingClientRect().top+window.scrollY):0;
+  };
+  const aboutY=()=>{
+    const st=(window.ScrollTrigger?ScrollTrigger.getAll():[]).find(t=>t.trigger&&t.trigger.classList&&t.trigger.classList.contains('abt-pin')&&t.pin);
+    if(st&&st.animation){
+      const frac=Math.min(.9,0.52/st.animation.duration());   // 見出しは出切り、写真はまだ出ない位置
+      return Math.round(st.start+(st.end-st.start)*frac);
+    }
+    return Math.round(document.getElementById('about').offsetTop-20);
+  };
+  const settleGal=()=>{ if(window.ScrollTrigger)ScrollTrigger.update();
+    const sc=GAL&&GAL.st.getTween&&GAL.st.getTween(); if(sc) sc.progress(1); };
+  // Top：いま見えている画面が小さくなりながらフェードアウト → TOPがふわっと戻る
+  const shrinkToTop=()=>{
+    if(!window.gsap||reduce||window.scrollY<10){ window.scrollTo(0,0); settleGal(); return; }
+    const vis=[document.querySelector('.hgal'),document.querySelector('.abt-pin'),document.querySelector('.site-foot')].filter(Boolean);
+    gsap.to(vis,{scale:.92,autoAlpha:0,duration:.5,ease:'power2.in',transformOrigin:'50% 50%',
+      onComplete:()=>{
+        window.scrollTo(0,0); settleGal();
+        gsap.set(vis,{clearProps:'transform,opacity,visibility'});
+        gsap.fromTo('.hgal',{autoAlpha:0,scale:.985},
+          {autoAlpha:1,scale:1,duration:.55,ease:'power2.out',clearProps:'transform,opacity,visibility'});
+      }});
+  };
+  // nav「Top」「About」：どの画面からでも該当位置へ（All Works/詳細はシート遷移で戻る）
+  const navGoto=(scrollFn)=>{
+    const awOn=document.querySelector('.aw').classList.contains('on');
+    const inDetail=!document.querySelector('.showcase').classList.contains('off');
+    if(inDetail){ closeWorksPage(); transitionTo(()=>{ showScreen('slider'); scrollFn(); }); }
+    else if(awOn){ transitionTo(()=>{ closeWorksPage(); scrollFn(); }); }
+    else scrollFn();
+  };
+  const closeOverlays=()=>{ closeWorks(); lbClose(); };
+  document.querySelectorAll('header.nav .nav-top').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); closeOverlays();
+    const awOn=document.querySelector('.aw').classList.contains('on');
+    const inDetail=!document.querySelector('.showcase').classList.contains('off');
+    if(inDetail){ closeWorksPage(); transitionTo(()=>{ showScreen('slider'); }); }
+    else if(awOn){ transitionTo(()=>{ closeWorksPage(); window.scrollTo(0,0); settleGal(); }); }
+    else shrinkToTop();
+  }));
+  document.querySelectorAll('header.nav .nav-about').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); closeOverlays(); navGoto(()=>{ window.scrollTo(0,aboutY()); settleGal(); });
+  }));
+  // nav「Work」・ブランドロゴ：詳細画面にいるときはスライダーへ戻す
+  document.querySelectorAll('header.nav a[href="#work"], header.nav .brand').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      closeWorks(); lbClose();
+      const awOn=document.querySelector('.aw').classList.contains('on');
+      const inDetail=!document.querySelector('.showcase').classList.contains('off');
+      const toSlider=()=>{ window.scrollTo(0,workZoneY()); settleGal(); };
+      if(awOn&&!inDetail){ transitionTo(()=>{ closeWorksPage(); toSlider(); }); }
+      else if(awOn&&inDetail){ closeWorksPage(); returnToWork(); }
+      else if(inDetail){ returnToWork(); }
+      else transitionTo(()=>toSlider());
+    });
+  });
+  // footer links — jump to sections (footer only exists on the TOP screen)
+  document.querySelectorAll('#foot a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=a.getAttribute('href');
+      if(t==='#top'){ window.scrollTo(0,0); return; }
+      const go=el=>{ if(el) window.scrollTo(0,Math.round(el.getBoundingClientRect().top+window.scrollY)); };
+      if(t==='#work'){ window.scrollTo(0,workZoneY()); settleGal(); }
+      else if(t==='#strengths'){ GAL?window.scrollTo(0,Math.round(GAL.st.start+((GAL.WORKEND+2.4)/GAL.total)*(GAL.st.end-GAL.st.start))):go(document.querySelector('.hg-strengths')); }
+      else if(t==='#about'){ window.scrollTo(0,aboutY()); settleGal(); }
+    });
+  });
+}
+
+window.addEventListener('load',()=>{
+  runLoader(()=>initAnim());
+  initCursor();initMagnetic();initWorksUI();
+  // safety net: only force-show things stuck INSIDE the current viewport.
+  // (it used to force-show everything, which pre-fired every below-the-fold
+  //  reveal 5s after load — the scroll animations then never played)
+  setTimeout(()=>{
+    const vh=window.innerHeight;
+    const inView=e=>{const r=e.getBoundingClientRect();return r.top<vh&&r.bottom>0;};
+    document.querySelectorAll('.reveal,.line-mask').forEach(e=>{ if(inView(e)) e.classList.add('in'); });
+  },5000);
+});
+</script>
+</body>
+</html>
