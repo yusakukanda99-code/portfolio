@@ -406,6 +406,21 @@ body.detail-on .wk-btn{display:inline-flex}
 /* work — full-bleed image + overlaid text */
 .hg-media{display:block;position:absolute;inset:0;overflow:hidden}
 .hg-media .img{position:absolute;top:0;left:-7%;width:114%;height:100%;background-size:cover;background-position:center;will-change:transform}
+/* TOP専用ヒーロー画像。ファイル未設置の間は透明のままで、下のダミー(.g1〜.g6)が見える */
+.hp01{background-image:url("assets/img/works/hero_p01.webp")}
+.hp02{background-image:url("assets/img/works/hero_p02.webp")}
+.hp03{background-image:url("assets/img/works/hero_p03.webp")}
+.hp04{background-image:url("assets/img/works/hero_p04.webp")}
+.hp05{background-image:url("assets/img/works/hero_p05.webp")}
+.hp06{background-image:url("assets/img/works/hero_p06.webp")}
+@media(max-width:820px){
+  .hp01{background-image:url("assets/img/works/hero_p01_sp.webp")}
+  .hp02{background-image:url("assets/img/works/hero_p02_sp.webp")}
+  .hp03{background-image:url("assets/img/works/hero_p03_sp.webp")}
+  .hp04{background-image:url("assets/img/works/hero_p04_sp.webp")}
+  .hp05{background-image:url("assets/img/works/hero_p05_sp.webp")}
+  .hp06{background-image:url("assets/img/works/hero_p06_sp.webp")}
+}
 .hg-media img,.hg-media .gif{position:absolute;top:0;left:-7%;width:114%;height:100%;object-fit:cover}
 /* legibility scrim (top + bottom) so overlaid text always reads */
 .hg-item::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -725,7 +740,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- Work 01 — real, full-bleed image + overlaid text -->
       <article class="hg-item" data-i="1">
-        <a class="hg-media" href="portfolio.html"><div class="img g1"></div></a>
+        <a class="hg-media" href="portfolio.html"><div class="img g1"></div><div class="img hp01"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 01 — ミカタグループ（ミカタ税理士法人） / 2026</span>
@@ -738,7 +753,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- CASE 03 — 構造を見ている -->
       <article class="hg-item" data-i="2">
-        <a class="hg-media" href="#"><div class="img g5"></div></a>
+        <a class="hg-media" href="#"><div class="img g5"></div><div class="img hp02"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
@@ -751,7 +766,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- CASE 04 — 判断を持っている -->
       <article class="hg-item" data-i="3">
-        <a class="hg-media" href="#"><div class="img g3"></div></a>
+        <a class="hg-media" href="#"><div class="img g3"></div><div class="img hp03"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 03 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
@@ -764,7 +779,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- CASE 05 — 言葉を作る -->
       <article class="hg-item" data-i="4">
-        <a class="hg-media" href="#"><div class="img g4"></div></a>
+        <a class="hg-media" href="#"><div class="img g4"></div><div class="img hp04"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 04 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
@@ -777,7 +792,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- CASE 06 — 第三者が評価した -->
       <article class="hg-item" data-i="5">
-        <a class="hg-media" href="#"><div class="img g2"></div></a>
+        <a class="hg-media" href="#"><div class="img g2"></div><div class="img hp05"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 05 — Sony Fashion Entertainments（個人応募） / 2018</span>
@@ -790,7 +805,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- CASE 07 — 運用を渡す -->
       <article class="hg-item" data-i="6">
-        <a class="hg-media" href="#"><div class="img g6"></div></a>
+        <a class="hg-media" href="#"><div class="img g6"></div><div class="img hp06"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 06 — MCD MIX（母校の卒業生コミュニティ） / 2025–2026</span>
