@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YUSAKU KANDA — Portfolio</title>
 <meta name="description" content="Portfolio of Yusaku Kanda — Product / UI・UX Designer.">
+<meta name="robots" content="noindex, nofollow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -323,7 +324,8 @@ body.detail-on .wk-btn{display:inline-flex}
 .wk-open-case{margin-left:auto;font-size:12.5px;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--ink);padding:0 0 2px;cursor:pointer;letter-spacing:.04em}
 .wk-open-case:hover{color:var(--accent);border-color:var(--accent)}
 .wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.wk-gl{grid-column:1/-1;font-size:12px;letter-spacing:.12em;color:var(--ink-soft);padding:6px 0 2px;border-top:1px solid var(--line)}
+.wk-gl{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.1em;color:var(--ink);padding:10px 0 2px;border-top:1px solid var(--line)}
+.wk-gl::before{content:"";width:18px;height:1px;background:var(--accent);flex:none}
 .wk-gl:first-child{border-top:none;padding-top:0}
 .wk-card{cursor:pointer;background:#F3F2EE;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:box-shadow .35s var(--ease),transform .35s var(--ease)}
 .wk-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(28,28,28,.12)}
@@ -407,6 +409,7 @@ body.detail-on .wk-btn{display:inline-flex}
 .hg-media{display:block;position:absolute;inset:0;overflow:hidden}
 .hg-media .img{position:absolute;top:0;left:-7%;width:114%;height:100%;background-size:cover;background-position:center;will-change:transform}
 /* TOP専用ヒーロー画像。ファイル未設置の間は透明のままで、下のダミー(.g1〜.g6)が見える */
+.g7{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjMWExZDIwIi8+PHJlY3QgeD0iMjAwIiB5PSIxNjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjU2MCIgcng9IjgiIGZpbGw9IiMyYjNhMzMiLz48cmVjdCB4PSIyMDAiIHk9IjE2MCIgd2lkdGg9IjEyMDAiIGhlaWdodD0iNTYwIiByeD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjM2Y1MTQ2IiBzdHJva2Utd2lkdGg9IjgiLz48ZWxsaXBzZSBjeD0iNzAwIiBjeT0iNDcwIiByeD0iMTEwIiByeT0iOTYiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuOTIiLz48ZWxsaXBzZSBjeD0iNjYyIiBjeT0iMzY2IiByeD0iMjIiIHJ5PSI1NCIgZmlsbD0iI2U5ZWZlOSIgb3BhY2l0eT0iMC45MiIvPjxlbGxpcHNlIGN4PSI3MTYiIGN5PSIzNjAiIHJ4PSIyMiIgcnk9IjU4IiBmaWxsPSIjZTllZmU5IiBvcGFjaXR5PSIwLjkyIi8+PGVsbGlwc2UgY3g9Ijk4MCIgY3k9IjUyMCIgcng9Ijg2IiByeT0iNTIiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuODUiLz48ZWxsaXBzZSBjeD0iMTA1MiIgY3k9IjQ5OCIgcng9IjI2IiByeT0iMjYiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuODUiLz48Y2lyY2xlIGN4PSIxMTUwIiBjeT0iMzAwIiByPSIxNiIgZmlsbD0iI2NmZTBjZiIgb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMTIxMCIgY3k9IjM0MCIgcj0iMTAiIGZpbGw9IiNjZmUwY2YiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjQyMCIgY3k9IjMyMCIgcj0iMTIiIGZpbGw9IiNjZmUwY2YiIG9wYWNpdHk9IjAuNSIvPjxyZWN0IHg9IjIwMCIgeT0iNjQwIiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzI0MzAyOSIgb3BhY2l0eT0iMC44Ii8+PHJlY3QgeD0iNjYwIiB5PSI4MDAiIHdpZHRoPSIyODAiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0iI2U5ZWZlOSIgb3BhY2l0eT0iMC45Ii8+PHJlY3QgeD0iNzAwIiB5PSI4NDYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTYiIHJ4PSI4IiBmaWxsPSIjOGY5YThmIiBvcGFjaXR5PSIwLjkiLz48L3N2Zz4=") center/cover no-repeat}
 .hp01{background-image:url("assets/img/works/hero_p01.webp")}
 .hp02{background-image:url("assets/img/works/hero_p02.webp")}
 .hp03{background-image:url("assets/img/works/hero_p03.webp")}
@@ -741,77 +744,67 @@ body.detail-on .wk-btn{display:inline-flex}
 
       <!-- Work 01 — real, full-bleed image + overlaid text -->
       <article class="hg-item" data-i="1">
-        <a class="hg-media" href="portfolio.html"><div class="img g1"></div><div class="img hp01"></div></a>
+        <a class="hg-media" href="#"><div class="img g7"></div><div class="img hp01"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 01 — ミカタグループ（ミカタ税理士法人） / 2026</span>
-            <h3 class="hg-title"><span class="nb">サポート終了の文書形式から、</span><span class="nb"><em>AIが読める状態</em>への移行</span></h3>
-            <p class="hg-lead">長年使ってきた文書システムはサポートが終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装した。</p>
-            <div class="hg-foot"><a href="portfolio.html" class="view">View case ↗</a></div>
+            <span class="hg-cat">PROJECT 01 — MCD MIX ／ ながくてアートブック（愛・地球博記念公園） / 2025–2026</span>
+            <h3 class="hg-title"><span class="nb">卒業生コミュニティの</span><span class="nb"><em>サイト制作から、イベント運営</em>まで</span></h3>
+            <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」の拠点サイトを単独で構築し、そこに載せるイベントの企画・参加規約・搬入出の案内までを整備した。2026年は来場者が描いた絵がその場で森に現れるワークショップを設計・開発し、2日間で67作品が森に加わった。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
       </article>
-
-      <!-- CASE 03 — 構造を見ている -->
       <article class="hg-item" data-i="2">
-        <a class="hg-media" href="#"><div class="img g5"></div><div class="img hp02"></div></a>
+        <a class="hg-media" href="#"><div class="img g1"></div><div class="img hp02"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
-            <h3 class="hg-title"><span class="nb">会社としての情報発信と</span><span class="nb"><em>お客様とのタッチポイント</em>設計</span></h3>
-            <p class="hg-lead">顧問契約をいただくお客様に、税制改正のような変化を、会社として正しく届ける必要があった。ただし内容が整っていなければ読まれない。媒体を問わず、発信物のデザインと管理・運用を一手に担った。</p>
+            <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2026</span>
+            <h3 class="hg-title"><span class="nb">サポート終了の文書形式から、</span><span class="nb"><em>AIが読める状態</em>への移行</span></h3>
+            <p class="hg-lead">長年使ってきた文書システムはサポートが終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装し、年間約1,200万円のコスト削減を試算している。</p>
             <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
       </article>
-
-      <!-- CASE 04 — 判断を持っている -->
       <article class="hg-item" data-i="3">
-        <a class="hg-media" href="#"><div class="img g3"></div><div class="img hp03"></div></a>
+        <a class="hg-media" href="#"><div class="img g4"></div><div class="img hp03"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 03 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
-            <h3 class="hg-title"><span class="nb">ミカタグループの</span><span class="nb"><em>ブランディングの社内定着</em></span></h3>
-            <p class="hg-lead">リブランディングを行いロゴは一新したが、ロゴが変わっただけという認識しか社内に無く、何も変化を感じていなかった。そこで、グループで使用する会社案内や資料をはじめ、サービスの資料なども作成した。対外的な資料に留まらず、社内報や社章といったインナーブランディングもデザインした。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- CASE 05 — 言葉を作る -->
-      <article class="hg-item" data-i="4">
-        <a class="hg-media" href="#"><div class="img g4"></div><div class="img hp04"></div></a>
-        <div class="hg-overlay">
-          <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 04 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
+            <span class="hg-cat">PROJECT 03 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
             <h3 class="hg-title"><span class="nb">抽象的だった理念を</span><span class="nb"><em>コミュニケーション可能な形</em>に</span></h3>
-            <p class="hg-lead">依頼は会社案内・チラシの制作と写真撮影だったが、企業理念が文章として存在せず、会社の方向性そのものが曖昧だった。そこで代表との対話から理念を読み解き、代表メッセージの執筆から着手。その上でチラシと会社案内を制作し、ブランディング全体を担った。</p>
+            <p class="hg-lead">依頼は会社案内・チラシの制作と写真撮影だったが、企業理念が文章として存在せず、会社の方向性そのものが曖昧だった。そこで代表との対話から理念を読み解き、代表メッセージの執筆から着手。その上でチラシと会社案内を制作し、ブランディング全体を担った。一言だけだった理念が、対外的に掲げられる3つの言葉になった。</p>
             <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
       </article>
-
-      <!-- CASE 06 — 第三者が評価した -->
-      <article class="hg-item" data-i="5">
-        <a class="hg-media" href="#"><div class="img g2"></div><div class="img hp05"></div></a>
+      <article class="hg-item" data-i="4">
+        <a class="hg-media" href="#"><div class="img g3"></div><div class="img hp04"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 05 — Sony Fashion Entertainments（個人応募） / 2018</span>
+            <span class="hg-cat">PROJECT 04 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
+            <h3 class="hg-title"><span class="nb">ミカタグループの</span><span class="nb"><em>ブランディングの社内定着</em></span></h3>
+            <p class="hg-lead">リブランディングを行いロゴは一新したが、ロゴが変わっただけという認識しか社内に無く、何も変化を感じていなかった。そこで、グループで使用する会社案内や資料をはじめ、サービスの資料なども作成した。対外的な資料に留まらず、社内報や社章といったインナーブランディングもデザインした。現場が資材を分解して自分の資料に流用できる状態になっている。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+      <article class="hg-item" data-i="5">
+        <a class="hg-media" href="#"><div class="img g5"></div><div class="img hp05"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 05 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
+            <h3 class="hg-title"><span class="nb">会社としての情報発信と</span><span class="nb"><em>お客様とのタッチポイント</em>設計</span></h3>
+            <p class="hg-lead">顧問契約をいただくお客様に、税制改正のような変化を、会社として正しく届ける必要があった。ただし内容が整っていなければ読まれない。媒体を問わず、発信物のデザインと管理・運用を一手に担った。主軸のメルマガは1配信約17,000件、平均開封率は約30%で推移している。</p>
+            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+          </div>
+        </div>
+      </article>
+      <article class="hg-item" data-i="6">
+        <a class="hg-media" href="#"><div class="img g2"></div><div class="img hp06"></div></a>
+        <div class="hg-overlay">
+          <div class="hg-bottom">
+            <span class="hg-cat">PROJECT 06 — Sony Fashion Entertainments（個人応募） / 2018</span>
             <h3 class="hg-title"><span class="nb">Sony <em>FES Watch U</em></span><span class="nb"> デザインコンペ</span></h3>
             <p class="hg-lead">電子ペーパー製ウォッチのデザインコンペに個人で応募し、全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトや専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開された。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- CASE 07 — 運用を渡す -->
-      <article class="hg-item" data-i="6">
-        <a class="hg-media" href="#"><div class="img g6"></div><div class="img hp06"></div></a>
-        <div class="hg-overlay">
-          <div class="hg-bottom">
-            <span class="hg-cat">PROJECT 06 — MCD MIX（母校の卒業生コミュニティ） / 2025–2026</span>
-            <h3 class="hg-title"><span class="nb">卒業生コミュニティ</span><span class="nb"><em>サイトの制作と運用</em></span></h3>
-            <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」のサイトを、元教授とコンテンツを検討しながら単独で構築した。サイトに掲載するイベントも、2025年に続き企画・運用を担当している。</p>
             <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
@@ -980,8 +973,8 @@ body.detail-on .wk-btn{display:inline-flex}
         <div class="g-grid">
           <div class="g-cell">
             <div class="g-pt">Point<span>01</span></div>
-            <h3 class="g-head">AIを進めているのに、AIが使いにくい環境だった</h3>
-            <p class="g-text">Google Workspace を導入してAIによる業務改善を進めてはいたが、文書がその形式のままではAIに読み込めず、AIはメール文を作る道具という認識にとどまっていた。サポートの終わった形式のまま重要な書類が保存され続ける状況も放置できないと考え、着手した。</p>
+            <h3 class="g-head">個人で始めて、組織の要件にした</h3>
+            <p class="g-text">Google Workspace を導入してAIによる業務改善を進めてはいたが、文書がその形式のままではAIに読み込めず、AIはメール文を作る道具という認識にとどまっていた。サポートの終わった形式のまま重要な書類が保存され続ける状況も放置できないと考え、依頼を待たずに着手した。編集ツールを作って代表にプレゼンをした結果、現システムの不安定さに気づいていただけ、変換ツールの開発を依頼された。個人の判断で始めたものが組織の要件になり、本格的に開発のリソースを確保できた。</p>
           </div>
           <div class="g-cell">
             <div class="g-pt">Point<span>02</span></div>
@@ -990,18 +983,18 @@ body.detail-on .wk-btn{display:inline-flex}
           </div>
           <div class="g-cell">
             <div class="g-pt">Point<span>03</span></div>
+            <h3 class="g-head">作らない選択肢から先に検討した</h3>
+            <p class="g-text">最初に検討したのはRPAだった。既存の画面操作を自動化できれば、開発せずに済む。ただ、RPAは設定にITリテラシーが必要で、全国634名に配れる形にならない。画面操作の自動化のため処理も遅く、クラウド型ではデータが社外に出る。加えて、現在はファイルを各自が管理しているため、一括で処理するより各自が自分の手元で変換できる方が、重要なファイルの誤消去も防げる。操作性・処理速度・セキュリティの3点で比較した結果、DocuWorksの公式APIを直接使う専用ツールの開発を選んだ。</p>
+          </div>
+          <div class="g-cell">
+            <div class="g-pt">Point<span>04</span></div>
             <h3 class="g-head">設計の順番はあえて編集ツールから</h3>
             <p class="g-text">工程の順番でいえば、着手すべきは変換ツールだった。しかし代表に必要性を示すには、代替の効かないものから作る必要があった。変換は「できない」のではなく「非効率」の問題である。一方、PDFにした後の編集・階層管理・押印には、代替のツールが存在せず手段そのものが無かった。プレゼンのしやすさも踏まえ、手段の無い側——編集ツール（pdf-annotator）から着手した。</p>
           </div>
           <div class="g-cell">
-            <div class="g-pt">Point<span>04</span></div>
+            <div class="g-pt">Point<span>05</span></div>
             <h3 class="g-head">機能を3本のツールに分けた</h3>
             <p class="g-text">すべてを1本にまとめると操作が複雑になり、工程によっては使わない機能も出てくる。加えて変換ツールは、社内のPDF移行が完了すれば役目を終える一時的な機能として考えている。長期的に使う編集ツールと同じシステムに入れると、不要になった機能を抱えたまま運用し続けることになる。そのため、使用期間の異なるものを切り離して機能を分け、工程をまたいでも操作に迷わないようにしている。</p>
-          </div>
-          <div class="g-cell">
-            <div class="g-pt">Point<span>05</span></div>
-            <h3 class="g-head">プレゼンをきっかけに本格導入へ</h3>
-            <p class="g-text">編集ツールを作り、代表にプレゼンをした結果、現システムの不安定さに気づいていただけた。それにより、変換ツールの開発を依頼された。個人の判断で始めたものが、組織の要件になり、本格的に開発のリソースを確保できた。</p>
           </div>
           <div class="g-cell">
             <div class="g-pt">Point<span>06</span></div>
@@ -1026,7 +1019,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <h3 class="ps-head">形式をAI対応に</h3>
               <div class="ps-sub">変換ツール（DocuWorks → PDF 一括変換）</div>
               <div class="ps-stack">Python / Flask / xdwlib / PyInstaller</div>
-              <p class="ps-text">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結し、データは外に出ないため、セキュリティ面でもクリアに。専用ソフトも不要で開ける状態となり、人によってPDFを確認するツールが異なるという状況を改善。</p>
+              <p class="ps-text">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結し、データは外に出ないため、セキュリティ面でもクリアに。専用ソフトも不要で開ける状態となり、人によってPDFを確認するツールが異なるという状況を改善。変換処理は自前で実装せず、DocuWorksの公式APIを使っている。既存のエンジンを通すため動作が安定し、開発期間も短縮できた。ただしDocuWorksが入っていないPCでは動作しない。移行期の一時的なツールという位置づけのため、この制約は許容している。</p>
             </div>
             <div class="ps-media"><span>画像</span></div>
           </div>
@@ -1070,6 +1063,8 @@ body.detail-on .wk-btn{display:inline-flex}
         <span class="c-eyebrow c-anim">Result</span>
         <h2 class="c-head c-anim">長年慣れ親しんだ<em>操作感</em>を損なうことなくコストを削減</h2>
         <p class="c-text c-anim">年間約1,200万円のコスト削減を試算（Adobe Acrobat Standard 約1,580円/人/月 × 634名）。「変換 → 編集 → AI分析」の社内フローを一本化し、人の仕事を、転記から精査・解釈・顧客提案へ移した。また、操作感も現在のツールをベースにしているため社内教育等も必要最低限で抑えた。</p>
+        <p class="c-text c-anim">変換にかかる時間は、1件あたり約20秒の手作業が約5秒になった（実測値をもとにした試算）。100件なら約33分が約8分になる。</p>
+        <p class="c-text c-anim">ただし、変換したPDFを編集ツールへ直接渡すことはまだできていない。ブラウザのセキュリティ制約によるもので、現状は一度ダウンロードしてから読み込ませる必要がある。編集ツール側にGoogle Drive連携を実装し、Drive上のPDFをそのまま開ける形にすることで解消する予定。変換ツールは、PDFが定着した段階で提供を終える。</p>
         <a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a>
       </div>
     </div>
@@ -1892,20 +1887,28 @@ const CASES={
       'Role — 企画（理念・代表メッセージの言語化を含む）・撮影・作図・デザイン・執筆まで、全工程を単独で担当した社外クライアント案件。',
       '説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。また、「幸せを多くの人に響かせる」を実際の活動へ落とすため、地域の方に向けた訪問看護や熱中症対策の説明会も提案し、実施に至っている。']}},
   c07:{
-    context:{img:'g6',paras:[
-      '元教授との企画でアートブック開催にあたり、サイトを作成。その際にイベントだけではなく、今後は母校の卒業生のコミュニティに繋がるサイトがあった方が良いという話になり「MCD MIX」を制作。大学時代からの縁による企画で、初めてのサイトの構築（WordPress）である。']},
+    context:{img:'g7',paras:[
+      '母校の卒業生を母体にしたコミュニティ「MCD MIX」の立ち上げから企画まで担当。しかし、活動の拠点になる場所がなく、イベントのたびに告知が流れて消えてしまったり、確認すべき場所が分からなかったりという問題があった。',
+      'そのため、元教授との企画でアートブックを開催するにあたりサイトを作ることになった。卒業生の有志を募っての団体のため、運営もサイトの管理も誰でも扱える設計である必要があり、サイト構築にはWordPressが適切であると考えてこちらを採用。',
+      '2026年は、来場者に向けたワークショップも設計した。子どもに絵を描いてもらう催しは多いが、描いた絵はその場で壁に貼られるか、持ち帰って終わることが多く、参加人数に不安があったため、描いたものが自分の手を離れて動き出す体験をこちらで用意することにした。']},
     judgment:[
-      {h:'単発ではなく、組織のサイトとして設計',t:'イベントごとの告知に留まらず、卒業生や興味のある方が継続的にイベントや活動内容の確認に集まるサイトとして設計した。特定のイベントに紐づけず、コミュニティそのものが主軸になるように構成している。'},
-      {h:'デザインの方向性やビジュアルは卒業生のアーカイブから構成',t:'新しく作り込むのではなく、これまでの卒業生の作品アーカイブを素材として構成した。コミュニティの蓄積そのものを、サイトのビジュアルにしている。'},
-      {h:'運用し続けられる状態までの作り込み',t:'WordPressテーマをゼロから構築し、FAQやEventの構造化データ、SEOの設定を一通り整えた。加えて、技術者でなくても更新できるよう運用マニュアルを用意。今後企画やイベントに関わりたいと集まった人が簡単に操作できるようにしている。'}],
+      {h:'単発の告知ではなく、誰でも運用できる拠点として設計した',t:'イベントごとの告知に留まらず、卒業生や興味のある方が継続的にイベントや活動内容の確認に集まるサイトとして設計した。特定のイベントに紐づけず、コミュニティそのものが主軸になるように構成し、ビジュアルは新しく作り込むのではなく、これまでの卒業生の作品アーカイブを素材にしている。WordPressテーマはゼロから構築し、FAQやEventの構造化データとSEOを整えたうえで、技術者でなくても更新できるよう運用マニュアルを用意した。今後企画やイベントに関わりたいと集まった人が自分で操作できるようにするためで、現在も保守運用と改善を続けている。直近では画像をそのままアップする人が多く、データが重くなって表示速度のスコアが下がっているため、最低限の圧縮機能が必要だと考えている。'},
+      {h:'参加規約と会場案内を、翌年は差し替えで済む型にした',t:'出展者に渡す参加規約と会場案内を、2025年に一から作成した。二次創作の扱いと著作権の帰属、ブースの寸法と備品、搬入出の時間厳守、駐車場、肖像権と個人情報まで、初参加でも迷わない範囲を洗い出している。2026年はこの型の日付と会場情報を差し替えるだけで運用できた。毎年ゼロから書き起こさずに済む状態にすることで開催2回目である2026年の運営の負担軽減に繋がった。'},
+      {h:'参加者がすることを「描く」と「撮って送る」だけにした',t:'切り抜きや設定を参加者に任せるのは難しいと考え、保護者が卓上のQRから専用ページを開き、自分のスマートフォンで絵を撮って送る形にした。アプリのインストールも会場Wi-Fiへの接続も不要で、最低限の操作で済むように設計している。描く側には、紙の下に4問の「いきものしんだん」（すむところ・せいかく・とくいわざ・ともだち）を置いた。チェックを読み取って投影の挙動に反映し、描いた本人にしか分からない設定が画面の中で表現されるようにしている。空想の生き物も良いことにしたが、描く際に迷う子もいるという想定から、地域のいきものを紹介した図鑑を卓上に置いた。'},
+      {h:'AIは候補を出すところまでにとどめた',t:'切り抜きは、AIモデル（rembg）と自作の画像処理を並べて候補を作る。ただしAIは提案するだけで、投影するかどうかは最後に人が決める設計。会期中、届いた直後の切り抜きだけ質が低い現象が出たため、候補を選ぶAI検品そのものを外し、「切り直す」ボタンで人が順に選べるようにした。精度が不安定な自動判定を残すより、人が1秒で選べる形のほうが現場では速いと考えた。'},
+      {h:'なまえ欄は、運用ではなく仕組みで投影から外した',t:'紙には名前を書く欄がある。区切り線を検出して、しんだん欄となまえ欄は切り抜きの対象から必ず除外した。投影に個人名が出ないことを、当日の注意ではなく処理で保証している。掲載の同意は撮影ページで取り、同意しない場合も投影には登場して、記録にだけ残さない。参加する体験と、記録に使うことを分ける設計。'}],
     evidence:[
-      {no:'土台',h:'WordPressテーマ',sub:'フルスクラッチ',stack:'WordPress',t:'既製テーマに載せず、テーマをゼロから構築。運用する人が触る画面から逆算して作っている。現在も保守運用や改善を行っており、より操作性の高いものにしている。'},
-      {no:'構造',h:'FAQ・Event の構造化データ／SEO一式',sub:'検索から見つかる状態に',stack:'構造化データ・SEO',t:'FAQとイベントを構造化データで整備し、SEOを一式実装。コミュニティの活動が検索に正しく拾われるようにした。'},
-      {no:'見た目',h:'卒業生アーカイブのビジュアル構成',sub:'蓄積を素材にする',stack:'アーカイブ構成',t:'これまでの卒業生の作品からビジュアルを構成。今までの蓄積された作品が、サイトのメインになるように調整。'},
-      {no:'引き渡し',h:'運用マニュアル',sub:'非技術者向け',stack:'運用設計',t:'作って渡して終わりにせず、属人化しないように操作性を高め、マニュアルも作成した。'}],
-    result:{head:'<em>公開・運用</em>開始',paras:[
-      'Role — サイトの企画・設計・実装・運用設計まで単独。',
-      '公開・運用を開始している（mcdmix.com）。WordPressテーマから運用マニュアルまでを含め、非技術者が自分で更新できる状態にしている。コミュニティとしての本格的な稼働はこれからであるが、まずは2026年10月開催のイベントに向けて準備を始めている。']}},
+      {no:'拠点',h:'MCD MIX サイト',sub:'フルスクラッチのWordPressテーマ',stack:'WordPress・構造化データ・SEO',t:'既製テーマに載せず、テーマをゼロから構築。運用する人が触る画面から逆算して作っている。FAQとイベントを構造化データで整備し、コミュニティの活動が検索に拾われるようにした。'},
+      {no:'引き渡し',h:'運用マニュアル',sub:'非技術者向け',stack:'運用設計',t:'作って渡して終わりにせず、属人化しないように操作性を高め、マニュアルも作成した。'},
+      {no:'運営',h:'参加規約・会場案内',sub:'2025年に一から作成、2026年は改訂',stack:'著作権・ブース仕様・搬入出・肖像権',t:'出展者が事前に判断できる範囲をすべて書き出した。翌年は日付と会場情報の差し替えで運用できる型にしている。'},
+      {no:'入口',h:'撮影ページ',sub:'アプリ不要・会場Wi-Fi不要',stack:'HTML / Vercel / Figma',t:'保護者のスマートフォンだけで完結する。ひらがな中心の画面構成で迷う余地をなくし、掲載の同意もこの画面で取る。'},
+      {no:'処理',h:'切り抜きとAI判定',sub:'候補を出すところまで',stack:'rembg / 自作の画像処理 / Claude / Supabase',t:'AIモデルと自作処理を並べて候補を作り、区切り線でしんだん欄となまえ欄を除外する。作品はクラウドに保存し、会場の機材が止まっても失われないようにした。投影の可否は人が決める。'},
+      {no:'出口',h:'投影エンジン',sub:'1ファイルで動く',stack:'HTML5 Canvas / Node.js ローカルサーバー / プロジェクター',t:'会場のMacで動かし、壁へ直接投影する。天気とイベントが巡り、しんだんの結果がすむ場所・動きの速さ・得意技・出現位置としてそのまま挙動になる。「みんなと」の子は寄り添っておしゃべりし、「ひとり」の子はうたた寝をする。傘や雪だるまの素材は自分で描いたSVGを、その子の絵の色に合わせて自動で塗り替えている。'}],
+    result:{head:'2年続く催しの<em>土台</em>と、67作品が加わった森',paras:[
+      'Role — サイトの企画・設計・実装・運用設計、参加規約と会場案内の作成、ワークショップの体験設計・UIデザイン・システム開発・当日運用まで単独。イベントの企画は元教授と共同で、当日の混雑時のみ、同じ催しの参加者である友人に子どもとのコミュニケーションなどサポートを依頼した。',
+      'サイトは公開・運用中（mcdmix.com）。WordPressテーマから運用マニュアルまでを含め、非技術者が自分で更新できる状態にしている。2025年に一から作成した参加規約と会場案内は、2026年は内容を差し替えるだけで使えた。',
+      'ワークショップ「ながくての森」は2026年10月3日・4日に実施し、2日間で67作品が森に加わった（3日26件、4日41件）。送られた絵はすべて投影し、却下は0件。掲載の同意も全件で得られた。会場の人の流れに合わせて昼前と昼過ぎに2つの山ができたが、撮影から投影までが保護者のスマートフォンだけで完結するため、受付に行列はできなかった。',
+      '会期中は、台紙に天井照明が映り込んで紙ごと投影されるなど、実際の光と子どもの自由な絵で初めて出た課題が5件あった。管理パネルの診断ログと現場の写真から原因を絞り込み、修正版をその日のうちに差し替えて運用が止まらないように調整した。自動処理で対応しきれない絵は、管理パネルから手動で切り抜いて差し替える道も用意している。']}},
   c06:{
     context:{img:'g2',paras:[
       'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに、個人で応募した。文字盤が電子ペーパー＝「紙」であること。その素材の性質をどう読むかが、デザインの出発点になった。']},
@@ -1922,11 +1925,6 @@ function renderCase(d){
     +'<span class="t-eyebrow t-anim">Context</span><h2 class="t-head t-anim">課題と背景</h2><div class="t-body">'
     +d.context.paras.map(p=>'<p class="t-anim">'+p+'</p>').join('')
     +'</div></div><div class="t-media"><div class="frame"><div class="img '+d.context.img+'"></div></div></div></div></div>';
-  h+='<div class="panel work gcard" style="--card-bg:#F1F5F4"><div class="g-inner wrap">'
-    +'<div class="g-label"><span class="g-en">JUDGMENT</span><span class="g-jp">判断</span></div><div class="g-grid">'
-    +d.judgment.map(c=>'<div class="g-cell"><div class="g-pt">Point</div><h3 class="g-head">'+c.h+'</h3><p class="g-text">'+c.t+'</p></div>').join('')
-    +(d.judgment.length%2?'<div class="g-cell g-empty"></div>':'')
-    +'</div></div></div>';
   if(d.evidence){
     h+='<div class="panel work pcard" style="--card-bg:#FAF9F6"><div class="p-inner wrap">'
       +'<div class="p-label"><span class="g-en">EVIDENCE</span><span class="g-jp">実物</span></div><div class="p-stack">'
@@ -1935,6 +1933,11 @@ function renderCase(d){
         +'<p class="ps-text">'+s.t+'</p></div><div class="ps-media"><span>画像</span></div></div>').join('')
       +'</div></div></div>';
   }
+  h+='<div class="panel work gcard" style="--card-bg:#F1F5F4"><div class="g-inner wrap">'
+    +'<div class="g-label"><span class="g-en">JUDGMENT</span><span class="g-jp">判断</span></div><div class="g-grid">'
+    +d.judgment.map(c=>'<div class="g-cell"><div class="g-pt">Point</div><h3 class="g-head">'+c.h+'</h3><p class="g-text">'+c.t+'</p></div>').join('')
+    +(d.judgment.length%2?'<div class="g-cell g-empty"></div>':'')
+    +'</div></div></div>';
   h+='<div class="panel work ccard" style="--card-bg:#F6F6F3"><div class="c-inner wrap">'
     +'<span class="c-eyebrow c-anim">Result</span><h2 class="c-head c-anim">'+d.result.head+'</h2>'
     +d.result.paras.map(p=>'<p class="c-text c-anim">'+p+'</p>').join('')
@@ -2063,16 +2066,18 @@ const WORKS=[
   {w:'work_08b',c:'c05',t:'ひのてり訪問看護 会社案内',y:'2025',cat:'Print / Branding',role:'理念の言語化から全工程単独',thumb:'work_08_work_08.webp',desc:'「何をしてくれるのか」に答える会社案内。連携体制とサービスの流れを図に描き起こし、利用者本人の悩みとご家族の悩みを分けて構成した。オレンジ基調・写真とイラスト中心。',imgs:[{"f": "work_08_work_08.webp", "cap": "表紙"}, {"f": "work_08_work_08_b.webp", "cap": "サービスフロー・連携体制"}]},
   {w:'work_17',c:'c06',t:'Sony FES Watch U デザインコンペ',y:'2018',cat:'Design Competition',role:'個人応募・32組の公認クリエイター選出',thumb:'work_17_work_17.webp',desc:'電子ペーパーの文字盤＝「紙」に、水墨画の余白を再現したデザイン。全国から32組の公認クリエイターに選出され、公式アプリ・百貨店での展示販売に展開された。',imgs:[{"f": "work_17_Detail1_Minamo.webp", "cap": "文字盤デザイン「水面」"}, {"f": "work_17_Detail2_Minamo.webp"}, {"f": "work_17_Detail3_Minamo.webp"}, {"f": "work_17_Detail4_Minamo.webp"}]},
   {w:'work_05',c:'c07',t:'MCD MIX ── 卒業生コミュニティサイト',y:'2025–2026',cat:'Web / WordPress',role:'企画・設計・実装・運用設計まで単独',thumb:'work_05_mcdmix_placeholder.webp',desc:'母校の卒業生コミュニティの拠点サイト。既製テーマを使わずWordPressテーマをゼロから構築し、FAQとEventの構造化データ、SEOを一式実装した。卒業生の作品アーカイブをそのままビジュアルの素材にしている。非技術者が自分で更新できるよう運用マニュアルまで用意し、現在も保守・改善を継続中。',imgs:[],link:'https://mcdmix.com'},
-  {w:'work_06',c:'c07',t:'ながくてアートブック',y:'2025',cat:'Event / Community',role:'サイト構築・イベント企画運営（企画は元教授と共同）',thumb:'work_06_work_06.webp',desc:'母校の卒業生コミュニティを母体にした地域アートイベントと、その拠点サイト。サイトは非技術者が自分で更新し続けられる状態で構築した。',imgs:[{"f": "work_06_work_06_slide01.webp"}, {"f": "work_06_work_06_slide02.webp"}, {"f": "work_06_work_06_slide03.webp"}, {"f": "work_06_work_06_slide04.webp"}, {"f": "work_06_work_06_slide05.webp"}, {"f": "work_06_work_06_slide06.webp"}]}
+  {w:'work_06',c:'c07',t:'ながくてアートブック',y:'2025–2026',cat:'Event / Community',role:'企画・参加規約と会場案内の作成・運営（企画は元教授と共同）',thumb:'work_06_work_06.webp',desc:'母校の卒業生コミュニティを母体にした地域アートイベント。出展者向けの参加規約と会場案内を2025年に一から作成し、2026年は内容を差し替えて再利用できる型にした。二次創作と著作権の帰属、ブースの寸法と備品、搬入出の時間、肖像権と個人情報の扱いまでを整理し、初参加でも迷わない状態にしている。',imgs:[{"f": "work_06_work_06_slide01.webp"}, {"f": "work_06_work_06_slide02.webp"}, {"f": "work_06_work_06_slide03.webp"}, {"f": "work_06_work_06_slide04.webp"}, {"f": "work_06_work_06_slide05.webp"}, {"f": "work_06_work_06_slide06.webp"}]},
+  {w:'work_28',c:'c07',t:'投影システム「ながくての森」',y:'2026',cat:'Interactive / Installation',role:'企画・体験設計・システム開発・当日運用（混雑時はサポート1名）',thumb:'work_28_placeholder.webp',desc:'紙に描いたいきものが、実写の森の映像に現れて動き出す参加型の投影インスタレーション。紙のチェック欄から読み取った性格が、すむ場所・動きの速さ・得意技として挙動に反映される。天気とイベントが巡り、傘や雪だるまはその子の絵の色に自動で染まる。実際の動作は下の動画の通り。',imgs:[],video:'nohara-forest'},
+  {w:'work_29',c:'c07',t:'撮影ページ「こんにちは！ながくての森へ」',y:'2026',cat:'Web / UI Design',role:'企画・UIデザイン・実装まで単独',thumb:'work_29_placeholder.webp',desc:'参加者が絵を送るための専用ページ。アプリのインストールも会場Wi-Fiへの接続も不要で、保護者のスマートフォンだけで完結する。ひらがな中心の画面構成で迷う余地をなくし、掲載の同意もこの画面で取る。',imgs:[],link:'https://nohara-upload.vercel.app'},
 ];
-const CASE_KEYS=['c01','c03','c04','c05','c06','c07'];
+const CASE_KEYS=['c07','c01','c05','c04','c03','c06'];
 const CASE_META={
-  c01:{no:'PROJECT 01',t:'サポート終了の文書形式から、AIが読める状態への移行'},
-  c03:{no:'PROJECT 02',t:'会社としての情報発信とお客様とのタッチポイント設計'},
-  c04:{no:'PROJECT 03',t:'ミカタグループのブランディングの社内定着'},
-  c05:{no:'PROJECT 04',t:'抽象的だった理念をコミュニケーション可能な形に'},
-  c06:{no:'PROJECT 05',t:'Sony FES Watch U デザインコンペ'},
-  c07:{no:'PROJECT 06',t:'卒業生コミュニティサイトの制作と運用'}
+  c07:{no:'PROJECT 01',t:'卒業生コミュニティのサイト制作から、イベント運営まで'},
+  c01:{no:'PROJECT 02',t:'サポート終了の文書形式から、AIが読める状態への移行'},
+  c05:{no:'PROJECT 03',t:'抽象的だった理念をコミュニケーション可能な形に'},
+  c04:{no:'PROJECT 04',t:'ミカタグループのブランディングの社内定着'},
+  c03:{no:'PROJECT 05',t:'会社としての情報発信とお客様とのタッチポイント設計'},
+  c06:{no:'PROJECT 06',t:'Sony FES Watch U デザインコンペ'}
 };
 const WKIMG='assets/img/works/';
 function wkCard(w,idx){
@@ -2280,10 +2285,9 @@ function initAnim(){
   ScrollTrigger.refresh();
   initReveals();
   // each work opens ITS case detail ; TOP へ戻る -> back to the slider
-  const KEYS=['c01','c03','c04','c05','c06','c07'];
   document.querySelectorAll('.hg-item').forEach((item,idx)=>{
     item.querySelectorAll('.view,.hg-media').forEach(a=>{
-      a.addEventListener('click',e=>{ e.preventDefault(); goToDetail(KEYS[idx]||'c01', idx); });
+      a.addEventListener('click',e=>{ e.preventDefault(); goToDetail(CASE_KEYS[idx]||CASE_KEYS[0], idx); });
     });
   });
   // delegated — the c-top link is re-created whenever the case content swaps
