@@ -558,13 +558,17 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-note{padding-left:12px;border-left:2px solid var(--accent);color:var(--ink);opacity:.9}
 .panel.work.pcard .ps-media{position:relative;height:80%;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:center;justify-content:center}
 .panel.work.pcard .ps-media span{color:var(--ink-soft);font-size:13px;letter-spacing:.12em}
-.panel.work.pcard .ps-media.ps-multi{background:none;display:grid;gap:8px;align-items:stretch}
-.panel.work.pcard .ps-media.ps-multi.n2{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
-.panel.work.pcard .ps-media.ps-multi.n3,.panel.work.pcard .ps-media.ps-multi.n4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
-.panel.work.pcard .ps-media.ps-multi.n3 .ps-cell:first-child{grid-column:1/-1}
-.panel.work.pcard .ps-cell{position:relative;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:flex-end;justify-content:flex-start;min-height:0}
+.panel.work.pcard .ps-media.ps-multi{background:none;display:block;overflow:hidden}
+.panel.work.pcard .ps-rail{display:flex;gap:10px;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.panel.work.pcard .ps-rail::-webkit-scrollbar{display:none}
+.panel.work.pcard .ps-cell{position:relative;flex:0 0 100%;scroll-snap-align:start;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:flex-end;justify-content:flex-start}
 .panel.work.pcard .ps-cell img,.panel.work.pcard .ps-cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.panel.work.pcard .ps-cell b{position:relative;z-index:1;margin:8px 10px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
+.panel.work.pcard .ps-cell b{position:relative;z-index:1;margin:10px 12px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
+.panel.work.pcard .ps-nav{position:absolute;right:10px;bottom:10px;display:flex;gap:6px;z-index:2}
+.panel.work.pcard .ps-nav button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(20,15,10,.16);background:rgba(255,255,255,.88);color:var(--ink);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:opacity .2s,background .2s}
+.panel.work.pcard .ps-nav button:disabled{opacity:.28;cursor:default}
+.panel.work.pcard .ps-nav button:not(:disabled):hover{background:#fff}
+.panel.work.pcard .ps-count{position:absolute;left:12px;top:12px;z-index:2;font-size:11px;letter-spacing:.1em;color:var(--ink-soft);background:rgba(255,255,255,.82);padding:4px 9px;border-radius:11px}
 .panel.work.pcard .ps-media img,.panel.work.pcard .ps-media .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel.work.pcard .ps-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 /* 実メディアが入ったカードは、SPで映像の比率に合わせて大きく表示 */
@@ -579,11 +583,8 @@ body.detail-on .wk-btn{display:inline-flex}
   .panel.work.pcard .p-step{grid-template-columns:1fr;height:60vh;gap:14px;padding:18px}
   .panel.work.pcard .ps-head{font-size:22px;margin-bottom:12px}
   .panel.work.pcard .ps-media{height:36%}
-  /* SPでは成果物の画像を横スクロールの1列にして、カードの高さを崩さない */
-  .panel.work.pcard .ps-media.ps-multi{height:clamp(130px,20vh,190px);align-self:end;display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .panel.work.pcard .ps-media.ps-multi::-webkit-scrollbar{display:none}
-  .panel.work.pcard .ps-media.ps-multi .ps-cell{flex:0 0 70%;scroll-snap-align:start}
-  .panel.work.pcard .ps-media.ps-multi.n3 .ps-cell:first-child{grid-column:auto}
+  .panel.work.pcard .ps-media.ps-multi{height:clamp(150px,22vh,210px);align-self:end}
+  .panel.work.pcard .ps-nav button{width:26px;height:26px;font-size:12px}
 }
 
 /* card variant "tcard" — left text column (write your copy here) + right image */
@@ -763,7 +764,7 @@ body.detail-on .wk-btn{display:inline-flex}
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 01 — MCD MIX ／ ながくてアートブック（愛・地球博記念公園） / 2025–2026</span>
             <h3 class="hg-title"><span class="nb">卒業生コミュニティの</span><span class="nb"><em>サイト制作から、イベント運営</em>まで</span></h3>
-            <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」の拠点サイトを単独で構築し、そこに載せるイベントの企画・参加規約・搬入出の案内までを整備した。2026年は来場者が描いた絵がその場で森に現れるワークショップを設計・開発し、2日間で67作品が森に加わった。</p>
+            <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」の拠点サイトを単独で構築し、そこに載せるイベントの企画や、参加が決定した参加者へお送りする規約・搬入出の案内までを整備した。2026年には来場者が描いた絵がその場でアニメーションになって現れるワークショップを設計・開発し、2日間で67作品が集まった。</p>
             <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
@@ -774,7 +775,7 @@ body.detail-on .wk-btn{display:inline-flex}
           <div class="hg-bottom">
             <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2026</span>
             <h3 class="hg-title"><span class="nb">サポート終了の文書形式から、</span><span class="nb"><em>AIが読める状態</em>への移行</span></h3>
-            <p class="hg-lead">長年使ってきた文書システムはサポートが終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装し、年間約1,200万円のコスト削減を試算している。</p>
+            <p class="hg-lead">長年使ってきた文書システムがサポート終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装し、年間約1,200万円のコスト削減を試算している。</p>
             <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
           </div>
         </div>
@@ -940,7 +941,7 @@ body.detail-on .wk-btn{display:inline-flex}
           <h2 class="t-head t-anim">課題</h2>
           <div class="t-body">
             <p class="t-anim">社内の文書は、すべて独自形式で管理・蓄積されていた。専用ソフトがなければ開けず、公式サポートは終了し、機能のカスタマイズもできない。顧客への納品時には、毎回PDFへ変換する必要があった。</p>
-            <p class="t-anim">社内にはすでに Google Workspace の Gemini があり、現場でも自発的にAIを使った効率化が始まっていた。とはいえ書類は独自形式のままで、AIにそのまま渡せるものは限られていた。</p>
+            <p class="t-anim">社内にはすでに Google Workspace の Gemini が導入済みであり、現場でも自発的にAIを使った効率化が始まっていた。とはいえ書類は独自形式のままで、AIにそのまま渡せるものは限られていた。</p>
             <p class="t-anim">このシステムを使う社員は全国で634名おり、ITリテラシーにも差がある。ヒアリングで見えたのは、元データと変換後データの二重管理が人によってばらばらなこと、そして操作感が変わると使われなくなること、の2つだった。</p>
           </div>
         </div>
@@ -961,12 +962,12 @@ body.detail-on .wk-btn{display:inline-flex}
           <div class="g-cell">
             <div class="g-pt">Point<span>01</span></div>
             <h3 class="g-head">作らない選択肢から先に検討した</h3>
-            <p class="g-text">最初に検討したのはRPAだった。既存の画面操作を自動化できれば、開発せずに済む。ただ、RPAは設定にITリテラシーが必要で、全国634名に配れる形にならない。画面操作の自動化のため処理も遅く、クラウド型ではデータが社外に出る。加えて、ファイルは各自が管理しているため、一括で処理するより手元で変換できる方が重要なファイルの誤消去も防げる。操作性・処理速度・セキュリティの3点で比較した結果、DocuWorksの公式APIを直接使う専用ツールの開発を選んだ。</p>
+            <p class="g-text">最初に検討したのはRPAだった。既存の画面操作を自動化できれば、開発せずに済む。ただ、RPAは設定にITリテラシーが必要で、全国634名に配れる形にするのは難しいと考えた。画面操作の自動化のため処理も遅く、クラウド型ではデータが社外に出る。加えて、ファイルは各自が管理しているため、一括で処理するより手元で変換できる方が重要なファイルの誤消去も防止できる。操作性・処理速度・セキュリティの3点で比較した結果、DocuWorksの公式APIを直接使う専用ツールの開発を選んだ。開発に使う道具も同じ基準で選んでいる。Claudeは会社に導入する前に自分の負担で検証し、業務用の資料を実際に作って代表に提示した。結論は「Geminiの置き換えではなく役割が違う」で、以降は実装をClaude、日常の分析をGeminiと使い分けている。</p>
           </div>
           <div class="g-cell">
             <div class="g-pt">Point<span>02</span></div>
             <h3 class="g-head">着手の順番は、代替手段が無い側から</h3>
-            <p class="g-text">工程の順番でいえば、着手すべきは変換ツールだった。しかし代表に必要性を示すには、代替の効かないものから作る必要があった。変換は「できない」のではなく「非効率」の問題である。一方、PDFにした後の編集・階層管理・押印には、代替のツールが存在せず手段そのものが無かった。プレゼンのしやすさも踏まえ、手段の無い側——編集ツール（pdf-annotator）から着手した。</p>
+            <p class="g-text">工程の順番でいえば、着手すべきは変換ツールであった。しかし代表に必要性を示すには、代替の効かないものから作る必要があった（変換は「できない」のではなく「非効率」の問題である）。一方、PDFにした後の編集・階層管理・押印には、代替のツールが存在せず手段そのものが無かった。プレゼンのしやすさも踏まえ、手段の無い側——編集ツール（pdf-annotator）から着手した。</p>
           </div>
           <div class="g-cell">
             <div class="g-pt">Point<span>03</span></div>
@@ -1031,7 +1032,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <p class="ps-text">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結するためデータは外に出ず、専用ソフトなしで開ける状態になった。</p>
               <p class="ps-text ps-note">工夫：変換処理は自前で実装せず、DocuWorksの公式APIを使っている。既存のエンジンを通すため動作が安定し、開発期間も短縮できた。DocuWorksが入っていないPCでは動かないが、移行期の一時的なツールという位置づけのため、この制約は許容している。</p>
             </div>
-            <div class="ps-media ps-multi n2"><div class="ps-cell"><b>変換画面</b></div><div class="ps-cell"><b>フォルダ選択</b></div></div>
+            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><b>変換画面</b></div><div class="ps-cell"><b>フォルダ選択</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
           <div class="p-step">
             <div class="ps-body">
@@ -1042,7 +1043,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <p class="ps-text">複数のPDFをまたぐ階層グループ化を、Acrobat互換のしおりとして書き出す。日本式の電子押印やドラッグ&amp;ドロップでの結合にも対応し、書類の管理がPDF上で完結する。</p>
               <p class="ps-text ps-note">工夫：変換ツールからワンクリックでつながるようにし、工程をまたいでも操作に迷わない導線にしている。長期的に使い続ける側なので、フレームワークに依存しない構成を選んだ。</p>
             </div>
-            <div class="ps-media ps-multi n3"><div class="ps-cell"><b>編集画面</b></div><div class="ps-cell"><b>しおり・階層</b></div><div class="ps-cell"><b>電子押印</b></div></div>
+            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><b>編集画面</b></div><div class="ps-cell"><b>しおり・階層</b></div><div class="ps-cell"><b>電子押印</b></div></div><div class="ps-count"><i>1</i> / 3</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
           <div class="p-step">
             <div class="ps-body">
@@ -1051,9 +1052,9 @@ body.detail-on .wk-btn{display:inline-flex}
               <div class="ps-sub">保険証券解析ツール</div>
               <div class="ps-stack">React / Claude API / SheetJS</div>
               <p class="ps-text">PDFで管理されるようになった書類を分析できるようにした。書式がばらばらでも項目構造（JSON）で抽出し、Excelへ自動転記する。専属の担当を置かずに、加入状況や返戻率をその場で確認できる。</p>
-              <p class="ps-text ps-note">工夫：ここで使うAIは Claude を選んでいる。会社に導入する前に自分の負担で検証し、業務用の資料を実際に作って代表に提示した。結論は「Gemini の置き換えではなく役割が違う」で、以降は実装を Claude、日常の分析を Gemini と使い分けている。</p>
+              <p class="ps-text ps-note">工夫：書式ごとのテンプレートを持たず、項目構造で抽出している。保険会社や様式が増えても、ツール側を作り直さずに済む。</p>
             </div>
-            <div class="ps-media ps-multi n2"><div class="ps-cell"><b>解析画面</b></div><div class="ps-cell"><b>Excel出力</b></div></div>
+            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><b>解析画面</b></div><div class="ps-cell"><b>Excel出力</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
         </div>
       </div>
@@ -1064,10 +1065,10 @@ body.detail-on .wk-btn{display:inline-flex}
       <div class="c-inner wrap">
         <span class="c-eyebrow c-anim">Result</span>
         <h2 class="c-head c-anim">長年慣れ親しんだ<em>操作感</em>を損なうことなくコストを削減</h2>
-        <p class="c-text c-anim">3本のツールを通したことで、書類はAIが分析できる状態になった。Geminiに書類をそのまま読ませ、転記ミスの確認、顧客情報の分析、複数年度の比較ができる。従来は目視確認だけだった工程がAI＋目視の二重確認になり、人為的なミスを減らすことに成功した。</p>
-        <p class="c-text c-anim">年間約1,200万円のコスト削減を試算（Adobe Acrobat Standard 約1,580円/人/月 × 634名）。変換にかかる時間は1件あたり約20秒の手作業が約5秒になり、100件なら約33分が約8分になる（実測値をもとにした試算）。操作感は現行ツールをベースにしているため、社内教育も必要最低限で済んだ。</p>
+        <p class="c-text c-anim">3本のツールを通したことで、書類はAIが分析できる状態になった。Geminiに書類をそのまま読ませ、転記ミスの確認、顧客情報の分析、複数年度の比較ができる。従来は目視確認だけだった工程がAI＋目視の二重確認になり、人為的なミスを減らせた。</p>
+        <p class="c-text c-anim">編集ツールは、年間約1,200万円のコスト削減を試算している（Adobe Acrobat Standard 約1,580円/人/月 × 634名）。変換ツールは、1件あたり約20秒かかっていた手作業が約5秒になり、100件なら約33分が約8分になる（実測値をもとにした試算）。いずれも操作感は現行ツールをベースにしているため、社内教育も必要最低限で済んだ。</p>
         <p class="c-text c-anim">依頼を待たずに編集ツールを作って代表に提示したところ、現行システムの不安定さに気づいていただき、変換ツールの開発を正式に依頼された。個人の判断で始めたものが組織の要件になり、開発のリソースを確保できた。</p>
-        <p class="c-text c-anim">反省点として、変換したPDFを編集ツールへ直接渡すことはまだできていない。ブラウザのセキュリティ制約によるもので、現状は一度ダウンロードしてから読み込ませる必要がある。編集ツール側にGoogle Drive連携を実装し、Drive上のPDFをそのまま開ける形にすることで解消する予定である。変換ツールは、PDFが定着した段階で提供を終える。</p>
+        <p class="c-text c-anim">変換したPDFを編集ツールへ自動で引き渡す経路は、あえて設けていない。DocuWorksはローカルサーバーや各自のデスクトップに置かれていることが多く、セキュリティの観点からファイルを自動で動かす構成を避けた。変換ツールそのものも、PDFが定着した段階で提供を終える前提で作っている。</p>
         <a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a>
       </div>
     </div>
@@ -1854,51 +1855,51 @@ const CASES={
       'メルマガは到達率99.77%・平均開封率約30%（B2B平均を上回る水準）・CTR1.54%。YouTubeは贈与の解説動画1本で累計45万回再生・登録者約4,000人、ショートは月間約11.7万人にリーチし視聴継続率60.9%。セミナーはキャパシティの1.2倍で集客する型を確立し、全国7会場・3年で展開。オウンドメディアは広告費をかけず、問い合わせ・受注を継続的に生んでいる。']}},
   c04:{
     context:{img:'g3',paras:[
-      'ロゴとロゴマニュアルは作成してあったが、現場では何をどうすればよいか分からない状況だった。マニュアルが定めているのはロゴの使い方だけで、配色をどう組むか、フォントに何を選ぶか、図をどう描くかには答えがない。営業担当は商談のたびに各々資料を作り、品質もトンマナもそろわなかった。',
-      '原因は、ビジョン・ミッション・バリューも企業理念「ビジネス＆ライフ・コンサルティング」の全体像も、体系的に伝えるクリエイティブが一つも無かったことにある。統一された資料が存在せず、各担当者が口頭で説明している状態だった。']},
+      'ロゴとロゴマニュアルは作成してあったが、現場では何をどうすればよいか分からない状況だった。マニュアルが定めているのはロゴの使い方だけで、お客様にどう伝えるべきか、リブランディングで何が変わったのかは、どこにも書かれていない。配色の組み方もフォントの選び方も図の描き方も決まっておらず、営業担当は商談のたびに各々資料を作り、品質もトンマナもそろわなかった。',
+      '原因は、ビジョン・ミッション・バリューも企業理念「ビジネス＆ライフ・コンサルティング」の全体像も、体系的に伝えるクリエイティブが一つも無かったことにある。統一された資料が存在せず、各担当者が口頭で説明している状態で、ロゴだけが変更されたという認識にとどまっていた。']},
     judgment:[
-      {h:'ルールを配るのではなく、実物を作った',t:'マニュアルだけで理解できる人は限られる。そこで先に、コンサルタントがお客様への説明に使える資料を作った。会社案内（全16ページ）・営業チラシ・各種資材を揃え、「ミカタとはこういう見た目である」を現物で示している。誰でも加工できるPPT形式で配ったことが、結果としてデザインシステムとして機能した。'},
-      {h:'社内で作ったものを、外注の基準にした',t:'採用サイトは制作会社との連携案件だった。通常は制作会社が出すトンマナ案から選ぶことになるが、その工程を飛ばした。先に全49ページの会社紹介・採用資料を単独でデザインし、その配色・タイポ・図解ルールをサイト全体の基点にしている。外に出す前に、基準を内側に作った。'},
-      {h:'そろえるべきものを見極めて、あえて外した',t:'相続サイトとパンフレットだけは緑を基調にしている。手に取るのは大切な方を亡くされた直後のご家族で、黒ベースに赤の差し色はかえって不安をあおる。年配の方でも優しく感じられ、それでいてビジネスとして信頼できる両立点として緑を選んだ。一貫しているべきなのは見た目ではなく、相手に合わせる判断のほうだと考えた。'}],
+      {h:'ルールを配るのではなく、実物を作った',t:'マニュアルだけで理解できる人は限られる。そこで先に、コンサルタントがお客様への説明に使える資料を作った。会社案内（全16ページ／メインビジュアルはサイトから転用）・営業チラシ・各種資材を揃え、「ミカタとはこういう見た目である」「ミカタの特徴とサービスはこれである」を現物で示している。資料を誰でも加工できるPPT形式で配ったことが、結果としてデザインシステムとして機能した。'},
+      {h:'社内で作ったものを、外注の基準にした',t:'採用サイトは外部発注の案件だった。通常は制作会社が出すトンマナ案から選ぶことになるが、その工程を飛ばし、先に全49ページの会社紹介・採用資料を単独でデザインして、その配色・タイポ・図解ルールをサイト全体の基点にした。外に出す前に、基準を内側に作っている。'},
+      {h:'そろえるべきものを見極めて、あえて外した',t:'相続サイトとパンフレットだけは緑を基調にしている。手に取るのは大切な方を亡くされた直後のご家族で、黒ベースに赤の差し色は葬儀を連想させ、不安を与えかねない。年配の方でも優しく感じられ、それでいてビジネスとして信頼できる両立点として緑を選んだ。一貫しているべきなのは見た目ではなく、相手に合わせる判断のほうだと考えた。'}],
     evidence:[
       {no:'対外',h:'会社案内・営業チラシ・各種資材',sub:'全16ページ・戦略立案から単独',stack:'フォトディレクション／ライティング／カラー・フォント設計',t:'工夫：墨絵風の既存ビジュアルを活かし、黒・グレーのグラデーションに差し色の赤。複雑なサービスは図に翻訳した——法人と個人の2つの財布、6ステップの成長支援、4つのソリューション体系。',imgs:['会社案内 表紙','サービス図解','営業チラシ']},
       {no:'社内',h:'社章／社内報「お元氣様です」',sub:'年3回発行・紙・全従業員の自宅へ発送',stack:'Maya 3Dモデリング／編集・デザイン',t:'工夫：社章はコーポレートロゴがシンプルで立体にしにくかったため、縁取りと陰影を変えた複数案を3Dレンダリングで提示し、実物ができる前に意思決定を通した。社内報は情報が集まってから作ると発行がずれるので、デザインを先に組み、空き枠は仮の内容を入れて総務に確認する進め方に変えた。',imgs:['社章','社内報 誌面']},
-      {no:'採用',h:'採用サイト・会社紹介／採用資料',sub:'全49ページ・2026年公開',stack:'IA設計／6職種のコンテンツ企画／Pardot実装',t:'工夫：6職種のキャリアステップは図解だけでなく、ソリューション課やM&A事業部など一部の内容も自分で構成している。',imgs:['採用サイト','会社紹介／採用資料']},
+      {no:'採用',h:'採用サイト・会社紹介／採用資料',sub:'全49ページ・2026年5月公開',stack:'IA設計／6職種のコンテンツ企画／Pardot実装',t:'工夫：6職種のキャリアステップは図解だけでなく、ソリューション課やM&A事業部など一部の内容も自分で構成している。',imgs:['採用サイト','会社紹介／採用資料']},
       {no:'サービス',h:'相続サイト・パンフレット',sub:'2026年2月公開',stack:'緑基調の選定／フォント条件の指定／ブランド整合の管理',t:'工夫：色とフォントの方向を自分でインプットしたうえで制作会社と進め、コーポレートから切り離しつつブランドとしての整合は保った。',imgs:['相続サイト','相続パンフレット']}],
     result:{head:'ルールではなく、<em>実物</em>が基準として機能した',paras:[
-      'Role — ミカタ（対外／社内／採用／サービス）のクリエイティブを一人で担当。対外は全工程単独、社内報は総務と協働、採用サイトはディレクター兼デザイナー、相続はディレクションとして関与。',
-      '現場が資材を分解し、自分たちの資料に流用している。営業現場からは「組織体制や、法人と個人の両軸によるサポートといった強みを説明しやすくなった」などの声をもらっている。資材の統一で従業員間の理念・サービス認識がそろい、インナーブランディングにも波及した。採用サイトは2026年公開、相続サイトは2026年2月公開しており、それぞれ問い合わせなど効果が出ている。']}},
+      'Role — ミカタ（対外／社内／採用／サービス）のクリエイティブを一人で担当。対外は全工程単独、社内報は総務と協働、採用サイトはディレクター兼デザイナー、相続はディレクションとして関与している。',
+      '現場が資材を分解し、自分たちの資料に流用している。営業現場からは「組織体制や、法人と個人の両軸によるサポートといった強みを説明しやすくなった」などの声をもらっている。資材の統一で従業員間の理念・サービス認識がそろい、インナーブランディングにも波及した。相続サイトは2026年2月、採用サイトは2026年5月に公開しており、それぞれ問い合わせなど効果が出ている。']}},
   c05:{
     context:{img:'g4',paras:[
       '訪問看護は、多くの人にとってなじみの薄いサービスである。何をしてくれるのか、いくらかかるのか、誰が来るのか。分からないことが、そのまま不安につながる。しかも実際に利用を決めるのはご家族であることが多く、利用者ご本人の不安とご家族の不安は同じではない。',
       '「ひのてり」の強みは、身体のケアだけでなく心のケアまで寄り添う姿勢にあった。ただ、その強みを言い表す言葉が社内になかった。']},
     judgment:[
-      {h:'理念そのものが、まだ成立していなかった',t:'言葉として存在したのは「幸せを多くの人に響かせる」の一言だけで、このまま掲げると抽象的すぎて宗教的な印象を与えかねない。内閣府の統計から社会課題を起点に据え、理念を3つの具体に分解した。「幸せ」という言葉は捨てず、前提から結論へ移し、社名「輪奏」の輪につなげて着地させている。デザインの前に、まず理念を成立させることから着手した。'},
+      {h:'理念そのものが、まだ成立していなかった',t:'当時、言葉として存在したのは「幸せを多くの人に響かせる」の一言だけで、このまま掲げると抽象的すぎて宗教的な印象を与えかねない。内閣府の統計から社会課題を起点に据え、理念を3つの具体に分解した。「幸せ」という言葉は捨てず、前提から結論へ移し、社名「輪奏」の輪につなげて着地させている。デザインの前に、まずは理念を成立させることから着手した。'},
       {h:'2つの不安に、2つの成果物で答えた',t:'「どのような人が家に来るのか」にはチラシ、「何をしてくれるのか」には会社案内。1冊にまとめず、不安の種類ごとに分けた。利用者ご本人とご家族では知りたいことが違うため、どちらの立場で手に取っても自分ごとになる構成にしている。'}],
     evidence:[
       {no:'言葉',h:'理念の構築',sub:'企業理念3つ＋代表メッセージ',stack:'内閣府の統計を起点に言語化',t:'工夫：既存の一言を捨てずに前提として残し、そこから社会課題を起点とした3つの具体へ展開した。代表メッセージも執筆している。',imgs:['企業理念']},
       {no:'素材',h:'現場での撮影',sub:'スタッフ',stack:'撮影も単独',t:'工夫：ストック写真で済ませれば手間は減るが、訪問時にチラシと違う人が来ることになり、理念の言葉からも外れる。実際に事務所へ足を運んで撮影した。表紙など利用者を伴うカットのみAI生成を使っている。',imgs:['スタッフ撮影カット','事務所']},
-      {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'工夫：他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、スタッフの顔を前面に置いた。',imgs:['チラシ 表面','チラシ 裏面']},
+      {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'工夫：他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、チラシではスタッフの顔を前面に置いた。',imgs:['チラシ 表面','チラシ 裏面']},
       {no:'成果物 ②',h:'会社案内',sub:'「何をしてくれるのか」に答える',stack:'オレンジ基調・写真とイラスト中心',t:'工夫：連携体制とサービスの流れを大きく図に描き起こし、利用者の悩みとご家族の悩みを分けて構成した。',imgs:['会社案内 表紙','サービスフロー図','連携体制図']}],
     result:{head:'一言だった理念が、<em>掲げられる言葉</em>になった',paras:[
       'Role — 企画（理念・代表メッセージの言語化を含む）・撮影・作図・デザイン・執筆まで、全工程を単独で担当した社外クライアント案件。',
       '説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。この理念を実際の活動へ落とすため、地域の方に向けた訪問看護や熱中症対策の説明会も提案し、実施に至っている。']}},
   c07:{
     context:{img:'g7',paras:[
-      '2025年は外部からの依頼を受けて、地域のアートブックイベントを開催した。ただ活動の拠点になる場所がなく、告知はそのたびに流れて消え、何をどこで確認すればよいのかも分からない状態だった。',
+      '2025年は外部からの依頼を受けて、地域のアートブックイベントを開催した。ただ活動情報を集約する場がなく、SNSによる告知はそのたびに流れて消え、何をどこで確認すればよいのかも分からない状態だった。',
       '2026年は自主企画としての開催になり、母校の卒業生を母体にしたコミュニティ「MCD MIX」を立ち上げた。集客にも不安があり、来場者が足を止める理由をこちらで用意する必要があった。']},
     judgment:[
-      {h:'運営は卒業生の有志。誰でも扱えることを最優先にした',t:'作って渡すだけでは、公開した時点で止まる。拠点となるサイトはWordPressでテーマをゼロから構築し、運用する人が触る画面から逆算して設計した。ビジュアルは新しく作り込まず、これまでの卒業生の作品アーカイブを素材にしている。コミュニティの蓄積が、そのままサイトの顔になる。'},
-      {h:'書類は、翌年そのまま使える型にした',t:'参加規約と会場案内を2025年に一から作成した。二次創作と著作権の帰属、ブースの寸法と備品、搬入出の時間、肖像権と個人情報まで、初参加の出展者が事前に判断できる範囲を洗い出している。毎年ゼロから書き起こさない形にしたことが、2回目となる2026年の運営の負担を下げた。'},
-      {h:'集客は「描いた絵が動く」体験で作った',t:'子どもに絵を描いてもらう催しは多いが、描いた絵はその場で貼られるか持ち帰って終わる。描いたものが自分の手を離れて動き出す体験があれば、足を止める理由になる。ただし参加者の負担が増えれば逆効果なので、することは「描く」と「撮って送る」の2つだけに絞った。'}],
+      {h:'運営は卒業生の有志。誰でも扱えることを最優先にした',t:'サイトを作って渡すだけでは、公開した時点で止まる。WordPressでテーマをゼロから構築し、運用する人が触る画面から逆算して設計した。ビジュアルは新しく作り込まず、これまでの卒業生の作品アーカイブを素材にしている。コミュニティの蓄積が、そのままサイトのメインビジュアルになる。'},
+      {h:'書類は、翌年そのまま使える型にした',t:'参加規約と会場案内を2025年に一から作成した。二次創作と著作権の帰属、ブースの寸法と備品、搬入出の時間、肖像権と個人情報まで、初参加の出展者が事前に判断できる範囲を洗い出している。毎年ゼロから書き起こさない形にしたことで、2回目となる2026年の運営の負担を下げた。'},
+      {h:'集客は「描いた絵が動く」体験で作った',t:'子どもに絵を描いてもらう催しは多く、それだけでは集客として弱い。描いた本人の絵が動き出す体験があれば参加者が増えると考え、実施した。ただし参加者の負担が増えれば逆効果なので、やってもらうことは「描く」と「撮って送る」の2点だけに絞った。'}],
     evidence:[
       {no:'拠点',h:'MCD MIX サイト',sub:'フルスクラッチのWordPressテーマ',stack:'WordPress・構造化データ・SEO・運用マニュアル',t:'工夫：非技術者が自分で更新できるよう、運用マニュアルまで含めて引き渡した。FAQとイベントは構造化データで整備し、活動が検索に拾われるようにしている。現在も保守と改善を継続中。',imgs:['トップページ','Eventページ','卒業生アーカイブ']},
       {no:'運営',h:'参加規約・会場案内',sub:'2025年に一から作成、2026年は改訂',stack:'著作権・ブース仕様・搬入出・肖像権',t:'工夫：出展者が当日までに判断できることを、すべて事前に書き出した。翌年は日付と会場情報の差し替えだけで運用できる。',imgs:['参加規約','会場案内図']},
-      {no:'ワークショップ',h:'ながくての森',sub:'撮影ページ → 自動切り抜き → 壁面投影',stack:'HTML / Vercel / Supabase / rembg / Claude / HTML5 Canvas',t:'工夫は3つ。紙の下に置いた4問の「いきものしんだん」を読み取り、すむ場所・動きの速さ・得意技として投影の挙動に変換した。なまえ欄は区切り線を検出して切り抜きから必ず除外し、個人名が出ないことを当日の注意ではなく処理で保証している。切り抜きはAIが候補を出すところまでとし、投影するかどうかは人が決める。',imgs:['撮影ページ','いきものしんだん（台紙）','壁面投影','会場の様子']}],
+      {no:'ワークショップ',h:'ながくての森',sub:'撮影ページ → 自動切り抜き → 壁面投影',stack:'HTML / Vercel / Supabase / rembg / Claude / HTML5 Canvas',t:'工夫は3つ。紙の下に置いた4問の「いきものしんだん」を読み取り、すむ場所・動きの速さ・得意技として投影の挙動に変換した。なまえ欄は区切り線を検出して切り抜きから必ず除外し、個人名が出ないことを当日の注意ではなく処理で保証している。切り抜きはAIが候補を出すところまでとし、投影するかどうかは人が判断する設計にしている。',imgs:['撮影ページ','いきものしんだん（台紙）','壁面投影','会場の様子']}],
     result:{head:'2年続く催しの<em>土台</em>と、67作品が加わった森',paras:[
-      'Role — サイトの企画・設計・実装・運用設計、参加規約と会場案内の作成、ワークショップの体験設計・UIデザイン・システム開発・当日運用まで単独。イベントの企画は元教授と共同で、当日の混雑時のみ、同じ催しの参加者である友人にサポートを依頼した。',
-      '2日間で67作品が森に加わった（10月3日26件、4日41件）。送られた絵はすべて投影し、却下は0件。掲載の同意も全件で得られた。撮影から投影までが保護者のスマートフォンだけで完結するため、混雑しても受付に行列はできていない。',
-      '反省点は2つある。会期中に、台紙への照明の映り込みなど、実際の光と子どもの自由な絵で初めて出た不具合が5件あった。診断ログと現場の写真から原因を絞り込んでその日のうちに直したが、想定で潰しきれなかった部分である。もうひとつは、投影をブラウザの全画面にしていなかったこと。記録写真に操作画面が写り込み、あとから使える画が減った。']}},
+      'Role — サイトの企画・設計・実装・運用設計、参加規約と会場案内の作成、ワークショップの体験設計・UIデザイン・システム開発・当日の運用まで単独。イベントの企画は元教授と共同で、当日の混雑時のみ、同じ催しの参加者である友人に子どもへの声かけなどのサポートを依頼した。',
+      '2日間で67作品が森に加わった（10月3日26件、4日41件）。送られた絵はすべて投影した。SNS掲載の同意も全件で得られている。撮影から投影までが保護者のスマートフォンだけで完結するため、混雑しても受付に行列はできなかった。',
+      '反省点は2つある。ひとつは、台紙への照明の映り込みなど、実際の光と子どもの自由な絵で初めて出た不具合が会期中に5件あったこと。診断ログと現場の写真から原因を絞り込んでその日のうちに直したが、想定で潰しきれなかった部分である。もうひとつは、絵を描くための席が足りず、途中で6席から12席に増やしたこと。当初の見込みが甘く、次はもう少しスペースを確保したい。']}},
   c06:{
     context:{img:'g2',paras:[
       'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに、個人で応募した。文字盤が電子ペーパー＝「紙」であること。その素材の性質をどう読むかが、デザインの出発点になった。']},
@@ -1911,6 +1912,16 @@ const CASES={
       '採用デザインはソニー公式サイト・専用アプリ「FES Closet」を通じて世界へ配信。阪急メンズ東京・高島屋横浜店・静岡伊勢丹・大丸神戸店にて展示販売された。']}}
 
 };
+/* 成果物の画像枠。2枚以上は横スライダーにする（キャプション＝何を入れるかの指示） */
+function mediaHTML(imgs){
+  if(!imgs||!imgs.length) return '<div class="ps-media"><span>\u753b\u50cf</span></div>';
+  if(imgs.length===1) return '<div class="ps-media"><span>'+imgs[0]+'</span></div>';
+  return '<div class="ps-media ps-multi"><div class="ps-rail">'
+    +imgs.map(function(c){return '<div class="ps-cell"><b>'+c+'</b></div>'}).join('')
+    +'</div><div class="ps-count"><i>1</i> / '+imgs.length+'</div>'
+    +'<div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">\u2039</button>'
+    +'<button type="button" data-d="1" aria-label="next">\u203a</button></div></div>';
+}
 function renderCase(d){
   let h='';
   h+='<div class="panel work tcard" data-i="01" style="--card-bg:#F1F4F4"><div class="t-inner wrap"><div class="t-text">'
@@ -1928,9 +1939,7 @@ function renderCase(d){
       +d.evidence.map(s=>'<div class="p-step"><div class="ps-body"><div class="ps-no">'+s.no+'</div><h3 class="ps-head">'+s.h+'</h3>'
         +(s.sub?'<div class="ps-sub">'+s.sub+'</div>':'')+(s.stack?'<div class="ps-stack">'+s.stack+'</div>':'')
         +(function(){var a=s.t.split(/(?=工夫[\u306f\uff1a])/);return a.map(function(x,k){return '<p class="ps-text'+(/^\u5de5\u592b/.test(x)?' ps-note':'')+'">'+x+'</p>'}).join('')})()
-        +'</div>'+(s.imgs&&s.imgs.length>1
-            ?'<div class="ps-media ps-multi n'+s.imgs.length+'">'+s.imgs.map(function(c){return '<div class="ps-cell"><b>'+c+'</b></div>'}).join('')+'</div>'
-            :'<div class="ps-media"><span>'+((s.imgs&&s.imgs[0])||'\u753b\u50cf')+'</span></div>')
+        +'</div>'+mediaHTML(s.imgs)
         +'</div>').join('')
       +'</div></div></div>';
   }
@@ -1940,6 +1949,30 @@ function renderCase(d){
     +'<a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a></div></div>';
   return h;
 }
+
+/* 成果物スライダー：矢印・スクロールでカウンタと矢印の活性を更新 */
+function syncRail(rail){
+  const wrap=rail.closest('.ps-multi'); if(!wrap) return;
+  const w=rail.clientWidth+10, n=rail.children.length;
+  const i=Math.min(n-1,Math.max(0,Math.round(rail.scrollLeft/w)));
+  const c=wrap.querySelector('.ps-count i'); if(c) c.textContent=String(i+1);
+  const b=wrap.querySelectorAll('.ps-nav button');
+  if(b.length===2){ b[0].disabled=(i<=0); b[1].disabled=(i>=n-1); }
+}
+function initRails(root){
+  (root||document).querySelectorAll('.ps-rail').forEach(r=>{
+    if(r.dataset.bound) return; r.dataset.bound='1';
+    let t=null; r.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>syncRail(r),60)},{passive:true});
+    syncRail(r);
+  });
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.panel.work.pcard .ps-nav button'); if(!b) return;
+  e.preventDefault();
+  const rail=b.closest('.ps-multi').querySelector('.ps-rail');
+  rail.scrollBy({left:Number(b.dataset.d)*(rail.clientWidth+10),behavior:'smooth'});
+});
+
 let CURRENT_CASE='c01', CASE01_HTML=null;
 function setCase(key){
   const showcase=document.querySelector('.showcase');
@@ -1949,6 +1982,7 @@ function setCase(key){
   showcase.querySelectorAll('.panel').forEach(p=>p.remove());
   showcase.insertAdjacentHTML('beforeend', key==='c01' ? CASE01_HTML : renderCase(CASES[key]));
   CURRENT_CASE=key;
+  initRails(showcase);
 }
 
 /* click on a work — a crisp two-beat transition:
@@ -2387,7 +2421,7 @@ function initAnim(){
 
 window.addEventListener('load',()=>{
   runLoader(()=>initAnim());
-  initCursor();initMagnetic();initWorksUI();
+  initCursor();initMagnetic();initWorksUI();initRails();
   // safety net: only force-show things stuck INSIDE the current viewport.
   // (it used to force-show everything, which pre-fired every below-the-fold
   //  reveal 5s after load — the scroll animations then never played)
