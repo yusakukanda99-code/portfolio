@@ -188,7 +188,7 @@ header.nav .nav-contact:hover::before{display:none}
 .prof-tl-year{font-size:11px;font-weight:500;background:#1c1c1c;color:#FAF9F6;padding:2px 8px;letter-spacing:.05em;white-space:nowrap}
 .prof-tl-text{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:1.6;color:#1c1c1c;white-space:nowrap}
 .prof-tl-now{text-align:right;font-size:11px;color:#999;font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;margin-top:12px;letter-spacing:.15em;padding-right:4px;z-index:1;position:relative}
-.prof-message{max-width:1000px;margin:0 auto;padding:0 40px 64px}
+.prof-message{max-width:1000px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:2;background:#FAF9F6}
 .prof-message p{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:2.4;color:#555;font-weight:300;margin-top:36px}
 /* スキル索引（原稿マスター分）— 同じ幅に合わせて掲載 */
 /* 一列マーキー — 左へ流れ続けるスキル索引 */
@@ -1143,6 +1143,12 @@ body.detail-on .wk-btn{display:inline-flex}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 document.documentElement.classList.add('js');
+/* 再読み込み時にブラウザが前回のスクロール位置を復元すると、ピン留めの途中から
+   始まって表示が崩れる。常にTOPから始める。ハッシュ付きで開かれた場合も同じ。 */
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+if(location.hash) history.replaceState(null,'',location.pathname+location.search);
+window.addEventListener('beforeunload',()=>{ try{window.scrollTo(0,0);}catch(e){} });
+window.addEventListener('pageshow',e=>{ if(e.persisted) window.scrollTo(0,0); });
 const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* Exactly ONE screen (slider / detail) is alive at a time — each holds {st,tl}.
    Switching kills the old ScrollTrigger (reverting its pin spacer so no dead
@@ -2520,6 +2526,10 @@ function initAnim(){
 window.addEventListener('load',()=>{
   runLoader(()=>initAnim());
   initCursor();initMagnetic();initWorksUI();initRails();fitPanels();
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+  requestAnimationFrame(()=>{ window.scrollTo(0,0);
+    if(window.ScrollTrigger) ScrollTrigger.refresh(); });
   // safety net: only force-show things stuck INSIDE the current viewport.
   // (it used to force-show everything, which pre-fired every below-the-fold
   //  reveal 5s after load — the scroll animations then never played)
