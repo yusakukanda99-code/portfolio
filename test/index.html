@@ -617,7 +617,7 @@ body.detail-on .wk-btn{display:inline-flex}
 }
 
 /* card variant "ccard" — centred, text-only conclusion */
-.panel.work.ccard .c-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:var(--nav-h)}
+.panel.work.ccard .c-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;text-align:center;padding-top:var(--nav-h);overflow:hidden}
 .panel.work.ccard .c-eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(28px,4vh,44px);display:inline-flex;gap:14px;align-items:center}
 .panel.work.ccard .c-eyebrow::before,.panel.work.ccard .c-eyebrow::after{content:"";width:36px;height:1px;background:var(--accent)}
 .panel.work.ccard .c-head{font-size:var(--fs-case-head);line-height:1.34;letter-spacing:.005em;color:var(--ink);max-width:24ch}
@@ -1686,10 +1686,21 @@ function initShowcase(){
       // ---- ccard: centred, text-only conclusion — lines reveal in order,
       //      then HOLD so the fully-revealed conclusion (incl. back-to-top) stays ----
       const anim=p.querySelectorAll('.c-anim');
+      const ci=p.querySelector('.c-inner');
+      if(ci) ci.scrollTop=0;
       gsap.set(anim,{y:46,opacity:0});
       tl.fromTo(anim,{y:46,opacity:0},{y:0,opacity:1,duration:.85,stagger:.16,ease:'power2.out'},pos+1.4);
-      tl.to(p,{duration:1.8},pos+3.1); // hold (no visual change, keeps everything shown)
-      cursor = pos + 5.0;
+      // 溢れ量は毎フレーム実測する。フォント読み込みや拡大率で後から変わっても追従し、
+      // 収まっている時は scrollTop が 0 のまま＝従来どおりの「止めて見せる」一拍になる。
+      const prox={v:0};
+      tl.to(prox,{v:0,duration:0.01},pos+3.0)
+        .fromTo(prox,{v:0},{v:1,duration:1.9,ease:'none',onUpdate:()=>{
+          if(!ci) return;
+          const ov=Math.max(0, ci.scrollHeight-ci.clientHeight);
+          ci.scrollTop = ov>2 ? ov*prox.v : 0;
+        }},pos+3.1)
+        .to({},{duration:.7},pos+5.0);
+      cursor = pos + 5.9;
     } else {
       cursor = pos + STD_LEN;  // fallback for any future card type
     }
@@ -1981,9 +1992,38 @@ function renderCase(d){
   return h;
 }
 
+/* 詳細ページの先頭でさらに上へスクロールしたら、スライダーへ戻る。
+   下まで送って「TOP へ戻る」を押す以外の退出口。誤爆しないよう量と時間でしきい値を取る。 */
+(function(){
+  let acc=0, t0=0, fired=false;
+  const canLeave=()=>document.body.classList.contains('detail-on')
+    && !document.body.classList.contains('aw-lock')
+    && !document.body.classList.contains('locked')
+    && !document.documentElement.classList.contains('sp-flow')
+    && window.scrollY<=2;
+  const leave=()=>{ if(fired) return; fired=true; acc=0;
+    try{ returnToWork(); }catch(e){}
+    setTimeout(()=>{fired=false;},1200); };
+  window.addEventListener('wheel',e=>{
+    if(!canLeave()){ acc=0; return; }
+    if(e.deltaY>=0){ acc=0; return; }
+    const now=Date.now(); if(now-t0>700) acc=0;
+    t0=now; acc+=-e.deltaY;
+    if(acc>150) leave();
+  },{passive:true});
+  let ty=null;
+  window.addEventListener('touchstart',e=>{ ty=e.touches[0].clientY; },{passive:true});
+  window.addEventListener('touchmove',e=>{
+    if(ty===null) return;
+    if(!canLeave()){ ty=e.touches[0].clientY; return; }
+    if(e.touches[0].clientY-ty>110) leave();
+  },{passive:true});
+  window.addEventListener('touchend',()=>{ ty=null; },{passive:true});
+})();
+
 /* 可変フィット：パネルの中身が枠を超えたぶんだけ、その面を縮めて必ず収める。
    余裕がある画面では何もしない。幅は 1/k に広げてから縮めるので、見た目の幅は変わらない。 */
-const FIT_SEL='.ccard .c-inner, .tcard .t-inner';
+const FIT_SEL='.tcard .t-inner';
 const FIT_MIN=0.74;
 function fitPanels(root){
   for(let pass=0;pass<2;pass++) fitPass(root);
