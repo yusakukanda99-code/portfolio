@@ -557,6 +557,7 @@ body.detail-on .wk-btn{display:inline-flex}
   background:var(--paper);border-radius:18px;box-shadow:0 34px 80px rgba(20,15,10,.18);
   display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(22px,3vw,54px);align-items:center;
   padding:clamp(26px,3.6vw,58px);overflow:hidden;will-change:transform}
+.panel.work.pcard .ps-body{align-self:center;max-height:100%;overflow:hidden}
 .panel.work.pcard .ps-no{font-size:clamp(14px,1.4vw,19px);font-weight:500;letter-spacing:.02em;color:var(--ink);margin-bottom:14px}
 .panel.work.pcard .ps-no span{color:var(--accent)}
 .panel.work.pcard .ps-head{font-size:var(--fs-case-head);line-height:1.18;margin-bottom:clamp(18px,2.4vh,30px);color:var(--ink)}
@@ -1649,18 +1650,38 @@ function initShowcase(){
       // Step 1 is already centred from the start; the rest wait below the fold
       steps.forEach((c,i)=>gsap.set(c,{yPercent:i===0?0:120,scale:1,zIndex:i+1,transformOrigin:'50% 0%'}));
       tl.fromTo(label,{yPercent:22,opacity:0},{yPercent:0,opacity:1,duration:.7,ease:'power2.out'},pos+1.2);
-      const START=1.9, ENTER=1.0, HOLD=0.75, CYCLE=ENTER+HOLD;
-      // only steps 2..N rise & stack on scroll (Step 1 is shown immediately)
+      const START=1.9, ENTER=1.0, HOLD=0.75, READ=1.7, BEAT=0.4;
+      // 本文が枠より長いカードは、ページスクロールに同期して中身が流れ、
+      // 流れ切ってから次のカードが上がる
+      const bodies=steps.map(c=>c.querySelector('.ps-body'));
+      bodies.forEach(b=>{ if(b) b.scrollTop=0; });
+      const overOf=b=>b?Math.max(0,b.scrollHeight-b.clientHeight):0;
+      let t=pos+START;
+      // Step 1 は最初から中央にあるので、必要ならその場で流す
+      const ov0=overOf(bodies[0]);
+      if(ov0>8){
+        tl.to(bodies[0],{scrollTop:ov0,duration:READ,ease:'none'},pos+1.5)
+          .to({},{duration:BEAT},pos+1.5+READ);
+        t=Math.max(t,pos+1.5+READ+BEAT);
+      }
       for(let i=1;i<steps.length;i++){
-        const at=pos+START+(i-1)*CYCLE;
+        const at=t;
         // incoming card slides up to the centre and stops
         tl.to(steps[i],{yPercent:0,duration:ENTER,ease:'power2.out'},at);
         // the cards already stacked recede one more level (peek above)
         for(let j=0;j<i;j++){
           tl.to(steps[j],{yPercent:-(i-j)*7,scale:1-(i-j)*0.045,duration:ENTER,ease:'power2.out'},at);
         }
+        const ov=overOf(bodies[i]);
+        let ext=0;
+        if(ov>8){
+          ext=READ+BEAT;
+          tl.to(bodies[i],{scrollTop:ov,duration:READ,ease:'none'},at+ENTER+0.2)
+            .to({},{duration:BEAT},at+ENTER+0.2+READ);
+        }
+        t = at+ENTER+HOLD+ext;
       }
-      cursor = pos + START + (steps.length-1)*CYCLE + 0.3;
+      cursor = t + 0.3;
     } else if(p.classList.contains('ccard')){
       // ---- ccard: centred, text-only conclusion — lines reveal in order,
       //      then HOLD so the fully-revealed conclusion (incl. back-to-top) stays ----
@@ -1962,7 +1983,7 @@ function renderCase(d){
 
 /* 可変フィット：パネルの中身が枠を超えたぶんだけ、その面を縮めて必ず収める。
    余裕がある画面では何もしない。幅は 1/k に広げてから縮めるので、見た目の幅は変わらない。 */
-const FIT_SEL='.gcard .g-grid, .ccard .c-inner, .tcard .t-inner';
+const FIT_SEL='.ccard .c-inner, .tcard .t-inner';
 const FIT_MIN=0.74;
 function fitPanels(root){
   for(let pass=0;pass<2;pass++) fitPass(root);
@@ -2072,6 +2093,7 @@ function goToDetail(caseKey,workIdx){
   tl.add(()=>{
     dt.classList.remove('rise');
     gsap.set(dt,{clearProps:'transform'});
+    killScreen(DET); DET=null;        // 前の ScrollTrigger を破棄してから張り直す
     DET=initShowcase();
     ScrollTrigger.refresh();
     window.scrollTo(0,0);
