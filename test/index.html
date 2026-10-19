@@ -470,7 +470,7 @@ body.detail-on .wk-btn{display:inline-flex}
 /* work panels — a composed card: text + images that animate in */
 .panel.work{background:var(--card-bg,#f1ece4);color:var(--ink)}
 .panel.work .w-inner{position:relative;width:100%;height:100%;display:grid;
-  grid-template-columns:.82fr 1.18fr;gap:clamp(24px,4vw,70px);align-items:center;padding-top:var(--nav-h)}
+  grid-template-columns:.82fr 1.18fr;gap:clamp(24px,4vw,70px);align-items:center;padding-top:var(--nav-h);padding-bottom:clamp(40px,8vh,96px)}
 .panel.work .frame{position:absolute;inset:0;overflow:hidden;border-radius:12px;box-shadow:0 30px 70px rgba(20,15,10,.2)}
 .panel.work .frame .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center}
 /* drop a GIF/image straight in: <div class="frame"><img class="gif" src="your.gif"></div> */
@@ -511,7 +511,7 @@ body.detail-on .wk-btn{display:inline-flex}
 }
 
 /* card variant "gcard" — left section label + right 2-column Point grid w/ rules */
-.panel.work.gcard .g-inner{display:grid;grid-template-columns:minmax(150px,19%) 1fr;gap:clamp(28px,4.5vw,80px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.gcard .g-inner{display:grid;grid-template-columns:minmax(150px,19%) 1fr;gap:clamp(28px,4.5vw,80px);height:100%;align-items:center;padding-top:var(--nav-h);padding-bottom:clamp(40px,8vh,96px)}
 .panel.work.gcard .g-label{align-self:center}
 /* unified section label — small accent EN kicker + JP serif heading (shared by gcard & pcard) */
 .panel.work .g-en{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;display:inline-flex;gap:12px;align-items:center;margin-bottom:18px}
@@ -550,7 +550,7 @@ body.detail-on .wk-btn{display:inline-flex}
 
 /* card variant "pcard" — left "工程" label + right stack of Step cards that
    rise from below and stack on top of one another on scroll */
-.panel.work.pcard .p-inner{display:grid;grid-template-columns:minmax(120px,15%) 1fr;gap:clamp(22px,3.5vw,64px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.pcard .p-inner{display:grid;grid-template-columns:minmax(120px,15%) 1fr;gap:clamp(22px,3.5vw,64px);height:100%;align-items:center;padding-top:var(--nav-h);padding-bottom:clamp(40px,8vh,96px)}
 .panel.work.pcard .p-label{align-self:center}
 .panel.work.pcard .p-stack{position:relative;height:min(66vh,600px)}
 .panel.work.pcard .p-step{position:absolute;inset:0;margin:auto;width:100%;height:min(60vh,540px);
@@ -598,7 +598,7 @@ body.detail-on .wk-btn{display:inline-flex}
 }
 
 /* card variant "tcard" — left text column (write your copy here) + right image */
-.panel.work.tcard .t-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);height:100%;align-items:center;padding-top:var(--nav-h)}
+.panel.work.tcard .t-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);height:100%;align-items:center;padding-top:var(--nav-h);padding-bottom:clamp(40px,8vh,96px)}
 .panel.work.tcard .t-text{max-width:580px}
 .panel.work.tcard .t-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;gap:12px;align-items:center}
 .panel.work.tcard .t-eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
@@ -617,7 +617,7 @@ body.detail-on .wk-btn{display:inline-flex}
 }
 
 /* card variant "ccard" — centred, text-only conclusion */
-.panel.work.ccard .c-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;text-align:center;padding-top:var(--nav-h);overflow:hidden}
+.panel.work.ccard .c-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;text-align:center;padding-top:var(--nav-h);padding-bottom:clamp(40px,8vh,96px);overflow:hidden}
 .panel.work.ccard .c-eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(28px,4vh,44px);display:inline-flex;gap:14px;align-items:center}
 .panel.work.ccard .c-eyebrow::before,.panel.work.ccard .c-eyebrow::after{content:"";width:36px;height:1px;background:var(--accent)}
 .panel.work.ccard .c-head{font-size:var(--fs-case-head);line-height:1.34;letter-spacing:.005em;color:var(--ink);max-width:24ch}
@@ -1638,9 +1638,9 @@ function initShowcase(){
       if(over>8){
         ext=1.9;
         tl.to(grid,{scrollTop:over,duration:ext,ease:'none'},pos+3.0)  // リストが流れる
-          .to({},{duration:.45},pos+3.0+ext);                          // 読み切りの一拍
+          .to({},{duration:.8},pos+3.0+ext);                           // 読み切りの一拍
       }
-      cursor = pos + 4.4 + (ext ? ext+.45 : 0);
+      cursor = pos + 4.4 + (ext ? ext+.8 : 0);
     } else if(p.classList.contains('pcard')){
       // ---- pcard: Step cards rise from below to centre; each new one stacks on
       //      top while the earlier ones recede upward a notch ----
@@ -1650,7 +1650,7 @@ function initShowcase(){
       // Step 1 is already centred from the start; the rest wait below the fold
       steps.forEach((c,i)=>gsap.set(c,{yPercent:i===0?0:120,scale:1,zIndex:i+1,transformOrigin:'50% 0%'}));
       tl.fromTo(label,{yPercent:22,opacity:0},{yPercent:0,opacity:1,duration:.7,ease:'power2.out'},pos+1.2);
-      const START=1.9, ENTER=1.0, HOLD=0.75, READ=1.7, BEAT=0.4;
+      const START=1.9, ENTER=1.0, HOLD=0.75, READ=1.7, BEAT=0.75;
       // 本文が枠より長いカードは、ページスクロールに同期して中身が流れ、
       // 流れ切ってから次のカードが上がる
       const bodies=steps.map(c=>c.querySelector('.ps-body'));
@@ -1705,6 +1705,7 @@ function initShowcase(){
       cursor = pos + STD_LEN;  // fallback for any future card type
     }
   }
+  tl.to({},{duration:1.4},cursor);   // 最後の結論を見せたまま一拍おいてからピン解除
   const totalDur=tl.totalDuration();
   const dst=ScrollTrigger.create({
     animation:tl,trigger:showcase,start:'top top',
