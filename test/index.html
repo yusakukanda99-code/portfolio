@@ -89,6 +89,8 @@ header.nav nav a:hover::before{content:'';position:absolute;inset:-2px -8px;bord
 header.nav .nav-contact{margin-left:auto;color:var(--accent);font-weight:500;transition:color .3s var(--ease)}
 header.nav .nav-contact:hover{color:#14695f;text-shadow:none}
 header.nav .nav-contact:hover::before{display:none}
+header.nav nav a.is-current{color:var(--accent)}
+header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:20px;bottom:4px;height:1px;background:var(--accent)}
 @media(max-width:900px){header.nav nav a{font-size:14px;padding:8px 12px}}
 
 /* ---------- HERO — typographic statement overlay. Scroll fades it away while
@@ -286,7 +288,6 @@ header.nav .nav-contact:hover::before{display:none}
 .aw-head h2{margin-top:12px;font-size:clamp(30px,3.6vw,54px);color:var(--ink);font-weight:500}
 .aw-head p{margin-top:12px;font-size:13.5px;color:#7a7b74;line-height:1.9;max-width:56ch}
 body.aw-lock{overflow:hidden}
-.aw-close{position:fixed;top:calc(var(--nav-h) + 14px);right:clamp(20px,2.8vw,40px);z-index:720;background:var(--paper)}
 .aw-foot{margin-top:clamp(50px,8vh,90px)}
 /* プロジェクト間はしっかり距離を取る */
 .aw .wk-sec{margin-bottom:clamp(72px,13vh,120px)}
@@ -1108,7 +1109,6 @@ body.detail-on .wk-btn{display:inline-flex}
       </div>
     </div>
   </footer>
-  <button class="wk-close aw-close" type="button">閉じる ×</button>
 </section>
 
 <button class="wk-btn" type="button" aria-label="このプロジェクトの制作物を見る">制作物 <b data-wk-count>0</b> →</button>
@@ -2277,6 +2277,7 @@ function openWorksPage(){
   aw.scrollTop=0;
   aw.classList.add('on');
   document.body.classList.add('aw-lock');
+  document.querySelectorAll('.nav-aw').forEach(a=>{a.classList.add('is-current');a.setAttribute('aria-current','page');});
   circleIn(aw,aw.querySelector('.aw-inner'));
 }
 function closeWorksPage(){
@@ -2285,6 +2286,7 @@ function closeWorksPage(){
   aw.classList.remove('on');
   aw.style.clipPath='';
   document.body.classList.remove('aw-lock');
+  document.querySelectorAll('.nav-aw').forEach(a=>{a.classList.remove('is-current');a.removeAttribute('aria-current');});
 }
 /* All Works → 該当プロジェクトへ */
 /* 「プロジェクトを読む」→ 該当プロジェクト詳細の冒頭（課題と背景）へ */
