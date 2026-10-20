@@ -434,14 +434,17 @@ body.detail-on .wk-btn{display:inline-flex}
   display:flex;flex-direction:column;justify-content:flex-end}
 .hg-cat{display:inline-flex;gap:12px;align-items:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#FAF9F6;margin-bottom:clamp(14px,2vh,22px)}
 .hg-cat::before{content:"";width:30px;height:1px;background:var(--accent);flex:none}
-.hg-title{color:#FAF9F6;font-size:clamp(30px,4.4vw,68px);line-height:1.08;letter-spacing:-.01em;max-width:22ch}
+.hg-title{color:#FAF9F6;font-size:clamp(26px,3.3vw,50px);line-height:1.14;letter-spacing:-.005em;max-width:26ch}
 .hg-title em{font-style:italic;color:var(--accent)}
 .hg-title .nb{display:inline-block}
-.hg-lead{margin-top:clamp(16px,2.4vh,28px);max-width:54ch;color:rgba(255,255,255,.9);font-size:clamp(14px,1.15vw,17px);line-height:1.75}
+.hg-lead{margin-top:clamp(16px,2.4vh,28px);max-width:min(68ch,62vw);color:rgba(255,255,255,.92);font-size:clamp(14px,1.05vw,16px);line-height:1.95}
 .hg-foot{display:flex;align-items:center;gap:clamp(20px,3vw,44px);margin-top:clamp(22px,3vh,38px);flex-wrap:wrap}
 .hg-foot .view{pointer-events:auto;display:inline-flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.04em;color:#FAF9F6;
   border:1px solid rgba(255,255,255,.6);padding:12px 24px;border-radius:100px;transition:.35s var(--ease)}
 .hg-foot .view:hover{background:#FAF9F6;color:var(--ink);border-color:#FAF9F6}
+/* PCはカーソルの「Click」が誘導になるためボタンを出さない。タップ環境のみ表示 */
+.hg-foot .view.sp-only{display:none}
+@media(hover:none),(max-width:820px){.hg-foot .view.sp-only{display:inline-flex}}
 
 /* persistent UI (pinned) */
 .hg-ui{position:absolute;z-index:90;color:#FAF9F6;mix-blend-mode:difference;pointer-events:none}
@@ -451,8 +454,8 @@ body.detail-on .wk-btn{display:inline-flex}
 .hg-prog i{position:absolute;left:0;top:0;height:100%;width:0;background:#FAF9F6}
 
 @media(max-width:820px){
-  .hg-title{font-size:clamp(24px,6.6vw,38px);line-height:1.14}
-  .hg-lead{font-size:14px;max-width:none}
+  .hg-title{font-size:clamp(23px,6vw,34px);line-height:1.18}
+  .hg-lead{font-size:13.5px;max-width:none;line-height:1.9}
   .hg-foot{gap:16px}
 }
 /* =========================================================
@@ -666,7 +669,7 @@ body.detail-on .wk-btn{display:inline-flex}
 <body>
 
 <div class="cursor"></div>
-<div class="cursor-follow"><span class="cur-txt">View</span></div>
+<div class="cursor-follow"><span class="cur-txt">Click</span></div>
 
 <!-- LOADER -->
 <div id="loader">
@@ -776,7 +779,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 01 — MCD MIX ／ ながくてアートブック（愛・地球博記念公園） / 2025–2026</span>
             <h3 class="hg-title"><span class="nb">卒業生コミュニティの</span><span class="nb"><em>サイト制作から、イベント運営</em>まで</span></h3>
             <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」の拠点サイトを単独で構築し、そこに載せるイベントの企画や、参加が決定した参加者へお送りする規約・搬入出の案内までを整備した。2026年には来場者が描いた絵がその場でアニメーションになって現れるワークショップを設計・開発し、2日間で67作品が集まった。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -787,7 +790,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2026</span>
             <h3 class="hg-title"><span class="nb">サポート終了の文書形式から、</span><span class="nb"><em>AIが読める状態</em>への移行</span></h3>
             <p class="hg-lead">長年使ってきた文書システムがサポート終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装し、年間約1,200万円のコスト削減を試算している。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -798,7 +801,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 03 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
             <h3 class="hg-title"><span class="nb">抽象的だった理念を</span><span class="nb"><em>コミュニケーション可能な形</em>に</span></h3>
             <p class="hg-lead">依頼は会社案内・チラシの制作と写真撮影だったが、企業理念が文章として存在せず、会社の方向性そのものが曖昧だった。そこで代表との対話から理念を読み解き、代表メッセージの執筆から着手。その上でチラシと会社案内を制作し、ブランディング全体を担った。一言だけだった理念が、対外的に掲げられる3つの言葉になった。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -809,7 +812,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 04 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
             <h3 class="hg-title"><span class="nb">ミカタグループの</span><span class="nb"><em>ブランディングの社内定着</em></span></h3>
             <p class="hg-lead">リブランディングを行いロゴは一新したが、ロゴが変わっただけという認識しか社内に無く、何も変化を感じていなかった。そこで、グループで使用する会社案内や資料をはじめ、サービスの資料なども作成した。対外的な資料に留まらず、社内報や社章といったインナーブランディングもデザインした。現場が資材を分解して自分の資料に流用できる状態になっている。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -820,7 +823,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 05 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
             <h3 class="hg-title"><span class="nb">会社としての情報発信と</span><span class="nb"><em>お客様とのタッチポイント</em>設計</span></h3>
             <p class="hg-lead">顧問契約をいただくお客様に、税制改正のような変化を、会社として正しく届ける必要があった。ただし内容が整っていなければ読まれない。媒体を問わず、発信物のデザインと管理・運用を一手に担った。主軸のメルマガは1配信約17,000件、平均開封率は約30%で推移している。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -831,7 +834,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 06 — Sony Fashion Entertainments（個人応募） / 2018</span>
             <h3 class="hg-title"><span class="nb">Sony <em>FES Watch U</em></span><span class="nb"> デザインコンペ</span></h3>
             <p class="hg-lead">電子ペーパー製ウォッチのデザインコンペに個人で応募し、全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトや専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開された。</p>
-            <div class="hg-foot"><a href="#" class="view">View case ↗</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
           </div>
         </div>
       </article>
@@ -1175,10 +1178,14 @@ function initCursor(){
   let mx=innerWidth/2,my=innerHeight/2,fx=mx,fy=my;
   addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
   (function loop(){fx+=(mx-fx)*.18;fy+=(my-fy)*.18;fol.style.transform=`translate(${fx}px,${fy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
-  document.querySelectorAll('.hg-media,.view,.c-top').forEach(t=>{
-    t.addEventListener('mouseenter',()=>{fol.classList.add('grow');fol.querySelector('.cur-txt').style.opacity=1;});
-    t.addEventListener('mouseleave',()=>fol.classList.remove('grow'));
-  });
+  // クリックできる場所でだけ輪を広げて「Click」を出す。
+  // 以前は inline で opacity=1 を書き込んでいたため、一度ホバーすると
+  // どこでも文字が残り続けていた（.grow を外しても inline が勝つ）
+  const CLICKABLE='.hg-media,.view,.c-top,.wk-card,.wd-thumb,.aw .wk-card';
+  const on=()=>fol.classList.add('grow');
+  const off=()=>fol.classList.remove('grow');
+  document.addEventListener('mouseover',e=>{ if(e.target.closest(CLICKABLE)) on(); });
+  document.addEventListener('mouseout',e=>{ if(e.target.closest(CLICKABLE)&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest(CLICKABLE))) off(); });
 }
 
 function initMagnetic(){
