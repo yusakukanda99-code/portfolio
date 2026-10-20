@@ -580,7 +580,7 @@ body.detail-on .wk-btn{display:inline-flex}
   padding:clamp(26px,3.6vw,58px);overflow:hidden;will-change:transform}
 .panel.work.pcard .ps-body{align-self:center;max-height:100%;overflow:hidden}
 .panel.work.pcard .ps-no{font-size:var(--fs-lead);font-weight:500;letter-spacing:.02em;color:var(--ink);margin-bottom:14px}
-.panel.work.pcard .ps-no span{color:var(--accent)}
+.panel.work.pcard .ps-no span{color:var(--accent);margin-left:.45em}
 .panel.work.pcard .ps-head{font-size:var(--fs-case-head);line-height:1.18;margin-bottom:clamp(18px,2.4vh,30px);color:var(--ink)}
 .panel.work.pcard .ps-sub{font-size:var(--fs-lead);margin-bottom:6px;color:var(--ink)}
 .panel.work.pcard .ps-stack{font-size:11px;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:16px}
@@ -1078,9 +1078,9 @@ body.detail-on .wk-btn{display:inline-flex}
             <div class="ps-body">
               <div class="ps-no">Tool<span>03</span></div>
               <h3 class="ps-head">解析にかける</h3>
-              <div class="ps-sub">保険証券解析ツール</div>
+              <div class="ps-sub">保険証券解析ツール　※検証待ち</div>
               <div class="ps-stack">React / Claude API / SheetJS</div>
-              <p class="ps-text">PDFで管理されるようになった書類を分析できるようにした。書式がばらばらでも項目構造（JSON）で抽出し、Excelへ自動転記する。専属の担当を置かずに、加入状況や返戻率をその場で確認できる。</p>
+              <p class="ps-text">PDFで管理されるようになった書類を分析できるようにした。書式がばらばらでも項目構造（JSON）で抽出し、Excelへ自動転記する。専属の担当を置かずに、加入状況や返戻率をその場で確認できる状態まで作っている。現在は担当部門の検証待ちで、運用はまだ始まっていない。</p>
               <p class="ps-text ps-note">工夫：書式ごとのテンプレートを持たず、項目構造で抽出している。保険会社や様式が増えても、ツール側を作り直さずに済む。</p>
             </div>
             <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><b>解析画面</b></div><div class="ps-cell"><b>Excel出力</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
@@ -2203,7 +2203,7 @@ function returnToWork(){
 const WORKS=[
   {w:'work_24',c:'c01',t:'pdf-annotator ── PDF業務基盤',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_24_work_24.webp',desc:'社内の書類管理をブラウザ完結にするPDF編集ツール。複数PDFをまたぐ階層しおり、日本式の電子押印、ドラッグ&ドロップ結合を実装し、使い方ガイドサイトまで含めて作成した。',imgs:[],link:'https://pdf-annotator-mycompany.netlify.app/about'},
   {w:'work_27',c:'c01',t:'DocuWorks → PDF 一括変換ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・実装・配布設計まで単独',thumb:'work_27_work_27.webp',desc:'DocuWorks独自形式（.xdw）をドロップするだけで一括PDF化するローカルツール。処理はPC内で完結し、「変換 → 編集 → AI分析」の社内フローの起点になる。',imgs:[],video:'docuworks-convert'},
-  {w:'work_26',c:'c01',t:'保険証券解析ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_26_placeholder.webp',desc:'PDFで管理されるようになった保険証券を、AIで読み取って構造化するツール。書式がばらばらでも項目構造（JSON）で抽出し、Excelへ自動転記する。専属の担当を置かずに、加入状況や返戻率をその場で確認できる状態にした。',imgs:[]},
+  {w:'work_26',c:'c01',t:'保険証券解析ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_26_placeholder.webp',desc:'PDFで管理されるようになった保険証券を、AIで読み取って構造化するツール。書式がばらばらでも項目構造（JSON）で抽出し、Excelへ自動転記する。専属の担当を置かずに、加入状況や返戻率をその場で確認できる状態まで作っている。現在は担当部門の検証待ちで、運用はまだ始まっていない。',imgs:[]},
   {w:'work_01',c:'c03',g:'知らない人（潜在層）に会社を知ってもらう',t:'企業動画「オーナーの一生に伴走する」',y:'2025',cat:'Branding / Video',role:'企画・絵コンテ・配信ディレクション（制作は制作会社）',thumb:'work_01_work_01.webp',desc:'経営者の一生に伴走するブランドムービー。認知だけを狙う設計で、TVer・YouTube・タクシー広告・屋外大型ビジョンで配信した。',imgs:[],yt:'Ll2MaM-uSSI'},
   {w:'work_12',c:'c03',g:'知らない人（潜在層）に会社を知ってもらう',t:'デジタルマーケティング運用',y:'2023–2026',cat:'Digital Marketing',role:'広告クリエイティブ制作・AB設計（入札・配信運用は代理店）',thumb:'work_12_work_12.webp',desc:'ディスプレイ広告のクリエイティブ制作とABテスト運用。AI生成画像をレタッチし、ターゲット別に最適化している。',imgs:[{"f": "work_12_work_12_a2.webp", "cap": "ディスプレイ広告バナー"}, {"f": "work_12_work_12_d.webp", "cap": "ディスプレイ広告バナー"}, {"f": "work_12_work_12_e.webp", "cap": "ディスプレイ広告バナー"}]},
   {w:'work_21',c:'c03',g:'知らない人（潜在層）に会社を知ってもらう',t:'M&A 会社案内動画',y:'2024',cat:'Video / Branding',role:'企画・絵コンテ・撮影・編集・アニメーションまで単独',thumb:'work_21_work_21.webp',desc:'M&A事業の会社案内動画。絵コンテから構成を設計し、撮影・編集・アニメーションまで単独で制作した。',imgs:[{"f": "work_21_MA_storyboard_p1.webp", "cap": "絵コンテ"}, {"f": "work_21_MA_storyboard_p2.webp", "cap": "絵コンテ"}, {"f": "work_21_MA_storyboard_p3.webp", "cap": "絵コンテ"}]},
