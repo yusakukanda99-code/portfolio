@@ -446,6 +446,10 @@ body.detail-on .wk-btn{display:inline-flex}
 /* legibility scrim (top + bottom) so overlaid text always reads */
 .hg-item::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,rgba(12,14,12,.30) 0%,rgba(12,14,12,0) 20%,rgba(12,14,12,.10) 42%,rgba(12,14,12,.52) 66%,rgba(12,14,12,.84) 100%)}
+/* 紙モノの平置きのように地が明るいスライドは、通常のスクリムだと
+   白文字が白い紙に負ける。下半分だけ濃いめに差し替える。 */
+.hg-item.hg-bright::after{
+  background:linear-gradient(180deg,rgba(12,14,12,.30) 0%,rgba(12,14,12,0) 20%,rgba(12,14,12,.22) 42%,rgba(12,14,12,.70) 66%,rgba(12,14,12,.92) 100%)}
 .hg-overlay{position:absolute;inset:0;z-index:2;color:#FAF9F6;pointer-events:none;
   padding:calc(var(--nav-h) + clamp(16px,3.5vh,44px)) var(--pad) clamp(38px,7vh,92px);
   display:flex;flex-direction:column;justify-content:flex-end}
@@ -820,7 +824,7 @@ body.detail-on .wk-btn{display:inline-flex}
           </div>
         </div>
       </article>
-      <article class="hg-item" data-i="4">
+      <article class="hg-item hg-bright" data-i="4">
         <a class="hg-media" href="#"><div class="img g3"></div><div class="img hp04"></div></a>
         <div class="hg-overlay">
           <div class="hg-bottom">
