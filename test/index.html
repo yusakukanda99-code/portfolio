@@ -599,6 +599,8 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-cell{position:relative;flex:0 0 100%;scroll-snap-align:start;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:flex-end;justify-content:flex-start}
 .panel.work.pcard .ps-cell img,.panel.work.pcard .ps-cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel.work.pcard .ps-cell b{position:relative;z-index:1;margin:10px 12px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
+/* 画像が入ったセルは、キャプションが写真に乗るので地を敷く */
+.panel.work.pcard .ps-cell:has(img) b{background:rgba(250,249,246,.9);padding:3px 9px;border-radius:100px;color:var(--ink)}
 .panel.work.pcard .ps-nav{position:absolute;right:10px;bottom:10px;display:flex;gap:6px;z-index:2}
 .panel.work.pcard .ps-nav button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(20,15,10,.16);background:rgba(255,255,255,.88);color:var(--ink);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:opacity .2s,background .2s}
 .panel.work.pcard .ps-nav button:disabled{opacity:.28;cursor:default}
@@ -1952,10 +1954,10 @@ const CASES={
       {h:'理念そのものが、まだ成立していなかった',t:'当時、言葉として存在したのは「幸せを多くの人に響かせる」の一言だけで、このまま掲げると抽象的すぎて宗教的な印象を与えかねない。内閣府の統計から社会課題を起点に据え、理念を3つの具体に分解した。「幸せ」という言葉は捨てず、前提から結論へ移し、社名「輪奏」の輪につなげて着地させている。デザインの前に、まずは理念を成立させることから着手した。'},
       {h:'2つの不安に、2つの成果物で答えた',t:'「どのような人が家に来るのか」にはチラシ、「何をしてくれるのか」には会社案内。1冊にまとめず、不安の種類ごとに分けた。利用者ご本人とご家族では知りたいことが違うため、どちらの立場で手に取っても自分ごとになる構成にしている。'}],
     evidence:[
-      {no:'言葉',h:'理念の構築',sub:'企業理念3つ＋代表メッセージ',stack:'内閣府の統計を起点に言語化',t:'工夫：既存の一言を捨てずに前提として残し、そこから社会課題を起点とした3つの具体へ展開した。代表メッセージも執筆している。',imgs:['企業理念']},
-      {no:'素材',h:'現場での撮影',sub:'スタッフ',stack:'撮影も単独',t:'工夫：ストック写真で済ませれば手間は減るが、訪問時にチラシと違う人が来ることになり、理念の言葉からも外れる。実際に事務所へ足を運んで撮影した。表紙など利用者を伴うカットのみAI生成を使っている。',imgs:['スタッフ撮影カット','事務所']},
-      {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'工夫：他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、チラシではスタッフの顔を前面に置いた。',imgs:['チラシ 表面','チラシ 裏面']},
-      {no:'成果物 ②',h:'会社案内',sub:'「何をしてくれるのか」に答える',stack:'オレンジ基調・写真とイラスト中心',t:'工夫：連携体制とサービスの流れを大きく図に描き起こし、利用者の悩みとご家族の悩みを分けて構成した。',imgs:['会社案内 表紙','サービスフロー図','連携体制図']}],
+      {no:'言葉',h:'理念の構築',sub:'企業理念3つ＋代表メッセージ',stack:'内閣府の統計を起点に言語化',t:'工夫：既存の一言を捨てずに前提として残し、そこから社会課題を起点とした3つの具体へ展開した。代表メッセージも執筆している。',imgs:[{f:'p03_01_rinen.webp',cap:'代表メッセージと企業理念'}]},
+      {no:'素材',h:'現場での撮影',sub:'スタッフ',stack:'撮影も単独',t:'工夫：ストック写真で済ませれば手間は減るが、訪問時にチラシと違う人が来ることになり、理念の言葉からも外れる。実際に事務所へ足を運んで撮影した。表紙など利用者を伴うカットのみAI生成を使っている。',imgs:[{f:'p03_02_staff.webp',cap:'スタッフ撮影カット'},{f:'p03_03_office.webp',cap:'事務所・アクセス'}]},
+      {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'工夫：他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、チラシではスタッフの顔を前面に置いた。',imgs:[{f:'p03_04_flyer.webp',cap:'チラシ'},{f:'p03_05_jihi.webp',cap:'自費料金のご案内'}]},
+      {no:'成果物 ②',h:'会社案内',sub:'「何をしてくれるのか」に答える',stack:'オレンジ基調・写真とイラスト中心',t:'工夫：連携体制とサービスの流れを大きく図に描き起こし、利用者の悩みとご家族の悩みを分けて構成した。',imgs:[{f:'p03_06_cover.webp',cap:'会社案内 表紙'},{f:'p03_07_flow.webp',cap:'訪問看護の流れ'},{f:'p03_08_renkei.webp',cap:'専門家の連携体制'}]}],
     result:{head:'一言だった理念が、<em>掲げられる言葉</em>になった',paras:[
       'Role — 企画（理念・代表メッセージの言語化を含む）・撮影・作図・デザイン・執筆まで、全工程を単独で担当した社外クライアント案件。',
       '説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。この理念を実際の活動へ落とすため、地域の方に向けた訪問看護や熱中症対策の説明会も提案し、実施に至っている。']}},
@@ -1988,11 +1990,20 @@ const CASES={
 
 };
 /* 成果物の画像枠。2枚以上は横スライダーにする（キャプション＝何を入れるかの指示） */
+/* imgs \u306f2\u7a2e\u985e\u3092\u53d7\u3051\u308b\u3002
+   \u6587\u5b57\u5217 \u2026 \u753b\u50cf\u5f85\u3061\u306e\u30d7\u30ec\u30fc\u30b9\u30db\u30eb\u30c0\uff08\u30ad\u30e3\u30d7\u30b7\u30e7\u30f3\u3060\u3051\u8868\u793a\uff09
+   {f,cap} \u2026 \u5b9f\u753b\u50cf\u3002f \u306f assets/img/works/ \u914d\u4e0b\u306e\u30d5\u30a1\u30a4\u30eb\u540d */
+function mediaCell(c){
+  if(typeof c==='string') return '<div class="ps-cell"><b>'+c+'</b></div>';
+  return '<div class="ps-cell"><img src="assets/img/works/'+c.f+'" alt="'+(c.cap||'')+'" loading="lazy">'
+    +(c.cap?'<b>'+c.cap+'</b>':'')+'</div>';
+}
 function mediaHTML(imgs){
   if(!imgs||!imgs.length) return '<div class="ps-media"><span>\u753b\u50cf</span></div>';
-  if(imgs.length===1) return '<div class="ps-media"><span>'+imgs[0]+'</span></div>';
+  if(imgs.length===1&&typeof imgs[0]==='string') return '<div class="ps-media"><span>'+imgs[0]+'</span></div>';
+  if(imgs.length===1) return '<div class="ps-media"><img src="assets/img/works/'+imgs[0].f+'" alt="'+(imgs[0].cap||'')+'" loading="lazy"></div>';
   return '<div class="ps-media ps-multi"><div class="ps-rail">'
-    +imgs.map(function(c){return '<div class="ps-cell"><b>'+c+'</b></div>'}).join('')
+    +imgs.map(mediaCell).join('')
     +'</div><div class="ps-count"><i>1</i> / '+imgs.length+'</div>'
     +'<div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">\u2039</button>'
     +'<button type="button" data-d="1" aria-label="next">\u203a</button></div></div>';
