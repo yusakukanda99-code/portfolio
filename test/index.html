@@ -226,8 +226,16 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   .prof-hero{grid-template-columns:1fr;padding:24px 24px 28px}
   .prof-left{padding:0 0 24px;border-bottom:1px solid #e8e7e3}
   .prof-right{padding:24px 0 0}
-  .prof-timeline{transform:scale(.78);transform-origin:top left;margin-bottom:-18%}
-  .prof-tl-text{white-space:normal}
+  /* SPでは階段組みをやめて、年と本文の2カラムに畳む。
+     scale(.78) は右に22%の空白を作り、さらに各行のインデントが
+     本文の幅を削って3行に折り返していた。 */
+  .prof-timeline{transform:none;margin-bottom:0;gap:16px}
+  .prof-timeline .prof-tl-item:nth-child(n){margin-left:0;align-items:flex-start;gap:12px}
+  .prof-timeline .prof-tl-year-wrap{align-items:flex-start;width:62px}
+  .prof-tl-year{font-size:10.5px;padding:2px 6px}
+  .prof-tl-since{margin-bottom:2px}
+  .prof-tl-text{white-space:normal;flex:1;font-size:13.5px;line-height:1.7}
+  .prof-tl-now{text-align:left;padding-right:0;padding-left:74px}
   .prof-message{padding:0 24px 48px}
   .prof-section-head{padding-top:48px}
 }
@@ -428,19 +436,19 @@ body.detail-on .wk-btn{display:inline-flex}
 .hg-media .img{position:absolute;top:0;left:-7%;width:114%;height:100%;background-size:cover;background-position:center;will-change:transform}
 /* TOP専用ヒーロー画像。ファイル未設置の間は透明のままで、下のダミー(.g1〜.g6)が見える */
 .g7{background:#111 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjMWExZDIwIi8+PHJlY3QgeD0iMjAwIiB5PSIxNjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjU2MCIgcng9IjgiIGZpbGw9IiMyYjNhMzMiLz48cmVjdCB4PSIyMDAiIHk9IjE2MCIgd2lkdGg9IjEyMDAiIGhlaWdodD0iNTYwIiByeD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjM2Y1MTQ2IiBzdHJva2Utd2lkdGg9IjgiLz48ZWxsaXBzZSBjeD0iNzAwIiBjeT0iNDcwIiByeD0iMTEwIiByeT0iOTYiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuOTIiLz48ZWxsaXBzZSBjeD0iNjYyIiBjeT0iMzY2IiByeD0iMjIiIHJ5PSI1NCIgZmlsbD0iI2U5ZWZlOSIgb3BhY2l0eT0iMC45MiIvPjxlbGxpcHNlIGN4PSI3MTYiIGN5PSIzNjAiIHJ4PSIyMiIgcnk9IjU4IiBmaWxsPSIjZTllZmU5IiBvcGFjaXR5PSIwLjkyIi8+PGVsbGlwc2UgY3g9Ijk4MCIgY3k9IjUyMCIgcng9Ijg2IiByeT0iNTIiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuODUiLz48ZWxsaXBzZSBjeD0iMTA1MiIgY3k9IjQ5OCIgcng9IjI2IiByeT0iMjYiIGZpbGw9IiNlOWVmZTkiIG9wYWNpdHk9IjAuODUiLz48Y2lyY2xlIGN4PSIxMTUwIiBjeT0iMzAwIiByPSIxNiIgZmlsbD0iI2NmZTBjZiIgb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMTIxMCIgY3k9IjM0MCIgcj0iMTAiIGZpbGw9IiNjZmUwY2YiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjQyMCIgY3k9IjMyMCIgcj0iMTIiIGZpbGw9IiNjZmUwY2YiIG9wYWNpdHk9IjAuNSIvPjxyZWN0IHg9IjIwMCIgeT0iNjQwIiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzI0MzAyOSIgb3BhY2l0eT0iMC44Ii8+PHJlY3QgeD0iNjYwIiB5PSI4MDAiIHdpZHRoPSIyODAiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0iI2U5ZWZlOSIgb3BhY2l0eT0iMC45Ii8+PHJlY3QgeD0iNzAwIiB5PSI4NDYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTYiIHJ4PSI4IiBmaWxsPSIjOGY5YThmIiBvcGFjaXR5PSIwLjkiLz48L3N2Zz4=") center/cover no-repeat}
-.hp01{background-image:url("assets/img/works/hero_p01.webp")}
-.hp02{background-image:url("assets/img/works/hero_p02.webp")}
-.hp03{background-image:url("assets/img/works/hero_p03.webp")}
-.hp04{background-image:url("assets/img/works/hero_p04.webp")}
-.hp05{background-image:url("assets/img/works/hero_p05.webp")}
-.hp06{background-image:url("assets/img/works/hero_p06.webp")}
+.hg-load .hp01{background-image:url("assets/img/works/hero_p01.webp")}
+.hg-load .hp02{background-image:url("assets/img/works/hero_p02.webp")}
+.hg-load .hp03{background-image:url("assets/img/works/hero_p03.webp")}
+.hg-load .hp04{background-image:url("assets/img/works/hero_p04.webp")}
+.hg-load .hp05{background-image:url("assets/img/works/hero_p05.webp")}
+.hg-load .hp06{background-image:url("assets/img/works/hero_p06.webp")}
 @media(max-width:820px){
-  .hp01{background-image:url("assets/img/works/hero_p01_sp.webp")}
-  .hp02{background-image:url("assets/img/works/hero_p02_sp.webp")}
-  .hp03{background-image:url("assets/img/works/hero_p03_sp.webp")}
-  .hp04{background-image:url("assets/img/works/hero_p04_sp.webp")}
-  .hp05{background-image:url("assets/img/works/hero_p05_sp.webp")}
-  .hp06{background-image:url("assets/img/works/hero_p06_sp.webp")}
+  .hg-load .hp01{background-image:url("assets/img/works/hero_p01_sp.webp")}
+  .hg-load .hp02{background-image:url("assets/img/works/hero_p02_sp.webp")}
+  .hg-load .hp03{background-image:url("assets/img/works/hero_p03_sp.webp")}
+  .hg-load .hp04{background-image:url("assets/img/works/hero_p04_sp.webp")}
+  .hg-load .hp05{background-image:url("assets/img/works/hero_p05_sp.webp")}
+  .hg-load .hp06{background-image:url("assets/img/works/hero_p06_sp.webp")}
 }
 .hg-media img,.hg-media .gif{position:absolute;top:0;left:-7%;width:114%;height:100%;object-fit:cover}
 /* legibility scrim (top + bottom) so overlaid text always reads */
@@ -1415,6 +1423,25 @@ function initHeroMotion(){
 
 /* SLIDER screen — builds its timeline + pinned ScrollTrigger from scroll 0.
    Call only while .hgal is visible. Returns {st,tl} (killed on screen switch). */
+/* ヒーロー画像の遅延読み込み。
+   PC は initGallery の syncCp が読み込み範囲を進める。
+   SP（sp-flow）は initGallery を通らないので、交差監視で面倒を見る。
+   どちらの経路でも最初の1枚だけは即座に出す。 */
+function initHeroLazy(){
+  const items=[...document.querySelectorAll('.hg-item')];
+  if(!items.length) return;
+  items[0].classList.add('hg-load');
+  if(!document.documentElement.classList.contains('sp-flow')) return;
+  if(!('IntersectionObserver' in window)){ items.forEach(e=>e.classList.add('hg-load')); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const i=items.indexOf(e.target);
+    items[i].classList.add('hg-load');
+    if(items[i+1]) items[i+1].classList.add('hg-load');   // 次の1枚を先読み
+    io.unobserve(e.target);
+  }),{rootMargin:'150% 0px'});
+  items.forEach(e=>io.observe(e));
+}
 function initGallery(){
   splitHeroChars();
   const sec=document.querySelector('.hgal');
@@ -1540,10 +1567,16 @@ function initGallery(){
   // カウンター・クリック可否は「実際に描画されている進捗」で同期する。
   // スクラブは1秒遅れて追従するため、スクロール位置基準だと高速スクロール
   // 直後に“見えている作品”と“クリックで開く作品”がズレてしまう。
+  /* 画像は「いま見えているスライド＋次の1枚」だけ読む。
+     以前は6枚のヒーローがページを開いた瞬間に並列で落ちてきて、
+     回線が細いと1枚目すら出るのが遅かった（SPで860KB／PCで1.39MB）。 */
+  const heroLoad=n=>{ for(let i=0;i<=Math.min(n,items.length-1);i++) items[i].classList.add('hg-load'); };
+  heroLoad(1);
   const syncCp=()=>{
     const t=tl.progress()*total;
     let cp=0;
     for(let i=1;i<panels.length;i++){ if(t >= (startAt[i]+REV*0.5)) cp=i; }
+    heroLoad(cp+1);
     const open = t > PRE*0.92 && t < SLAND+SDUR*0.3;
     panels.forEach((p,i)=> p.style.pointerEvents=(open&&i===cp)?'auto':'none');
     if(curEl){ const work=Math.min(items.length, cp+1);
@@ -1903,6 +1936,7 @@ function showScreen(which){
     dt.classList.add('off');
     topScreens().forEach(s=>s.classList.remove('off'));
     window.scrollTo(0,0);
+    initHeroLazy();
     if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
     initAboutFx();
   }
@@ -2453,6 +2487,7 @@ function initAnim(){
     const sec=document.querySelector('.hgal'), stn=sec&&sec.querySelector('.hg-strengths');
     if(stn) sec.appendChild(stn);
   }
+  initHeroLazy();
   if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
   initHeroMotion();     // ローダー明けにヒーローの図形モーションを再生
   initAboutFx();
