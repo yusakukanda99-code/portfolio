@@ -226,16 +226,23 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   .prof-hero{grid-template-columns:1fr;padding:24px 24px 28px}
   .prof-left{padding:0 0 24px;border-bottom:1px solid #e8e7e3}
   .prof-right{padding:24px 0 0}
-  /* SPでは階段組みをやめて、年と本文の2カラムに畳む。
-     scale(.78) は右に22%の空白を作り、さらに各行のインデントが
-     本文の幅を削って3行に折り返していた。 */
-  .prof-timeline{transform:none;margin-bottom:0;gap:16px}
-  .prof-timeline .prof-tl-item:nth-child(n){margin-left:0;align-items:flex-start;gap:12px}
-  .prof-timeline .prof-tl-year-wrap{align-items:flex-start;width:62px}
-  .prof-tl-year{font-size:10.5px;padding:2px 6px}
-  .prof-tl-since{margin-bottom:2px}
-  .prof-tl-text{white-space:normal;flex:1;font-size:13.5px;line-height:1.7}
-  .prof-tl-now{text-align:left;padding-right:0;padding-left:74px}
+  /* 階段組みは残したまま、本文の折り返し位置を右へ伸ばす。
+     scale(.78) は右に22%の余白を作るだけなので外し、代わりに
+     段差をPCの約44%に縮めて本文の幅に回す。
+     最小の本文幅：342 - 70(最大の段差) - 72(年＋余白) = 200px */
+  .prof-timeline{transform:none;margin-bottom:0;gap:18px}
+  .prof-timeline .prof-tl-item{gap:10px}
+  .prof-timeline .prof-tl-item:nth-child(1){margin-left:0}
+  .prof-timeline .prof-tl-item:nth-child(2){margin-left:18px}
+  .prof-timeline .prof-tl-item:nth-child(3){margin-left:35px}
+  .prof-timeline .prof-tl-item:nth-child(4){margin-left:35px}
+  .prof-timeline .prof-tl-item:nth-child(5){margin-left:35px}
+  .prof-timeline .prof-tl-item:nth-child(6){margin-left:53px}
+  .prof-timeline .prof-tl-item:nth-child(7){margin-left:70px}
+  .prof-timeline .prof-tl-item:nth-child(8){margin-left:9px}
+  .prof-timeline .prof-tl-item:nth-child(9){margin-left:26px}
+  .prof-tl-year{font-size:10px;padding:2px 6px}
+  .prof-tl-text{white-space:normal;flex:1;font-size:13px;line-height:1.65}
   .prof-message{padding:0 24px 48px}
   .prof-section-head{padding-top:48px}
 }
