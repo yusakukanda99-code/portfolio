@@ -606,6 +606,11 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-text{font-size:var(--fs-case-body);line-height:1.85;color:var(--ink-soft);max-width:42ch}
 .panel.work.pcard .ps-text+.ps-text{margin-top:.9em}
 .panel.work.pcard .ps-note{padding-left:12px;border-left:2px solid var(--accent);color:var(--ink);opacity:.9}
+ /* 成果物グループから外部へ出る導線（公開されているツール等） */
+ .panel.work.pcard .ps-link{display:inline-flex;align-items:center;gap:8px;margin-top:1.1em;font-size:var(--fs-case-body);
+   color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;transition:opacity .25s var(--ease)}
+ .panel.work.pcard .ps-link:hover{opacity:.65}
+ .panel.work.pcard .ps-link span{font-size:1.15em;line-height:1}
 .panel.work.pcard .ps-media{position:relative;height:80%;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:center;justify-content:center}
 .panel.work.pcard .ps-media span{color:var(--ink-soft);font-size:13px;letter-spacing:.12em}
 .panel.work.pcard .ps-media.ps-multi{background:none;display:block;overflow:hidden}
@@ -1101,6 +1106,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <div class="ps-stack">pdf.js / fabric.js / jsPDF（フレームワーク不使用）</div>
               <p class="ps-text">複数のPDFをまたぐ階層グループ化を、Acrobat互換のしおりとして書き出す。日本式の電子押印やドラッグ&amp;ドロップでの結合にも対応し、書類の管理がPDF上で完結する。</p>
               <p class="ps-text ps-note">工夫：変換ツールからワンクリックでつながるようにし、工程をまたいでも操作に迷わない導線にしている。長期的に使い続ける側なので、フレームワークに依存しない構成を選んだ。</p>
+              <a class="ps-link" href="https://pdf-annotator-mycompany.netlify.app/" target="_blank" rel="noopener">実際に触れます<span>›</span></a>
             </div>
             <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><img src="assets/img/works/p02_03_editor.webp" alt="PDF編集ツールの注釈画面" loading="lazy"><b>編集画面</b></div><div class="ps-cell"><img src="assets/img/works/p02_04_tree.webp" alt="しおり・階層のフォルダー管理" loading="lazy"><b>しおり・階層</b></div><div class="ps-cell"><img src="assets/img/works/p02_05_stamp.webp" alt="電子押印の設定画面" loading="lazy"><b>電子押印</b></div></div><div class="ps-count"><i>1</i> / 3</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
@@ -2126,6 +2132,7 @@ function renderCase(d){
       +d.evidence.map(s=>'<div class="p-step"><div class="ps-body"><div class="ps-no">'+s.no+'</div><h3 class="ps-head">'+s.h+'</h3>'
         +(s.sub?'<div class="ps-sub">'+s.sub+'</div>':'')+(s.stack?'<div class="ps-stack">'+s.stack+'</div>':'')
         +(function(){var a=s.t.split(/(?=工夫[\u306f\uff1a])/);return a.map(function(x,k){return '<p class="ps-text'+(/^\u5de5\u592b/.test(x)?' ps-note':'')+'">'+x+'</p>'}).join('')})()
+        +(s.link?'<a class="ps-link" href="'+s.link+'" target="_blank" rel="noopener">'+(s.linkLabel||'サイトを見る')+'<span>›</span></a>':'')
         +'</div>'+mediaHTML(s.imgs)
         +'</div>').join('')
       +'</div></div></div>';
@@ -2321,7 +2328,7 @@ function returnToWork(){
 
 /* ═══════ WORKS モーダル（制作物一覧）＋ライトボックス ═══════ */
 const WORKS=[
-  {w:'work_24',c:'c01',t:'pdf-annotator ── PDF業務基盤',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_24_work_24.webp',desc:'社内の書類管理をブラウザ完結にするPDF編集ツール。複数PDFをまたぐ階層しおり、日本式の電子押印、ドラッグ&ドロップ結合を実装し、使い方ガイドサイトまで含めて作成した。',imgs:[],link:'https://pdf-annotator-mycompany.netlify.app/about'},
+  {w:'work_24',c:'c01',t:'pdf-annotator ── PDF業務基盤',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_24_work_24.webp',desc:'社内の書類管理をブラウザ完結にするPDF編集ツール。複数PDFをまたぐ階層しおり、日本式の電子押印、ドラッグ&ドロップ結合を実装し、使い方ガイドサイトまで含めて作成した。',imgs:[],link:'https://pdf-annotator-mycompany.netlify.app/'},
   {w:'work_27',c:'c01',t:'DocuWorks → PDF 一括変換ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・実装・配布設計まで単独',thumb:'work_27_work_27.webp',desc:'DocuWorks独自形式（.xdw）をドロップするだけで一括PDF化するローカルツール。処理はPC内で完結し、「変換 → 編集 → AI分析」の社内フローの起点になる。',imgs:[],video:'docuworks-convert'},
   {w:'work_26',c:'c01',t:'保険証券解析ツール',y:'2026',cat:'Internal Tool / UX & Dev',role:'企画・UI/UX設計・実装まで単独',thumb:'work_26_analyzer.webp',desc:'PDFで管理されるようになった保険証券を、AIで読み取って構造化するツール。書式がばらばらでも項目構造（JSON）で抽出し、Excelへの転記まで実装している。専属の担当を置かずに、加入状況や返戻率をその場で確認できる状態まで作っている。現在は担当部門の検証待ちで、運用はまだ始まっていない。',imgs:[],video:'insurance-analyzer'},
   {w:'work_01',c:'c03',g:'知らない人（潜在層）に会社を知ってもらう',t:'企業動画「オーナーの一生に伴走する」',y:'2025',cat:'Branding / Video',role:'企画・絵コンテ・配信ディレクション（制作は制作会社）',thumb:'work_01_work_01.webp',desc:'経営者の一生に伴走するブランドムービー。認知だけを狙う設計で、TVer・YouTube・タクシー広告・屋外大型ビジョンで配信した。',imgs:[],yt:'Ll2MaM-uSSI'},
