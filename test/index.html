@@ -1215,16 +1215,28 @@ function initCursor(){
   if(window.matchMedia('(hover:none)').matches||window.innerWidth<900)return;
   const dot=document.querySelector('.cursor'),fol=document.querySelector('.cursor-follow');
   let mx=innerWidth/2,my=innerHeight/2,fx=mx,fy=my;
-  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
-  (function loop(){fx+=(mx-fx)*.18;fy+=(my-fy)*.18;fol.style.transform=`translate(${fx}px,${fy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
   // クリックできる場所でだけ輪を広げて「Click」を出す。
-  // 以前は inline で opacity=1 を書き込んでいたため、一度ホバーすると
-  // どこでも文字が残り続けていた（.grow を外しても inline が勝つ）
-  const CLICKABLE='.hg-media,.view,.c-top,.wk-card,.wd-thumb,.aw .wk-card';
-  const on=()=>fol.classList.add('grow');
-  const off=()=>fol.classList.remove('grow');
-  document.addEventListener('mouseover',e=>{ if(e.target.closest(CLICKABLE)) on(); });
-  document.addEventListener('mouseout',e=>{ if(e.target.closest(CLICKABLE)&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest(CLICKABLE))) off(); });
+  // mouseover/mouseout の対で判定すると、ホバー中の要素が画面遷移で DOM から
+  // 消えたり display:none になったとき mouseout が飛ばず、「Click」が出たまま
+  // 固まる。対にせず、カーソル位置の実要素を見て毎回判定し直す。
+  const CLICKABLE='.hg-media,.view,.c-top,.wk-card,.wd-thumb,.aw .wk-card,'
+                 +'a[href],button,[role="button"],summary,label[for],input,select,textarea';
+  let dirty=true;
+  const touch=()=>{dirty=true;};
+  const sync=()=>{ const el=document.elementFromPoint(mx,my);
+    fol.classList.toggle('grow', !!(el&&el.closest&&el.closest(CLICKABLE))); };
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;dirty=true;});
+  addEventListener('scroll',touch,{passive:true});          // カーソルは動かず中身が動く場合
+  addEventListener('blur',()=>fol.classList.remove('grow'));
+  let last=0;
+  (function loop(t){
+    fx+=(mx-fx)*.18;fy+=(my-fy)*.18;
+    fol.style.transform=`translate(${fx}px,${fy}px) translate(-50%,-50%)`;
+    // 動いた時に加えて、160msごとにも見直す。カーソルも画面も動かないまま
+    // JSだけが要素を消すケース（モーダルを閉じる等）でも取り残されない。
+    if(dirty||t-last>160){dirty=false;last=t;sync();}
+    requestAnimationFrame(loop);
+  })();
 }
 
 function initMagnetic(){
