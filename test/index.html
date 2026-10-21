@@ -1061,7 +1061,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <p class="cap-detail">書式がばらばらでも、項目を抽出してExcelへ転記する。</p>
           </div>
         </div>
-        <div class="w-meta"><span class="yr">2026</span><a href="#top" class="view mag">View project ↗</a></div>
+        <div class="w-meta"><span class="yr">2026</span><a href="#top" class="view mag">View project ›</a></div>
       </div>
     </div>
 
@@ -2293,13 +2293,23 @@ const CASE_META={
   c06:{no:'PROJECT 06',t:'Sony FES Watch U デザインコンペ'}
 };
 const WKIMG='assets/img/works/';
+/* 開く前に何が出るか分かるよう、カードの誘導文に中身を書く。
+   「詳細」だけだと押す価値が読めず、画像の無い項目で空振りになる。 */
+function wkLabel(w){
+  if(w.yt) return '動画を見る';
+  if(w.video) return '動画を見る';
+  const n=(w.imgs||[]).length;
+  if(n) return '画像'+n+'枚';
+  if(w.link) return 'サイトを見る';
+  return '詳細';
+}
 function wkCard(w,idx){
   return `<div class="wk-card" data-wk="${idx}">
     <div class="wk-thumb"><img src="${WKIMG+w.thumb}" alt="${w.t}" loading="lazy"></div>
     <div class="wk-meta"><h4>${w.t}</h4>
       <div class="wk-sub">${w.y}　${w.cat}</div>
       <div class="wk-role">${w.role}</div>
-      <div class="wk-n">詳細 ↗</div>
+      <div class="wk-n">${wkLabel(w)} ›</div>
     </div></div>`;
 }
 function buildAllSections(){
@@ -2400,7 +2410,7 @@ function openWork(idx){
   (w.imgs||[]).forEach((im,i)=>{
     h+=`<figure class="wd-fig" data-wd-img="${i}" data-wd-of="${idx}"><img src="${WKIMG+im.f}" loading="lazy" alt="${im.cap||w.t}">${im.cap?`<figcaption>${im.cap}</figcaption>`:''}</figure>`;
   });
-  if(w.link) h+=`<a class="wd-link" href="${w.link}" target="_blank" rel="noopener">サイトを見る ↗</a>`;
+  if(w.link) h+=`<a class="wd-link" href="${w.link}" target="_blank" rel="noopener">サイトを見る ›</a>`;
   body.innerHTML=h; body.scrollTop=0;
   md.classList.add('on'); md.style.opacity='1';
   if(window.gsap&&!reduce){
