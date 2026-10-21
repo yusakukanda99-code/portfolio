@@ -1871,7 +1871,7 @@ function topScreens(){ return Array.from(document.querySelectorAll('.hgal,#about
    浮き上がって）現れ、最後にスキル索引が出る。全てスクラブ＝スクロール量に
    完全連動し、逆スクロールで巻き戻る。 */
 let ABT=[];
-function killAbout(){ ABT.forEach(s=>{ if(s.animation) s.animation.kill(); s.kill(true); }); ABT=[]; }
+function killAbout(){ ABT.forEach(s=>s.kill(true)); ABT=[]; }
 function initAboutFx(){
   killAbout();
   const S=(el,from,to,pos)=>{ if(!el) return;
@@ -2196,6 +2196,10 @@ function goToDetail(caseKey,workIdx){
   //    the viewport, already reset so nothing stale shows
   tl.add(()=>{
     killScreen(GAL); GAL=null; killAbout();
+    // パネルを差し替える前に前の ScrollTrigger を破棄する。順序が逆だと、
+    // pin対象が先にDOMから消えてGSAPが .pin-spacer を回収できず、開くたびに
+    // 空のラッパーが1個ずつ残り続ける。
+    killScreen(DET); DET=null;
     closeWorksPage();   // All Worksページはシートに隠れたこの瞬間に畳む
     topScreens().forEach(s=>s.classList.add('off'));
     setCase(caseKey||'c01');
