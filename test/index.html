@@ -615,7 +615,7 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-cell img,.panel.work.pcard .ps-cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel.work.pcard .ps-cell b{position:relative;z-index:1;margin:10px 12px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
 /* 画像が入ったセルは、キャプションが写真に乗るので地を敷く */
-.panel.work.pcard .ps-cell:has(img) b{background:rgba(250,249,246,.9);padding:3px 9px;border-radius:100px;color:var(--ink)}
+.panel.work.pcard .ps-cell:has(img) b,.panel.work.pcard .ps-cell:has(video) b{background:rgba(250,249,246,.9);padding:3px 9px;border-radius:100px;color:var(--ink)}
 .panel.work.pcard .ps-nav{position:absolute;right:10px;bottom:10px;display:flex;gap:6px;z-index:2}
 .panel.work.pcard .ps-nav button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(20,15,10,.16);background:rgba(255,255,255,.88);color:var(--ink);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:opacity .2s,background .2s}
 .panel.work.pcard .ps-nav button:disabled{opacity:.28;cursor:default}
@@ -1091,7 +1091,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <p class="ps-text">ドロップするだけで変換し、サブフォルダも自動で検出する。処理はPC内で完結するためデータは外に出ず、専用ソフトなしで開ける状態になった。</p>
               <p class="ps-text ps-note">工夫：変換処理は自前で実装せず、DocuWorksの公式APIを使っている。既存のエンジンを通すため動作が安定し、開発期間も短縮できた。DocuWorksが入っていないPCでは動かないが、移行期の一時的なツールという位置づけのため、この制約は許容している。</p>
             </div>
-            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><img src="assets/img/works/p02_01_folder.webp" alt="XDWファイルの投入画面" loading="lazy"><b>ファイル投入</b></div><div class="ps-cell"><img src="assets/img/works/p02_02_convert.webp" alt="一括変換の完了画面" loading="lazy"><b>一括変換</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
+            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><video data-src="assets/media/docuworks-convert" muted loop playsinline preload="none" poster="assets/img/works/p02_01_folder.webp"></video><b>操作デモ</b></div><div class="ps-cell"><img src="assets/img/works/p02_01_folder.webp" alt="XDWファイルの投入画面" loading="lazy"><b>ファイル投入</b></div><div class="ps-cell"><img src="assets/img/works/p02_02_convert.webp" alt="一括変換の完了画面" loading="lazy"><b>一括変換</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
           <div class="p-step">
             <div class="ps-body">
@@ -1113,7 +1113,7 @@ body.detail-on .wk-btn{display:inline-flex}
               <p class="ps-text">PDFで管理されるようになった書類を分析できるようにした。書式がばらばらでも項目構造（JSON）で抽出し、Excelへの転記まで実装している。専属の担当を置かずに、加入状況や返戻率をその場で確認できる状態まで作っている。現在は担当部門の検証待ちで、運用はまだ始まっていない。</p>
               <p class="ps-text ps-note">工夫：書式ごとのテンプレートを持たず、項目構造で抽出している。保険会社や様式が増えても、ツール側を作り直さずに済む。</p>
             </div>
-            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><img src="assets/img/works/p02_06_aiscan.webp" alt="AI解析の進行画面" loading="lazy"><b>AI解析</b></div><div class="ps-cell"><img src="assets/img/works/p02_07_result.webp" alt="解析結果（保険内容）の一覧" loading="lazy"><b>解析結果</b></div><div class="ps-cell"><img src="assets/img/works/p02_08_karte.webp" alt="保険カルテの印刷プレビュー" loading="lazy"><b>保険カルテ出力</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
+            <div class="ps-media ps-multi"><div class="ps-rail"><div class="ps-cell"><video data-src="assets/media/insurance-analyzer" muted loop playsinline preload="none" poster="assets/img/works/p02_06_aiscan.webp"></video><b>操作デモ</b></div><div class="ps-cell"><img src="assets/img/works/p02_06_aiscan.webp" alt="AI解析の進行画面" loading="lazy"><b>AI解析</b></div><div class="ps-cell"><img src="assets/img/works/p02_07_result.webp" alt="解析結果（保険内容）の一覧" loading="lazy"><b>解析結果</b></div><div class="ps-cell"><img src="assets/img/works/p02_08_karte.webp" alt="保険カルテの印刷プレビュー" loading="lazy"><b>保険カルテ出力</b></div></div><div class="ps-count"><i>1</i> / 2</div><div class="ps-nav"><button type="button" data-d="-1" aria-label="prev">‹</button><button type="button" data-d="1" aria-label="next">›</button></div></div>
           </div>
         </div>
       </div>
@@ -2064,8 +2064,34 @@ function ctxMedia(c){
 }
 function mediaCell(c){
   if(typeof c==='string') return '<div class="ps-cell"><b>'+c+'</b></div>';
+  /* v: 操作デモ動画。読み込みは画面内に入ってから（initCellVideos）。
+     poster に静止画を置いてあるので、再生前でも枠が崩れない。 */
+  if(c.v) return '<div class="ps-cell"><video data-src="assets/media/'+c.v+'" muted loop playsinline '
+    +'preload="none"'+(c.poster?' poster="assets/img/works/'+c.poster+'"':'')+'></video>'
+    +(c.cap?'<b>'+c.cap+'</b>':'')+'</div>';
   return '<div class="ps-cell"><img src="assets/img/works/'+c.f+'" alt="'+(c.cap||'')+'" loading="lazy">'
     +(c.cap?'<b>'+c.cap+'</b>':'')+'</div>';
+}
+/* セル内の動画は、見えている間だけ読み込んで再生する。
+   初期表示のバイト数を増やさず、裏で複数本が回り続けるのも防ぐ。 */
+function initCellVideos(root){
+  const vs=[...(root||document).querySelectorAll('.ps-cell video[data-src]')];
+  if(!vs.length) return;
+  const load=v=>{
+    if(v.dataset.ready) return;
+    v.dataset.ready='1';
+    const n=v.dataset.src;
+    v.insertAdjacentHTML('afterbegin',
+      '<source src="'+n+'.mp4" type="video/mp4"><source src="'+n+'.webm" type="video/webm">');
+    v.load();
+  };
+  if(!('IntersectionObserver' in window)){ vs.forEach(load); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    const v=e.target;
+    if(e.isIntersecting){ load(v); v.play().catch(()=>{}); }
+    else v.pause();
+  }),{threshold:.35});
+  vs.forEach(v=>io.observe(v));
 }
 function mediaHTML(imgs){
   if(!imgs||!imgs.length) return '<div class="ps-media"><span>\u753b\u50cf</span></div>';
@@ -2173,6 +2199,7 @@ function syncRail(rail){
   if(b.length===2){ b[0].disabled=(i<=0); b[1].disabled=(i>=n-1); }
 }
 function initRails(root){
+  initCellVideos(root);
   (root||document).querySelectorAll('.ps-rail').forEach(r=>{
     if(r.dataset.bound) return; r.dataset.bound='1';
     let t=null; r.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>syncRail(r),60)},{passive:true});
