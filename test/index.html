@@ -651,9 +651,12 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.tcard .t-media .frame{position:absolute;inset:0;border-radius:14px;overflow:hidden;box-shadow:0 34px 80px rgba(20,15,10,.2)}
 .panel.work.tcard .t-media .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center}
 .panel.work.tcard .t-media img,.panel.work.tcard .t-media .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+ /* 課題の画像は「着手前の状態」= 自分の制作物ではないので、必ずラベルを添える */
+ .panel.work.tcard .t-media .t-cap{position:absolute;left:14px;bottom:14px;z-index:2;background:rgba(250,249,246,.92);color:var(--ink);font-size:11.5px;letter-spacing:.02em;line-height:1.5;padding:5px 12px;border-radius:100px;max-width:calc(100% - 28px)}
 @media(max-width:820px){
   .panel.work.tcard .t-inner{grid-template-columns:1fr;gap:20px;align-content:center}
   .panel.work.tcard .t-media{height:38vh;order:-1}
+  .panel.work.tcard .t-media .t-cap{left:10px;bottom:10px;font-size:10.5px;padding:4px 10px}
   .panel.work.tcard .t-text{max-width:none}
 }
 
@@ -996,7 +999,7 @@ body.detail-on .wk-btn{display:inline-flex}
           </div>
         </div>
         <div class="t-media">
-          <div class="frame"><img src="assets/img/works/case02_issue.webp" alt="独自形式のファイルをAIに渡しても読み取れない状態" loading="lazy"></div>
+          <div class="frame"><img src="assets/img/works/case02_issue.webp" alt="独自形式のファイルをAIに渡しても読み取れない状態" loading="lazy"><span class="t-cap">着手前：独自形式のままではAIに渡せない</span></div>
         </div>
       </div>
     </div>
@@ -1622,7 +1625,7 @@ function initShowcase(){
       });
     });
     gsap.set(showcase.querySelectorAll(
-      '.h-track,.h-slide .frame,.w-caption,.hc-cap,.g-label,.g-cell,.p-label,.p-step,.c-anim,.t-anim,.t-media .frame,.t-media .img'
+      '.h-track,.h-slide .frame,.w-caption,.hc-cap,.g-label,.g-cell,.p-label,.p-step,.c-anim,.t-anim,.t-media .frame,.t-media .img,.t-media img'
     ),{clearProps:'all'});
     const sts=[];
     panels.forEach((p,i)=>{
@@ -1988,7 +1991,7 @@ const CASES={
       'Role — ミカタ（対外／社内／採用／サービス）のクリエイティブを一人で担当。対外は全工程単独、社内報は総務と協働、創業記念式典は企画と運営、採用サイトはディレクター兼デザイナー、相続はディレクションとして関与している。',
       '現場が資材を分解し、自分たちの資料に流用している。営業現場からは「組織体制や、法人と個人の両軸によるサポートといった強みを説明しやすくなった」などの声をもらっている。資材の統一で従業員間の理念・サービス認識がそろい、インナーブランディングにも波及した。相続サイトは2026年2月、採用サイトは2026年5月に公開しており、それぞれ問い合わせなど効果が出ている。']}},
   c05:{
-    context:{img:'g4',paras:[
+    context:{f:'case03_issue.webp',cap:'着手前：当時配布されていた代表挨拶',paras:[
       '訪問看護は、多くの人にとってなじみの薄いサービスである。何をしてくれるのか、いくらかかるのか、誰が来るのか。分からないことが、そのまま不安につながる。しかも実際に利用を決めるのはご家族であることが多く、利用者ご本人の不安とご家族の不安は同じではない。',
       '「ひのてり」の強みは、身体のケアだけでなく心のケアまで寄り添う姿勢にあった。ただ、その強みを言い表す言葉が社内になかった。']},
     judgment:[
@@ -2034,6 +2037,13 @@ const CASES={
 /* imgs \u306f2\u7a2e\u985e\u3092\u53d7\u3051\u308b\u3002
    \u6587\u5b57\u5217 \u2026 \u753b\u50cf\u5f85\u3061\u306e\u30d7\u30ec\u30fc\u30b9\u30db\u30eb\u30c0\uff08\u30ad\u30e3\u30d7\u30b7\u30e7\u30f3\u3060\u3051\u8868\u793a\uff09
    {f,cap} \u2026 \u5b9f\u753b\u50cf\u3002f \u306f assets/img/works/ \u914d\u4e0b\u306e\u30d5\u30a1\u30a4\u30eb\u540d */
+/* 課題パネルの画像。f があれば実画像、無ければ従来の抽象SVG(g1〜g7)。
+   cap は「着手前の状態」であることを示すラベルで、自作物との誤認を防ぐ。 */
+function ctxMedia(c){
+  const cap=c.cap?'<span class="t-cap">'+c.cap+'</span>':'';
+  if(c.f) return '<img src="assets/img/works/'+c.f+'" alt="'+(c.cap||'')+'" loading="lazy">'+cap;
+  return '<div class="img '+c.img+'"></div>'+cap;
+}
 function mediaCell(c){
   if(typeof c==='string') return '<div class="ps-cell"><b>'+c+'</b></div>';
   return '<div class="ps-cell"><img src="assets/img/works/'+c.f+'" alt="'+(c.cap||'')+'" loading="lazy">'
@@ -2054,7 +2064,7 @@ function renderCase(d){
   h+='<div class="panel work tcard" data-i="01" style="--card-bg:#F1F4F4"><div class="t-inner wrap"><div class="t-text">'
     +'<span class="t-eyebrow t-anim">Context</span><h2 class="t-head t-anim">課題</h2><div class="t-body">'
     +d.context.paras.map(p=>'<p class="t-anim">'+p+'</p>').join('')
-    +'</div></div><div class="t-media"><div class="frame"><div class="img '+d.context.img+'"></div></div></div></div></div>';
+    +'</div></div><div class="t-media"><div class="frame">'+ctxMedia(d.context)+'</div></div></div></div>';
   h+='<div class="panel work gcard" style="--card-bg:#F1F5F4"><div class="g-inner wrap">'
     +'<div class="g-label"><span class="g-en">DESIGN</span><span class="g-jp">設計</span></div><div class="g-grid">'
     /* 通し番号は PROJECT 02（直書きDOM）と同じ「Point 01」形式にそろえる */
@@ -2209,7 +2219,7 @@ function goToDetail(caseKey,workIdx){
         {y:0,opacity:1,duration:.8,stagger:.12,ease:'power2.out',delay:.3,overwrite:'auto'});
       gsap.fromTo(p.querySelector('.t-media .frame'),{clipPath:'inset(0% 0% 100% 0%)'},
         {clipPath:'inset(0% 0% 0% 0%)',duration:1,ease:'power2.out',delay:.4,overwrite:'auto'});
-      gsap.fromTo(p.querySelector('.t-media .img'),{scale:1.14},
+      gsap.fromTo(p.querySelector('.t-media .img,.t-media img'),{scale:1.14},
         {scale:1,duration:1.3,ease:'power2.out',delay:.4,overwrite:'auto'});
     }
   });
