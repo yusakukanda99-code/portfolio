@@ -617,6 +617,7 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-rail{display:flex;gap:10px;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .panel.work.pcard .ps-rail::-webkit-scrollbar{display:none}
 .panel.work.pcard .ps-cell{position:relative;flex:0 0 100%;scroll-snap-align:start;border-radius:10px;overflow:hidden;background:#dcdcd8;display:flex;align-items:flex-end;justify-content:flex-start}
+.panel.work.pcard .ps-cell img{cursor:zoom-in}
 .panel.work.pcard .ps-cell img,.panel.work.pcard .ps-cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel.work.pcard .ps-cell b{position:relative;z-index:1;margin:10px 12px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
 /* 画像が入ったセルは、キャプションが写真に乗るので地を敷く */
@@ -2505,11 +2506,11 @@ function closeWork(){
   if(window.gsap&&!reduce) gsap.to(md,{opacity:0,duration:.3,ease:'power1.out',onComplete:done});
   else done();
 }
-const LB={imgs:[],cap:'',i:0};
+const LB={imgs:[],caps:null,cap:'',i:0};
 function lbShow(){
   const lb=document.querySelector('.wk-lb');
   lb.querySelector('img').src=WKIMG+LB.imgs[LB.i];
-  lb.querySelector('.wk-lb-cap').innerHTML=LB.cap+(LB.imgs.length>1?`<span>${LB.i+1} / ${LB.imgs.length}</span>`:'');
+  lb.querySelector('.wk-lb-cap').innerHTML=((LB.caps&&LB.caps[LB.i])||LB.cap)+(LB.imgs.length>1?`<span>${LB.i+1} / ${LB.imgs.length}</span>`:'');
   lb.classList.add('on');
 }
 function lbClose(){ document.querySelector('.wk-lb').classList.remove('on'); }
@@ -2534,7 +2535,17 @@ function initWorksUI(){
   document.querySelector('[data-wd-body]').addEventListener('click',e=>{
     const fig=e.target.closest('.wd-fig');
     if(fig){ const w=WORKS[+fig.dataset.wdOf];
-      LB.imgs=w.imgs.map(im=>im.f); LB.i=+fig.dataset.wdImg; LB.cap=w.t; lbShow(); }
+      LB.imgs=w.imgs.map(im=>im.f); LB.caps=null; LB.i=+fig.dataset.wdImg; LB.cap=w.t; lbShow(); }
+  });
+  /* 成果物スライダーの画像も拡大できるようにする。セルは約430pxしかなく、
+     図や画面のスクリーンショットはそのままでは読めないため。 */
+  document.addEventListener('click',e=>{
+    const im=e.target.closest('.panel.work.pcard .ps-cell img');
+    if(!im) return;
+    const cells=[...im.closest('.ps-rail').querySelectorAll('.ps-cell img')];
+    LB.imgs=cells.map(x=>x.getAttribute('src').replace(WKIMG,''));
+    LB.caps=cells.map(x=>x.parentElement.querySelector('b')?.textContent||'');
+    LB.i=cells.indexOf(im); LB.cap=''; lbShow();
   });
   const lb=document.querySelector('.wk-lb');
   lb.querySelector('[data-lb-close]').addEventListener('click',lbClose);
