@@ -1,0 +1,4 @@
+site.json
+node_modules/
+*.docx
+package*.json
