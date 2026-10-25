@@ -438,7 +438,7 @@ body.detail-on .wk-btn{display:inline-flex}
 .hg-item{position:relative;width:100vw;height:100vh}
 /* when JS runs: panels stack on top of each other; each next one bleeds in
    with the ink-spread filter */
-.js .hg-item{position:absolute;inset:0;pointer-events:none;will-change:opacity,filter;overflow:hidden}
+.js .hg-item{position:absolute;inset:0;pointer-events:none;will-change:opacity,transform;overflow:hidden}
 /* before JS sets opacities, show only the first work (prevents the last panel
    flashing while the loader lifts) */
 .js .hgal-track > *{opacity:0}
@@ -1286,38 +1286,6 @@ function initMagnetic(){
    (the image opens from several spots and spreads to cover), and the blob
    edges are displaced for a wet-ink bleed. Resolves to crisp when settled.
    Built ONCE and cached — initGallery() itself can be re-run freely. */
-let GALF=null;
-function buildGalleryFilters(count){
-  const NS='http://www.w3.org/2000/svg';
-  const fsvg=document.createElementNS(NS,'svg');
-  fsvg.style.cssText='position:absolute;width:0;height:0;pointer-events:none';
-  const flt=[];
-  for(let i=0;i<count;i++){
-    const f=document.createElementNS(NS,'filter');
-    f.setAttribute('id','nij'+i);
-    f.setAttribute('x','-15%');f.setAttribute('y','-15%');f.setAttribute('width','130%');f.setAttribute('height','130%');
-    f.setAttribute('color-interpolation-filters','sRGB');
-    const t=document.createElementNS(NS,'feTurbulence');
-    t.setAttribute('type','fractalNoise');t.setAttribute('baseFrequency','0.0038 0.0058');
-    t.setAttribute('numOctaves','3');t.setAttribute('seed',String(i*13+4));t.setAttribute('result','noise');
-    const dm=document.createElementNS(NS,'feDisplacementMap');
-    dm.setAttribute('in','SourceGraphic');dm.setAttribute('in2','noise');dm.setAttribute('scale','0');
-    dm.setAttribute('xChannelSelector','R');dm.setAttribute('yChannelSelector','G');dm.setAttribute('result','disp');
-    const ct=document.createElementNS(NS,'feComponentTransfer');
-    ct.setAttribute('in','noise');ct.setAttribute('result','mask');
-    const fa=document.createElementNS(NS,'feFuncA');
-    fa.setAttribute('type','linear');fa.setAttribute('slope','2.0');fa.setAttribute('intercept','-2.2');
-    ct.appendChild(fa);
-    const co=document.createElementNS(NS,'feComposite');
-    co.setAttribute('in','disp');co.setAttribute('in2','mask');co.setAttribute('operator','in');
-    f.appendChild(t);f.appendChild(dm);f.appendChild(ct);f.appendChild(co);
-    fsvg.appendChild(f);
-    flt[i]={dm,fa};
-  }
-  document.body.appendChild(fsvg);
-  return flt;
-}
-
 /* hero見出しを1文字ずつ<span class="ch">に分割（初回のみ） */
 function splitHeroChars(){
   const h1=document.querySelector('.hg-hero h1');
@@ -1498,9 +1466,6 @@ function initGallery(){
   const curEl=sec.querySelector('[data-cur]');
   const progEl=sec.querySelector('[data-prog]');
 
-  if(!GALF) GALF=buildGalleryFilters(panels.length);
-  const flt=GALF;
-
   // pristine state — also resets leftovers when the screen is rebuilt
   panels.forEach((p,i)=>{ p.style.zIndex=i+1; p.style.filter='none';
     p.style.pointerEvents='none'; });
@@ -1533,7 +1498,7 @@ function initGallery(){
   gsap.set([sLabel].concat(sGroups).filter(Boolean),{autoAlpha:0,y:24});
 
   const tl=gsap.timeline();
-  const HOLD=1.15, REV=2.2, MAXDISP=130;               // dwell, then spreading bleed
+  const HOLD=1.15, REV=2.2;                            // 各作品の滞在と、切り替えにかける長さ
   // OPENING — ヒーローの文字がすっと消えながら、work 01 が小さなカードから
   // 徐々に大きくなり、画面いっぱいにフィットする
   const HFADE=1.1, GROW=2.2, GROW_AT=0.35, PRE=GROW_AT+GROW;
@@ -1574,19 +1539,22 @@ function initGallery(){
   let cursor=PRE+HOLD;
   for(let i=1;i<panels.length;i++){
     const at=cursor; startAt[i]=at;
-    const p=panels[i], F=flt[i], st={s:1};
-    // s:1 → hidden (blobs closed, max warp) ; s:0 → fully open & crisp
-    tl.to(st,{s:0,duration:REV,ease:'power2.inOut',
-      onUpdate:()=>{
-        F.dm.setAttribute('scale',(st.s*MAXDISP).toFixed(1));
-        F.fa.setAttribute('intercept',(-2.2 + (1-st.s)*2.85).toFixed(3)); // spots grow & spread
-        p.style.filter=`url(#nij${i})`;
-      },
-      onComplete:()=>{ p.style.filter='none'; },
-      onReverseComplete:()=>{ p.style.filter='none'; }
-    },at);
-    tl.fromTo(p,{opacity:0},{opacity:1,duration:0.3,ease:'none'},at);
-    textIn(p,at+REV*0.55);
+    const p=panels[i];
+    /* 作品の切り替えは opacity と scale だけで行う。
+       以前は全画面に SVG フィルタ（feTurbulence + feDisplacementMap）を
+       スクロール追従でかけて「にじみ」で出していたが、1枚あたり実ピクセルが
+       数千万になり、環境によって前の作品が透けたまま残る・描画が崩れる
+       事故が出ていた。transform と opacity だけなら合成処理だけで済む。 */
+    tl.fromTo(p,{opacity:0},
+      {opacity:1,duration:REV*0.45,ease:'power2.out',immediateRender:false},at);
+    tl.fromTo(p,{scale:1.06},
+      {scale:1,duration:REV*0.95,ease:'power2.out',immediateRender:false},at);
+    /* 前の作品のテキストは先に引く。重なっている間に見出しが二重に
+       読めてしまうのを防ぐ（パネル自体は下に残るので画は途切れない） */
+    const prevTxt=panels[i-1].querySelectorAll('.hg-title,.hg-cat,.hg-lead,.hg-foot');
+    if(prevTxt.length) tl.to(prevTxt,
+      {autoAlpha:0,duration:REV*0.3,ease:'power1.in'},at);
+    textIn(p,at+REV*0.5);
     cursor = at + HOLD + REV;
   }
 
