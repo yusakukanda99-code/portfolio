@@ -139,8 +139,10 @@ for key in D['order']:
         if il: label(il)
         if w.get('video'): label('動画：' + w['video'])
         if w.get('yt'): label('YouTube：' + w['yt'])
-        if w.get('link'): P('外部リンク：' + w['link'], size=9, space_after=10)
-        else: doc.paragraphs[-1].paragraph_format.space_after = Pt(10)
+        if w.get('link'): P('外部リンク：' + w['link'], size=9, space_after=2)
+        for l in (w.get('links') or []):
+            P('外部リンク：' + l.get('t','') + '　' + l.get('u',''), size=9, space_after=2)
+        doc.paragraphs[-1].paragraph_format.space_after = Pt(10)
 
 # ---------- 4. 取りこぼし検出 ----------
 written = set()
