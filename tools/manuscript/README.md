@@ -1,12 +1,12 @@
 # 原稿マスターの生成
 
-`test/index.html` を正として、原稿マスター（docx）を書き出します。
+`index.html` を正として、原稿マスター（docx）を書き出します。
 docx は生成物です。直接編集せず、サイトを直してから流し直してください。
 
 ## 使い方
 
 ```bash
-cd test/tools/manuscript
+cd tools/manuscript
 npm i -D playwright gsap          # 初回のみ
 pip install python-docx           # 初回のみ
 node dump.mjs                     # サイトを読んで site.json を作る

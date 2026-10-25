@@ -1,4 +1,4 @@
-# サイト（test/index.html）を正として原稿マスター docx を生成する。
+# サイト（index.html）を正として原稿マスター docx を生成する。
 # 使い方: node dump.mjs && python3 genmaster.py [出力先.docx]
 import json, datetime, re, os, sys
 from docx import Document
@@ -33,7 +33,7 @@ def clean(s): return re.sub(r'\s+', ' ', (s or '')).strip()
 # ---------- 表紙 ----------
 H('原稿マスター｜ポートフォリオサイト', 0)
 P(f"生成日：{datetime.date.today():%Y年%m月%d日}", size=9, color=(0x88,0x88,0x88), space_after=2)
-P('出典：test/index.html（サイトが正。この原稿はサイトから生成したもの）',
+P('出典：index.html（サイトが正。この原稿はサイトから生成したもの）',
   size=9, color=(0x88,0x88,0x88), space_after=18)
 
 # ---------- 1. 共通 ----------
