@@ -635,8 +635,10 @@ body.detail-on .wk-btn{display:inline-flex}
 .panel.work.pcard .ps-cell:has(img) b,.panel.work.pcard .ps-cell:has(video) b{background:rgba(250,249,246,.9);padding:3px 9px;border-radius:100px;color:var(--ink)}
 .panel.work.pcard .ps-nav{position:absolute;right:10px;bottom:10px;display:flex;gap:6px;z-index:2}
 .panel.work.pcard .ps-nav button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(20,15,10,.16);background:rgba(255,255,255,.88);color:var(--ink);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:opacity .2s,background .2s}
-.panel.work.pcard .ps-nav button:disabled{opacity:.28;cursor:default}
-.panel.work.pcard .ps-nav button:not(:disabled):hover{background:#fff}
+/* 端では淡くするが disabled にはしない。disabled はクリック自体が
+   届かなくなるため、状態が一度ずれると戻れなくなる */
+.panel.work.pcard .ps-nav button.off{opacity:.28}
+.panel.work.pcard .ps-nav button:hover{background:#fff}
 .panel.work.pcard .ps-count{position:absolute;left:12px;top:12px;z-index:2;font-size:11px;letter-spacing:.1em;color:var(--ink-soft);background:rgba(255,255,255,.82);padding:4px 9px;border-radius:11px}
 .panel.work.pcard .ps-media img,.panel.work.pcard .ps-media .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel.work.pcard .ps-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -2014,12 +2016,13 @@ const CASES={
       {h:'2つの不安に、2つの成果物で答えた',t:'「どのような人が家に来るのか」にはチラシ、「何をしてくれるのか」には会社案内。1冊にまとめず、不安の種類ごとに分けた。利用者ご本人とご家族では知りたいことが違うため、どちらの立場で手に取っても自分ごとになる構成にしている。'}],
     evidence:[
       {no:'言葉',h:'理念の構築',sub:'企業理念3つ＋代表メッセージ',stack:'内閣府の統計を起点に言語化',t:'工夫：既存の一言を捨てずに前提として残し、そこから社会課題を起点とした3つの具体へ展開した。代表メッセージも執筆している。',imgs:[{f:'p03_01_rinen.webp',cap:'代表メッセージと企業理念'}]},
-      {no:'素材',h:'現場での撮影',sub:'スタッフ',stack:'撮影も単独',t:'工夫：ストック写真で済ませれば手間は減るが、訪問時にチラシと違う人が来ることになり、理念の言葉からも外れる。実際に事務所へ足を運んで撮影した。表紙など利用者を伴うカットのみAI生成を使っている。',imgs:[{f:'p03_02_staff.webp',cap:'スタッフ撮影カット'},{f:'p03_03_office.webp',cap:'事務所・アクセス'}]},
+      {no:'素材',h:'現場での撮影',sub:'スタッフ',stack:'撮影も単独',t:'工夫：ストック写真で済ませれば手間は減るが、訪問時にチラシと違う人が来ることになり、理念の言葉からも外れる。実際に事務所へ足を運んで撮影した。表紙など利用者を伴うカットのみAI生成を使っている。',imgs:[{f:'p03_02_staff.webp',cap:'スタッフ撮影（集合）'},{f:'p03_03_office.webp',cap:'スタッフ撮影（個別）'}]},
       {no:'成果物 ①',h:'チラシ',sub:'「誰が来るのか」に答える',stack:'従業員の顔が分かる紙面',t:'工夫：他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、チラシではスタッフの顔を前面に置いた。',imgs:[{f:'p03_04_flyer.webp',cap:'チラシ'},{f:'p03_05_jihi.webp',cap:'自費料金のご案内'}]},
       {no:'成果物 ②',h:'会社案内',sub:'「何をしてくれるのか」に答える',stack:'オレンジ基調・写真とイラスト中心',t:'工夫：連携体制とサービスの流れを大きく図に描き起こし、利用者の悩みとご家族の悩みを分けて構成した。',imgs:[{f:'p03_06_cover.webp',cap:'会社案内 表紙'},{f:'p03_07_flow.webp',cap:'訪問看護の流れ'},{f:'p03_08_renkei.webp',cap:'専門家の連携体制'}]}],
     result:{head:'一言だった理念が、<em>掲げられる言葉</em>になった',paras:[
       'Role — 企画（理念・代表メッセージの言語化を含む）・撮影・作図・デザイン・執筆まで、全工程を単独で担当した社外クライアント案件。',
-      '説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。この理念を実際の活動へ落とすため、地域の方に向けた訪問看護や熱中症対策の説明会も提案し、実施に至っている。']}},
+      '説明にかかる手間が減り、相談から利用開始までの流れがスムーズになった。「幸せを多くの人に響かせる」の一言だった理念が、社会課題を起点とした3つの具体として成立し、対外的に掲げられる状態になった。この理念を実際の活動へ落とすため、地域の方に向けた訪問看護や熱中症対策の説明会も提案し、実施に至っている。',
+      'その後、既存サイトでPHPまわりの不具合が出たことをきっかけに、サイトのリニューアルを依頼された。現在、制作を進めている。']}},
   c07:{
     context:{f:'case01_issue.webp',cap:'着手前：告知はSNSに流れるだけだった（2025年）',paras:[
       '2025年は外部からの依頼を受けて、地域のアートブックイベントを開催した。ただ活動情報を集約する場がなく、SNSによる告知はそのたびに流れて消え、何をどこで確認すればよいのかも分からない状態だった。',
@@ -2190,27 +2193,47 @@ window.addEventListener('resize',scheduleFit);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>fitPanels());
 
 /* 成果物スライダー：矢印・スクロールでカウンタと矢印の活性を更新 */
-function syncRail(rail){
-  const wrap=rail.closest('.ps-multi'); if(!wrap) return;
-  const w=rail.clientWidth+10, n=rail.children.length;
-  const i=Math.min(n-1,Math.max(0,Math.round(rail.scrollLeft/w)));
+/* セル1枚分の送り幅は、gap の値を決め打ちせず実際の間隔から測る */
+function railStep(rail){
+  const a=rail.children[0], b=rail.children[1];
+  const s=(a&&b)?(b.offsetLeft-a.offsetLeft):(rail.clientWidth+10);
+  return s>0?s:(rail.clientWidth+10);
+}
+function railIndex(rail){
+  return Math.min(rail.children.length-1,
+    Math.max(0, Math.round(rail.scrollLeft/railStep(rail))));
+}
+function paintRail(wrap,i,n){
   const c=wrap.querySelector('.ps-count i'); if(c) c.textContent=String(i+1);
   const b=wrap.querySelectorAll('.ps-nav button');
-  if(b.length===2){ b[0].disabled=(i<=0); b[1].disabled=(i>=n-1); }
+  if(b.length===2){ b[0].classList.toggle('off',i<=0); b[1].classList.toggle('off',i>=n-1); }
+}
+function syncRail(rail){
+  const wrap=rail.closest('.ps-multi'); if(!wrap) return;
+  if(!rail.clientWidth) return;        // 非表示のうちは測っても無意味
+  paintRail(wrap, railIndex(rail), rail.children.length);
 }
 function initRails(root){
   initCellVideos(root);
   (root||document).querySelectorAll('.ps-rail').forEach(r=>{
     if(r.dataset.bound) return; r.dataset.bound='1';
     let t=null; r.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>syncRail(r),60)},{passive:true});
+    /* 幅が決まるのは表示されてから。リサイズとパネルの出現を拾い直す */
+    if(window.ResizeObserver) new ResizeObserver(()=>syncRail(r)).observe(r);
     syncRail(r);
   });
 }
 document.addEventListener('click',e=>{
   const b=e.target.closest('.panel.work.pcard .ps-nav button'); if(!b) return;
   e.preventDefault();
-  const rail=b.closest('.ps-multi').querySelector('.ps-rail');
-  rail.scrollBy({left:Number(b.dataset.d)*(rail.clientWidth+10),behavior:'smooth'});
+  const wrap=b.closest('.ps-multi'), rail=wrap.querySelector('.ps-rail');
+  const n=rail.children.length;
+  const i=Math.min(n-1, Math.max(0, railIndex(rail)+Number(b.dataset.d)));
+  /* scrollBy の積み上げだと誤差で少しずつズレる。毎回絶対位置へ送る */
+  rail.scrollTo({left:i*railStep(rail),behavior:'smooth'});
+  /* スクロールイベントを待たずに表示を更新する。
+     イベントが落ちた環境でもカウンタと矢印が置き去りにならない */
+  paintRail(wrap,i,n);
 });
 
 let CURRENT_CASE='c01', CASE01_HTML=null;
