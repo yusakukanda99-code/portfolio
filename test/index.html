@@ -163,6 +163,12 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 .hgst-card{position:absolute;inset:0;background:#FAF9F6;will-change:transform;overflow:hidden;
   box-shadow:0 48px 120px rgba(28,28,28,.40);display:flex;flex-direction:column;justify-content:center}
 .hgst-card.lin{padding:0}
+/* 着地しきったら3Dをたたむ。マーキーは1本が7〜8千pxあり、perspective の中に
+   居続けると「回転した面」として1枚のテクスチャに焼こうとする。Retinaでは
+   実ピクセルが倍になってGPUの上限（多くは16384px）を超え、文字が消えたり
+   帯状のゴミが出たりする。着地後の transform は恒等なので、外しても見た目は変わらない。 */
+.hg-strengths.flat{perspective:none}
+.hg-strengths.flat .hgst-card{transform:none!important;will-change:auto;box-shadow:none}
 .hgst-card .sk-label{display:block;margin-bottom:clamp(20px,3.5vh,40px)}
 .lin{background:var(--paper);padding:clamp(80px,12vh,130px) 0 clamp(60px,9vh,110px)}
 .lin .lin-head{margin-bottom:clamp(18px,3vh,36px)}
@@ -815,7 +821,7 @@ body.detail-on .wk-btn{display:inline-flex}
       </div>
       <div class="sm-group">
         <div class="skill-marquee " style="--smdur:30s">
-          <div class="sm-track"><span class="sm-seq"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span><span class="sm-seq" aria-hidden="true"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span></div>
+          <div class="sm-track"><span class="sm-seq"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span><span class="sm-seq" aria-hidden="true"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span></div>
         </div>
       </div>
       <div class="sm-group">
@@ -1623,6 +1629,9 @@ function initGallery(){
     panels.forEach((p,i)=> p.style.pointerEvents=(open&&i===cp)?'auto':'none');
     if(curEl){ const work=Math.min(items.length, cp+1);
       curEl.textContent=String(work).padStart(2,'0'); }
+    /* 強みのカードが着地しきったら3Dをたたむ（CSS側 .flat 参照）。
+       回転中だけ perspective を効かせ、止まったら普通の2D面に戻す。 */
+    if(stOv) stOv.classList.toggle('flat', t >= SLAND+SDUR);
   };
   tl.eventCallback('onUpdate',syncCp);
   syncCp();
