@@ -1600,7 +1600,7 @@ function initCardStack(){
   for(let k=1;k<N;k++) tl.to(cards[k-1],{yPercent:-100,duration:PER},HERO+(k-1)*PER);
 
   const TOTAL=HERO+(N-1)*PER;
-  const UNIT=()=>Math.round((window.innerHeight||800)*1.0);
+  const UNIT=()=>Math.round((window.innerHeight||800)*0.62);
 
   /* 着地点の目印。ピン区間に、1目盛りぶんの高さのブロックを TOTAL+1 個置く。
      見えない要素でもスナップの対象になる。位置はピンの区間に合わせて
@@ -1621,7 +1621,7 @@ function initCardStack(){
   const st=ScrollTrigger.create({
     trigger:sec, start:'top top',
     end:()=>'+='+(UNIT()*TOTAL),
-    pin:stage, pinSpacing:true, scrub:.4, animation:tl, invalidateOnRefresh:true,
+    pin:stage, pinSpacing:true, scrub:.5, animation:tl, invalidateOnRefresh:true,
     onRefresh:layMarks,
     /* 画像は2枚先まで。カードは全部が画面内にあるため、交差監視では
        一度に6枚取りに行ってしまう */
