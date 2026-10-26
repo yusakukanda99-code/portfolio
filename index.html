@@ -269,15 +269,22 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 .ft-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,10vh,110px) 40px 36px}
 .ft-label{color:rgba(250,249,246,.55)}
 .ft-lead{margin-top:18px;font-size:var(--fs-lead);line-height:2;color:rgba(250,249,246,.78)}
+/* PCは文言とボタンを横並びに。SPは幅が足りないので従来どおり縦に積む */
+.ft-row{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,6vw,90px)}
+.ft-act{flex:0 0 auto;text-align:right}
+.ft-row .ft-btn{margin-top:0}
+@media(max-width:820px){
+  .ft-row{display:block}
+  .ft-act{text-align:left}
+  .ft-row .ft-btn{margin-top:clamp(22px,3.8vh,36px)}
+}
 /* 連絡先はアドレスを見出し大で置かず、押せるものとして示す。
    宛先は href に持たせ、アドレス自体は下に小さく残す（コピーしたい人向け） */
 .ft-btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(22px,3.8vh,36px);
   font-family:"Inter","Noto Sans JP",sans-serif;font-size:15px;font-weight:500;letter-spacing:.1em;
   color:var(--ink);background:var(--paper);border:1px solid var(--paper);
   padding:18px 44px;border-radius:100px;transition:.35s var(--ease)}
-.ft-btn .ar{transition:transform .35s var(--ease)}
 .ft-btn:hover{background:transparent;color:var(--paper)}
-.ft-btn:hover .ar{transform:translateX(5px)}
 .ft-mail{display:block;margin-top:18px;font-size:12.5px;letter-spacing:.03em;
   color:rgba(250,249,246,.5);overflow-wrap:anywhere;transition:color .3s}
 .ft-mail:hover{color:var(--paper)}
@@ -1014,9 +1021,13 @@ body.detail-on .wk-btn{display:inline-flex}
   <footer class="site-foot screen" id="foot">
     <div class="ft-inner">
       <span class="mono-label ft-label">Contact</span>
-      <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
-      <a class="ft-btn" href="mailto:yusaku.kanda99@gmail.com">Contact<span class="ar">→</span></a>
-      <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+      <div class="ft-row">
+        <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
+        <div class="ft-act">
+          <a class="ft-btn" href="mailto:yusaku.kanda99@gmail.com">Contact</a>
+          <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+        </div>
+      </div>
       <div class="ft-bottom">
         <nav class="ft-nav">
           <a href="#top">Top</a><a href="#work">Project</a><a href="#allworks" class="nav-aw">All Works</a><a href="#about">About</a><a href="mailto:yusaku.kanda99@gmail.com">Contact</a>
@@ -1190,9 +1201,13 @@ body.detail-on .wk-btn{display:inline-flex}
   <footer class="site-foot aw-foot">
     <div class="ft-inner">
       <span class="mono-label ft-label">Contact</span>
-      <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
-      <a class="ft-btn" href="mailto:yusaku.kanda99@gmail.com">Contact<span class="ar">→</span></a>
-      <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+      <div class="ft-row">
+        <p class="ft-lead">つくるところから、育てるところまで。<br>まずはお気軽にご相談ください。</p>
+        <div class="ft-act">
+          <a class="ft-btn" href="mailto:yusaku.kanda99@gmail.com">Contact</a>
+          <a class="ft-mail" href="mailto:yusaku.kanda99@gmail.com">yusaku.kanda99@gmail.com</a>
+        </div>
+      </div>
       <div class="ft-bottom">
         <nav class="ft-nav">
           <a href="#top">Top</a><a href="#work">Project</a><a href="#about">About</a><a href="mailto:yusaku.kanda99@gmail.com">Contact</a>
@@ -1251,22 +1266,34 @@ let GAL=null, DET=null;
 function runLoader(done){
   const box=document.querySelector('[data-count]'),loader=document.getElementById('loader');
   document.body.classList.add('locked');
-  /* スロット式のカウンタ。数字を差し替えるのではなく、0〜100を縦に並べた帯を
-     動かして見せる。帯は値と同じ向きにしか進まないので、9→0のときに逆回転して
-     しまう事故が起きない。1桁ぶんの高さ DH は CSS の --dh と同じ値。 */
-  const DH=1.15, MAX=100, strips=[];
+  /* スロット式のカウンタ。数字を差し替えるのではなく、0〜9を繰り返し縦に並べた
+     帯を動かして見せる。帯は前にしか進まないので、9→0のときに逆回転しない。
+     1桁ぶんの高さ DH は CSS の --dh と同じ値。 */
+  const DH=1.15, MAX=100, CELLS=MAX+1, strips=[], pos=[0,0,0];
   box.innerHTML='';
   for(let c=0;c<3;c++){
     const col=document.createElement('div'); col.className='l-dig';
     const st=document.createElement('div'); st.className='l-strip';
-    for(let v=0;v<=MAX;v++){
+    for(let k=0;k<CELLS;k++){
       const s=document.createElement('span');
-      s.textContent=String(v).padStart(3,'0')[c];
+      s.textContent=String(k%10);
       st.appendChild(s);
     }
     col.appendChild(st); box.appendChild(col); strips.push(st);
   }
-  const paint=n=>{strips.forEach(st=>{st.style.transform='translateY('+(-n*DH)+'em)';});};
+  /* 桁ごとに現在位置を持ち、数字が変わった桁だけを動かす。
+     全桁を値そのものでずらすと、たとえば十の位は 20〜29 のあいだ同じ「2」の
+     セルが次々と流れるだけで、変わっていないのに回り続けて見えてしまう。
+     進める量は (新しい数字 - いまの数字 + 10) % 10 で、必ず前回りになる。 */
+  const paint=n=>{
+    const t=String(n).padStart(3,'0');
+    strips.forEach((st,c)=>{
+      const step=((+t[c]) - (pos[c]%10) + 10) % 10;
+      if(!step) return;
+      pos[c]+=step;
+      st.style.transform='translateY('+(-pos[c]*DH)+'em)';
+    });
+  };
   const hide=()=>{document.body.classList.remove('locked');
     if(window.gsap)gsap.to(loader,{yPercent:-100,duration:1,ease:'expo.inOut',onComplete:()=>{loader.style.display='none';done&&done();}});
     else{loader.style.display='none';done&&done();}};
@@ -1275,8 +1302,8 @@ function runLoader(done){
     paint(MAX); hide(); return;
   }
   /* 乱数で飛ばすと落ち着かないので、立ち上がりと終わりをゆるめた曲線で進める。
-     更新間隔(70ms)より帯のtransition(.42s)を長くしてあるため、桁は常に動いて
-     いる状態になり、止まった数字が切り替わるのではなく回って見える。 */
+     更新間隔(70ms)より帯のtransition(.42s)を長くしてあるため、動いている桁は
+     回り続け、変わらない桁は止まったままになる。 */
   const DUR=1750, t0=performance.now();
   const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
   const tick=()=>{
@@ -2406,7 +2433,7 @@ const WORKS=[
   {w:'work_10',c:'c04',t:'MIKATAグループ採用サイト',y:'2026',cat:'Recruitment Branding',role:'IA設計・コンテンツ企画・撮影・Pardot実装（サイト実装は制作会社）',thumb:'work_10_work_10.webp',desc:'採用サイトと、その基点となる全49ページの会社紹介・採用資料。IA設計、6職種のコンテンツ企画・執筆、キャリアステップの図解、採用ブランディング撮影、Pardot実装まで担当した。',imgs:[{"f": "work_10_recruit_deck_cover.webp", "cap": "会社紹介・採用資料 表紙"}, {"f": "work_10_recruit_deck_contents.webp", "cap": "会社紹介・採用資料 CONTENTS"}, {"f": "work_10_recruit_deck_onestop.webp", "cap": "ワンストップサービス"}, {"f": "work_10_recruit_deck_numbers.webp", "cap": "数字で見るミカタ"}, {"f": "work_10_recruit_deck_career.webp", "cap": "キャリアステップ"}, {"f": "work_10_202510148.webp", "cap": "採用ブランディング撮影"}, {"f": "work_10_DSC04975.webp", "cap": "採用ブランディング撮影"}, {"f": "work_10_DSC05044.webp", "cap": "採用ブランディング撮影"}, {"f": "work_10_DSC05039.webp", "cap": "採用ブランディング撮影"}, {"f": "work_10_DSC05020.webp", "cap": "自身が設計した資料が商談で使われる想定での撮影"}]},
   {w:'work_03',c:'c04',t:'ミカタの相続サイト & パンフレット',y:'2026',cat:'Web / Print',role:'ディレクション（色・フォント設計）',thumb:'work_03_work_03.webp',desc:'サービス「ミカタの相続」のサイトとパンフレット。手に取るのは大切な方を亡くされた直後の家族——コーポレートとあえて切り離した緑基調を選び、色とフォントの方向などを示して制作会社と進めた。',imgs:[]},
   {w:'work_31',c:'c04',t:'MIKATA Advisory Group ── 外国人向け会社設立サイト',y:'2026',cat:'Web / Branding',role:'情報設計・実装・フォーム設定（サイトデザインはアシスタントデザイナー）',thumb:'work_31_intl.webp',desc:'国際事業部の立ち上げに初期メンバーとして参加し、外国人起業家に向けた英語サイトを担当した。日本での会社設立から税務・労務・法務までをワンストップで示す構成にしている。サイトデザインは未経験採用のアシスタントデザイナーに任せ、情報設計とディレクション、コーディングとフォームの設定を自身で行った。',imgs:[{"f": "work_31_intl_top.webp", "cap": "トップページ"}],link:'https://mikata-c.co.jp/en/company-formation.html'},
-  {w:'work_08a',c:'c05',t:'ひのてり訪問看護 チラシ',y:'2025',cat:'Print / Branding',role:'理念の言語化から全工程単独',thumb:'work_08_work_08_c.webp',desc:'「誰が来るのか」の不安を払拭するため従業員の写真を使用したチラシ。他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、事務所へ足を運んでスタッフを撮影した。',imgs:[{"f": "work_08_work_08_c.webp", "cap": "チラシ"}, {"f": "work_08_work_08_b2.webp", "cap": "自費料金のご案内"}]},
+  {w:'work_08a',c:'c05',t:'ひのてり訪問看護 チラシ',y:'2025',cat:'Print / Branding',role:'理念の言語化から全工程単独',thumb:'work_08_work_08_c.webp',desc:'「誰が来るのか？」の不安を払拭するため従業員の写真を使用したチラシ。他人を家に上げる仕事である以上、先に顔が分かることが最大の安心になると考え、事務所へ足を運んでスタッフを撮影した。',imgs:[{"f": "work_08_work_08_c.webp", "cap": "チラシ"}, {"f": "work_08_work_08_b2.webp", "cap": "自費料金のご案内"}]},
   {w:'work_08b',c:'c05',t:'ひのてり訪問看護 会社案内',y:'2025',cat:'Print / Branding',role:'理念の言語化から全工程単独',thumb:'work_08_pamphlet_mock.webp',desc:'「何をしてくれるのか？」に答える会社案内。連携体制とサービスの流れを図に描き起こし、利用者本人の悩みとご家族の悩みを分けて構成した。ロゴと同じオレンジ基調・写真とイラストが中心で親しみを持ってもらえるようにデザインした。',imgs:[{"f": "p03_06_cover.webp", "cap": "表紙"}, {"f": "work_08_work_08_b.webp", "cap": "サービスフロー・連携体制"}]},
   {w:'work_17',c:'c06',t:'Sony FES Watch U デザインコンペ',y:'2018',cat:'Design Competition',role:'個人応募・32組の公認クリエイター選出',thumb:'work_17_work_17.webp',desc:'電子ペーパーの文字盤＝「紙」に、水墨画の余白を再現したデザイン。全国から32組の公認クリエイターに選出され、公式アプリ・百貨店での展示販売に展開された。',imgs:[{"f": "work_17_Detail1_Minamo.webp", "cap": "文字盤デザイン「水面」"}, {"f": "work_17_Detail2_Minamo.webp"}, {"f": "work_17_Detail3_Minamo.webp"}, {"f": "work_17_Detail4_Minamo.webp"}],link:'https://prtimes.jp/main/html/rd/p/000000011.000027298.html',linkLabel:'プレスリリースを見る'},
   {w:'work_05',c:'c07',t:'MCD MIX ── 卒業生コミュニティサイト',y:'2025–2026',cat:'Web / WordPress',role:'企画・設計・実装・運用設計まで単独',thumb:'work_05_mcdmix.webp',desc:'母校の卒業生コミュニティの拠点サイト。既製テーマを使わずWordPressテーマをゼロから構築し、FAQとEventの構造化データ、SEOを一式実装した。卒業生の作品アーカイブをそのままビジュアルの素材にしている。非技術者が自分で更新できるよう運用マニュアルまで用意した。',imgs:[{f:'p01_11_mcdmix_top.webp',cap:'トップページ（納品時・2026年7月）'},{f:'p01_12_mcdmix_about.webp',cap:'Aboutページ（納品時・2026年7月）'},{f:'p01_10_customizer.webp',cap:'カスタマイザー（運営者が触る画面）'}],link:'https://mcdmix.com'},
