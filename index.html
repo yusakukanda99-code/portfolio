@@ -321,6 +321,16 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
      ここでは逆に下敷きなので、重なりを入れ替える */
   html.sp-flow .hgal-stage .hg-hero{position:absolute;inset:0;height:100%;z-index:1}
   html.sp-flow .hgal-stage .hgal-track{position:absolute;inset:0;height:100%;pointer-events:none;z-index:2}
+  /* ブラウザ標準のスクロールスナップ。JSで慣性のあとに吸い寄せるのではなく、
+     慣性そのものをブラウザに止めてもらう。scroll-snap-stop:always が肝で、
+     これが付いていると、どれだけ強く弾いても1目盛りずつしか進まない。 */
+  /* mandatory にすると、目印の無いセクション（About・フッター）へ進めなくなる。
+     proximity なら目印の近くでだけ効き、離れた場所は普通にスクロールできる。 */
+  html.sp-flow{scroll-snap-type:y proximity}
+  html.sp-flow .hgal-marks{position:absolute;top:0;left:0;width:1px;
+    pointer-events:none;visibility:hidden}
+  html.sp-flow .hgal-marks > i{display:block;scroll-snap-align:start;scroll-snap-stop:always}
+
   /* カードは画面いっぱい。重なりは、抜けていく1枚の下端に落ちる影で見せる。
      素の .hg-item は width:100vw / height:100vh なので auto に戻しておく */
   html.sp-flow .hgal-stage .hg-item{
@@ -1590,18 +1600,29 @@ function initCardStack(){
   for(let k=1;k<N;k++) tl.to(cards[k-1],{yPercent:-100,duration:PER},HERO+(k-1)*PER);
 
   const TOTAL=HERO+(N-1)*PER;
-  const UNIT=()=>Math.round((window.innerHeight||800)*1.5);
+  const UNIT=()=>Math.round((window.innerHeight||800)*1.0);
+
+  /* 着地点の目印。ピン区間に、1目盛りぶんの高さのブロックを TOTAL+1 個置く。
+     見えない要素でもスナップの対象になる。位置はピンの区間に合わせて
+     refresh のたびに測り直す。 */
+  let marks=sec.querySelector('.hgal-marks');
+  if(!marks){ marks=document.createElement('div'); marks.className='hgal-marks';
+    marks.setAttribute('aria-hidden','true'); sec.insertBefore(marks,sec.firstChild); }
+  const layMarks=()=>{
+    const u=UNIT();
+    marks.style.height=(u*TOTAL+1)+'px';
+    marks.innerHTML='';
+    for(let k=0;k<=TOTAL;k++){
+      const i=document.createElement('i'); i.style.height=u+'px'; marks.appendChild(i);
+    }
+  };
+  layMarks();
+
   const st=ScrollTrigger.create({
     trigger:sec, start:'top top',
     end:()=>'+='+(UNIT()*TOTAL),
     pin:stage, pinSpacing:true, scrub:.4, animation:tl, invalidateOnRefresh:true,
-    /* 指を離したら、いちばん近いカードまで吸い付かせる。1目盛り = カード1枚
-       （進捗 0, 1/6, 2/6 … がそれぞれの着地点）。これを入れないと、
-       途中で止まって2枚が半分ずつ見える状態で放置される。
-       inertia:false は、勢いから着地点を予測させないため——予測させると
-       強く弾いたときに2枚先まで飛ぶ。 */
-    snap:{snapTo:1/TOTAL,duration:{min:.18,max:.4},delay:.03,
-      ease:'power2.out',inertia:false},
+    onRefresh:layMarks,
     /* 画像は2枚先まで。カードは全部が画面内にあるため、交差監視では
        一度に6枚取りに行ってしまう */
     onUpdate:self=>{
