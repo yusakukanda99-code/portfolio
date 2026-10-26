@@ -2,3 +2,4 @@ site.json
 node_modules/
 *.docx
 package*.json
+node_modules
