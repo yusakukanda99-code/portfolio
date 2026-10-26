@@ -321,26 +321,13 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
      ここでは逆に下敷きなので、重なりを入れ替える */
   html.sp-flow .hgal-stage .hg-hero{position:absolute;inset:0;height:100%;z-index:1}
   html.sp-flow .hgal-stage .hgal-track{position:absolute;inset:0;height:100%;pointer-events:none;z-index:2}
-  /* 下にヒーローが覗くよう、しっかり内側に入れる */
+  /* カードは画面いっぱい。重なりは、抜けていく1枚の下端に落ちる影で見せる。
+     素の .hg-item は width:100vw / height:100vh なので auto に戻しておく */
   html.sp-flow .hgal-stage .hg-item{
-    position:absolute;left:22px;right:22px;
-    top:calc(var(--nav-h) + 46px);bottom:46px;
-    /* 素の .hg-item は width:100vw / height:100vh。これを消さないと
-       left と right の両方は効かず、カードが画面幅のままになる */
-    width:auto;height:auto;
-    border-radius:20px;overflow:hidden;pointer-events:auto;
-    box-shadow:0 10px 26px rgba(20,15,10,.20),0 1px 4px rgba(20,15,10,.12);
-    will-change:transform,opacity}
-  /* カードの中は全画面前提の余白だと詰まるので締める */
-  html.sp-flow .hgal-stage .hg-overlay{padding:24px 20px 24px}
-  html.sp-flow .hgal-stage .hg-cat{font-size:10px;letter-spacing:.12em;margin-bottom:12px}
-  html.sp-flow .hgal-stage .hg-title{font-size:25px;line-height:1.2}
-  html.sp-flow .hgal-stage .hg-lead{margin-top:14px;font-size:12.5px;line-height:1.85;max-width:none}
-  html.sp-flow .hgal-stage .hg-foot{margin-top:18px}
-  /* ::after は文字を読ませるためのスクリムなので触らない。
-     カードの縁は .hg-media 側に内側の線を足して出す */
-  html.sp-flow .hgal-stage .hg-media::after{content:"";position:absolute;inset:0;z-index:3;
-    border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);pointer-events:none}
+    position:absolute;inset:0;width:auto;height:auto;
+    border-radius:0;overflow:hidden;pointer-events:auto;
+    box-shadow:0 26px 64px rgba(12,14,12,.62);
+    will-change:transform}
   html.sp-flow .hg-strengths{position:relative;inset:auto;pointer-events:auto;perspective:none}
   html.sp-flow .hgst-card{position:relative;inset:auto;transform:none;opacity:1;visibility:visible;padding:70px 0}
 }
@@ -1588,47 +1575,27 @@ function initCardStack(){
   if(!stage||!hero||!cards.length) return null;
 
   const N=cards.length;
-  const DEPTH=3;                 // 後ろに覗かせる枚数
-  /* 変形の基点を上辺にしてある（transformOrigin '50% 0%'）。
-     こうすると縮小で上辺が動かないので、yPercent のぶんがそのまま
-     「上に覗く厚み」になる。中心基点だと縮小と移動が打ち消し合って
-     束が1枚に見えてしまう。 */
-  const dY=d=>-2.8*Math.min(d,DEPTH);
-  const dS=d=>1-0.040*Math.min(d,DEPTH);
-  const dO=d=>d<=DEPTH?1:0;
-
-  // 奥に行くほど下に重なる。飛んだカードは戻ってこないので z は固定でよい
-  cards.forEach((c,j)=>gsap.set(c,{zIndex:N-j,rotation:0,transformOrigin:'50% 0%',
-    yPercent:120,scale:dS(j),opacity:0}));
-  gsap.set(hero,{scale:1,opacity:1,transformOrigin:'50% 42%'});
+  /* 画面いっぱいのカードを重ねて置き、手前の1枚だけが真上へ抜ける。
+     拡大・回転・フェードは入れない。指の動きにそのまま付いてくるのが
+     いちばん滑らかに見えるので、イージングも掛けない（ease:'none'）。 */
+  cards.forEach((c,j)=>gsap.set(c,{zIndex:N-j,rotation:0,scale:1,opacity:1,
+    transformOrigin:'50% 50%',yPercent:100}));
+  gsap.set(hero,{scale:1,opacity:1});
 
   const HERO=1, PER=1;
   const tl=gsap.timeline({defaults:{ease:'none'}});
-  // 束が下から乗り、ヒーローは奥へ引く
-  tl.to(hero,{scale:.96,opacity:.55,duration:HERO},0);
-  cards.forEach((c,j)=>{
-    tl.to(c,{yPercent:dY(j),opacity:dO(j),duration:HERO,ease:'power2.out'},
-      Math.min(j,DEPTH)*0.05);
-  });
-  // 1枚ずつ送る
-  for(let k=1;k<N;k++){
-    const at=HERO+(k-1)*PER;
-    tl.to(cards[k-1],{yPercent:-128,rotation:-3,opacity:0,
-      duration:PER*0.92,ease:'power2.in'},at);
-    for(let j=k;j<N;j++){
-      const a=j-k+1, b=j-k;
-      tl.fromTo(cards[j],{yPercent:dY(a),scale:dS(a),opacity:dO(a)},
-        {yPercent:dY(b),scale:dS(b),opacity:dO(b),duration:PER,immediateRender:false},at);
-    }
-  }
+  // 束がそのままヒーローの上に乗る（重なっているので1枚に見える）
+  tl.to(cards,{yPercent:0,duration:HERO},0);
+  // 1枚ずつ真上へ抜ける。下の1枚は動かさない
+  for(let k=1;k<N;k++) tl.to(cards[k-1],{yPercent:-100,duration:PER},HERO+(k-1)*PER);
 
-  const UNIT=()=>Math.round((window.innerHeight||800)*0.85);
+  const UNIT=()=>Math.round((window.innerHeight||800)*0.78);
   const st=ScrollTrigger.create({
     trigger:sec, start:'top top',
     end:()=>'+='+(UNIT()*(HERO+(N-1)*PER)),
-    pin:stage, pinSpacing:true, scrub:.55, animation:tl, invalidateOnRefresh:true,
-    /* 画像は手前の2枚先まで読み込む。カードは全部が画面内にあるため、
-       交差監視では一度に6枚取りに行ってしまう */
+    pin:stage, pinSpacing:true, scrub:.5, animation:tl, invalidateOnRefresh:true,
+    /* 画像は2枚先まで。カードは全部が画面内にあるため、交差監視では
+       一度に6枚取りに行ってしまう */
     onUpdate:self=>{
       const i=Math.round(self.progress*(HERO+(N-1)*PER)-HERO)+1;
       for(let k=0;k<=Math.min(N-1,Math.max(1,i)+1);k++) cards[k].classList.add('hg-load');
