@@ -280,12 +280,14 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 }
 /* 連絡先はアドレスを見出し大で置かず、押せるものとして示す。
    宛先は href に持たせ、アドレス自体は下に小さく残す（コピーしたい人向け） */
-.ft-btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(22px,3.8vh,36px);
-  font-family:"Inter","Noto Sans JP",sans-serif;font-size:15px;font-weight:500;letter-spacing:.1em;
-  color:var(--ink);background:var(--paper);border:1px solid var(--paper);
-  padding:18px 44px;border-radius:100px;transition:.35s var(--ease)}
-.ft-btn:hover{background:transparent;color:var(--paper)}
-.ft-mail{display:block;margin-top:18px;font-size:12.5px;letter-spacing:.03em;
+/* 塗りつぶしだと暗いフッターで面積が勝ちすぎるため、枠と文字だけの白抜きに。
+   作品側のボタン（.hg-foot .view）と同じ見た目に揃え、ホバーで反転する */
+.ft-btn{display:inline-flex;align-items:center;margin-top:clamp(20px,3.4vh,32px);
+  font-family:"Inter","Noto Sans JP",sans-serif;font-size:13px;font-weight:500;letter-spacing:.1em;
+  color:var(--paper);background:transparent;border:1px solid rgba(250,249,246,.55);
+  padding:14px 36px;border-radius:100px;transition:.35s var(--ease)}
+.ft-btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.ft-mail{display:block;margin-top:16px;font-size:11.5px;letter-spacing:.03em;
   color:rgba(250,249,246,.5);overflow-wrap:anywhere;transition:color .3s}
 .ft-mail:hover{color:var(--paper)}
 .ft-bottom{margin-top:clamp(48px,8vh,86px);padding-top:22px;border-top:1px solid rgba(250,249,246,.16);
