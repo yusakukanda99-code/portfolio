@@ -302,8 +302,14 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   html.sp-flow .hgal{height:auto;overflow:visible}
   html.sp-flow .hgal-track{height:auto}
   html.sp-flow .hgal-track > *{opacity:1}
-  html.sp-flow .hg-item{position:relative;inset:auto;height:100svh;pointer-events:auto;overflow:hidden}
-  html.sp-flow .hg-hero{position:relative;inset:auto;height:100svh}
+  /* svh（アドレスバーが出ている前提の高さ）は、実際の表示領域より小さく
+     報告されることがあり、その差分だけ下の作品が覗いてしまう。スクロールで
+     バーが隠れるとさらに開く。dvh は「いまこの瞬間の表示領域」なので、
+     バーの出入りに追従して常に埋まる。古いブラウザ用に vh を先に置く。 */
+  html.sp-flow .hg-item{position:relative;inset:auto;pointer-events:auto;overflow:hidden;
+    height:100vh;height:100svh;height:100dvh}
+  html.sp-flow .hg-hero{position:relative;inset:auto;
+    height:100vh;height:100svh;height:100dvh}
   html.sp-flow .hg-ui,html.sp-flow .hg-shade{display:none}
   html.sp-flow .hg-strengths{position:relative;inset:auto;pointer-events:auto;perspective:none}
   html.sp-flow .hgst-card{position:relative;inset:auto;transform:none;opacity:1;visibility:visible;padding:70px 0}
@@ -311,7 +317,10 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 
 /* ===== SP：作品詳細もピン留めなし・縦積み＋フェードインのみ ===== */
 @media(max-width:820px){
-  html.sp-flow .showcase .panel{height:auto;min-height:100svh}
+  /* 作品詳細も同じ。min-height なので中身が長いパネルは影響を受けず、
+     画面ちょうどのパネルだけが表示領域に追従する */
+  html.sp-flow .showcase .panel{height:auto;
+    min-height:100vh;min-height:100svh;min-height:100dvh}
   html.sp-flow .showcase .sc-ui{display:none}
   /* 背景は白と薄いグリーンの交互 */
   html.sp-flow .showcase .panel{background:#FAF9F6}
