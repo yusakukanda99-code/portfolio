@@ -28,7 +28,8 @@ def P(t='', style=None, size=None, bold=False, color=None, space_after=6, indent
 def H(t, lv): doc.add_heading(t, level=lv)
 def label(t): P(t, size=9, bold=True, color=(0x88,0x88,0x88), space_after=2)
 
-def clean(s): return re.sub(r'\s+', ' ', (s or '')).strip()
+# サイト側の文言には強調の <em> などが混ざる。原稿には記号として出したくないので落とす
+def clean(s): return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', s or '')).strip()
 
 # ---------- 表紙 ----------
 H('原稿マスター｜ポートフォリオサイト', 0)
