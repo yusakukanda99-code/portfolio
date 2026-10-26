@@ -515,7 +515,11 @@ body.detail-on .wk-btn{display:inline-flex}
 .js .hgal-track > :first-child{opacity:1}
 
 /* work — full-bleed image + overlaid text */
-.hg-media{display:block;position:absolute;inset:0;overflow:hidden}
+/* 回線が遅いと画像が届くまでカードが透明になり、後ろのカードの文字が
+   透けて重なって見える。地の色を1つ持たせて必ず不透明にしておく。
+   下敷きのダミー要素を復活させるとレイヤーが倍になるので、
+   追加の要素ではなく background-color で持つ（合成の負担が増えない）。 */
+.hg-media{display:block;position:absolute;inset:0;overflow:hidden;background:#2b2c27}
 .hg-media .img{position:absolute;top:0;left:-7%;width:114%;height:100%;background-size:cover;background-position:center}
 /* 本画像が入ったら、下敷きのダミー(.g1〜.g7)は捨てる。
    残しておくと全画面のレイヤーが作品ごとに2枚ずつ積まれ、6作品で12枚になる。
