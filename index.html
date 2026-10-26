@@ -1590,7 +1590,7 @@ function initCardStack(){
   for(let k=1;k<N;k++) tl.to(cards[k-1],{yPercent:-100,duration:PER},HERO+(k-1)*PER);
 
   const TOTAL=HERO+(N-1)*PER;
-  const UNIT=()=>Math.round((window.innerHeight||800)*0.9);
+  const UNIT=()=>Math.round((window.innerHeight||800)*1.5);
   const st=ScrollTrigger.create({
     trigger:sec, start:'top top',
     end:()=>'+='+(UNIT()*TOTAL),
