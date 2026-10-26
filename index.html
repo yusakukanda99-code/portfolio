@@ -1589,24 +1589,31 @@ function initCardStack(){
   // 1枚ずつ真上へ抜ける。下の1枚は動かさない
   for(let k=1;k<N;k++) tl.to(cards[k-1],{yPercent:-100,duration:PER},HERO+(k-1)*PER);
 
-  const UNIT=()=>Math.round((window.innerHeight||800)*0.78);
+  const TOTAL=HERO+(N-1)*PER;
+  const UNIT=()=>Math.round((window.innerHeight||800)*0.9);
   const st=ScrollTrigger.create({
     trigger:sec, start:'top top',
-    end:()=>'+='+(UNIT()*(HERO+(N-1)*PER)),
-    pin:stage, pinSpacing:true, scrub:.5, animation:tl, invalidateOnRefresh:true,
+    end:()=>'+='+(UNIT()*TOTAL),
+    pin:stage, pinSpacing:true, scrub:.4, animation:tl, invalidateOnRefresh:true,
+    /* 指を離したら、いちばん近いカードまで吸い付かせる。1目盛り = カード1枚
+       （進捗 0, 1/6, 2/6 … がそれぞれの着地点）。これを入れないと、
+       途中で止まって2枚が半分ずつ見える状態で放置される。
+       inertia:false は、勢いから着地点を予測させないため——予測させると
+       強く弾いたときに2枚先まで飛ぶ。 */
+    snap:{snapTo:1/TOTAL,duration:{min:.18,max:.4},delay:.03,
+      ease:'power2.out',inertia:false},
     /* 画像は2枚先まで。カードは全部が画面内にあるため、交差監視では
        一度に6枚取りに行ってしまう */
     onUpdate:self=>{
-      const i=Math.round(self.progress*(HERO+(N-1)*PER)-HERO)+1;
+      const i=Math.round(self.progress*TOTAL-HERO)+1;
       for(let k=0;k<=Math.min(N-1,Math.max(1,i)+1);k++) cards[k].classList.add('hg-load');
     }
   });
   cards[0].classList.add('hg-load'); if(cards[1]) cards[1].classList.add('hg-load');
   /* card(i) = カード i が手前に来るスクロール位置。詳細から戻るときに使う */
-  const total=HERO+(N-1)*PER;
   const card=i=>Math.round(st.start
-    + (Math.min(Math.max(i,0),N-1)*PER + HERO)/total*(st.end-st.start));
-  return {st,tl,total,card};
+    + (Math.min(Math.max(i,0),N-1)*PER + HERO)/TOTAL*(st.end-st.start));
+  return {st,tl,total:TOTAL,card};
 }
 
 function initGallery(){
