@@ -413,6 +413,9 @@ body.detail-on .wk-btn{display:inline-flex}
 .wk-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px clamp(18px,3vw,34px);border-bottom:1px solid var(--line);flex:none}
 .wk-title{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
 .wk-close{border:1px solid var(--line);background:none;border-radius:100px;padding:8px 18px;font-size:12px;cursor:pointer;color:var(--ink);transition:.3s}
+/* 下端の閉じるボタン。SPでだけ出す（PCは上のボタンが見えている） */
+.wk-foot{display:none}
+.wk-close.wide{width:100%;padding:14px 18px;font-size:13px}
 .wk-close:hover{background:var(--ink);color:#FAF9F6}
 .wk-body{overflow-y:auto;padding:clamp(18px,3vw,34px);-webkit-overflow-scrolling:touch}
 .wk-sec{margin-bottom:clamp(30px,5vh,48px)}
@@ -462,7 +465,14 @@ body.detail-on .wk-btn{display:inline-flex}
 .wd-link{display:inline-flex;align-items:center;gap:8px;margin:26px 10px 0 0;font-size:13.5px;color:var(--ink);
   border:1px solid var(--ink);border-radius:100px;padding:12px 26px;transition:.3s}
 .wd-link:hover{background:var(--ink);color:#FAF9F6}
-@media(max-width:820px){.wd-panel{top:10px;bottom:10px;width:calc(100vw - 20px)}}
+/* SPはパネルが10pxから始まるため、上の閉じるボタンが固定ナビの裏に
+   隠れていた。パネルをナビの下へ下ろし、閉じるは親指の届く下端に置く */
+@media(max-width:820px){
+  .wd-panel{top:calc(var(--nav-h) + 10px);bottom:10px;width:calc(100vw - 20px)}
+  .wd-top{display:none}
+  .wk-foot{display:block;flex:none;border-top:1px solid var(--line);background:var(--paper);
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+}
 /* ライトボックス */
 .wk-lb{position:fixed;inset:0;z-index:9600;background:rgba(28,28,28,.93);display:none;align-items:center;justify-content:center;flex-direction:column;padding:calc(var(--nav-h) + 16px) 4vw 4vh}
 .wk-lb.on{display:flex}
@@ -474,7 +484,7 @@ body.detail-on .wk-btn{display:inline-flex}
 .wk-lb-prev:hover,.wk-lb-next:hover{opacity:1}
 .wk-lb-prev{left:6px}.wk-lb-next{right:6px}
 @media(max-width:820px){
-  .wk-panel{inset:10px}
+  .wk-panel{inset:10px;top:calc(var(--nav-h) + 10px)}
   .wk-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
   .wk-open-case{margin-left:0}
   .wk-btn{padding:12px 18px}
@@ -1265,6 +1275,7 @@ body.detail-on .wk-btn{display:inline-flex}
       <button class="wk-close" type="button" data-wk-close>閉じる ×</button>
     </div>
     <div class="wk-body" data-wk-body></div>
+    <div class="wk-foot"><button class="wk-close wide" type="button" data-wk-close>閉じる ×</button></div>
   </div>
 </div>
 <div class="wd-modal" role="dialog" aria-modal="true">
@@ -1272,6 +1283,7 @@ body.detail-on .wk-btn{display:inline-flex}
   <div class="wd-panel">
     <div class="wd-top"><button class="wk-close" type="button" data-wd-close>閉じる ×</button></div>
     <div class="wd-body" data-wd-body></div>
+    <div class="wk-foot"><button class="wk-close wide" type="button" data-wd-close>閉じる ×</button></div>
   </div>
 </div>
 <div class="wk-lb">
