@@ -311,6 +311,36 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   html.sp-flow .hg-hero{position:relative;inset:auto;
     height:100vh;height:100svh;height:100dvh}
   html.sp-flow .hg-ui,html.sp-flow .hg-shade{display:none}
+
+  /* ---- SP：作品はヒーローの上に重なるカードの束として送る ----
+     .hgal-stage は JS が作るラッパー。prefers-reduced-motion のときは
+     作らないので、その場合は上の縦積みレイアウトがそのまま生きる。 */
+  html.sp-flow .hgal-stage{position:relative;overflow:hidden;
+    height:100vh;height:100svh;height:100dvh}
+  /* ヒーローは PC で作品に覆い被さる役なので z-index:80 が付いている。
+     ここでは逆に下敷きなので、重なりを入れ替える */
+  html.sp-flow .hgal-stage .hg-hero{position:absolute;inset:0;height:100%;z-index:1}
+  html.sp-flow .hgal-stage .hgal-track{position:absolute;inset:0;height:100%;pointer-events:none;z-index:2}
+  /* 下にヒーローが覗くよう、しっかり内側に入れる */
+  html.sp-flow .hgal-stage .hg-item{
+    position:absolute;left:22px;right:22px;
+    top:calc(var(--nav-h) + 46px);bottom:46px;
+    /* 素の .hg-item は width:100vw / height:100vh。これを消さないと
+       left と right の両方は効かず、カードが画面幅のままになる */
+    width:auto;height:auto;
+    border-radius:20px;overflow:hidden;pointer-events:auto;
+    box-shadow:0 10px 26px rgba(20,15,10,.20),0 1px 4px rgba(20,15,10,.12);
+    will-change:transform,opacity}
+  /* カードの中は全画面前提の余白だと詰まるので締める */
+  html.sp-flow .hgal-stage .hg-overlay{padding:24px 20px 24px}
+  html.sp-flow .hgal-stage .hg-cat{font-size:10px;letter-spacing:.12em;margin-bottom:12px}
+  html.sp-flow .hgal-stage .hg-title{font-size:25px;line-height:1.2}
+  html.sp-flow .hgal-stage .hg-lead{margin-top:14px;font-size:12.5px;line-height:1.85;max-width:none}
+  html.sp-flow .hgal-stage .hg-foot{margin-top:18px}
+  /* ::after は文字を読ませるためのスクリムなので触らない。
+     カードの縁は .hg-media 側に内側の線を足して出す */
+  html.sp-flow .hgal-stage .hg-media::after{content:"";position:absolute;inset:0;z-index:3;
+    border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);pointer-events:none}
   html.sp-flow .hg-strengths{position:relative;inset:auto;pointer-events:auto;perspective:none}
   html.sp-flow .hgst-card{position:relative;inset:auto;transform:none;opacity:1;visibility:visible;padding:70px 0}
 }
@@ -1546,6 +1576,72 @@ function initHeroLazy(){
   }),{rootMargin:'150% 0px'});
   items.forEach(e=>io.observe(e));
 }
+/* ---------- SP：カードスタック ----------
+   ヒーローをピン留めし、その上に作品カードの束が下から乗る。スクロールで
+   先頭が上へ飛び、後ろが1段ずつ前へ出る。戻り値は {st,tl} で、PC版の
+   initGallery と同じ形。killScreen / GAL の仕組みにそのまま乗る。 */
+function initCardStack(){
+  const sec=document.querySelector('.hgal');
+  const stage=sec&&sec.querySelector('.hgal-stage');
+  const hero=stage&&stage.querySelector('.hg-hero');
+  const cards=stage?gsap.utils.toArray(stage.querySelectorAll('.hg-item')):[];
+  if(!stage||!hero||!cards.length) return null;
+
+  const N=cards.length;
+  const DEPTH=3;                 // 後ろに覗かせる枚数
+  /* 変形の基点を上辺にしてある（transformOrigin '50% 0%'）。
+     こうすると縮小で上辺が動かないので、yPercent のぶんがそのまま
+     「上に覗く厚み」になる。中心基点だと縮小と移動が打ち消し合って
+     束が1枚に見えてしまう。 */
+  const dY=d=>-2.8*Math.min(d,DEPTH);
+  const dS=d=>1-0.040*Math.min(d,DEPTH);
+  const dO=d=>d<=DEPTH?1:0;
+
+  // 奥に行くほど下に重なる。飛んだカードは戻ってこないので z は固定でよい
+  cards.forEach((c,j)=>gsap.set(c,{zIndex:N-j,rotation:0,transformOrigin:'50% 0%',
+    yPercent:120,scale:dS(j),opacity:0}));
+  gsap.set(hero,{scale:1,opacity:1,transformOrigin:'50% 42%'});
+
+  const HERO=1, PER=1;
+  const tl=gsap.timeline({defaults:{ease:'none'}});
+  // 束が下から乗り、ヒーローは奥へ引く
+  tl.to(hero,{scale:.96,opacity:.55,duration:HERO},0);
+  cards.forEach((c,j)=>{
+    tl.to(c,{yPercent:dY(j),opacity:dO(j),duration:HERO,ease:'power2.out'},
+      Math.min(j,DEPTH)*0.05);
+  });
+  // 1枚ずつ送る
+  for(let k=1;k<N;k++){
+    const at=HERO+(k-1)*PER;
+    tl.to(cards[k-1],{yPercent:-128,rotation:-3,opacity:0,
+      duration:PER*0.92,ease:'power2.in'},at);
+    for(let j=k;j<N;j++){
+      const a=j-k+1, b=j-k;
+      tl.fromTo(cards[j],{yPercent:dY(a),scale:dS(a),opacity:dO(a)},
+        {yPercent:dY(b),scale:dS(b),opacity:dO(b),duration:PER,immediateRender:false},at);
+    }
+  }
+
+  const UNIT=()=>Math.round((window.innerHeight||800)*0.85);
+  const st=ScrollTrigger.create({
+    trigger:sec, start:'top top',
+    end:()=>'+='+(UNIT()*(HERO+(N-1)*PER)),
+    pin:stage, pinSpacing:true, scrub:.55, animation:tl, invalidateOnRefresh:true,
+    /* 画像は手前の2枚先まで読み込む。カードは全部が画面内にあるため、
+       交差監視では一度に6枚取りに行ってしまう */
+    onUpdate:self=>{
+      const i=Math.round(self.progress*(HERO+(N-1)*PER)-HERO)+1;
+      for(let k=0;k<=Math.min(N-1,Math.max(1,i)+1);k++) cards[k].classList.add('hg-load');
+    }
+  });
+  cards[0].classList.add('hg-load'); if(cards[1]) cards[1].classList.add('hg-load');
+  /* card(i) = カード i が手前に来るスクロール位置。詳細から戻るときに使う */
+  const total=HERO+(N-1)*PER;
+  const card=i=>Math.round(st.start
+    + (Math.min(Math.max(i,0),N-1)*PER + HERO)/total*(st.end-st.start));
+  return {st,tl,total,card};
+}
+
 function initGallery(){
   splitHeroChars();
   const sec=document.querySelector('.hgal');
@@ -2045,7 +2141,7 @@ function showScreen(which){
     topScreens().forEach(s=>s.classList.remove('off'));
     window.scrollTo(0,0);
     initHeroLazy();
-    if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
+    GAL = document.documentElement.classList.contains('sp-flow') ? initCardStack() : initGallery();
     initAboutFx();
   }
   ScrollTrigger.refresh();
@@ -2405,6 +2501,15 @@ function returnToWork(){
       if(p) window.scrollTo(0,Math.round(p.getBoundingClientRect().top+window.scrollY));
       return;
     }
+    // SP のカードスタックは timeline の持ち物が違う。開いたカードが
+    // 手前にある位置へ直接戻す（PC版の startAt は持っていない）
+    if(GAL.card){
+      window.scrollTo(0,GAL.card(RETURN_IDX));
+      ScrollTrigger.update();
+      const sc0=GAL.st.getTween && GAL.st.getTween();
+      if(sc0) sc0.progress(1);
+      return;
+    }
     const i=RETURN_IDX;
     // middle of the clicked work's settled zone on the timeline
     const s0 = (i===0) ? GAL.PRE : (GAL.startAt[i]+GAL.REV);
@@ -2683,13 +2788,24 @@ function initAnim(){
   // SP：ピン留めスライダーは使わず、通常の縦スクロールで閲覧する
   if(window.matchMedia('(max-width:820px)').matches){
     document.documentElement.classList.add('sp-flow');
-    // 縦積みでは「作品 → スキル」の順になるよう、オーバーレイ用に
-    // 手前置きしてあったスキル節をトラックの後ろへ移動
-    const sec=document.querySelector('.hgal'), stn=sec&&sec.querySelector('.hg-strengths');
+    const sec=document.querySelector('.hgal');
+    // 作品はヒーローに重なるカードの束にする。ヒーローとトラックを1枚の
+    // ステージにまとめ、これをピン留めの対象にする。動きを減らす設定の
+    // 端末ではラッパーを作らず、従来の縦積みのまま見せる。
+    const hero=sec&&sec.querySelector('.hg-hero'), trk=sec&&sec.querySelector('.hgal-track');
+    if(sec&&hero&&trk&&!reduce){
+      const stage=document.createElement('div');
+      stage.className='hgal-stage';
+      sec.insertBefore(stage,hero);
+      stage.appendChild(hero); stage.appendChild(trk);
+    }
+    // 「作品 → スキル」の順になるよう、オーバーレイ用に手前置きして
+    // あったスキル節を最後へ移動
+    const stn=sec&&sec.querySelector('.hg-strengths');
     if(stn) sec.appendChild(stn);
   }
   initHeroLazy();
-  if(!document.documentElement.classList.contains('sp-flow')) GAL=initGallery();
+  GAL = document.documentElement.classList.contains('sp-flow') ? initCardStack() : initGallery();
   initHeroMotion();     // ローダー明けにヒーローの図形モーションを再生
   initAboutFx();
   ScrollTrigger.refresh();
