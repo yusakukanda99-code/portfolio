@@ -161,6 +161,12 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   .hero .hero-lead{max-width:none}
   /* SP：図形は中央よりやや上に */
   .hero .hm-stage{top:-2svh}
+  /* SP：図形が高さを食って、見出しと本文が下の PROJECTS の行に
+     ぶつかっていた。図形を縮めたぶん、中央寄せの塊ごと上へ上がる */
+  .hg-hero .hm-stage{height:min(34vh,300px)}
+  /* SP：スクロールの案内は出さない。本文の右側に重なるうえ、
+     カードが下から乗ってくるので無くても伝わる */
+  .hero .scroll-cue{display:none}
 }
 
 /* ---------- STRENGTHS — スライダー最終幕：ステートメントが覆い被さる ---------- */
