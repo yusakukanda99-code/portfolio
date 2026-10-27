@@ -133,7 +133,7 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 .hero h1{font-size:clamp(44px,8.2vw,140px);line-height:1.04;letter-spacing:-.02em;max-width:16ch}
 .hero h1 em{font-style:italic;color:var(--accent)}
 .hero .hero-lead{margin-top:clamp(26px,4.5vh,52px);max-width:52ch;color:var(--ink-soft);font-size:clamp(14px,1.2vw,18px);line-height:1.85}
-.hero .hero-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(24px,4.5vh,44px);display:flex;align-items:flex-end;justify-content:space-between}
+.hero .hero-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(24px,4.5vh,44px);display:flex;align-items:flex-end;justify-content:flex-end}
 .hero .scroll-cue{display:inline-flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
 .hero .scroll-cue .ln{width:1px;height:44px;background:var(--ink-soft);animation:cueDrop 2.4s var(--ease) infinite}
 @keyframes cueDrop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -164,9 +164,6 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   /* SP：図形が高さを食って、見出しと本文が下の PROJECTS の行に
      ぶつかっていた。図形を縮めたぶん、中央寄せの塊ごと上へ上がる */
   .hg-hero .hm-stage{height:min(34vh,300px)}
-  /* SP：スクロールの案内は出さない。本文の右側に重なるうえ、
-     カードが下から乗ってくるので無くても伝わる */
-  .hero .scroll-cue{display:none}
 }
 
 /* ---------- STRENGTHS — スライダー最終幕：ステートメントが覆い被さる ---------- */
@@ -896,7 +893,6 @@ body.detail-on .wk-btn{display:inline-flex}
         <div class="eyebrow reveal"><span class="dot"></span><span class="mono-label">Yusaku Kanda<br>Portfolio</span></div>
         <p class="hero-lead reveal">企画・デザイン・運営のあいだには、誰も持たない工程が残りがちです。そこを埋めて形にし、運営まで含めてデザインします。</p>
         <div class="hero-foot">
-          <span class="mono-label reveal">Projects ↓</span>
           <span class="scroll-cue reveal">Scroll<span class="ln"></span></span>
         </div>
       </div>
@@ -934,7 +930,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 01 — MCD MIX ／ ながくてアートブック（愛・地球博記念公園） / 2025–2026</span>
             <h3 class="hg-title"><span class="nb">卒業生コミュニティの</span><span class="nb"><em>サイト制作から、イベント運営</em>まで</span></h3>
             <p class="hg-lead">母校の卒業生を主軸としたコミュニティ「MCD MIX」の拠点サイトを単独で構築し、そこに載せるイベントの企画や、参加が決定した参加者へお送りする規約・搬入出の案内までを整備した。2026年には来場者が描いた絵がその場でアニメーションになって現れるワークショップを設計・開発し、2日間で67作品が集まった。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -945,7 +941,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 02 — ミカタグループ（ミカタ税理士法人） / 2026</span>
             <h3 class="hg-title"><span class="nb">サポート終了の文書形式から、</span><span class="nb"><em>AIが読める状態</em>への移行</span></h3>
             <p class="hg-lead">長年使ってきた文書システムがサポート終了し、保存形式もAIが直接読めないものだった。この文書をPDFに変換し、AIが読める状態へ移行。全国634名が使うため、ITリテラシーの差を踏まえ、教育コストと移行の手間を抑えるUI/UXで設計・実装し、年間約1,200万円のコスト削減を試算している。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -956,7 +952,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 03 — 株式会社輪奏（ひのてり訪問看護ステーション） / 2025</span>
             <h3 class="hg-title"><span class="nb">抽象的だった理念を</span><span class="nb"><em>コミュニケーション可能な形</em>に</span></h3>
             <p class="hg-lead">依頼は会社案内・チラシの制作と写真撮影だったが、企業理念が文章として存在せず、会社の方向性そのものが曖昧だった。そこで代表との対話から理念を読み解き、代表メッセージの執筆から着手。その上でチラシと会社案内を制作し、ブランディング全体を担った。一言だけだった理念が、対外的に掲げられる3つの言葉になった。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -967,7 +963,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 04 — ミカタグループ（ミカタ税理士法人） / 2024–2026</span>
             <h3 class="hg-title"><span class="nb">ミカタグループの</span><span class="nb"><em>ブランディングの社内定着</em></span></h3>
             <p class="hg-lead">リブランディングを行いロゴは一新したが、ロゴが変わっただけという認識しか社内に無く、何も変化を感じていなかった。そこで、グループで使用する会社案内や資料をはじめ、サービスの資料なども作成した。対外的な資料に留まらず、社内報や社章といったインナーブランディングもデザインした。現場が資材を分解して自分の資料に流用できる状態になっている。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -978,7 +974,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 05 — ミカタグループ（ミカタ税理士法人） / 2023–2026</span>
             <h3 class="hg-title"><span class="nb">会社としての情報発信と</span><span class="nb"><em>お客様とのタッチポイント</em>設計</span></h3>
             <p class="hg-lead">顧問契約をいただくお客様に、税制改正のような変化を、会社として正しく届ける必要があった。ただし内容が整っていなければ読まれない。媒体を問わず、発信物のデザインと管理・運用を一手に担った。主軸のメルマガは平均開封率約30%で推移している。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -989,7 +985,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <span class="hg-cat">PROJECT 06 — Sony Fashion Entertainments（個人応募） / 2018</span>
             <h3 class="hg-title"><span class="nb">Sony <em>FES Watch U</em></span> <span class="nb">デザインコンペ</span></h3>
             <p class="hg-lead">電子ペーパー製ウォッチのデザインコンペに個人で応募し、全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトや専用アプリ「FES Closet」、全国の百貨店での展示販売にまで展開された。</p>
-            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る →</a></div>
+            <div class="hg-foot"><a href="#" class="view sp-only">プロジェクトを見る</a></div>
           </div>
         </div>
       </article>
@@ -1185,7 +1181,7 @@ body.detail-on .wk-btn{display:inline-flex}
             <p class="cap-detail">書式がばらばらでも、項目を抽出してExcelへ転記する。</p>
           </div>
         </div>
-        <div class="w-meta"><span class="yr">2026</span><a href="#top" class="view mag">View project ›</a></div>
+        <div class="w-meta"><span class="yr">2026</span><a href="#top" class="view mag">View project</a></div>
       </div>
     </div>
 
@@ -1243,7 +1239,7 @@ body.detail-on .wk-btn{display:inline-flex}
         <p class="c-text c-anim">3本のツールを通したことで、書類はAIが分析できる状態になった。Geminiにそのまま読ませ、転記ミスの確認や複数年度の比較ができる。目視だけだった工程が二重確認になり、人為的なミスを減らせた。</p>
         <p class="c-text c-anim">書類管理ツールは年間約1,200万円のコスト削減を試算している（Adobe Acrobat Standard 約1,580円/人/月 × 634名）。変換は1件約20秒の手作業が約5秒になった。操作感を現行ツールに合わせたため、社内教育もほぼ不要。依頼を待たずに作り始めたものが、会社の要件になっている。</p>
         <p class="c-text c-anim">変換したPDFを書類管理ツールへ自動で引き渡す経路は、あえて設けていない。DocuWorksはローカルサーバーや各自の端末にあることが多く、セキュリティの観点からファイルを自動で動かす構成を避けた。変換ツール自体も、PDFが定着すれば提供を終える前提で作っている。</p>
-        <a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a>
+        <a class="c-top c-anim mag" href="#top">TOP へ戻る</a>
       </div>
     </div>
 
@@ -1280,7 +1276,7 @@ body.detail-on .wk-btn{display:inline-flex}
   </footer>
 </section>
 
-<button class="wk-btn" type="button" aria-label="このプロジェクトの制作物を見る">制作物 <b data-wk-count>0</b> →</button>
+<button class="wk-btn" type="button" aria-label="このプロジェクトの制作物を見る">制作物 <b data-wk-count>0</b></button>
 <div class="wk-modal" role="dialog" aria-modal="true">
   <div class="wk-back" data-wk-close></div>
   <div class="wk-panel">
@@ -2326,7 +2322,7 @@ function renderCase(d){
       +d.evidence.map(s=>'<div class="p-step"><div class="ps-body"><div class="ps-no">'+s.no+'</div><h3 class="ps-head">'+s.h+'</h3>'
         +(s.sub?'<div class="ps-sub">'+s.sub+'</div>':'')+(s.stack?'<div class="ps-stack">'+s.stack+'</div>':'')
         +(function(){var a=s.t.split(/(?=工夫[\u306f\uff1a])/);return a.map(function(x,k){return '<p class="ps-text'+(/^\u5de5\u592b/.test(x)?' ps-note':'')+'">'+x+'</p>'}).join('')})()
-        +(s.link?'<a class="ps-link" href="'+s.link+'" target="_blank" rel="noopener">'+(s.linkLabel||'サイトを見る')+'<span>›</span></a>':'')
+        +(s.link?'<a class="ps-link" href="'+s.link+'" target="_blank" rel="noopener">'+(s.linkLabel||'サイトを見る')+'</a>':'')
         +'</div>'+mediaHTML(s.imgs)
         +'</div>').join('')
       +'</div></div></div>';
@@ -2334,7 +2330,7 @@ function renderCase(d){
   h+='<div class="panel work ccard" style="--card-bg:#F6F6F3"><div class="c-inner wrap">'
     +'<span class="c-eyebrow c-anim">Result</span><h2 class="c-head c-anim">'+d.result.head+'</h2>'
     +d.result.paras.map(p=>'<p class="c-text c-anim">'+p+'</p>').join('')
-    +'<a class="c-top c-anim mag" href="#top">TOP へ戻る <span aria-hidden="true">↑</span></a></div></div>';
+    +'<a class="c-top c-anim mag" href="#top">TOP へ戻る</a></div></div>';
   return h;
 }
 
@@ -2605,7 +2601,7 @@ function wkCard(w,idx){
     <div class="wk-meta"><h4>${w.t}</h4>
       <div class="wk-sub">${w.y}　${w.cat}</div>
       <div class="wk-role">${w.role}</div>
-      <div class="wk-n">${wkLabel(w)} ›</div>
+      <div class="wk-n">${wkLabel(w)}</div>
     </div></div>`;
 }
 function buildAllSections(){
@@ -2619,7 +2615,7 @@ function buildAllSections(){
         const head = (w.g && w.g!==prev) ? `<div class="wk-gl">${w.g}</div>` : '';
         return head + wkCard(w,i);
       }).join('')}</div>
-      <div class="wk-sec-cta"><button class="wk-open-case wk-cta" data-case="${k}">プロジェクトを読む <span aria-hidden="true">→</span></button></div></div>`;
+      <div class="wk-sec-cta"><button class="wk-open-case wk-cta" data-case="${k}">プロジェクトを読む</button></div></div>`;
   }).join('');
 }
 /* 左下から円が広がるリビール */
@@ -2706,10 +2702,10 @@ function openWork(idx){
   (w.imgs||[]).forEach((im,i)=>{
     h+=`<figure class="wd-fig" data-wd-img="${i}" data-wd-of="${idx}"><img src="${WKIMG+im.f}" loading="lazy" alt="${im.cap||w.t}">${im.cap?`<figcaption>${im.cap}</figcaption>`:''}</figure>`;
   });
-  if(w.link) h+=`<a class="wd-link" href="${w.link}" target="_blank" rel="noopener">${w.linkLabel||'サイトを見る'} ›</a>`;
+  if(w.link) h+=`<a class="wd-link" href="${w.link}" target="_blank" rel="noopener">${w.linkLabel||'サイトを見る'}</a>`;
   /* 複数の記事や外部ページを並べる場合（執筆分の記事など） */
   (w.links||[]).forEach(l=>{
-    h+=`<a class="wd-link" href="${l.u}" target="_blank" rel="noopener">${l.t} ›</a>`;
+    h+=`<a class="wd-link" href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`;
   });
   body.innerHTML=h; body.scrollTop=0;
   md.classList.add('on'); md.style.opacity='1';
