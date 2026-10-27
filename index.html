@@ -315,8 +315,12 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
   /* ---- SP：作品はヒーローの上に重なるカードの束として送る ----
      .hgal-stage は JS が作るラッパー。prefers-reduced-motion のときは
      作らないので、その場合は上の縦積みレイアウトがそのまま生きる。 */
+  /* GSAP はピン留めするとき、その瞬間の高さをインラインのピクセル値で
+     固定する。iOSでアドレスバーが隠れて画面が伸びると、カードは縮んだ
+     ままの高さで残り、下に地の色の帯が出る。インライン指定に勝たせて
+     常に現在の表示領域に合わせる。 */
   html.sp-flow .hgal-stage{position:relative;overflow:hidden;
-    height:100vh;height:100svh;height:100dvh}
+    height:100vh!important;height:100svh!important;height:100dvh!important}
   /* ヒーローは PC で作品に覆い被さる役なので z-index:80 が付いている。
      ここでは逆に下敷きなので、重なりを入れ替える */
   html.sp-flow .hgal-stage .hg-hero{position:absolute;inset:0;height:100%;z-index:1}
