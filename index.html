@@ -2428,6 +2428,9 @@ function renderCase(d){
     && !document.body.classList.contains('aw-lock')
     && !document.body.classList.contains('locked')
     && !document.documentElement.classList.contains('sp-flow')
+    /* 1ページ構成の案件（PROJECT 06）は面の送りが無く、上スクロールは
+       中身を読み返す動作でしかない。退出口は「TOP へ戻る」に任せる */
+    && !document.querySelector('.showcase .panel.xcard')
     && window.scrollY<=2;
   const leave=()=>{ if(fired) return; fired=true; acc=0;
     try{ returnToWork(); }catch(e){}
