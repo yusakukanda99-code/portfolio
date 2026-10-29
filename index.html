@@ -471,10 +471,10 @@ body.detail-on .wk-btn{display:inline-flex}
 /* ---------- 1ページ構成の案件（PROJECT 06） ----------
    4幕の器に合わない案件のための版。短い文章＋大きな画像4枚。
    画像は左から順に、下からふわっと出る（initXGrid が .in を付ける） */
-/* 文章は必ず全部読めるようにし、余った高さを画像が受け持つ。
-   画面が低くて入りきらないときだけ中身をスクロールさせる */
+/* 画像が先、文章が後。画像は横幅いっぱいまで大きくし、
+   入りきらない分は中身のスクロールで読ませる */
 .panel.work.xcard .x-inner{display:flex;flex-direction:column;
-  height:100%;padding:calc(var(--nav-h) + 18px) 0 20px;gap:clamp(12px,2vh,26px);
+  height:100%;padding:calc(var(--nav-h) + 34px) 0 44px;gap:clamp(22px,3.4vh,42px);
   overflow-y:auto;overscroll-behavior:contain}
 /* 文章は他のパネルと同じ左余白に。画像は端まで伸ばす */
 .panel.work.xcard .x-head,.panel.work.xcard .x-foot{padding:0 var(--pad);flex:none}
@@ -482,22 +482,29 @@ body.detail-on .wk-btn{display:inline-flex}
 .x-title{margin-top:9px;font-size:var(--fs-head);line-height:1.35;color:var(--ink);font-weight:500}
 .x-meta{margin-top:9px;font-size:12px;color:#9a9a94;letter-spacing:.04em}
 .x-text{margin-top:10px;max-width:64ch;font-size:var(--fs-case-body);line-height:1.9;color:#55564f}
-.x-grid{flex:1 1 auto;min-height:230px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.x-fig{margin:0;display:flex;flex-direction:column;min-height:0;
+/* 4枚を同じ高さで中央に並べる。等幅の桝に入れると、縦長の時計が
+   桝の中で小さくなり左右に死んだ余白が出るので、幅は画像なりにする */
+.x-grid{flex:none;display:flex;justify-content:center;align-items:flex-start;
+  gap:clamp(14px,2vw,30px);padding:0 var(--pad)}
+.x-fig{margin:0;flex:0 0 auto;
   opacity:0;transform:translateY(28px);
   transition:opacity .75s var(--ease),transform .75s var(--ease)}
 .x-fig.in{opacity:1;transform:none}
-/* 画像ごとの下地（枠線・角丸）は付けない。元画像の外側にあったグレーの
-   地も切り落とし済み（*_c.webp）。残りの高さいっぱいに敷く */
-.x-fig img{flex:1 1 auto;min-height:0;width:100%;height:100%;object-fit:contain;display:block}
-.x-fig figcaption{flex:none;margin-top:9px;font-size:11px;color:#9a9a94;letter-spacing:.03em;line-height:1.6}
+/* 画像ごとの下地（枠線・角丸）は付けない。元画像のグレーの地も、
+   被写体のまわりの余白も切り落とし済み（*_t.webp）。
+   高さを揃えると、横幅は被写体の形のまま決まる */
+.x-fig img{height:clamp(170px,min(42vh,29vw),460px);width:auto;max-width:100%;
+  object-fit:contain;display:block}
+.x-fig figcaption{margin-top:14px;font-size:11px;color:#9a9a94;letter-spacing:.03em;
+  line-height:1.6;text-align:center}
 .x-foot{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
 .x-foot .wd-link{margin:0}
 @media(max-width:820px){
   /* SPは4列だと小さすぎる。2列に折り返して1枚を大きく保つ。
      縦は自然に流す（パネル自体がスクロールする） */
-  .panel.work.xcard .x-grid{grid-template-columns:repeat(2,1fr);gap:6px;flex:none;min-height:0}
-  .panel.work.xcard .x-fig img{aspect-ratio:1/1;height:auto;object-fit:contain}
+  .panel.work.xcard .x-grid{display:grid;grid-template-columns:repeat(2,1fr);
+    gap:clamp(14px,4vw,26px);align-items:end;padding:0 var(--pad)}
+  .panel.work.xcard .x-fig img{height:auto;width:100%;max-height:34vh}
   .panel.work.xcard .x-inner{overflow:visible;padding-bottom:48px}
 }
 .wd-link{display:inline-flex;align-items:center;gap:8px;margin:26px 10px 0 0;font-size:13.5px;color:var(--ink);
@@ -2296,10 +2303,10 @@ const CASES={
         '腕時計は上から覗き込む道具で、その所作が金魚鉢を思わせた。そこで金魚をモチーフに据え、文字盤から帯の文様、漢数字の日付まで、全体を和のトーンでまとめている。',
         '全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトと専用アプリ「FES Closet」で配信され、阪急メンズ東京・高島屋横浜店・静岡伊勢丹・大丸神戸店で展示販売された。'],
       imgs:[
-        {f:'p06_01_minamo_c.webp',cap:'文字盤「水面」── 金魚と波紋'},
-        {f:'p06_02_face2_c.webp',cap:'文字盤のバリエーション'},
-        {f:'p06_03_band1_c.webp',cap:'バンドの文様と漢数字の日付'},
-        {f:'p06_04_band2_c.webp',cap:'バンドパターンの比較'}],
+        {f:'p06_01_minamo_t.webp',cap:'文字盤「水面」── 金魚と波紋'},
+        {f:'p06_02_face2_t.webp',cap:'文字盤のバリエーション'},
+        {f:'p06_03_band1_t.webp',cap:'バンドの文様と漢数字の日付'},
+        {f:'p06_04_band2_t.webp',cap:'バンドパターンの比較'}],
       link:'https://prtimes.jp/main/html/rd/p/000000011.000027298.html',
       linkLabel:'プレスリリースを見る'}}
 
@@ -2362,16 +2369,17 @@ function renderCase(d){
      割らず、短い文章と大きな画像だけで見せる */
   if(d.solo){
     const x=d.solo;
+    /* 作品そのものを先に見せ、説明は後ろに置く */
     return '<div class="panel work xcard" style="--card-bg:#F6F6F3"><div class="x-inner wrap">'
+      +'<div class="x-grid">'
+      +x.imgs.map(im=>'<figure class="x-fig"><img src="assets/img/works/'+im.f+'" alt="'+(im.cap||x.title)+'" loading="lazy">'
+        +(im.cap?'<figcaption>'+im.cap+'</figcaption>':'')+'</figure>').join('')
+      +'</div>'
       +'<div class="x-head">'
       +'<span class="x-eyebrow">'+x.eyebrow+'</span>'
       +'<h2 class="x-title">'+x.title+'</h2>'
       +'<div class="x-meta">'+x.meta+'</div>'
       +x.paras.map(t=>'<p class="x-text">'+t+'</p>').join('')
-      +'</div>'
-      +'<div class="x-grid">'
-      +x.imgs.map(im=>'<figure class="x-fig"><img src="assets/img/works/'+im.f+'" alt="'+(im.cap||x.title)+'" loading="lazy">'
-        +(im.cap?'<figcaption>'+im.cap+'</figcaption>':'')+'</figure>').join('')
       +'</div>'
       +'<div class="x-foot">'
       +(x.link?'<a class="wd-link" href="'+x.link+'" target="_blank" rel="noopener">'+(x.linkLabel||'サイトを見る')+'</a>':'')
