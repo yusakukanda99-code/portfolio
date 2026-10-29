@@ -468,6 +468,32 @@ body.detail-on .wk-btn{display:inline-flex}
 .wd-fig{margin:22px 0 0}
 .wd-fig img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);cursor:zoom-in}
 .wd-fig figcaption{margin-top:8px;font-size:11.5px;color:#9a9a94;letter-spacing:.04em}
+/* ---------- 1ページ構成の案件（PROJECT 06） ----------
+   4幕の器に合わない案件のための版。短い文章＋大きな画像4枚。
+   画像は左から順に、下からふわっと出る（initXGrid が .in を付ける） */
+.panel.work.xcard .x-inner{display:flex;flex-direction:column;justify-content:center;
+  height:100%;padding:calc(var(--nav-h) + 18px) 0 20px;gap:clamp(12px,2vh,26px)}
+/* 文章は他のパネルと同じ左余白に。画像は端まで伸ばす */
+.panel.work.xcard .x-head,.panel.work.xcard .x-foot{padding:0 var(--pad)}
+.x-eyebrow{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.16em;color:var(--accent)}
+.x-title{margin-top:9px;font-size:var(--fs-head);line-height:1.35;color:var(--ink);font-weight:500}
+.x-meta{margin-top:9px;font-size:12px;color:#9a9a94;letter-spacing:.04em}
+.x-text{margin-top:10px;max-width:64ch;font-size:var(--fs-case-body);line-height:1.9;color:#55564f}
+.x-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,20px)}
+.x-fig{margin:0;opacity:0;transform:translateY(28px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.x-fig.in{opacity:1;transform:none}
+/* 元画像は 1200×800 の中央に小さく被写体が置かれている。正方形に
+   切って寄せると、同じ面積でも時計が1.5倍ほど大きく見える */
+.x-fig img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:10px;border:1px solid var(--line)}
+.x-fig figcaption{margin-top:9px;font-size:11px;color:#9a9a94;letter-spacing:.03em;line-height:1.6}
+.x-foot{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.x-foot .wd-link{margin:0}
+@media(max-width:820px){
+  /* SPは4列だと小さすぎる。2列に折り返して1枚を大きく保つ */
+  .panel.work.xcard .x-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .panel.work.xcard .x-inner{justify-content:flex-start;padding-bottom:48px}
+}
 .wd-link{display:inline-flex;align-items:center;gap:8px;margin:26px 10px 0 0;font-size:13.5px;color:var(--ink);
   border:1px solid var(--ink);border-radius:100px;padding:12px 26px;transition:.3s}
 .wd-link:hover{background:var(--ink);color:#FAF9F6}
@@ -903,17 +929,17 @@ body.detail-on .wk-btn{display:inline-flex}
         <div class="wrap"><span class="mono-label sk-label">Skills</span></div>
       <div class="sm-group">
         <div class="skill-marquee mr" style="--smdur:36s">
-          <div class="sm-track"><span class="sm-seq"><b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　<b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　</span><span class="sm-seq" aria-hidden="true"><b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　<b>Design</b>：・Figma　・Adobe XD　・Illustrator　・Photoshop　・After Effects　・Lightroom　　</span></div>
+          <div class="sm-track"><span class="sm-seq"><b>企画</b>：ニーズと問題点を、現場で確かめる　・要件定義　・絵コンテ　・構成　　<b>企画</b>：ニーズと問題点を、現場で確かめる　・要件定義　・絵コンテ　・構成　　</span><span class="sm-seq" aria-hidden="true"><b>企画</b>：ニーズと問題点を、現場で確かめる　・要件定義　・絵コンテ　・構成　　<b>企画</b>：ニーズと問題点を、現場で確かめる　・要件定義　・絵コンテ　・構成　　</span></div>
         </div>
       </div>
       <div class="sm-group">
         <div class="skill-marquee " style="--smdur:30s">
-          <div class="sm-track"><span class="sm-seq"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span><span class="sm-seq" aria-hidden="true"><b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　<b>Development</b>：・React　・Python　・Supabase　・Claude API（AIを活用した開発）　　</span></div>
+          <div class="sm-track"><span class="sm-seq"><b>デザイン</b>：判断できる形にまとめる　・Figma　・Illustrator　・Photoshop　・After Effects　・Lightroom　・撮影　　<b>デザイン</b>：判断できる形にまとめる　・Figma　・Illustrator　・Photoshop　・After Effects　・Lightroom　・撮影　　</span><span class="sm-seq" aria-hidden="true"><b>デザイン</b>：判断できる形にまとめる　・Figma　・Illustrator　・Photoshop　・After Effects　・Lightroom　・撮影　　<b>デザイン</b>：判断できる形にまとめる　・Figma　・Illustrator　・Photoshop　・After Effects　・Lightroom　・撮影　　</span></div>
         </div>
       </div>
       <div class="sm-group">
         <div class="skill-marquee mr" style="--smdur:32s">
-          <div class="sm-track"><span class="sm-seq"><b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　<b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　</span><span class="sm-seq" aria-hidden="true"><b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　<b>Marketing</b>：・Salesforce（Pardot）　・Google Analytics　・YouTube Analytics　　</span></div>
+          <div class="sm-track"><span class="sm-seq"><b>運営</b>：仕組み化で運用が続くようにする　・WordPress　・React　・Salesforce　・Google Analytics　・運用マニュアル　　<b>運営</b>：仕組み化で運用が続くようにする　・WordPress　・React　・Salesforce　・Google Analytics　・運用マニュアル　　</span><span class="sm-seq" aria-hidden="true"><b>運営</b>：仕組み化で運用が続くようにする　・WordPress　・React　・Salesforce　・Google Analytics　・運用マニュアル　　<b>運営</b>：仕組み化で運用が続くようにする　・WordPress　・React　・Salesforce　・Google Analytics　・運用マニュアル　　</span></div>
         </div>
       </div>
       </div>
@@ -1358,15 +1384,35 @@ function runLoader(done){
     strips.forEach(st=>{st.style.transition='none';});
     paint(MAX); hide(); return;
   }
-  /* 乱数で飛ばすと落ち着かないので、立ち上がりと終わりをゆるめた曲線で進める。
-     更新間隔(70ms)より帯のtransition(.42s)を長くしてあるため、動いている桁は
-     回り続け、変わらない桁は止まったままになる。 */
-  const DUR=1750, t0=performance.now();
-  const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+  /* 数字は実際の読み込みに連動させる。見えるのは最初の1枚なので、
+     待つのは「いま出る1枚＋次の1枚」の2枚だけ。6枚そろうのを待つ理由はない。
+     下限 FLOOR：速い回線で数字が一瞬だけ出て消えるのを防ぐ
+     上限 CEIL ：回線が悪いときに閉じ込めない。時間が来たら読み込み中でも開ける */
+  const FLOOR=600, CEIL=2500, NEED=2;
+  const items=[...document.querySelectorAll('.hg-item')].slice(0,NEED);
+  let loaded=0;
+  items.forEach(it=>{
+    it.classList.add('hg-load');                 // ここで初めて背景画像が指定される
+    const el=it.querySelector('.hg-media .img:last-child');
+    const m=el&&/url\(["']?(.+?)["']?\)/.exec(getComputedStyle(el).backgroundImage);
+    if(!m){ loaded++; return; }
+    const im=new Image();
+    im.onload=im.onerror=()=>{loaded++;};
+    im.src=m[1];
+    if(im.complete) loaded++;                    // キャッシュ済み
+  });
+  const need=Math.max(1,items.length);
+
+  const t0=performance.now();
   const tick=()=>{
-    const p=Math.min(1,(performance.now()-t0)/DUR);
-    paint(Math.round(MAX*ease(p)));
-    if(p<1) setTimeout(tick,70); else setTimeout(hide,560);
+    const el=performance.now()-t0;
+    /* 読めた割合で進む。ただし止まって見えないよう、経過時間ぶんは最低限進める。
+       開ける条件を満たすまでは95%で頭打ちにして、100は「本当に開く」合図にする */
+    let p=Math.max(loaded/need, Math.min(el/CEIL,1));
+    const ready = el>=FLOOR && (loaded>=need || el>=CEIL);
+    p = ready ? 1 : Math.min(p,.95);
+    paint(Math.round(MAX*p));
+    if(p<1) setTimeout(tick,70); else setTimeout(hide,260);
   };
   tick();
 }
@@ -2232,15 +2278,24 @@ const CASES={
       '反省点は3つある。ひとつは、台紙への照明の映り込みなど、実際の光と子どもの自由な絵で初めて出た不具合が会期中に5件あったこと。診断ログと現場の写真から原因を絞り込んでその日のうちに直したが、想定で潰しきれなかった部分である。ふたつめは、絵を描くための席が足りず、途中で6席から12席に増やしたこと。当初の見込みが甘く、次はもう少しスペースを確保したい。',
       '3つめは、引き渡したあとのことである。運営が記事の画像を差し替えていくうちに、納品時に出していたWebスコアが落ちた。誰でも更新できる形にした以上、画面の作りだけでなく、アップロード時に圧縮とリサイズがかかる仕組みまでテーマ側に用意しておくべきだった。運用マニュアルで「軽い画像を上げてください」と書いても、運用は続くほど守られなくなる。仕組みで吸収するのが正しい。次の改修で入れる。']}},
   c06:{
-    context:{paras:[
-      'ソニーの電子ペーパー製ウォッチ「FES Watch U」のデザインコンペに、個人で応募した。文字盤が電子ペーパー＝「紙」であること。その素材の性質をどう読むかが、デザインの出発点になった。']},
-    judgment:[
-      {h:'文字盤が「紙」であることに着目した',t:'水墨画や日本美術が持つ「余白の力」を、デジタルデバイスの上で再現する方針にした。「動かないなかに時間が流れている」という一見矛盾した美しさを、最小限の要素で表現している。'}],
-    evidence:[
-      {no:'成果物',h:'文字盤デザイン「水面」',sub:'モノクローム・大きな余白',stack:'電子ペーパー（FES Watch U）',t:'工夫：水面に映る月のような円形のモチーフで、静けさのなかにある動きを視覚化した。全体はモノクロームに絞り、線と形は最小限に留めている。',imgs:[{f:'p06_01_minamo.webp',cap:'文字盤デザイン「水面」'},{f:'p06_02_face2.webp',cap:'文字盤のバリエーション'},{f:'p06_03_band1.webp',cap:'バンドと日付表示の展開'},{f:'p06_04_band2.webp',cap:'バンドパターンの比較'}]}],
-    result:{head:'全国から、<em>32組</em>の公認クリエイターに選出',paras:[
-      '全国から集まった応募作品の中から、32組の公認クリエイターに選出（PR TIMES掲載・公式発表）。',
-      '採用デザインはソニー公式サイト・専用アプリ「FES Closet」を通じて世界へ配信。阪急メンズ東京・高島屋横浜店・静岡伊勢丹・大丸神戸店にて展示販売された。']}}
+    /* この案件だけ1ページ。運用も改善の弧も無いコンペなので、
+       課題→判断→実物→成果の器に入れると無理が出る。文章を3つに絞り、
+       画像を大きく4枚並べる（renderCase の solo 分岐） */
+    solo:{
+      eyebrow:'PROJECT 06',
+      title:'Sony FES Watch U デザインコンペ',
+      meta:'2018　／　個人応募　／　Sony Fashion Entertainments',
+      paras:[
+        '電子ペーパーの文字盤は、自ら光らない。紙と同じで、見る角度と光で表情が変わる。その性質をどう読むかを出発点にした。',
+        '腕時計は上から覗き込む道具で、その所作が金魚鉢を思わせた。そこで金魚をモチーフに据え、文字盤から帯の文様、漢数字の日付まで、全体を和のトーンでまとめている。',
+        '全国から32組の公認クリエイターに選出。採用デザインはソニー公式サイトと専用アプリ「FES Closet」で配信され、阪急メンズ東京・高島屋横浜店・静岡伊勢丹・大丸神戸店で展示販売された。'],
+      imgs:[
+        {f:'p06_01_minamo.webp',cap:'文字盤「水面」── 金魚と波紋'},
+        {f:'p06_02_face2.webp',cap:'文字盤のバリエーション'},
+        {f:'p06_03_band1.webp',cap:'バンドの文様と漢数字の日付'},
+        {f:'p06_04_band2.webp',cap:'バンドパターンの比較'}],
+      link:'https://prtimes.jp/main/html/rd/p/000000011.000027298.html',
+      linkLabel:'プレスリリースを見る'}}
 
 };
 /* 成果物の画像枠。2枚以上は横スライダーにする（キャプション＝何を入れるかの指示） */
@@ -2297,6 +2352,26 @@ function mediaHTML(imgs){
     +'<button type="button" data-d="1" aria-label="next">\u203a</button></div></div>';
 }
 function renderCase(d){
+  /* 1ページ構成の案件（PROJECT 06）。器に合わないものを無理に4幕へ
+     割らず、短い文章と大きな画像だけで見せる */
+  if(d.solo){
+    const x=d.solo;
+    return '<div class="panel work xcard" style="--card-bg:#F6F6F3"><div class="x-inner wrap">'
+      +'<div class="x-head">'
+      +'<span class="x-eyebrow">'+x.eyebrow+'</span>'
+      +'<h2 class="x-title">'+x.title+'</h2>'
+      +'<div class="x-meta">'+x.meta+'</div>'
+      +x.paras.map(t=>'<p class="x-text">'+t+'</p>').join('')
+      +'</div>'
+      +'<div class="x-grid">'
+      +x.imgs.map(im=>'<figure class="x-fig"><img src="assets/img/works/'+im.f+'" alt="'+(im.cap||x.title)+'" loading="lazy">'
+        +(im.cap?'<figcaption>'+im.cap+'</figcaption>':'')+'</figure>').join('')
+      +'</div>'
+      +'<div class="x-foot">'
+      +(x.link?'<a class="wd-link" href="'+x.link+'" target="_blank" rel="noopener">'+(x.linkLabel||'サイトを見る')+'</a>':'')
+      +'<a class="c-top c-anim mag" href="#top">TOP へ戻る</a>'
+      +'</div></div></div>';
+  }
   let h='';
   /* 画像を持たない課題は2カラムをやめて1カラムにする。枠だけ残すと
      「読み込みに失敗した」ように見えるため、構成ごと切り替える。 */
@@ -2428,6 +2503,21 @@ document.addEventListener('click',e=>{
 });
 
 let CURRENT_CASE='c01', CASE01_HTML=null;
+/* 1ページ構成の4枚を、左から順にふわっと出す。
+   パネルが画面に入ったら発火し、遅延を並び順で付けるだけ。
+   動きを減らす設定では、遅延なしでそのまま出す。 */
+function initXGrid(root){
+  const figs=[...(root||document).querySelectorAll('.x-fig')];
+  if(!figs.length) return;
+  if(reduce||!('IntersectionObserver' in window)){ figs.forEach(f=>f.classList.add('in')); return; }
+  figs.forEach((f,i)=>{ f.classList.remove('in'); f.style.transitionDelay=(i*0.13)+'s'; });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.classList.add('in'); io.unobserve(e.target);
+  }),{threshold:.2});
+  figs.forEach(f=>io.observe(f));
+}
+
 function setCase(key){
   const showcase=document.querySelector('.showcase');
   if(CASE01_HTML===null)
@@ -2437,6 +2527,7 @@ function setCase(key){
   showcase.insertAdjacentHTML('beforeend', key==='c01' ? CASE01_HTML : renderCase(CASES[key]));
   CURRENT_CASE=key;
   initRails(showcase);
+  initXGrid(showcase);
   fitPanels(showcase);
 }
 
