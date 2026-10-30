@@ -219,8 +219,11 @@ header.nav nav a.is-current::after{content:'';position:absolute;left:20px;right:
 .prof-tl-item:nth-child(7){margin-left:160px;transition-delay:.3s}
 .prof-tl-item:nth-child(8){margin-left:20px;transition-delay:.35s}
 .prof-tl-item:nth-child(9){margin-left:60px;transition-delay:.4s}
-.prof-tl-year-wrap{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0}
-.prof-tl-since{font-size:8px;letter-spacing:.12em;color:#999;margin-bottom:1px}
+.prof-tl-year-wrap{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;position:relative}
+/* Since は年号の上に浮かせる。列に積むと枠の高さが増え、
+   その行の本文だけが年号より上にずれて見えるため */
+.prof-tl-since{position:absolute;bottom:100%;left:0;margin-bottom:1px;
+  font-size:8px;letter-spacing:.12em;color:#999;line-height:1}
 .prof-tl-year{font-size:11px;font-weight:500;background:#1c1c1c;color:#FAF9F6;padding:2px 8px;letter-spacing:.05em;white-space:nowrap}
 .prof-tl-text{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:14px;line-height:1.6;color:#1c1c1c;white-space:nowrap}
 .prof-tl-now{text-align:right;font-size:11px;color:#999;font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;margin-top:12px;letter-spacing:.15em;padding-right:4px;z-index:1;position:relative}
